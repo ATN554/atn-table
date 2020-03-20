@@ -1,0 +1,113 @@
+body {
+  font-family: Roboto;
+}
+
+.content {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 0;
+  bottom: 0;
+  background-color: azure;
+  border: 1px solid gray;
+}
+
+.atn-table-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: whitesmoke;
+  border: 1px solid green;
+  overflow: auto;
+}
+
+.atn-table {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 0px solid blue;
+  overflow-x: auto;
+}
+
+.atn-thead {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0px;
+  height: 34px;
+  border: 0px solid blue;
+}
+
+.atn-thead-tr {
+  height: 100%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.atn-thead-td {
+  border: 0px solid red;
+}
+
+.atn-tbody {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  right: 0;
+  bottom: 37px;
+  border: 1px solid green;
+  overflow-y: auto;
+  padding: 0px;
+  margin: 0px;
+}
+
+.atn-tfoot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 36px;
+  border: 1px solid blue;
+  padding: 0px;
+  margin: 0px;
+}
+
+.atn-thead-td-container {
+  border: 1px solid rgb(28, 53, 25);
+  border-right: 1px dashed rgb(28, 53, 25);
+  border-radius: 5px 0 0 5px;
+  background-color: rgb(163, 180, 161);
+  cursor: move;
+  user-select: none;
+  padding: 3px;
+  margin: 0px;
+}
+
+.atn-thead-td-container:hover,
+.atn-thead-td-container:focus,
+.atn-thead-td-container:active {
+  background-color: rgb(183, 216, 180);
+}
+
+.atn-thead-td-resizer {
+  width: 7px;
+  height: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin: 0px;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid rgb(28, 53, 25);
+  border-left: none;
+  background-color: rgb(163, 180, 161);
+}
+
+.atn-thead-td-resizer:hover,
+.atn-thead-td-resizer:focus,
+.atn-thead-td-resizer:active {
+  background-color: rgb(183, 216, 180);
+}
