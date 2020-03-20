@@ -70,6 +70,20 @@ export default class App extends React.Component {
                 ))}
               </AtnTheadTr>
             </div>
+
+            <div className="atn-tbody">
+              
+            </div>
+
+
+          </div>
+
+          <div className="atn-tfoot">
+            <div className="atn-tfoot-tr">
+              <div className="atn-tfoot-td">
+                Footer
+                </div>
+            </div>
           </div>
         </div>
       </div>
