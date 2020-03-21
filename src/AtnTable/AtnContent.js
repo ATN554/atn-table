@@ -1,8 +1,6 @@
 import React from "react";
 import "./content.css";
-import Draggable from "../DND/Draggable.js";
-import Droppable from "../DND/Droppable.js";
-import AtnTheadTr from "./AtnTheadTr.js";
+import AtnHeadCell from "./AtnHeadCell.js";
 
 const swap = (arr, a, b) => {
   arr[a] = arr.splice(b, 1, arr[a])[0];
@@ -16,17 +14,16 @@ export default class AtnContent extends React.Component {
       columns: props.columns,
       data: props.data,
       totals: props.totals,
-      resizer: props.resizer,
-      deltaW: 7,
+      resizer: props.resizer
     };
 
     this.handleHeaderResize = this.handleHeaderResize.bind(this);
     this.handleDragEnd = this.handleDragEnd.bind(this);
   }
 
-  handleHeaderResize(idx, width) {
+  handleHeaderResize(column, width) {
     let columns = this.state.columns;
-    columns[idx].tableData.width = width + this.state.deltaW;
+    column.tableData.width = width;
     this.setState({ columns });
   }
 
@@ -50,37 +47,21 @@ export default class AtnContent extends React.Component {
     return (
       <div className="atn-table">
         <div className="atn-thead">
-          <AtnTheadTr
-            type="div"
-            minWidth={10}
-            maxWidth={250}
-            resizer={this.state.resizer}
-            className="atn-thead-tr"
-            onChangeWidth={(idFrom, width) => {
-              this.handleHeaderResize(idFrom.substr(13), width);
-            }}
-          >
-            {this.state.columns.map((column, col_index) => (
-              <Droppable
-                id={"Droppable" + column.tableData.id}
-                key={"th" + col_index}
-                type="div"
-                className="atn-thead-td"
-              >
-                <Draggable
-                  id={"Draggable" + column.tableData.id}
-                  droppable={"atn-thead-td"}
-                  type="div"
-                  axis="horizontal"
-                  className="atn-thead-td-container"
-                  style={{ width: (column.tableData.width - this.state.deltaW) + "px" }}
-                  onDragEnd={(idFrom, idTo, x, y) => this.handleDragEnd(idFrom, idTo)}
-                >
-                  {column.title}
-                </Draggable>
-              </Droppable>
+          <div className="atn-thead-tr">
+            {this.state.columns.map((col) => (
+              <AtnHeadCell
+                key={"th" + col.tableData.id}
+                column={col}
+                resizer={this.state.resizer}
+                onChangeWidth={(column, width) => {
+                  this.handleHeaderResize(column, width);
+                }}
+                onDragEnd={(idFrom, idTo) => {
+                  this.handleDragEnd(idFrom, idTo);
+                }}
+              />
             ))}
-          </AtnTheadTr>
+          </div>
         </div>
 
         <div className="atn-tbody">
