@@ -5,6 +5,12 @@ export const columns = [
   { title: "Дата рождения", field: "DT", type: "date", format: "DD.MM.YYYY", tableData: { width: 80 } }
 ];
 
+export const totals = { 
+  "Name": "10", 
+  "Email": "53%", 
+  "DT": "144f" 
+};
+
 export const data = [
   {
     Name: "Stone Rachel",

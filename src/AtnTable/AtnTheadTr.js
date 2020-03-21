@@ -142,7 +142,7 @@ export default class AtnTheadTr extends React.Component {
 
   render() {
     return React.createElement(
-      "div",
+      this.props.type,
       {
         ref: "reftrresizer",
         id: this.props.id,

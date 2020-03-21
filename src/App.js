@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 import AtnTable from "./AtnTable/AtnTable.js";
-import { columns, data } from "./data.js";
+import { columns, data, totals } from "./data.js";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -10,19 +10,11 @@ export default class App extends React.Component {
     this.state = {
       columns: columns,
       data: data,
-      widths: [100, 200, 50, 90],
+      totals: totals,
       resizer: (
         <div></div>
       )
     };
-
-    this.handleHeaderResize = this.handleHeaderResize.bind(this);
-  }
-
-  handleHeaderResize(idx, width) {
-    let widths = this.state.widths;
-    widths[idx] = width;
-    this.setState({ widths: widths });
   }
 
   render() {
@@ -31,6 +23,7 @@ export default class App extends React.Component {
         <AtnTable
           columns={this.state.columns}
           data={this.state.data}
+          totals={this.state.totals}
           resizer={this.state.resizer}
         />
       </div>

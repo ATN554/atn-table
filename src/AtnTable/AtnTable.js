@@ -9,6 +9,7 @@ export default class AtnTable extends React.Component {
     this.state = {
       columns: props.columns,
       data: props.data,
+      totals: props.totals,
       resizer: props.resizer,
     };
 
@@ -47,6 +48,7 @@ export default class AtnTable extends React.Component {
                 <AtnContent
                   columns={this.state.columns}
                   data={this.state.data}
+                  totals={this.state.totals}
                   resizer={this.state.resizer}
                 />
               </td>

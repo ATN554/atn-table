@@ -11,6 +11,7 @@ export default class AtnContent extends React.Component {
     this.state = {
       columns: props.columns,
       data: props.data,
+      totals: props.totals,
       resizer: props.resizer,
     };
 
@@ -28,6 +29,7 @@ export default class AtnContent extends React.Component {
       <div className="atn-table">
         <div className="atn-thead">
           <AtnTheadTr
+            type="div"
             maxWidth={250}
             resizer={this.state.resizer}
             className="atn-thead-tr"
@@ -38,7 +40,7 @@ export default class AtnContent extends React.Component {
             {this.state.columns.map((column, col_index) => (
               <Droppable
                 id={"Droppable" + col_index}
-                key={"div" + col_index}
+                key={"th" + col_index}
                 type="div"
                 className="atn-thead-td"
               >
@@ -66,7 +68,35 @@ export default class AtnContent extends React.Component {
         </div>
 
         <div className="atn-tbody">
+          {this.state.data.map((row, row_index) => (
+            <div className="atn-tbody-tr" key={"tr" + row_index}>
+              {this.state.columns.map((column, col_index) => (
+                <div className="atn-tbody-td" key={"td" + col_index}>
+                  <div 
+                    className="atn-tbody-td-container"
+                    style={{ width: column.tableData.width + "px" }}
+                  >
+                    {row[column.field]}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
 
+        <div className="atn-tfoot">
+          <div className="atn-tfoot-tr">
+            {this.state.columns.map((column, col_index) => (
+              <div key={"tf" + col_index} className="atn-tfoot-td">
+                <div 
+                  className="atn-tfoot-td-container"
+                  style={{ width: column.tableData.width + "px" }}
+                >
+                  {this.state.totals[column.field]}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
