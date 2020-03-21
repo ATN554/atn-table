@@ -13,6 +13,7 @@ export default class AtnContent extends React.Component {
       data: props.data,
       totals: props.totals,
       resizer: props.resizer,
+      deltaW: 7,
     };
 
     this.handleHeaderResize = this.handleHeaderResize.bind(this);
@@ -20,8 +21,12 @@ export default class AtnContent extends React.Component {
 
   handleHeaderResize(idx, width) {
     let columns = this.state.columns;
-    columns[idx].tableData.width = width;
+    columns[idx].tableData.width = width + this.state.deltaW;
     this.setState({ columns: columns });
+  }
+
+  componentDidMount() {
+    /*let resizer = document.getElementById("resizable-th-0");*/
   }
 
   render() {
@@ -30,6 +35,7 @@ export default class AtnContent extends React.Component {
         <div className="atn-thead">
           <AtnTheadTr
             type="div"
+            minWidth={10}
             maxWidth={250}
             resizer={this.state.resizer}
             className="atn-thead-tr"
@@ -50,6 +56,7 @@ export default class AtnContent extends React.Component {
                   type="div"
                   axis="horizontal"
                   className="atn-thead-td-container"
+                  style={{ width: (column.tableData.width - this.state.deltaW) + "px" }}
                   onDragStart={(idFrom, x, y) => {
                     console.log("start", idFrom, x, y);
                   }}

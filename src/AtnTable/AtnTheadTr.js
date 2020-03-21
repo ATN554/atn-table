@@ -23,13 +23,14 @@ export default class AtnTheadTr extends React.Component {
         childTh,
         {
           ...childTh.props,
-          style: { overflow: "hidden", whiteSpace: "nowrap" }
+          style: { ...childTh.props.style, overflow: "hidden", whiteSpace: "nowrap" }
         },
         [
           React.Children.map(childTh.props.children, innerTh => {
             return React.cloneElement(
               innerTh,
-              { ...innerTh.props, style: innerThStyle },
+              {
+                ...innerTh.props, style: {...innerTh.props.style, ...innerThStyle} },
               innerTh.props.children
             );
           }),
@@ -114,7 +115,8 @@ export default class AtnTheadTr extends React.Component {
       let newWidth = this.state.curColWidth + diffX;
       curCol.style.width = newWidth + "px";
       if (this.props.onChangeWidth) {
-        this.props.onChangeWidth(idFrom, curCol.parentElement.offsetWidth);
+        //this.props.onChangeWidth(idFrom, curCol.parentElement.offsetWidth);
+        this.props.onChangeWidth(idFrom, newWidth);
       }
     }
   }

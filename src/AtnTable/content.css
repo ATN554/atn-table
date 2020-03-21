@@ -12,6 +12,7 @@
 .atn-thead {
   position: sticky;
   top: 0;
+  font-weight: bold;
 }
 
 .atn-thead-tr {
@@ -19,7 +20,6 @@
 }
 
 .atn-thead-td {
-  font-weight: bold;
   display: inline-block;
   white-space: nowrap;
   vertical-align: middle;
@@ -35,6 +35,7 @@
   user-select: none;
   padding: 3px;
   margin: 0px;
+  text-align: center;
 }
 
 .atn-thead-td-container:last-child {
@@ -86,11 +87,13 @@
   background-color: rgb(163, 180, 161);
   padding: 3px;
   margin: 0px;
+  overflow: hidden;
 }
 
 .atn-tfoot {
   position: sticky;
   bottom: 0;
+  font-weight: bold;
 }
 
 .atn-tfoot-tr {
@@ -111,4 +114,5 @@
   background-color: rgb(163, 180, 161);
   padding: 3px;
   margin: 0px;
+  overflow: hidden;
 }
