@@ -13,8 +13,7 @@ export default class AtnContent extends React.Component {
     this.state = {
       columns: props.columns,
       data: props.data,
-      totals: props.totals,
-      resizer: props.resizer
+      totals: props.totals
     };
 
     this.handleHeaderResize = this.handleHeaderResize.bind(this);
@@ -23,24 +22,18 @@ export default class AtnContent extends React.Component {
 
   handleHeaderResize(column, width) {
     let columns = this.state.columns;
-    column.tableData.width = width;
+    column.width = width;
     this.setState({ columns });
   }
 
   handleDragEnd(idFrom, idTo) {
     let columns = this.state.columns;
-    let colFromId = idFrom.substr(9);
-    let colToId = idTo.substr(9);
-    if (colFromId !== colToId) {
-      let colFromIdx = columns.findIndex((el) => el.tableData.id === colFromId);
-      let colToIdx = columns.findIndex((el) => el.tableData.id === colToId);
-      swap(columns, colFromIdx, colToIdx);
+    if (idFrom !== idTo) {
+      let idxFrom = columns.findIndex((el) => el.tableData.draggableId === idFrom);
+      let idxTo = columns.findIndex((el) => el.tableData.droppableId === idTo);
+      swap(columns, idxFrom, idxTo);
       this.setState({ columns });
     }
-  }
-
-  componentDidMount() {
-    /*let resizer = document.getElementById("resizable-th-0");*/
   }
 
   render() {
@@ -52,7 +45,6 @@ export default class AtnContent extends React.Component {
               <AtnHeadCell
                 key={"th" + col.tableData.id}
                 column={col}
-                resizer={this.state.resizer}
                 onChangeWidth={(column, width) => {
                   this.handleHeaderResize(column, width);
                 }}
@@ -68,10 +60,10 @@ export default class AtnContent extends React.Component {
           {this.state.data.map((row, row_index) => (
             <div className="atn-tbody-tr" key={"tr" + row_index}>
               {this.state.columns.map((column, col_index) => (
-                <div className="atn-tbody-td" key={"td" + col_index}>
+                <div className="atn-tbody-td" key={"tb" + col_index} >
                   <div 
                     className="atn-tbody-td-container"
-                    style={{ width: column.tableData.width + "px" }}
+                    style={{ width: column.width + "px" }}
                   >
                     {row[column.field]}
                   </div>
@@ -87,7 +79,7 @@ export default class AtnContent extends React.Component {
               <div key={"tf" + col_index} className="atn-tfoot-td">
                 <div 
                   className="atn-tfoot-td-container"
-                  style={{ width: column.tableData.width + "px" }}
+                  style={{ width: column.width + "px" }}
                 >
                   {this.state.totals[column.field]}
                 </div>

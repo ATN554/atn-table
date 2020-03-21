@@ -1,4 +1,5 @@
 import React from "react";
+import getUID from "../UID/uid.js";
 import Draggable from "../DND/Draggable.js";
 import Droppable from "../DND/Droppable.js";
 
@@ -6,16 +7,17 @@ export default class AtnTheadTr extends React.Component {
   constructor(props) {
     super(props);
 
-    this.ref = null;
-
     this.state = {
-      selfId: "Droppable" + props.column.tableData.id,
+      droppableId: props.column.tableData.droppableId,
+      draggableId: props.column.tableData.draggableId,
+      resizerId: getUID(),
       column: props.column,
       pageX: undefined,
       curCol: undefined,
       curColWidth: undefined,
-      curColMinWidth: undefined,
-      curColMaxWidth: this.props.maxWidth
+      curColMinWidth: props.column.minWidth ? props.column.minWidth : 0,
+      curColMaxWidth: props.column.maxWidth ? props.column.maxWidth : 500,
+      resizerWidth: 0
     }
 
     this.onDragStart = this.onDragStart.bind(this);
@@ -25,23 +27,19 @@ export default class AtnTheadTr extends React.Component {
   }
 
   onDragStart(idFrom, x, y) {
-    let curCol = document.getElementById(this.state.selfId);
+    let curCol = document.getElementById(this.state.draggableId);
     let cs = getComputedStyle(curCol);
     let width =
       curCol.offsetWidth -
       parseFloat(cs.paddingLeft) -
       parseFloat(cs.paddingRight) -
       parseFloat(cs.borderLeftWidth) -
-      parseFloat(cs.borderRightWidth);
-    if (!curCol.style.minWidth) {
-      curCol.style.minWidth =
-        (this.props.minWidth ? this.props.minWidth : width) + "px";
-    }
+      parseFloat(cs.borderRightWidth) +
+      this.state.resizerWidth;
     this.setState({
       curCol: curCol,
       pageX: x,
-      curColWidth: width,
-      curColMinWidth: parseFloat(curCol.style.minWidth)
+      curColWidth: width
     });
   }
 
@@ -50,8 +48,6 @@ export default class AtnTheadTr extends React.Component {
     if (curCol) {
       let diffX = x - this.state.pageX;
       let newWidth = this.state.curColWidth + diffX;
-      curCol.style.width = newWidth + "px";
-      //this.props.onChangeWidth(this.state.column, curCol.offsetWidth);
       this.props.onChangeWidth(this.state.column, newWidth);
     }
   }
@@ -60,49 +56,50 @@ export default class AtnTheadTr extends React.Component {
     this.setState({
       curCol: undefined,
       pageX: undefined,
-      curColWidth: undefined,
-      curColMinWidth: undefined
+      curColWidth: undefined
     });
   }
 
   allowMove(idFrom, xs, ys, xe, ye) {
     let curCol = this.state.curCol;
     if (curCol) {
+      let deltaX = xe - xs;
       let diffX = xe - this.state.pageX;
       let newWidth = this.state.curColWidth + diffX;
-      let minWidth = this.state.curColMinWidth;
+      let minWidth = this.state.curColMinWidth + this.state.resizerWidth;
       let maxWidth = this.state.curColMaxWidth;
-      return newWidth > minWidth && (maxWidth ? newWidth < maxWidth : true);
+      return ((deltaX < 0 && newWidth > minWidth) || (deltaX > 0 && newWidth < maxWidth));
     }
     return false;
   }
 
+  componentDidMount() {
+    let resizer = document.getElementById(this.state.resizerId);
+    let resizerWidth = resizer.offsetWidth;
+    this.setState({ resizerWidth: resizerWidth});
+  }
+
   render() {
-    let column = this.state.column;
-    let id = column.tableData.id;
-    let width = column.tableData.width;
     return(
       <Droppable
-        id={this.state.selfId}
-        key={"th" + id}
+        id={this.state.droppableId}
         type="div"
         className="atn-thead-td"
-        style={{ width: (width+7) + "px" }}
       >
         <Draggable
-          id={"Draggable" + id}
-          droppable={"atn-thead-td"}
+          id={this.state.draggableId}
           type="div"
-          axis="horizontal"
+          droppable={"atn-thead-td"}
           className="atn-thead-td-container"
+          style={{ width: (this.state.column.width - this.state.resizerWidth) + "px" }}
+          axis="horizontal"
           onDragEnd={(idFrom, idTo, x, y) => this.props.onDragEnd(idFrom, idTo)}
         >
-          {column.title}
+          {this.state.column.title}
         </Draggable>
 
         <Draggable
-          id={"resizable-th-" + id}
-          key={"resizable-th-" + id}
+          id={this.state.resizerId}
           type="div"
           showClone={false}
           className="atn-thead-td-resizer"
@@ -112,9 +109,7 @@ export default class AtnTheadTr extends React.Component {
           onDragEnd={(idFrom, idTo, x, y) => { this.onDragStop(idFrom, x, y); }}
           onDragCancel={(idFrom, x, y) => { this.onDragStop(idFrom, x, y); }}
           allowMove={(idFrom, xs, ys, xe, ye) => { return this.allowMove(idFrom, xs, ys, xe, ye); }}
-        >
-          {this.props.resizer}
-        </Draggable>
+        />
       </Droppable>
     );
   }

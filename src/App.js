@@ -10,10 +10,7 @@ export default class App extends React.Component {
     this.state = {
       columns: columns,
       data: data,
-      totals: totals,
-      resizer: (
-        <div></div>
-      )
+      totals: totals
     };
   }
 
@@ -24,7 +21,6 @@ export default class App extends React.Component {
           columns={this.state.columns}
           data={this.state.data}
           totals={this.state.totals}
-          resizer={this.state.resizer}
         />
       </div>
     );

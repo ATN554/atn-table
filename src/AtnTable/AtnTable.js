@@ -1,20 +1,33 @@
 import React from "react";
 import "./container.css";
+import getUID from "../UID/uid.js";
 import AtnContent from "./AtnContent.js";
+
+const fillColumnsTableData = (columns) => {
+  columns.forEach((column, column_idx) => {
+    if (!column.tableData) {
+      column.tableData = {};
+    }
+    column.tableData.id = column_idx;
+    column.tableData.droppableId = getUID();
+    column.tableData.draggableId = getUID();
+  });
+  return columns;
+}
 
 export default class AtnTable extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      columns: props.columns,
-      data: props.data,
-      totals: props.totals,
-      resizer: props.resizer,
-    };
+    ;
 
+    this.state = {
+      columns: fillColumnsTableData(props.columns),
+      data: props.data,
+      totals: props.totals
+    };
   }
-  
+
   render() {
     return (
       <div className="content">
@@ -49,7 +62,6 @@ export default class AtnTable extends React.Component {
                   columns={this.state.columns}
                   data={this.state.data}
                   totals={this.state.totals}
-                  resizer={this.state.resizer}
                 />
               </td>
               <td className="atn-content-right">

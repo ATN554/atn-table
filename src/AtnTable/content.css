@@ -4,7 +4,7 @@
   left: 0px;
   right: 0px;
   bottom: 0px;
-  border: 0px solid rgb(28, 53, 25);
+  border: 1px solid rgb(28, 53, 25);
   border-collapse: collapse;
   overflow: auto;
 }
@@ -13,6 +13,7 @@
   position: sticky;
   top: 0;
   font-weight: bold;
+  height: 25px;
 }
 
 .atn-thead-tr {
@@ -23,31 +24,27 @@
   display: inline-block;
   white-space: nowrap;
   vertical-align: middle;
-  width: 100%;
-  overflow: hidden;
 }
 
 .atn-thead-td-container {
   display: inline-block;
-  white-space: nowrap;
-  vertical-align: middle;
-  width: auto;
-  height: 20px;
-  border-bottom: 1px solid rgb(28, 53, 25);
+  height: 18px;
+  line-height: 18px;
   border-right: 1px dashed rgb(28, 53, 25);
-  border-radius: 0;
+  border-bottom: 1px solid rgb(28, 53, 25);
   background-color: rgb(163, 180, 161);
   cursor: move;
   user-select: none;
-  padding: 0px;
+  padding: 3px;
   margin: 0px;
+  overflow: hidden;
   text-align: center;
 }
-
+/*
 .atn-thead-td-container:last-child {
   border-left: 1px solid rgb(28, 53, 25);
 }
-
+*/
 .atn-thead-td-container:hover,
 .atn-thead-td-container:focus,
 .atn-thead-td-container:active {
@@ -56,16 +53,17 @@
 
 .atn-thead-td-resizer {
   display: inline-block;
-  white-space: nowrap;
-  vertical-align: middle;
-  width: 12px;
-  height: 20px;
+  /*float: right;
+  white-space: nowrap;*/
+  width: 4px;
+  height: 18px;
+  line-height: 18px;
   border-right: 1px solid rgb(28, 53, 25);
   border-bottom: 1px solid rgb(28, 53, 25);
   background-color: rgb(163, 180, 161);
   cursor: col-resize;
   user-select: none;
-  padding: 0px;
+  padding: 3px;
   margin: 0px;
 }
 
@@ -91,10 +89,10 @@
 }
 
 .atn-tbody-td-container {
-  height: 20px;
-  border-bottom: 1px solid rgb(90, 110, 88);
-  border-right: 1px solid rgb(90, 110, 88);
-  border-radius: 0;
+  height: 16px;
+  line-height: 16px;
+  border-right: 1px solid rgb(128, 139, 126);
+  border-bottom: 1px solid rgb(128, 139, 126);
   background-color: rgb(163, 180, 161);
   padding: 3px;
   margin: 0px;
@@ -105,6 +103,7 @@
   position: sticky;
   bottom: 0;
   font-weight: bold;
+  height: 23px;
 }
 
 .atn-tfoot-tr {
@@ -118,10 +117,10 @@
 }
 
 .atn-tfoot-td-container {
-  height: 20px;
-  border-top: 1px solid rgb(90, 110, 88);
-  border-right: 1px solid rgb(90, 110, 88);
-  border-radius: 0;
+  height: 16px;
+  line-height: 16px;
+  border-top: 1px solid rgb(28, 53, 25);
+  border-right: 1px solid rgb(28, 53, 25);
   background-color: rgb(163, 180, 161);
   padding: 3px;
   margin: 0px;

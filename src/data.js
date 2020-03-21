@@ -1,8 +1,26 @@
 export const columns = [
-  { title: "ФИО", field: "Name", tableData: { id: "0", width: 90 } },
-  { title: "Почта", field: "Email", tableData: { id: "1", width: 50 } },
-  { title: "Город", field: "City", tableData: { id: "2", width: 120 } },
-  { title: "Дата рождения", field: "DT", type: "date", format: "DD.MM.YYYY", tableData: { id: "3", width: 80 } }
+  { title: "ФИО", 
+    field: "Name", 
+    width: 90,
+    mimWidth: 10,
+    maxWidth: 250
+  },
+  { title: "Почта", 
+    field: "Email", 
+    width: 50, 
+    frozen: "left"
+  },
+  { title: "Город", 
+    field: "City", 
+    width: 120,
+    frozen: "right"
+  },
+  { title: "Дата рождения", 
+    field: "DT", 
+    type: "date", 
+    format: "DD.MM.YYYY", 
+    width: 80
+  }
 ];
 
 export const totals = { 

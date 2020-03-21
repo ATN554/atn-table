@@ -1,20 +1,18 @@
 import React from "react";
+import getUID from "../UID/uid.js";
 
 export default class Draggable extends React.Component {
   constructor(props) {
     super(props);
 
-    this.ref = null;
-
     let droppable = this.props.droppable === undefined ? "droppable" : this.props.droppable;
     let axis = this.props.axis === undefined ? "both" : this.props.axis;
     let enabled = this.props.enabled === undefined ? true : this.props.enabled;
-    let showClone =
-      this.props.showClone !== undefined ? this.props.showClone : true;
-    let cloneOpacity =
-      this.props.cloneOpacity !== undefined ? this.props.cloneOpacity : 0.8;
+    let showClone = this.props.showClone !== undefined ? this.props.showClone : true;
+    let cloneOpacity = this.props.cloneOpacity !== undefined ? this.props.cloneOpacity : 0.8;
 
     this.state = {
+      dndcloneId: getUID(),
       droppable: droppable,
       elements: this.props.children,
       isReadyForDrag: false,
@@ -260,8 +258,8 @@ export default class Draggable extends React.Component {
           "div",
           {
             ref: "refdndclone",
-            id: "dnd",
-            key: "dnd",
+            id: this.state.dndcloneId,
+            key: this.state.dndcloneId,
             className: this.props.className,
             style: {
               ...this.props.style,
