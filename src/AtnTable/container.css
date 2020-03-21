@@ -1,0 +1,53 @@
+.atn-container {
+  width: 100%;
+  height: 100%;
+  background-color: whitesmoke;
+  border: 1px solid rgb(28, 53, 25);
+  border-collapse: collapse;
+}
+
+.atn-toolbar {
+  background-color: antiquewhite;
+}
+
+.atn-groupbar {
+  background-color: burlywood;
+}
+
+.atn-menu-top {
+  background-color: cadetblue;
+}
+
+.atn-content-mid-tr {
+  height: 100%;
+}
+
+.atn-menu-left {
+  background-color: cadetblue;
+}
+
+.atn-content-left {
+  background-color: azure;
+}
+
+.atn-content-mid {
+  background-color: white;
+  width: 100%;
+  position: relative;
+}
+
+.atn-content-right {
+  background-color: azure;
+}
+
+.atn-menu-right {
+  background-color: cadetblue;
+}
+
+.atn-menu-bot {
+  background-color: cadetblue;
+}
+
+.atn-footer {
+  background-color: antiquewhite;
+}

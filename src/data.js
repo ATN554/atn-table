@@ -1,8 +1,8 @@
 export const columns = [
-  { title: "ФИО", field: "Name", tableData: { groupOrder: 0 } },
-  { title: "Почта", field: "Email" },
-  { title: "Город", field: "City" },
-  { title: "Дата рождения", field: "DT", type: "date", format: "DD.MM.YYYY" }
+  { title: "ФИО", field: "Name", tableData: { width: 90 } },
+  { title: "Почта", field: "Email", tableData: { width: 50 } },
+  { title: "Город", field: "City", tableData: { width: 120 } },
+  { title: "Дата рождения", field: "DT", type: "date", format: "DD.MM.YYYY", tableData: { width: 80 } }
 ];
 
 export const data = [
