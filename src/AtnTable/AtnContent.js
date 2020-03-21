@@ -4,6 +4,10 @@ import Draggable from "../DND/Draggable.js";
 import Droppable from "../DND/Droppable.js";
 import AtnTheadTr from "./AtnTheadTr.js";
 
+const swap = (arr, a, b) => {
+  arr[a] = arr.splice(b, 1, arr[a])[0];
+}
+
 export default class AtnContent extends React.Component {
   constructor(props) {
     super(props);
@@ -17,12 +21,25 @@ export default class AtnContent extends React.Component {
     };
 
     this.handleHeaderResize = this.handleHeaderResize.bind(this);
+    this.handleDragEnd = this.handleDragEnd.bind(this);
   }
 
   handleHeaderResize(idx, width) {
     let columns = this.state.columns;
     columns[idx].tableData.width = width + this.state.deltaW;
-    this.setState({ columns: columns });
+    this.setState({ columns });
+  }
+
+  handleDragEnd(idFrom, idTo) {
+    let columns = this.state.columns;
+    let colFromId = idFrom.substr(9);
+    let colToId = idTo.substr(9);
+    if (colFromId !== colToId) {
+      let colFromIdx = columns.findIndex((el) => el.tableData.id === colFromId);
+      let colToIdx = columns.findIndex((el) => el.tableData.id === colToId);
+      swap(columns, colFromIdx, colToIdx);
+      this.setState({ columns });
+    }
   }
 
   componentDidMount() {
@@ -45,27 +62,19 @@ export default class AtnContent extends React.Component {
           >
             {this.state.columns.map((column, col_index) => (
               <Droppable
-                id={"Droppable" + col_index}
+                id={"Droppable" + column.tableData.id}
                 key={"th" + col_index}
                 type="div"
                 className="atn-thead-td"
               >
                 <Draggable
-                  id={"Draggable" + col_index}
+                  id={"Draggable" + column.tableData.id}
                   droppable={"atn-thead-td"}
                   type="div"
                   axis="horizontal"
                   className="atn-thead-td-container"
                   style={{ width: (column.tableData.width - this.state.deltaW) + "px" }}
-                  onDragStart={(idFrom, x, y) => {
-                    console.log("start", idFrom, x, y);
-                  }}
-                  onDragEnd={(idFrom, idTo, x, y) => {
-                    console.log("end", idFrom, idTo, x, y);
-                  }}
-                  onDragCancel={(idFrom, x, y) => {
-                    console.log("cancel", idFrom, x, y);
-                  }}
+                  onDragEnd={(idFrom, idTo, x, y) => this.handleDragEnd(idFrom, idTo)}
                 >
                   {column.title}
                 </Draggable>
