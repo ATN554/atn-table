@@ -130,7 +130,7 @@ export default class Draggable extends React.Component {
         },
         function () {
           this.refs.refdndclone.visibility = "hidden";
-          let target = document.elementFromPoint(endPos[0], endPos[1]);
+          let target = document.elementFromPoint(endPos[0]+1, endPos[1]+1);
           let idFrom = this.props.id;
           if (target) {
             let droppable = target.closest("." + this.state.droppable);

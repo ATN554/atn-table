@@ -37,14 +37,14 @@ export default class AtnTable extends React.Component {
         <table className="atn-container">
           <thead className="atn-container-th">
             <tr className="atn-toolbar-tr">
-              <td colSpan={3} className="atn-toolbar">
+              <td className="atn-toolbar">
                 <div style={{ height: "40px" }}>
                   Панель кнопок
                 </div>
               </td>
             </tr>
             <tr className="atn-groupbar-tr">
-              <td colSpan={3} className="atn-groupbar">
+              <td className="atn-groupbar">
                 <div style={{ height: "30px" }}>
                   Панель группы
                 </div>
@@ -52,8 +52,8 @@ export default class AtnTable extends React.Component {
             </tr>
           </thead>
           <tbody className="atn-container-tb">
-            <tr className="atn-content-top-tr">
-              <td colSpan={3} className="atn-menu-top">
+            <tr className="atn-content-mid-tr">
+              <td className="atn-content-mid">
                 <AtnMenu
                   mainClass="atn-mtop"
                   contentClass="atn-mtop-content"
@@ -61,10 +61,6 @@ export default class AtnTable extends React.Component {
                 >
                   Меню сверху
                 </AtnMenu>
-              </td>
-            </tr>
-            <tr className="atn-content-mid-tr">
-              <td className="atn-menu-left">
                 <AtnMenu
                   mainClass="atn-mleft"
                   contentClass="atn-mleft-content"
@@ -72,15 +68,11 @@ export default class AtnTable extends React.Component {
                 >
                   Меню слева
                 </AtnMenu>
-              </td>
-              <td className="atn-content-mid">
                 <AtnContent
                   columns={this.state.columns}
                   data={this.state.data}
                   totals={this.state.totals}
                 />
-              </td>
-              <td className="atn-menu-right">
                 <AtnMenu
                   mainClass="atn-mright"
                   contentClass="atn-mright-content"
@@ -88,10 +80,6 @@ export default class AtnTable extends React.Component {
                 >
                   Меню справа
                 </AtnMenu>
-              </td>
-            </tr>
-            <tr className="atn-content-bot-tr">
-              <td colSpan={3} className="atn-menu-bot">
                 <AtnMenu
                   mainClass="atn-mbot"
                   contentClass="atn-mbot-content"
@@ -104,7 +92,7 @@ export default class AtnTable extends React.Component {
           </tbody>
           <tfoot className="atn-container-tf">
             <tr className="atn-container-tr">
-              <td colSpan={3} className="atn-footer">
+              <td className="atn-footer">
                 <div style={{ height: "40px" }}>
                   Подвал таблицы
                 </div>

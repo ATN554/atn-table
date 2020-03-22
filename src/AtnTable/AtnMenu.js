@@ -71,20 +71,20 @@ export default class AtnMenu extends React.Component {
 
   render() {
     return (
-        <div
-          id={this.state.menuId}
-          className={this.state.mainClass}
-        >
-          <div className={this.state.contentClass}>
-            {this.props.children}
-          </div>
-          <input
-            type="button"
-            value=""
-            onClick={this.toggle}
-            className={this.state.buttonClass}
-      />
+      <div
+        id={this.state.menuId}
+        className={this.state.mainClass}
+      >
+        <div className={this.state.contentClass}>
+          {this.props.children}
         </div>
+        <input
+          type="button"
+          value=""
+          onClick={this.toggle}
+          className={this.state.buttonClass}
+        />
+      </div>
     );
   }
 }

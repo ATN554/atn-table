@@ -5,6 +5,7 @@
   right: 0;
   height: 0;
   transition: height 0.5s ease-in-out 0.1s;
+  z-index: 4;
 }
 
 .atn-mtop.active {
@@ -33,7 +34,7 @@
 
 .atn-mtop-button {
   position: absolute;
-  bottom: -16px;
+  bottom: -15px;
   left: 0;
   right: 0;
   margin: auto;
@@ -41,7 +42,7 @@
   height: 15px;
   background-color: rgba(208, 219, 208);
   border-radius: 0px 0px 10px 10px;
-  opacity: 0.75;
+  opacity: 0.7;
   transition: background-color 0.5s ease-in 0.0s;
 }
 
