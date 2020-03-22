@@ -8,12 +8,10 @@ export const columns = [
   { title: "Почта", 
     field: "Email", 
     width: 50, 
-    frozen: "left"
   },
   { title: "Город", 
     field: "City", 
     width: 120,
-    frozen: "right"
   },
   { title: "Дата рождения", 
     field: "DT", 
@@ -24,9 +22,10 @@ export const columns = [
 ];
 
 export const totals = { 
-  "Name": "10", 
-  "Email": "53%", 
-  "DT": "144f" 
+  "Name": "16", 
+  "Email": "right", 
+  "City": "A - G",
+  "DT": "2019 - 2020" 
 };
 
 export const data = [

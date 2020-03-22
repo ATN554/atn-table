@@ -54,18 +54,12 @@ export default class AtnTable extends React.Component {
               <td className="atn-menu-left">
                 menu left
               </td>
-              <td className="atn-content-left">
-                frozen left
-              </td>
               <td className="atn-content-mid">
                 <AtnContent
                   columns={this.state.columns}
                   data={this.state.data}
                   totals={this.state.totals}
                 />
-              </td>
-              <td className="atn-content-right">
-                frozen right
               </td>
               <td className="atn-menu-right">
                 menu right

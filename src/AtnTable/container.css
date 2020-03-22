@@ -28,6 +28,8 @@
 
 .atn-content-left {
   background-color: azure;
+  min-width: 200px;
+  position: relative;
 }
 
 .atn-content-mid {
@@ -38,6 +40,8 @@
 
 .atn-content-right {
   background-color: azure;
+  min-width: 200px;
+  position: relative;
 }
 
 .atn-menu-right {
