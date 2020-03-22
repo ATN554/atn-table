@@ -8,28 +8,31 @@
 
 .atn-toolbar {
   background-color: antiquewhite;
+  position: relative;
 }
 
 .atn-groupbar {
   background-color: burlywood;
+  position: relative;
 }
 
 .atn-menu-top {
-  background-color: cadetblue;
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  z-index: 4;
 }
 
 .atn-content-mid-tr {
   height: 100%;
+  z-index: 0;
 }
 
 .atn-menu-left {
-  background-color: cadetblue;
-}
-
-.atn-content-left {
-  background-color: azure;
-  min-width: 200px;
   position: relative;
+  overflow: visible;
+  padding: 0;
+  z-index: 2;
 }
 
 .atn-content-mid {
@@ -38,20 +41,21 @@
   position: relative;
 }
 
-.atn-content-right {
-  background-color: azure;
-  min-width: 200px;
-  position: relative;
-}
-
 .atn-menu-right {
-  background-color: cadetblue;
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  z-index: 1;
 }
 
 .atn-menu-bot {
-  background-color: cadetblue;
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  z-index: 3;
 }
 
 .atn-footer {
   background-color: antiquewhite;
+  position: relative;
 }

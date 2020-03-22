@@ -47,6 +47,7 @@
   user-select: none;
   padding: 3px;
   margin: 0px;
+  transition: background-color 0.3s ease-in;
 }
 
 .atn-thead-td-container:last-child {
@@ -56,7 +57,8 @@
 .atn-thead-td-container:hover,
 .atn-thead-td-container:focus,
 .atn-thead-td-container:active {
-  background-color: rgb(183, 216, 180);
+  background-color: rgb(167, 219, 163);
+  transition: background-color 0.3s ease-in;
 }
 
 .atn-thead-td-resizer {
@@ -71,12 +73,14 @@
   user-select: none;
   padding: 3px;
   margin: 0px;
+  transition: background-color 0.3s ease-in;
 }
 
 .atn-thead-td-resizer:hover,
 .atn-thead-td-resizer:focus,
 .atn-thead-td-resizer:active {
-  background-color: rgb(183, 216, 180);
+  background-color: rgb(167, 219, 163);
+  transition: background-color 0.3s ease-in;
 }
 
 .atn-tbody {
@@ -89,6 +93,7 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  transition: background-color 0.3s ease-in;
 }
 
 .atn-tbody-tr:nth-child(odd) {
@@ -102,7 +107,8 @@
 .atn-tbody-tr:hover,
 .atn-tbody-tr:focus,
 .atn-tbody-tr:active {
-  background-color: rgb(183, 216, 180);
+  background-color: rgb(167, 219, 163);
+  transition: background-color 0.3s ease-in;
 }
 
 .atn-tbody-td {
