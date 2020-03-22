@@ -72,7 +72,7 @@ export default class AtnContent extends React.Component {
             </div>
           ))}
         </div>
-
+       
         <div className="atn-tfoot">
           <div className="atn-tfoot-tr">
             {this.state.columns.map((column, col_index) => (
