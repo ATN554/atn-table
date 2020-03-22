@@ -81,6 +81,9 @@
 
 .atn-tbody-tr {
   white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
 }
 
 .atn-tbody-tr:nth-child(odd) {
@@ -88,18 +91,25 @@
 }
 
 .atn-tbody-tr:nth-child(even) {
-	background-color: rgb(194, 206, 193);
+  background-color: rgb(194, 206, 193);
+}
+
+.atn-tbody-tr:hover,
+.atn-tbody-tr:focus,
+.atn-tbody-tr:active {
+  background-color: rgb(183, 216, 180);
 }
 
 .atn-tbody-td {
-  display: inline-block;
-  white-space: nowrap;
   vertical-align: middle;
   background-color: inherit;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
 }
 
 .atn-tbody-td-container {
-  height: 16px;
+  max-height: 38px;
   line-height: 16px;
   border-right: 1px solid rgb(128, 139, 126);
   border-bottom: 1px solid rgb(128, 139, 126);
@@ -107,6 +117,8 @@
   padding: 3px;
   margin: 0px;
   overflow: hidden;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .atn-tfoot {
