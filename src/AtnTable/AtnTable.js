@@ -2,6 +2,8 @@ import React from "react";
 import "./container.css";
 import "./menutop.css";
 import "./menubot.css";
+import "./menuleft.css";
+import "./menuright.css";
 import getUID from "../UID/uid.js";
 import AtnContent from "./AtnContent.js";
 import AtnMenu from "./AtnMenu.js";
@@ -63,7 +65,13 @@ export default class AtnTable extends React.Component {
             </tr>
             <tr className="atn-content-mid-tr">
               <td className="atn-menu-left">
-                Меню слева
+                <AtnMenu
+                  mainClass="atn-mleft"
+                  contentClass="atn-mleft-content"
+                  buttonClass="atn-mleft-button"
+                >
+                  Меню слева
+                </AtnMenu>
               </td>
               <td className="atn-content-mid">
                 <AtnContent
@@ -73,7 +81,13 @@ export default class AtnTable extends React.Component {
                 />
               </td>
               <td className="atn-menu-right">
-                Меню справа
+                <AtnMenu
+                  mainClass="atn-mright"
+                  contentClass="atn-mright-content"
+                  buttonClass="atn-mright-button"
+                >
+                  Меню справа
+                </AtnMenu>
               </td>
             </tr>
             <tr className="atn-content-bot-tr">

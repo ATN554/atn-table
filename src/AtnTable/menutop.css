@@ -1,14 +1,14 @@
 .atn-mtop {
   position: absolute;
   top: 0;
-  left: 0px;
-  right: 0px;
-  height: 0px;
+  left: 0;
+  right: 0;
+  height: 0;
   transition: height 0.5s ease-in-out 0.1s;
 }
 
 .atn-mtop.active {
-  height: 50px;
+  height: 100px;
   transition: height 0.5s ease-in-out 0.1s;
 }
 
@@ -33,7 +33,7 @@
 
 .atn-mtop-button {
   position: absolute;
-  bottom: -15px;
+  bottom: -16px;
   left: 0;
   right: 0;
   margin: auto;

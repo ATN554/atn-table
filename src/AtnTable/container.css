@@ -25,7 +25,6 @@
 
 .atn-content-mid-tr {
   height: 100%;
-  z-index: 0;
 }
 
 .atn-menu-left {
@@ -37,8 +36,9 @@
 
 .atn-content-mid {
   background-color: white;
-  width: 80%;
   position: relative;
+  width: 100%;
+  z-index: 0;
 }
 
 .atn-menu-right {

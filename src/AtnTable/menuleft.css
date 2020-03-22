@@ -1,53 +1,53 @@
-.atn-mbot {
+.atn-mleft {
   position: absolute;
+  top: 0;
   bottom: 0;
-  left: 0;
-  right: 0;
-  height: 0;
-  transition: height 0.5s ease-in-out 0.1s;
+  left: 0px;
+  width: 0;
+  transition: width 0.5s ease-in-out 0.1s;
 }
 
-.atn-mbot.active {
-  height: 100px;
-  transition: height 0.5s ease-in-out 0.1s;
+.atn-mleft.active {
+  width: 100px;
+  transition: width 0.5s ease-in-out 0.1s;
 }
 
-.atn-mbot-content {
+.atn-mleft-content {
   position: absolute;
   opacity: 0;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  border-top: 1px solid rgb(28, 53, 25);
+  border-right: 1px solid rgb(28, 53, 25);
   background-color: rgb(208, 219, 208);
-  box-shadow: 0px -10px 15px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 15px 0px 15px -12px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   transition: opacity 0.5s ease-in-out 0.1s;
 }
 
-.atn-mbot-content.active {
+.atn-mleft-content.active {
   opacity: 1;
   transition: opacity 0.5s ease-in-out 0.1s;
 }
 
-.atn-mbot-button {
+.atn-mleft-button {
   position: absolute;
-  top: -16px;
-  left: 0;
-  right: 0;
+  top: 0;
+  bottom: 0;
+  right: -16px;
   margin: auto;
-  width: 48px;
-  height: 15px;
+  width: 15px;
+  height: 48px;
   background-color: rgba(208, 219, 208);
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 0px 10px 10px 0px;
   opacity: 0.75;
   transition: background-color 0.5s ease-in 0.0s;
 }
 
-.atn-mbot-button:hover,
-.atn-mbot-button:focus,
-.atn-mbot-button:active {
+.atn-mleft-button:hover,
+.atn-mleft-button:focus,
+.atn-mleft-button:active {
   outline: none;
   opacity: 1;
   background-color: rgb(167, 219, 163);
