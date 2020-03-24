@@ -1,13 +1,13 @@
 export const columns = [
   { title: "ФИО", 
     field: "Name", 
-    width: 90,
+    width: 150,
     mimWidth: 10,
     maxWidth: 250
   },
   { title: "Почта", 
     field: "Email", 
-    width: 50, 
+    width: 250, 
   },
   { title: "Город", 
     field: "City", 
@@ -17,7 +17,7 @@ export const columns = [
     field: "DT", 
     type: "date", 
     format: "DD.MM.YYYY", 
-    width: 80
+    width: 140
   }
 ];
 

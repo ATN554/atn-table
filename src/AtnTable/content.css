@@ -4,11 +4,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /*border: 1px solid rgb(28, 53, 25);*/
   border-collapse: collapse;
   border-spacing: 0;
   overflow: auto;
-  background-color: rgb(208, 219, 208);
+  background-color: inherit;
   z-index: 0;
 }
 
@@ -23,7 +22,7 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  background-color: rgb(194, 206, 193);
+  background-color: var(--header-bg-color);
 }
 
 .atn-thead-td {
@@ -42,8 +41,8 @@
   word-wrap: break-word;
   text-align: center;
   overflow: hidden;
-  border-right: 1px dashed rgb(28, 53, 25);
-  border-bottom: 1px solid rgb(28, 53, 25);
+  border-right: 1px dashed var(--inner-bd-color-darken);
+  border-bottom: 1px solid var(--inner-bd-color-darken);
   background-color: inherit;
   cursor: move;
   user-select: none;
@@ -53,13 +52,13 @@
 }
 
 .atn-thead-td-container:last-child {
-  border-left: 1px solid rgb(28, 53, 25);
+  border-left: 1px solid var(--inner-bd-color-darken);
 }
 
 .atn-thead-td-container:hover,
 .atn-thead-td-container:focus,
 .atn-thead-td-container:active {
-  background-color: rgb(167, 219, 163);
+  background-color: var(--header-bg-color-hover);
   transition: background-color 0.3s ease-in;
 }
 
@@ -68,8 +67,8 @@
   width: 4px;
   max-height: 38px;
   line-height: 18px;
-  border-right: 1px solid rgb(28, 53, 25);
-  border-bottom: 1px solid rgb(28, 53, 25);
+  border-right: 1px solid var(--inner-bd-color-darken);
+  border-bottom: 1px solid var(--inner-bd-color-darken);
   background-color: inherit;
   cursor: col-resize;
   user-select: none;
@@ -81,7 +80,7 @@
 .atn-thead-td-resizer:hover,
 .atn-thead-td-resizer:focus,
 .atn-thead-td-resizer:active {
-  background-color: rgb(167, 219, 163);
+  background-color: var(--header-bg-color-hover);
   transition: background-color 0.3s ease-in;
 }
 
@@ -99,17 +98,17 @@
 }
 
 .atn-tbody-tr:nth-child(odd) {
-	background-color: rgb(208, 219, 208);
+	background-color: inherit;
 }
 
 .atn-tbody-tr:nth-child(even) {
-  background-color: rgb(194, 206, 193);
+  background-color: var(--table-bg-color-darken);
 }
 
 .atn-tbody-tr:hover,
 .atn-tbody-tr:focus,
 .atn-tbody-tr:active {
-  background-color: rgb(167, 219, 163);
+  background-color: var(--table-bg-color-hover);
   transition: background-color 0.3s ease-in;
 }
 
@@ -127,8 +126,8 @@
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow: hidden;
-  border-right: 1px solid rgb(128, 139, 126);
-  border-bottom: 1px solid rgb(128, 139, 126);
+  border-right: 1px solid var(--inner-bd-color);
+  border-bottom: 1px solid var(--inner-bd-color);
   background-color: inherit;
   padding: 3px;
   margin: 0px;
@@ -145,7 +144,7 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  background-color:rgb(208, 219, 208);
+  background-color: var(--table-bg-color);
 }
 
 .atn-tfoot-td {
@@ -162,9 +161,9 @@
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow: hidden;
-  border-top: 1px solid rgb(28, 53, 25);
-  border-right: 1px solid rgb(28, 53, 25);
-  border-bottom: 1px solid rgb(128, 139, 126);
+  border-top: 1px solid var(--inner-bd-color-darken);
+  border-right: 1px solid var(--inner-bd-color-darken);
+  border-bottom: 1px solid var(--inner-bd-color);
   background-color: inherit;
   padding: 3px;
   margin: 0px;
