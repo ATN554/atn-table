@@ -5,7 +5,7 @@
   left: 0px;
   width: 0;
   transition: width 0.5s ease-in-out 0.1s;
-  z-index: 1;
+  z-index: 2;
 }
 
 .atn-mleft.active {
@@ -36,13 +36,13 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  right: -3px;
+  right: -4px;
   margin: auto;
   padding: 0;
-  width: 12px;
+  width: 10px;
   height: 48px;
   background-color: var(--button-bg-color-inactive);
-  border-radius: 0px 12px 0px 12px;
+  border-radius: 5px 5px 5px 5px;
   outline: none;
   transition: background-color 0.5s ease-in 0.0s;
 }

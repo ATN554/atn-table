@@ -5,7 +5,7 @@
   right: 0;
   height: 0;
   transition: height 0.5s ease-in-out 0.1s;
-  z-index: 3;
+  z-index: 2;
 }
 
 .atn-mbot.active {
@@ -20,9 +20,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  border-top: 1px solid rgb(28, 53, 25);
-  background-color: rgb(208, 219, 208);
-  box-shadow: 0px -10px 15px -10px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid var(--inner-bd-color-darken);
+  background-color: var(--table-bg-color-darken);
+  box-shadow: 0px -10px 15px -10px var(--shadow-bg-color);
   overflow: hidden;
   transition: opacity 0.5s ease-in-out 0.1s;
 }
@@ -34,23 +34,22 @@
 
 .atn-mbot-button {
   position: absolute;
-  top: -15px;
+  top: -4px;
   left: 0;
   right: 0;
   margin: auto;
+  padding: 0;
   width: 48px;
-  height: 15px;
-  background-color: rgba(208, 219, 208);
-  border-radius: 10px 10px 0px 0px;
-  opacity: 0.7;
+  height: 10px;
+  background-color: var(--button-bg-color-inactive);
+  border-radius: 5px 5px 5px 5px;
+  outline: none;
   transition: background-color 0.5s ease-in 0.0s;
 }
 
 .atn-mbot-button:hover,
 .atn-mbot-button:focus,
 .atn-mbot-button:active {
-  outline: none;
-  opacity: 1;
-  background-color: rgb(167, 219, 163);
+  background-color: var(--button-bg-color-active);
   transition: background-color 0.5s ease-in 0.0s;
 }
