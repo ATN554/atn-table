@@ -41,8 +41,8 @@
   word-wrap: break-word;
   text-align: center;
   overflow: hidden;
-  border-right: 1px dashed var(--inner-bd-color-darken);
-  border-bottom: 1px solid var(--inner-bd-color-darken);
+  border-right: 1px dashed var(--bd-color-darken);
+  border-bottom: 1px solid var(--bd-color-darken);
   background-color: inherit;
   cursor: move;
   user-select: none;
@@ -52,7 +52,7 @@
 }
 
 .atn-thead-td-container:last-child {
-  border-left: 1px solid var(--inner-bd-color-darken);
+  border-left: 1px solid var(--bd-color-darken);
 }
 
 .atn-thead-td-container:hover,
@@ -67,8 +67,8 @@
   width: 4px;
   max-height: 38px;
   line-height: 18px;
-  border-right: 1px solid var(--inner-bd-color-darken);
-  border-bottom: 1px solid var(--inner-bd-color-darken);
+  border-right: 1px solid var(--bd-color-darken);
+  border-bottom: 1px solid var(--bd-color-darken);
   background-color: inherit;
   cursor: col-resize;
   user-select: none;
@@ -126,8 +126,8 @@
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow: hidden;
-  border-right: 1px solid var(--inner-bd-color);
-  border-bottom: 1px solid var(--inner-bd-color);
+  border-right: 1px solid var(--bd-color);
+  border-bottom: 1px solid var(--bd-color);
   background-color: inherit;
   padding: 3px;
   margin: 0px;
@@ -161,9 +161,9 @@
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow: hidden;
-  border-top: 1px solid var(--inner-bd-color-darken);
-  border-right: 1px solid var(--inner-bd-color-darken);
-  border-bottom: 1px solid var(--inner-bd-color);
+  border-top: 1px solid var(--bd-color-darken);
+  border-right: 1px solid var(--bd-color-darken);
+  border-bottom: 1px solid var(--bd-color);
   background-color: inherit;
   padding: 3px;
   margin: 0px;

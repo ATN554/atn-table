@@ -21,7 +21,8 @@ export const columns = [
   }
 ];
 
-export const totals = { 
+export const totals = {
+  "First-Column-Text": "Итого: ",
   "Name": "16", 
   "Email": "right", 
   "City": "A - G",

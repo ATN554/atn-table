@@ -1,10 +1,9 @@
 :root {
   --table-bg-color: #d1e9d3;
   --table-bg-color-darken: #bfd6c1;
-  --table-bg-color-hover: #9ef098;
-  --outer-bd-color: #333;
-  --inner-bd-color: #817474;
-  --inner-bd-color-darken: #463f3f;
+  --table-bg-color-hover: #a9f0a3;
+  --bd-color: #817474;
+  --bd-color-darken: #463f3f;
   --header-bg-color: #b8dabb;
   --header-bg-color-darken: #a3c2a5;
   --header-bg-color-hover: #9ef098;
@@ -19,19 +18,42 @@
   margin-top: 5px;
   margin-left: 5px;
   background-color: var(--table-bg-color);
-  border: 1px solid var(--outer-bd-color);
+  border: 1px solid var(--bd-color-darken);
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+.atn-title {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  line-height: 18px;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color: var(--table-bg-color);
+  border: 1px solid var(--bd-color-darken);
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.atn-container-th {
+  border: 1px solid var(--bd-color-darken);
 }
 
 .atn-toolbar {
   background-color: var(--header-bg-color);
   position: relative;
+  border: 1px solid var(--bd-color-darken);
 }
 
 .atn-groupbar {
   background-color: var(--header-bg-color-darken);
   position: relative;
+  border: 1px solid var(--bd-color-darken);
+}
+
+.atn-container-tb {
+  border: 1px solid var(--bd-color-darken);
 }
 
 .atn-content-mid-tr {
@@ -44,6 +66,10 @@
   position: relative;
   width: 100%;
   z-index: 1;
+}
+
+.atn-container-tf {
+  border: 1px solid var(--bd-color-darken);
 }
 
 .atn-footer {

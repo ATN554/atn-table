@@ -18,6 +18,7 @@ export default class App extends React.Component {
     return (
       <div className="content">
         <AtnTable
+          title="Заголовок таблицы"
           columns={this.state.columns}
           data={this.state.data}
           totals={this.state.totals}

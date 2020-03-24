@@ -20,7 +20,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  border-top: 1px solid var(--inner-bd-color-darken);
+  border-top: 1px solid var(--bd-color-darken);
   background-color: var(--table-bg-color-darken);
   box-shadow: 0px -10px 15px -10px var(--shadow-bg-color);
   overflow: hidden;

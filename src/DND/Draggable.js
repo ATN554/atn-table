@@ -111,7 +111,7 @@ export default class Draggable extends React.Component {
     }
   }
 
-  stop() {
+  stop(x, y) {
     if (this.state.isReadyForDrag) {
       this.setState({
         isReadyForDrag: false
@@ -130,7 +130,7 @@ export default class Draggable extends React.Component {
         },
         function () {
           this.refs.refdndclone.visibility = "hidden";
-          let target = document.elementFromPoint(endPos[0]+1, endPos[1]+1);
+          let target = document.elementFromPoint(x, y);
           let idFrom = this.props.id;
           if (target) {
             let droppable = target.closest("." + this.state.droppable);
@@ -212,7 +212,7 @@ export default class Draggable extends React.Component {
 
   onMouseUp(event) {
     event.preventDefault();
-    this.stop();
+    this.stop(event.pageX, event.pageY);
   }
 
   onMouseMove(event) {
@@ -230,7 +230,10 @@ export default class Draggable extends React.Component {
 
   onTouchEnd(event) {
     event.preventDefault();
-    this.stop();
+    if (event.changedTouches.length > 0) {
+      let touch = event.changedTouches[0];
+      this.stop(touch.pageX, touch.pageY);
+    }
   }
 
   onTouchMove(event) {

@@ -25,6 +25,7 @@ export default class AtnTable extends React.Component {
     super(props);
 
     this.state = {
+      title: props.title,
       columns: fillColumnsTableData(props.columns),
       data: props.data,
       totals: props.totals
@@ -37,14 +38,17 @@ export default class AtnTable extends React.Component {
         <thead className="atn-container-th">
           <tr className="atn-toolbar-tr">
             <td className="atn-toolbar">
-              <div style={{ height: "40px" }}>
+              <div className="atn-title">
+                {this.state.title}
+              </div>
+              <div style={{ height: "32px", lineHeight: "32px" }}>
                 Панель кнопок
               </div>
             </td>
           </tr>
           <tr className="atn-groupbar-tr">
             <td className="atn-groupbar">
-              <div style={{ height: "30px" }}>
+              <div style={{ height: "24px", lineHeight: "24px" }}>
                 Панель группы
               </div>
             </td>
@@ -92,7 +96,7 @@ export default class AtnTable extends React.Component {
         <tfoot className="atn-container-tf">
           <tr className="atn-container-tr">
             <td className="atn-footer">
-              <div style={{ height: "40px" }}>
+              <div style={{ height: "24px", lineHeight: "24px" }}>
                 Подвал таблицы
               </div>
             </td>
