@@ -19,8 +19,7 @@ export default class Draggable extends React.Component {
       isDraging: false,
       showClone: showClone,
       cloneOpacity: cloneOpacity,
-      evtX: 0,
-      evtY: 0,
+      eventPos: [0, 0],
       position: [0, 0],
       deltaPos: [0, 0],
       size: [0, 0],
@@ -43,6 +42,7 @@ export default class Draggable extends React.Component {
     this.move = this.move.bind(this);
 
     this.findPos = this.findPos.bind(this);
+    this.findDroppable = this.findDroppable.bind(this);
   }
 
   componentDidMount() {
@@ -97,8 +97,7 @@ export default class Draggable extends React.Component {
         this.setState({
           isReadyForDrag: true,
           isDraging: false,
-          evtX: _x,
-          evtY: _y,
+          eventPos: [_x, _y],
           position: selfPos,
           deltaPos: deltaPos,
           size: size,
@@ -111,18 +110,26 @@ export default class Draggable extends React.Component {
     }
   }
 
+  findDroppable(x, y) {
+    let target = document.elementFromPoint(x, y);
+    if (target) {
+      return target.closest("." + this.state.droppable);
+    }
+    return undefined;
+  }
+
   stop(x, y) {
     if (this.state.isReadyForDrag) {
       this.setState({
         isReadyForDrag: false
       });
     } else if (this.state.isDraging) {
-      let endPos = [this.state.evtX, this.state.evtY];
+      let endPos = [this.state.eventPos[0], this.state.eventPos[1]];
+      let centerPos = [this.state.eventPos[0] + this.state.size[0] / 2, this.state.eventPos[1] + this.state.size[1] / 2];
       this.setState(
         {
           isDraging: false,
-          evtX: 0,
-          evtY: 0,
+          eventPos: [0, 0],
           position: [0, 0],
           deltaPos: [0, 0],
           size: [0, 0],
@@ -130,19 +137,18 @@ export default class Draggable extends React.Component {
         },
         function () {
           this.refs.refdndclone.visibility = "hidden";
-          let target = document.elementFromPoint(x, y);
           let idFrom = this.props.id;
-          if (target) {
-            let droppable = target.closest("." + this.state.droppable);
-            if (droppable) {
-              let idTo = droppable.id;
-              if (this.props.onDragEnd !== undefined) {
-                this.props.onDragEnd(idFrom, idTo, endPos[0], endPos[1]);
-              }
-            } else {
-              if (this.props.onDragCancel !== undefined) {
-                this.props.onDragCancel(idFrom, endPos[0], endPos[1]);
-              }
+          let droppable = this.findDroppable(x, y);
+          if (!droppable) {
+            droppable = this.findDroppable(endPos[0], endPos[1]);
+            if (!droppable) {
+              droppable = this.findDroppable(centerPos[0], centerPos[1]);
+            }
+          }
+          if (droppable) {
+            let idTo = droppable.id;
+            if (this.props.onDragEnd !== undefined) {
+              this.props.onDragEnd(idFrom, idTo, endPos[0], endPos[1]);
             }
           } else {
             if (this.props.onDragCancel !== undefined) {
@@ -167,8 +173,8 @@ export default class Draggable extends React.Component {
           if (this.props.onDragStart !== undefined) {
             this.props.onDragStart(
               this.props.id,
-              this.state.evtX,
-              this.state.evtY
+              this.state.eventPos[0],
+              this.state.eventPos[1]
             );
           }
         }
@@ -178,8 +184,8 @@ export default class Draggable extends React.Component {
       if (this.props.allowMove !== undefined) {
         allowMove = this.props.allowMove(
           this.props.id,
-          this.state.evtX,
-          this.state.evtY,
+          this.state.eventPos[0],
+          this.state.eventPos[1],
           _x,
           _y
         );
@@ -187,15 +193,14 @@ export default class Draggable extends React.Component {
       if (allowMove) {
         this.setState(
           {
-            evtX: _x,
-            evtY: _y
+            eventPos: [_x, _y]
           },
           function () {
             if (this.props.onDragMove !== undefined) {
               this.props.onDragMove(
                 this.props.id,
-                this.state.evtX,
-                this.state.evtY
+                this.state.eventPos[0],
+                this.state.eventPos[1]
               );
             }
           }
@@ -274,12 +279,12 @@ export default class Draggable extends React.Component {
               margin: "0px",
               zIndex: 1000,
               left:
-                this.state.evtX +
+                this.state.eventPos[0] +
                 this.state.deltaPos[0] -
                 this.state.innerShift[0] +
                 "px",
               top:
-                this.state.evtY +
+                this.state.eventPos[1] +
                 this.state.deltaPos[1] -
                 this.state.innerShift[1] +
                 "px",

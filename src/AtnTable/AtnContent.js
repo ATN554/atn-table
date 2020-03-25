@@ -62,7 +62,7 @@ export default class AtnContent extends React.Component {
               {this.state.columns.map((column, col_index) => (
                 <div className="atn-tbody-td" key={"tb" + col_index} >
                   <div 
-                    className="atn-tbody-td-container"
+                    className={"atn-tbody-td-container atn-" + column.align + "-align"}
                     style={{ width: column.width + "px" }}
                   >
                     {row[column.field]}
@@ -78,7 +78,7 @@ export default class AtnContent extends React.Component {
             {this.state.columns.map((column, col_index) => (
               <div key={"tf" + col_index} className="atn-tfoot-td">
                 <div 
-                  className="atn-tfoot-td-container"
+                  className={"atn-tfoot-td-container atn-" + (col_index === 0 ? "left" : column.align) + "-align"}
                   style={{ width: column.width + "px" }}
                 >
                   {col_index === 0 && 

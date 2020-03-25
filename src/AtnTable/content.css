@@ -136,6 +136,22 @@
   margin: 0px;
 }
 
+.atn-left-align {
+  text-align: left;
+}
+
+.atn-center-align {
+  text-align: center;
+}
+
+.atn-right-align {
+  text-align: right;
+}
+s
+.atn-timestamp-data {
+  text-align: right;
+}
+
 .atn-tfoot {
   position: sticky;
   bottom: 0;

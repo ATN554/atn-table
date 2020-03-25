@@ -16,6 +16,8 @@ const fillColumnsTableData = (columns) => {
     column.tableData.id = column_idx;
     column.tableData.droppableId = getUID();
     column.tableData.draggableId = getUID();
+    column.type = column.type ? column.type : 'text';
+    column.align = column.align ? column.align : 'left';
   });
   return columns;
 }

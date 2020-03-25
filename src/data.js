@@ -1,11 +1,12 @@
 export const columns = [
   { 
     title: "Ид.", 
-    field: "ID",
+    field: "ID", 
     type: "integer", 
-    width: 150,
-    mimWidth: 10,
-    maxWidth: 250
+    align: "right", 
+    width: 150, 
+    mimWidth: 10, 
+    maxWidth: 250, 
   },
   { 
     title: "Наименование", 
@@ -16,20 +17,22 @@ export const columns = [
     title: "Сумма", 
     field: "SM", 
     type: "currency", 
-    width: 120,
+    align: "right", 
+    width: 120, 
   },
   { 
     title: "Дата создания", 
     field: "DT_CREATE", 
     type: "date", 
+    align: "center", 
     format: "DD.MM.YYYY", 
-    width: 140
+    width: 140, 
   },
   {
-    title: "Исполнитель",
-    field: "URC",
-    type: "integer",
-    width: 140
+    title: "Исполнитель", 
+    field: "URC", 
+    type: "integer", 
+    width: 140, 
   }
 ];
 
