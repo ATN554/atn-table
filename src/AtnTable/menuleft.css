@@ -20,9 +20,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  border-right: 1px solid var(--bd-color-darken);
-  background-color: var(--table-bg-color-darken);
-  box-shadow: 15px 0px 15px -12px var(--shadow-bg-color);
+  border-right: 1px solid var(--border-color-darken);
+  background: var(--menu-bg-color);
+  box-shadow: 15px 0px 15px -10px var(--shadow-bg-color);
   overflow: hidden;
   transition: opacity 0.5s ease-in-out 0.1s;
 }
@@ -41,7 +41,7 @@
   padding: 0;
   width: 10px;
   height: 48px;
-  background-color: var(--button-bg-color-inactive);
+  background: var(--button-bg-color-inactive);
   border-radius: 5px 5px 5px 5px;
   outline: none;
   transition: background-color 0.5s ease-in 0.0s;
@@ -50,6 +50,6 @@
 .atn-mleft-button:hover,
 .atn-mleft-button:focus,
 .atn-mleft-button:active {
-  background-color: var(--button-bg-color-active);
+  background: var(--button-bg-color-active);
   transition: background-color 0.5s ease-in 0.0s;
 }

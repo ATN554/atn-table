@@ -20,8 +20,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  border-bottom: 1px solid var(--bd-color-darken);
-  background-color: var(--table-bg-color-darken);
+  border-bottom: 1px solid var(--border-color-darken);
+  background: var(--menu-bg-color);
   box-shadow: 0 15px 15px -10px var(--shadow-bg-color);
   overflow: hidden;
   transition: opacity 0.5s ease-in-out 0.1s;
@@ -41,7 +41,7 @@
   padding: 0;
   width: 48px;
   height: 10px;
-  background-color: var(--button-bg-color-inactive);
+  background: var(--button-bg-color-inactive);
   border-radius: 5px 5px 5px 5px;
   outline: none;
   transition: background-color 0.5s ease-in 0.0s;
@@ -50,6 +50,6 @@
 .atn-mtop-button:hover,
 .atn-mtop-button:focus,
 .atn-mtop-button:active {
-  background-color: var(--button-bg-color-active);
+  background: var(--button-bg-color-active);
   transition: background-color 0.5s ease-in 0.0s;
 }

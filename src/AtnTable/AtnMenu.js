@@ -34,7 +34,7 @@ export default class AtnMenu extends React.Component {
   onMouseUp(event) {
     event.preventDefault();
     let el = document.getElementById(this.state.menuId);
-    if (!el.contains(event.target)) {
+    if (el && event.target && !el.contains(event.target)) {
       this.close();
     }
   }
@@ -44,7 +44,7 @@ export default class AtnMenu extends React.Component {
     if (event.changedTouches.length > 0) {
       let touch = event.changedTouches[0];
       let el = document.getElementById(this.state.menuId);
-      if (!el.contains(touch.target)) {
+      if (el && touch.target && !el.contains(touch.target)) {
         this.close();
       }
     }

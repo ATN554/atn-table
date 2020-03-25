@@ -1,15 +1,25 @@
 :root {
+  --border-color: #817474;
+  --border-color-darken: #463f3f;
+
   --table-bg-color: #d1e9d3;
-  --table-bg-color-darken: #bfd6c1;
-  --table-bg-color-hover: #a9f0a3;
-  --bd-color: #817474;
-  --bd-color-darken: #463f3f;
-  --header-bg-color: #b8dabb;
-  --header-bg-color-darken: #a3c2a5;
-  --header-bg-color-hover: #9ef098;
+
+  --title-bg-color: #d2e7d4;
+  --toolbar-bg-color: #b8dabb;
+  --groupbar-bg-color: #b8dabb;
+  --footer-bg-color: #b8dabb;
+
+  --menu-bg-color: #bfd6c1;
   --button-bg-color-active: #9E9;
   --button-bg-color-inactive: #977;
   --shadow-bg-color: #0008;
+
+  --th-bg-color: #b8dabb;
+  --th-bg-color-hover: #9ef098;
+  --tb-bg-color: #d1e9d3;
+  --tb-bg-color-darken: #bfd6c1;
+  --tb-bg-color-hover: #a9f0a3;
+  --tf-bg-color: #bfd6c1;
 }
 
 .atn-container {
@@ -17,8 +27,8 @@
   height: calc(100% - 10px);
   margin-top: 5px;
   margin-left: 5px;
-  background-color: var(--table-bg-color);
-  border: 1px solid var(--bd-color-darken);
+  background: var(--table-bg-color);
+  border: 1px solid var(--border-color-darken);
   border-collapse: collapse;
   border-spacing: 0;
 }
@@ -30,30 +40,30 @@
   line-height: 18px;
   padding-left: 3px;
   padding-right: 3px;
-  background-color: var(--table-bg-color);
-  border: 1px solid var(--bd-color-darken);
+  background: var(--title-bg-color);
+  border: 1px solid var(--border-color-darken);
   border-radius: 5px;
   z-index: 1;
 }
 
 .atn-container-th {
-  border: 1px solid var(--bd-color-darken);
+  border: 1px solid var(--border-color-darken);
 }
 
 .atn-toolbar {
-  background-color: var(--header-bg-color);
+  background: var(--toolbar-bg-color);
   position: relative;
-  border: 1px solid var(--bd-color-darken);
+  border: 1px solid var(--border-color-darken);
 }
 
 .atn-groupbar {
-  background-color: var(--header-bg-color-darken);
+  background: var(--groupbar-bg-color);
   position: relative;
-  border: 1px solid var(--bd-color-darken);
+  border: 1px solid var(--border-color-darken);
 }
 
 .atn-container-tb {
-  border: 1px solid var(--bd-color-darken);
+  border: 1px solid var(--border-color-darken);
 }
 
 .atn-content-mid-tr {
@@ -62,17 +72,17 @@
 }
 
 .atn-content-mid {
-  background-color: inherit;
+  background: inherit;
   position: relative;
   width: 100%;
   z-index: 1;
 }
 
 .atn-container-tf {
-  border: 1px solid var(--bd-color-darken);
+  border: 1px solid var(--border-color-darken);
 }
 
 .atn-footer {
-  background-color: var(--header-bg-color);
+  background: var(--footer-bg-color);
   position: relative;
 }

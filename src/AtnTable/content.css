@@ -7,7 +7,7 @@
   border-collapse: collapse;
   border-spacing: 0;
   overflow: auto;
-  background-color: inherit;
+  background: inherit;
   z-index: 0;
 }
 
@@ -15,6 +15,7 @@
   position: sticky;
   top: 0;
   font-weight: bold;
+  background: var(--th-bg-color);
 }
 
 .atn-thead-tr {
@@ -22,14 +23,14 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  background-color: var(--header-bg-color);
+  background: inherit;
 }
 
 .atn-thead-td {
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  background-color: inherit;
+  background: inherit;
 }
 
 .atn-thead-td-container {
@@ -41,9 +42,9 @@
   word-wrap: break-word;
   text-align: center;
   overflow: hidden;
-  border-right: 1px dashed var(--bd-color-darken);
-  border-bottom: 1px solid var(--bd-color-darken);
-  background-color: inherit;
+  border-right: 1px dashed var(--border-color-darken);
+  border-bottom: 1px solid var(--border-color-darken);
+  background: inherit;
   cursor: move;
   user-select: none;
   padding: 3px;
@@ -52,13 +53,13 @@
 }
 
 .atn-thead-td-container:last-child {
-  border-left: 1px solid var(--bd-color-darken);
+  border-left: 1px solid var(--border-color-darken);
 }
 
 .atn-thead-td-container:hover,
 .atn-thead-td-container:focus,
 .atn-thead-td-container:active {
-  background-color: var(--header-bg-color-hover);
+  background: var(--th-bg-color-hover);
   transition: background-color 0.3s ease-in;
 }
 
@@ -67,9 +68,9 @@
   width: 4px;
   max-height: 38px;
   line-height: 18px;
-  border-right: 1px solid var(--bd-color-darken);
-  border-bottom: 1px solid var(--bd-color-darken);
-  background-color: inherit;
+  border-right: 1px solid var(--border-color-darken);
+  border-bottom: 1px solid var(--border-color-darken);
+  background: inherit;
   cursor: col-resize;
   user-select: none;
   padding: 3px;
@@ -80,13 +81,14 @@
 .atn-thead-td-resizer:hover,
 .atn-thead-td-resizer:focus,
 .atn-thead-td-resizer:active {
-  background-color: var(--header-bg-color-hover);
+  background: var(--th-bg-color-hover);
   transition: background-color 0.3s ease-in;
 }
 
 .atn-tbody {
   padding: 0px;
   margin: 0px;
+  background: var(--tb-bg-color);
 }
 
 .atn-tbody-tr {
@@ -94,21 +96,22 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  background: inherit;
   transition: background-color 0.3s ease-in;
 }
 
 .atn-tbody-tr:nth-child(odd) {
-	background-color: inherit;
+	background: inherit;
 }
 
 .atn-tbody-tr:nth-child(even) {
-  background-color: var(--table-bg-color-darken);
+  background: var(--tb-bg-color-darken);
 }
 
 .atn-tbody-tr:hover,
 .atn-tbody-tr:focus,
 .atn-tbody-tr:active {
-  background-color: var(--table-bg-color-hover);
+  background: var(--tb-bg-color-hover);
   transition: background-color 0.3s ease-in;
 }
 
@@ -116,7 +119,7 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  background-color: inherit;
+  background: inherit;
 }
 
 .atn-tbody-td-container {
@@ -126,9 +129,9 @@
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow: hidden;
-  border-right: 1px solid var(--bd-color);
-  border-bottom: 1px solid var(--bd-color);
-  background-color: inherit;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  background: inherit;
   padding: 3px;
   margin: 0px;
 }
@@ -137,6 +140,7 @@
   position: sticky;
   bottom: 0;
   font-weight: bold;
+  background: var(--tf-bg-color);
 }
 
 .atn-tfoot-tr {
@@ -144,14 +148,14 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  background-color: var(--table-bg-color);
+  background: inherit;
 }
 
 .atn-tfoot-td {
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  background-color: inherit;
+  background: inherit;
 }
 
 .atn-tfoot-td-container {
@@ -161,10 +165,10 @@
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow: hidden;
-  border-top: 1px solid var(--bd-color-darken);
-  border-right: 1px solid var(--bd-color-darken);
-  border-bottom: 1px solid var(--bd-color);
-  background-color: inherit;
+  border-top: 1px solid var(--border-color-darken);
+  border-right: 1px solid var(--border-color-darken);
+  border-bottom: 1px solid var(--border-color);
+  background: inherit;
   padding: 3px;
   margin: 0px;
 }
