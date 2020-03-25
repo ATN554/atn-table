@@ -2,17 +2,16 @@
   --border-color: #817474;
   --border-color-darken: #463f3f;
 
-  --table-bg-color: #d1e9d3;
-
   --title-bg-color: #d2e7d4;
   --toolbar-bg-color: #b8dabb;
   --groupbar-bg-color: #b8dabb;
-  --footer-bg-color: #b8dabb;
+  --table-bg-color: #d1e9d3;
+  --footer-bg-color: #c1e2c4;
 
   --menu-bg-color: #bfd6c1;
   --button-bg-color-active: #9E9;
   --button-bg-color-inactive: #977;
-  --shadow-bg-color: #0008;
+  --shadow-bg-color: #000A;
 
   --th-bg-color: #b8dabb;
   --th-bg-color-hover: #9ef098;
