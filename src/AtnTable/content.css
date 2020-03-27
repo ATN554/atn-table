@@ -71,7 +71,7 @@
   border-right: 1px solid var(--border-color-darken);
   border-bottom: 1px solid var(--border-color-darken);
   background: inherit;
-  cursor: col-resize;
+  cursor: ew-resize;
   user-select: none;
   padding: 3px;
   margin: 0px;
