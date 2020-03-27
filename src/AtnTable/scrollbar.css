@@ -1,0 +1,47 @@
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar:horizontal {
+  background: var(--webkit-scrollbar-gradient-a);
+  background: -webkit-linear-gradient(0deg, var(--webkit-scrollbar-gradient-b) 0%, var(--webkit-scrollbar-gradient-a) 25%, var(--webkit-scrollbar-gradient-a) 75%, var(--webkit-scrollbar-gradient-b) 100%);
+  background: linear-gradient(0deg, var(--webkit-scrollbar-gradient-b) 0%, var(--webkit-scrollbar-gradient-a) 25%, var(--webkit-scrollbar-gradient-a) 75%, var(--webkit-scrollbar-gradient-b) 100%);
+}
+::-webkit-scrollbar:vertical {
+  background: var(--webkit-scrollbar-gradient-a);
+  background: -webkit-linear-gradient(270deg, var(--webkit-scrollbar-gradient-b) 0%, var(--webkit-scrollbar-gradient-a) 25%, var(--webkit-scrollbar-gradient-a) 75%, var(--webkit-scrollbar-gradient-b) 100%);
+  background: linear-gradient(270deg, var(--webkit-scrollbar-gradient-b) 0%, var(--webkit-scrollbar-gradient-a) 25%, var(--webkit-scrollbar-gradient-a) 75%, var(--webkit-scrollbar-gradient-b) 100%);
+}
+::-webkit-scrollbar-button:horizontal:start {
+  background: radial-gradient(circle at 25% 75%, var(--webkit-scrollbar-gradient-a) 25%, var(--webkit-scrollbar-gradient-b));
+  border-radius: 0px 6px 6px 0px;
+}
+::-webkit-scrollbar-button:horizontal:end {
+  background: radial-gradient(circle at 75% 75%, var(--webkit-scrollbar-gradient-a) 25%, var(--webkit-scrollbar-gradient-b));
+  border-radius: 6px 0px 0px 6px;
+}
+::-webkit-scrollbar-button:vertical:start {
+  background: radial-gradient(ellipse at 75% 25%, var(--webkit-scrollbar-gradient-a) 25%, var(--webkit-scrollbar-gradient-b));
+  border-radius: 0px 0px 6px 6px;
+}
+::-webkit-scrollbar-button:vertical:end {
+  background: radial-gradient(circle at 75% 75%, var(--webkit-scrollbar-gradient-a) 25%, var(--webkit-scrollbar-gradient-b));
+  border-radius: 6px 6px 0px 0px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  -webkit-box-shadow: inset 0 0 8px var(--webkit-scrollbar-gradient-b);
+  box-shadow: inset 0 0 8px var(--webkit-scrollbar-gradient-b);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+::-webkit-resizer {
+  background: transparent;
+}
