@@ -21,6 +21,10 @@ export default class AtnMenu extends React.Component {
     this.onTouchEnd = this.onTouchEnd.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.show !== nextState.show;
+  }
+
   componentDidMount() {
     document.addEventListener("mouseup", this.onMouseUp);
     document.addEventListener("touchend", this.onTouchEnd);
