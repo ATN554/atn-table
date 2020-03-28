@@ -3,11 +3,12 @@ import getUID from "../UID/uid.js";
 import Draggable from "../DND/Draggable.js";
 import Droppable from "../DND/Droppable.js";
 
-export default class AtnTheadTr extends React.Component {
+export default class AtnHeadCell extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
+      memProps: props,
       droppableId: props.column.tableData.droppableId,
       draggableId: props.column.tableData.draggableId,
       resizerId: getUID(),
@@ -17,7 +18,9 @@ export default class AtnTheadTr extends React.Component {
       curColWidth: undefined,
       curColMinWidth: props.column.minWidth ? props.column.minWidth : 0,
       curColMaxWidth: props.column.maxWidth ? props.column.maxWidth : 500,
-      resizerWidth: 0
+      resizerWidth: 0,
+
+      updateColumn: false
     }
 
     this.onDragStart = this.onDragStart.bind(this);
@@ -77,6 +80,20 @@ export default class AtnTheadTr extends React.Component {
     let resizer = document.getElementById(this.state.resizerId);
     let resizerWidth = resizer.offsetWidth;
     this.setState({ resizerWidth: resizerWidth});
+  }
+
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    let changed = { update: false };
+    if (prevState.memProps.updateColumn !== nextProps.updateColumn) {
+      changed.columns = nextProps.columns;
+      changed.updateColumn = nextProps.updateColumn;
+      changed.update = true;
+    }
+    if (changed.update) {
+      return { ...prevState, ...changed, memProps: nextProps }
+    } else {
+      return null;
+    }
   }
 
   render() {
