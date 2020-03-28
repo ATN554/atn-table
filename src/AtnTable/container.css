@@ -1,6 +1,9 @@
 :root {
   --webkit-scrollbar-gradient-a: #d1e9d3;
-  --webkit-scrollbar-gradient-b: #463f3fA0;
+  --webkit-scrollbar-gradient-a-hover: #efe;
+  --webkit-scrollbar-gradient-a-active: #afa;
+  --webkit-scrollbar-gradient-b: #b8dabb;
+  --webkit-scrollbar-gradient-shadow: #504b4bB0;
 
   --border-color: #817474;
   --border-color-darken: #463f3f;
