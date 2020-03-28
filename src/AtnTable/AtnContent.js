@@ -81,11 +81,7 @@ export default class AtnContent extends React.Component {
                   className={"atn-tfoot-td-container atn-" + (col_index === 0 ? "left" : column.align) + "-align"}
                   style={{ width: column.width + "px" }}
                 >
-                  {col_index === 0 && 
-                   this.state.totals["First-Column-Text"] ? 
-                     this.state.totals["First-Column-Text"] : 
-                     ""
-                  }
+                  {col_index === 0 && (this.state.totals["First-Column-Text"] || "")}
                   {this.state.totals[column.field]}
                 </div>
               </div>
