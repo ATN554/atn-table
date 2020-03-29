@@ -95,7 +95,7 @@ export default class AtnHeadCell extends React.Component {
           onDragEnd={(idFrom, idTo, x, y) => this.props.onDragEnd(idFrom, idTo)}
           enabled={column.dnd.draggable}
         >
-          {column.title} {column.id} {column.sort.id || 0} {column.group.id || 0}
+          {this.props.renderHeaderCell(column, this.props.columnIndex)}
         </Draggable>
 
         <Draggable

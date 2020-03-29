@@ -31,10 +31,12 @@ export default class AtnHeadRow extends React.Component {
   render() {
     return (
       <div className="atn-thead-tr">
-        {this.props.columns.map((col) => (
+        {this.props.columns.map((col, col_index) => (
           <AtnHeadCell
             key={"th" + col.id}
             column={col}
+            columnIndex={col_index}
+            renderHeaderCell={this.props.renderHeaderCell}
             onChangeWidth={(column, width) => {
               this.handleHeaderResize(column, width);
             }}

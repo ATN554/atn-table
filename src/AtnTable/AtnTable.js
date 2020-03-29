@@ -9,6 +9,22 @@ import { fillColumnsTableData, fillRowsTableData, sortColumns, sortData } from "
 import AtnContent from "./AtnContent.js";
 import AtnMenu from "./AtnMenu.js";
 
+const renderHeaderCell = (column, column_index) => {
+  return column.title;
+}
+
+const renderDataCell = (row, row_index, column, column_index) => {
+  return row[column.field];
+}
+
+const renderTotalsCell = (totals, column, column_index) => {
+  let text = totals[column.field] || "";
+  if (column_index === 0) {
+    text = (totals["First-Column-Text"] || "") + text;
+  }
+  return text;
+}
+
 export default class AtnTable extends React.Component {
   constructor(props) {
     super(props);
@@ -18,12 +34,19 @@ export default class AtnTable extends React.Component {
     let data = fillRowsTableData(props.data);
     data = sortData(data, columns);
 
+    let renders = props.renders || {};
+    renders.renderHeaderCell = renders.renderHeaderCell || renderHeaderCell;
+    renders.renderDataCell = renders.renderDataCell || renderDataCell;
+    renders.renderTotalsCell = renders.renderTotalsCell || renderTotalsCell;
+
     this.state = {
       memProps: props,
       title: props.title,
       columns: columns,
       data: data,
       totals: props.totals,
+
+      renders: renders
     };
 
     this.setTitle = this.setTitle.bind(this);
@@ -126,6 +149,7 @@ export default class AtnTable extends React.Component {
                 columns={visibleColumns}
                 data={this.state.data}
                 totals={this.state.totals}
+                renders={this.state.renders}
               />
               <AtnMenu
                 mainClass="atn-mright"

@@ -7,7 +7,7 @@ export default function AtnBodyRow(props) {
         className={"atn-tbody-td-container atn-" + props.column.align + "-align"}
         style={{ width: props.column.width + "px" }}
       >
-        {props.value}
+        {props.renderDataCell(props.row, props.rowIndex, props.column, props.columnIndex)}
       </div>
     </div>
   )

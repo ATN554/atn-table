@@ -10,6 +10,7 @@ export default function AtnContent(props) {
         <AtnHeadRow
           tableRef={props.tableRef}
           columns={props.columns}
+          renderHeaderCell={props.renders.renderHeaderCell}
         />
       </div>
 
@@ -19,6 +20,8 @@ export default function AtnContent(props) {
             key={"tr" + row_index}
             columns={props.columns}
             row={row}
+            rowIndex={row_index}
+            renderDataCell={props.renders.renderDataCell}
           />
         ))}
       </div>
@@ -31,8 +34,7 @@ export default function AtnContent(props) {
                 className={"atn-tfoot-td-container atn-" + (col_index === 0 ? "left" : column.align) + "-align"}
                 style={{ width: column.width + "px" }}
               >
-                {col_index === 0 && (props.totals["First-Column-Text"] || "")}
-                {props.totals[column.field]}
+                {props.renders.renderTotalsCell(props.totals, column, col_index)}
               </div>
             </div>
           ))}
