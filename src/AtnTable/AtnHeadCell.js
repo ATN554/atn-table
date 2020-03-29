@@ -97,29 +97,60 @@ export default class AtnHeadCell extends React.PureComponent {
   }
 
   render() {
-    return(
-      <Droppable
-        id={this.state.droppableId}
+    let column = this.state.column;
+    
+    if (column.draggable) {
+      return (
+        <Droppable
+          id={this.state.droppableId}
+          type="div"
+          className="atn-thead-td atn-thead-td-droppable"
+        >
+          <Draggable
+            id={this.state.draggableId}
+            type="div"
+            droppable={"atn-thead-td-droppable"}
+            className="atn-thead-td-container atn-cursor-move"
+            style={{ width: (column.width - this.state.resizerWidth) + "px" }}
+            axis="horizontal"
+            onDragEnd={(idFrom, idTo, x, y) => this.props.onDragEnd(idFrom, idTo)}
+          >
+            {column.title}
+          </Draggable>
+
+          <Draggable
+            id={this.state.resizerId}
+            type="div"
+            showClone={false}
+            className="atn-thead-td-resizer atn-cursor-resize-horizontal"
+            axis="horizontal"
+            onDragStart={(idFrom, x, y) => { this.onDragStart(idFrom, x, y); }}
+            onDragMove={(idFrom, x, y) => { this.onDragMove(idFrom, x, y); }}
+            onDragEnd={(idFrom, idTo, x, y) => { this.onDragStop(idFrom, x, y); }}
+            onDragCancel={(idFrom, x, y) => { this.onDragStop(idFrom, x, y); }}
+            allowMove={(idFrom, xs, ys, xe, ye) => { return this.allowMove(idFrom, xs, ys, xe, ye); }}
+          />
+        </Droppable>
+      );
+    }
+    return (
+      <div
         type="div"
         className="atn-thead-td"
       >
-        <Draggable
+        <div
           id={this.state.draggableId}
-          type="div"
-          droppable={"atn-thead-td"}
           className="atn-thead-td-container"
-          style={{ width: (this.state.column.width - this.state.resizerWidth) + "px" }}
-          axis="horizontal"
-          onDragEnd={(idFrom, idTo, x, y) => this.props.onDragEnd(idFrom, idTo)}
+          style={{ width: (column.width - this.state.resizerWidth) + "px" }}
         >
-          {this.state.column.title}
-        </Draggable>
+          {column.title}
+        </div>
 
         <Draggable
           id={this.state.resizerId}
           type="div"
           showClone={false}
-          className="atn-thead-td-resizer"
+          className="atn-thead-td-resizer atn-cursor-resize-horizontal"
           axis="horizontal"
           onDragStart={(idFrom, x, y) => { this.onDragStart(idFrom, x, y); }}
           onDragMove={(idFrom, x, y) => { this.onDragMove(idFrom, x, y); }}
@@ -127,7 +158,7 @@ export default class AtnHeadCell extends React.PureComponent {
           onDragCancel={(idFrom, x, y) => { this.onDragStop(idFrom, x, y); }}
           allowMove={(idFrom, xs, ys, xe, ye) => { return this.allowMove(idFrom, xs, ys, xe, ye); }}
         />
-      </Droppable>
+      </div>
     );
   }
 }

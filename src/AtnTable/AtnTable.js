@@ -5,62 +5,22 @@ import "./menutop.css";
 import "./menubot.css";
 import "./menuleft.css";
 import "./menuright.css";
-import getUID from "../UID/uid.js";
+import { fillColumnsTableData, fillRowsTableData } from "./AtnEngine.js";
 import AtnContent from "./AtnContent.js";
 import AtnMenu from "./AtnMenu.js";
-
-const fillColumnsTableData = (columns) => {
-  columns.forEach((column, column_idx) => {
-    if (!column.tableData) {
-      column.tableData = {};
-    }
-
-    column.type = column.type || 'string';
-    column.align = column.align || 'left';
-
-    column.tableData.id = column_idx;
-    column.tableData.droppableId = getUID();
-    column.tableData.draggableId = getUID();
-
-    column.tableData.group = column.tableData.group || {};
-    column.tableData.group.id = column.tableData.group.id || undefined;
-    column.tableData.group.order = column.tableData.group.order || undefined;
-    
-    column.tableData.order = column.tableData.order || {};
-    column.tableData.order.id = column.tableData.order.id || undefined;
-    column.tableData.order.order = column.tableData.order.order || undefined;
-
-    column.tableData.filter = column.tableData.filter || [{ value: undefined, type: undefined }];
-  });
-  return columns;
-}
-
-const fillRowsTableData = (rows) => {
-  rows.forEach((row, row_idx) => {
-    if (!row.tableData) {
-      row.tableData = {};
-    }
-
-    row.tableData.id = row_idx;
-    
-    row.tableData.group = row.tableData.group || {};
-    row.tableData.group.id = row.tableData.group.id || undefined;
-    row.tableData.group.title = row.tableData.group.title || undefined;
-    row.tableData.group.level = row.tableData.group.level || undefined;
-    row.tableData.group.open = row.tableData.group.open || undefined;
-  });
-  return rows;
-}
 
 export default class AtnTable extends React.Component {
   constructor(props) {
     super(props);
 
+    let columns = fillColumnsTableData(props.columns);
+    let data = fillRowsTableData(props.data, columns);
+
     this.state = {
       memProps: props,
       title: props.title,
-      columns: fillColumnsTableData(props.columns),
-      data: fillRowsTableData(props.data),
+      columns: columns,
+      data: data,
       totals: props.totals,
       
       updateTitle: false, 
@@ -128,6 +88,7 @@ export default class AtnTable extends React.Component {
   }
 
   render() {
+    let visibleColumns = this.state.columns.filter((col) => col.visible);
     return (
       <table className="atn-container">
         <thead className="atn-container-th">
@@ -168,7 +129,7 @@ export default class AtnTable extends React.Component {
               </AtnMenu>
               <AtnContent
                 tableRef={this}
-                columns={this.state.columns}
+                columns={visibleColumns}
                 data={this.state.data}
                 totals={this.state.totals}
                 updateColumns={this.state.updateColumns}

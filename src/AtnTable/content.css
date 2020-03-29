@@ -45,7 +45,6 @@
   border-right: 1px dashed var(--border-color-darken);
   border-bottom: 1px solid var(--border-color-darken);
   background: inherit;
-  cursor: move;
   user-select: none;
   padding: 3px;
   margin: 0px;
@@ -71,7 +70,6 @@
   border-right: 1px solid var(--border-color-darken);
   border-bottom: 1px solid var(--border-color-darken);
   background: inherit;
-  cursor: ew-resize;
   user-select: none;
   padding: 3px;
   margin: 0px;
@@ -145,10 +143,6 @@
 }
 
 .atn-right-align {
-  text-align: right;
-}
-s
-.atn-timestamp-data {
   text-align: right;
 }
 

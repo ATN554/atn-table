@@ -91,3 +91,11 @@
   background: var(--footer-bg-color);
   position: relative;
 }
+
+.atn-cursor-move {
+  cursor: move;
+}
+
+.atn-cursor-resize-horizontal {
+  cursor: ew-resize;
+}
