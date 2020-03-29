@@ -3,24 +3,16 @@ import getUID from "../UID/uid.js";
 import Draggable from "../DND/Draggable.js";
 import Droppable from "../DND/Droppable.js";
 
-export default class AtnHeadCell extends React.PureComponent {
+export default class AtnHeadCell extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      memProps: props,
-      droppableId: props.column.dnd.droppableId,
-      draggableId: props.column.dnd.draggableId,
       resizerId: getUID(),
-      column: props.column,
       pageX: undefined,
       curCol: undefined,
       curColWidth: undefined,
-      curColMinWidth: props.column.minWidth ? props.column.minWidth : 0,
-      curColMaxWidth: props.column.maxWidth ? props.column.maxWidth : 500,
       resizerWidth: 0,
-
-      updateColumn: false
     }
 
     this.onDragStart = this.onDragStart.bind(this);
@@ -30,7 +22,7 @@ export default class AtnHeadCell extends React.PureComponent {
   }
 
   onDragStart(idFrom, x, y) {
-    let curCol = document.getElementById(this.state.draggableId);
+    let curCol = document.getElementById(this.props.column.dnd.draggableId);
     let cs = getComputedStyle(curCol);
     let width =
       curCol.offsetWidth -
@@ -51,7 +43,7 @@ export default class AtnHeadCell extends React.PureComponent {
     if (curCol) {
       let diffX = x - this.state.pageX;
       let newWidth = this.state.curColWidth + diffX;
-      this.props.onChangeWidth(this.state.column, newWidth);
+      this.props.onChangeWidth(this.props.column, newWidth);
     }
   }
 
@@ -66,11 +58,12 @@ export default class AtnHeadCell extends React.PureComponent {
   allowMove(idFrom, xs, ys, xe, ye) {
     let curCol = this.state.curCol;
     if (curCol) {
+      let column = this.props.column;
       let deltaX = xe - xs;
       let diffX = xe - this.state.pageX;
       let newWidth = this.state.curColWidth + diffX;
-      let minWidth = this.state.curColMinWidth + this.state.resizerWidth;
-      let maxWidth = this.state.curColMaxWidth;
+      let minWidth = (column.minWidth !== undefined ? column.minWidth : 0) + this.state.resizerWidth;
+      let maxWidth = (column.maxWidth !== undefined ? column.maxWidth : 500);
       return ((deltaX < 0 && newWidth > minWidth) || (deltaX > 0 && newWidth < maxWidth));
     }
     return false;
@@ -82,69 +75,28 @@ export default class AtnHeadCell extends React.PureComponent {
     this.setState({ resizerWidth: resizerWidth});
   }
 
-  static getDerivedStateFromProps = (nextProps, prevState) => {
-    let changed = { update: false };
-    if (prevState.memProps.updateColumn !== nextProps.updateColumn) {
-      changed.columns = nextProps.columns;
-      changed.updateColumn = nextProps.updateColumn;
-      changed.update = true;
-    }
-    if (changed.update) {
-      return { ...prevState, ...changed, memProps: nextProps }
-    } else {
-      return null;
-    }
-  }
-
   render() {
-    let column = this.state.column;
-    
-    if (column.draggable) {
-      return (
-        <Droppable
-          id={this.state.droppableId}
-          type="div"
-          className="atn-thead-td atn-thead-td-droppable"
-        >
-          <Draggable
-            id={this.state.draggableId}
-            type="div"
-            droppable={"atn-thead-td-droppable"}
-            className="atn-thead-td-container atn-cursor-move"
-            style={{ width: (column.width - this.state.resizerWidth) + "px" }}
-            axis="horizontal"
-            onDragEnd={(idFrom, idTo, x, y) => this.props.onDragEnd(idFrom, idTo)}
-          >
-            {column.title} {column.tableData.id} {column.tableData.sort.id || 0} {column.tableData.group.id || 0}
-          </Draggable>
-
-          <Draggable
-            id={this.state.resizerId}
-            type="div"
-            showClone={false}
-            className="atn-thead-td-resizer atn-cursor-resize-horizontal"
-            axis="horizontal"
-            onDragStart={(idFrom, x, y) => { this.onDragStart(idFrom, x, y); }}
-            onDragMove={(idFrom, x, y) => { this.onDragMove(idFrom, x, y); }}
-            onDragEnd={(idFrom, idTo, x, y) => { this.onDragStop(idFrom, x, y); }}
-            onDragCancel={(idFrom, x, y) => { this.onDragStop(idFrom, x, y); }}
-            allowMove={(idFrom, xs, ys, xe, ye) => { return this.allowMove(idFrom, xs, ys, xe, ye); }}
-          />
-        </Droppable>
-      );
-    }
+    let column = this.props.column;
+    let droppableClassName = column.dnd.droppable ? "atn-thead-td atn-thead-td-droppable" : "atn-thead-td";
+    let draggableClassName = column.dnd.draggable ? "atn-thead-td-container atn-cursor-move" : "atn-thead-td-container";
     return (
-      <div
+      <Droppable
+        id={column.dnd.droppableId}
         type="div"
-        className="atn-thead-td"
+        className={droppableClassName}
       >
-        <div
-          id={this.state.draggableId}
-          className="atn-thead-td-container"
+        <Draggable
+          id={column.dnd.draggableId}
+          type="div"
+          droppable={"atn-thead-td-droppable"}
+          className={draggableClassName}
           style={{ width: (column.width - this.state.resizerWidth) + "px" }}
+          axis="horizontal"
+          onDragEnd={(idFrom, idTo, x, y) => this.props.onDragEnd(idFrom, idTo)}
+          enabled={column.dnd.draggable}
         >
-          {column.title}
-        </div>
+          {column.title} {column.id} {column.sort.id || 0} {column.group.id || 0}
+        </Draggable>
 
         <Draggable
           id={this.state.resizerId}
@@ -158,7 +110,7 @@ export default class AtnHeadCell extends React.PureComponent {
           onDragCancel={(idFrom, x, y) => { this.onDragStop(idFrom, x, y); }}
           allowMove={(idFrom, xs, ys, xe, ye) => { return this.allowMove(idFrom, xs, ys, xe, ye); }}
         />
-      </div>
+      </Droppable>
     );
   }
 }

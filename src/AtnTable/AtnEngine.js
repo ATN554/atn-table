@@ -13,7 +13,7 @@ export function fillColumnsTableData(columns) {
       width: 90,
       service: true,
       dnd: { droppable: false, draggable: false },
-      visibility: { visible: false, locked: true },
+      visibility: { visible: true, locked: true },
       group: { locked: true },
       sort: { locked: true },
       filter: { locked: true },
@@ -28,7 +28,7 @@ export function fillColumnsTableData(columns) {
       width: 90,
       service: true,
       dnd: { droppable: false, draggable: false },
-      visibility: { visible: false, locked: true },
+      visibility: { visible: true, locked: true },
       group: { locked: true },
       sort: { locked: true },
       filter: { locked: true },
@@ -48,6 +48,7 @@ export function fillColumnsTableData(columns) {
     column.type = column.type || 'text'; // 'text', 'number', 'date'
     column.align = column.align || 'left'; // 'left', 'center', 'right'
     column.service = column.service !== undefined ? column.service : false;
+    column.width = column.width !== undefined ? column.width : 0;
 
     column.dnd = column.dnd || {};
     column.dnd.droppable = column.dnd.droppable !== undefined ? column.dnd.droppable : true;
@@ -74,10 +75,10 @@ export function fillColumnsTableData(columns) {
     column.filter.locked = column.filter.locked !== undefined ? column.filter.locked : false;
     column.filter.values = column.filter.values || [{ value: undefined, type: undefined }];
   });
-  return sortColumns(columns, [['service'], ['group', 'id'], ['id']]);
+  return columns;
 }
 
-export function fillRowsTableData(rows, columns) {
+export function fillRowsTableData(rows) {
   rows.forEach((row, row_idx) => {
     if (!row.tableData) {
       row.tableData = {};
@@ -91,7 +92,7 @@ export function fillRowsTableData(rows, columns) {
     row.tableData.group.level = row.tableData.group.level || undefined;
     row.tableData.group.open = row.tableData.group.open || undefined;
   });
-  return sortRows(rows, columns);
+  return rows;
 }
 
 function compareColumns(column1, column2, key) {
@@ -110,7 +111,7 @@ function compareColumns(column1, column2, key) {
   return 0;
 }
 
-export function sortColumns(columns, keys) {
+export function sortColumns(columns, keys = [['service'], ['group', 'id'], ['id']]) {
   let _columns = columns.slice(0).sort(function (column1, column2) {
     let result = 0;
     let i = 0;
@@ -171,10 +172,10 @@ function compareRows(row1, row2, columns) {
   return result;
 }
 
-export function sortRows(rows, columns) {
+export function sortData(data, columns) {
   let _columns = sortColumns(columns, [['service'], ['group', 'id'], ['sort', 'id'], ['id']]);
-  rows.sort(function (row1, row2) {
+  data.sort(function (row1, row2) {
     return compareRows(row1, row2, _columns);
   });
-  return rows;
+  return data;
 }

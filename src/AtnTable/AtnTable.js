@@ -5,7 +5,7 @@ import "./menutop.css";
 import "./menubot.css";
 import "./menuleft.css";
 import "./menuright.css";
-import { fillColumnsTableData, fillRowsTableData } from "./AtnEngine.js";
+import { fillColumnsTableData, fillRowsTableData, sortColumns, sortData } from "./AtnEngine.js";
 import AtnContent from "./AtnContent.js";
 import AtnMenu from "./AtnMenu.js";
 
@@ -14,7 +14,9 @@ export default class AtnTable extends React.Component {
     super(props);
 
     let columns = fillColumnsTableData(props.columns);
-    let data = fillRowsTableData(props.data, columns);
+    columns = sortColumns(columns);
+    let data = fillRowsTableData(props.data);
+    data = sortData(data, columns);
 
     this.state = {
       memProps: props,
@@ -22,12 +24,12 @@ export default class AtnTable extends React.Component {
       columns: columns,
       data: data,
       totals: props.totals,
-      
-      updateTitle: false, 
-      updateColumns: false,
-      updateData: false,
-      updateTotals: false
     };
+
+    this.setTitle = this.setTitle.bind(this);
+    this.setColumns = this.setColumns.bind(this);
+    this.setData = this.setData.bind(this);
+    this.setTotals = this.setTotals.bind(this);
 
     this.updateTitle = this.updateTitle.bind(this);
     this.updateColumns = this.updateColumns.bind(this);
@@ -35,56 +37,48 @@ export default class AtnTable extends React.Component {
     this.updateTotals = this.updateTotals.bind(this);
   }
 
-  updateTitle(title) {
-    this.setState({ title, updateTitle: !this.state.updateTitle });
+  setTitle(_title) {
+    this.setState({ title: _title });
   }
 
-  updateColumns(columns) {
-    this.setState({ columns: columns, updateColumns: !this.state.updateColumns });
+  setColumns(_columns) {
+    _columns = fillColumnsTableData(_columns);
+    _columns = sortColumns(_columns);
+    this.setState({ columns: _columns });
   }
 
-  updateData(data) {
-    this.setState({ data: data, updateData: !this.state.updateData });
+  setData(_data) {
+    _data = fillRowsTableData(_data);
+    _data = sortData(_data);
+    this.setState({ data: _data });
+  }
+
+  setTotals(_totals) {
+    this.setState({ totals: _totals });
+  }
+
+  updateTitle(_title) {
+    this.setState({ title: _title });
+  }
+
+  updateColumns(_columns, _sortColumns = true, _sortData = true) {
+    if (_sortData) {
+      _columns = _sortColumns ? sortColumns(_columns) : _columns;
+      let _data = sortData(this.props.data);
+      this.setState({ columns: _columns, data: _data });
+    } else {
+      _columns = _sortColumns ? sortColumns(_columns) : _columns;
+      this.setState({ columns: _columns });
+    }
+  }
+
+  updateData(_data, _sortData = true) {
+    _data = _sortData ? sortData(_data) : _data;
+    this.setState({ data: _data });
   }
 
   updateTotals(totals) {
-    this.setState({ totals: totals, updateTotals: !this.state.updateTotals });
-  }
-
-  static getDerivedStateFromProps = (nextProps, prevState) => {
-    let changed = { update: false };
-    if (prevState.memProps.updateTitle !== nextProps.updateTitle) {
-      changed.title = nextProps.title;
-      changed.updateTitle = nextProps.updateTitle;
-      changed.update = true;
-    }
-    if (prevState.memProps.updateColumns !== nextProps.updateColumns) {
-      changed.columns = nextProps.columns;
-      changed.columns = nextProps.columns;
-      changed.update = true;
-    }
-    if (prevState.memProps.updateData !== nextProps.updateData) {
-      changed.data = nextProps.data;
-      changed.updateData = nextProps.updateData;
-      changed.update = true;
-    }
-    if (prevState.memProps.updateTotals !== nextProps.updateTotals) {
-      changed.totals = nextProps.totals;
-      changed.updateTotals = nextProps.updateTotals;
-      changed.update = true;
-    }
-    if (changed.update) {
-      return { ...prevState, ...changed, memProps: nextProps }
-    } else {
-      return null;
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.updateTitle !== nextState.updateTitle ||
-      this.state.updateColumns !== nextState.updateColumns ||
-      this.state.updateData !== nextState.updateData ||
-      this.state.updateTotals !== nextState.updateTotals;
+    this.setState({ totals: totals });
   }
 
   render() {
@@ -132,9 +126,6 @@ export default class AtnTable extends React.Component {
                 columns={visibleColumns}
                 data={this.state.data}
                 totals={this.state.totals}
-                updateColumns={this.state.updateColumns}
-                updateData={this.state.updateData}
-                updateTotals={this.state.updateTotals}
               />
               <AtnMenu
                 mainClass="atn-mright"

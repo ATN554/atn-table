@@ -11,7 +11,7 @@ export default class AtnHeadRow extends React.Component {
 
   handleHeaderResize(column, width) {
     column.width = width;
-    this.props.tableRef.updateColumns(this.props.columns);
+    this.props.tableRef.updateColumns(this.props.columns, false, false);
   }
 
   handleDragEnd(idFrom, idTo) {
@@ -24,7 +24,7 @@ export default class AtnHeadRow extends React.Component {
       colFrom.id = colTo.id;
       colTo.id = tmpId;
 
-      this.props.tableRef.updateColumns(columns);
+      this.props.tableRef.updateColumns(columns, true, false);
     }
   }
 
