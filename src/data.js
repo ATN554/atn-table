@@ -12,11 +12,9 @@ export const columns = [
     title: "Наименование", 
     field: "FULL_NAME", 
     width: 250, 
-    tableData: {
-      sort: {
-        id: 1,
-        order: 'asc'
-      }
+    sort: {
+      id: 1,
+      order: 'asc'
     }
   },
   { 
