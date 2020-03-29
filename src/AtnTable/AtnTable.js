@@ -88,7 +88,7 @@ export default class AtnTable extends React.Component {
   }
 
   render() {
-    let visibleColumns = this.state.columns.filter((col) => col.visible);
+    let visibleColumns = this.state.columns.filter((col) => col.visibility.visible);
     return (
       <table className="atn-container">
         <thead className="atn-container-th">

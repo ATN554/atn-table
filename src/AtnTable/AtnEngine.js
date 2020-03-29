@@ -7,61 +7,74 @@ export function fillColumnsTableData(columns) {
 
   if (!hasActionColumn) {
     let actionColumn = {
+      id: -2,
       title: "Действия",
       field: "#ACTION_COLUMN",
       width: 90,
-      visible: false,
-      groupable: false,
-      sortable: true,
-      draggable: false,
-      tableData: { id: -2 }
+      service: true,
+      dnd: { droppable: false, draggable: false },
+      visibility: { visible: false, locked: true },
+      group: { locked: true },
+      sort: { locked: true },
+      filter: { locked: true },
     };
     columns.push(actionColumn);
   }
   if (!hasGroupColumn) {
     let groupColumn = {
+      id: -1,
       title: "Группа",
       field: "#GROUP_COLUMN",
       width: 90,
-      visible: false,
-      groupable: false,
-      sortable: true,
-      draggable: false,
-      tableData: { id: -1 }
+      service: true,
+      dnd: { droppable: false, draggable: false },
+      visibility: { visible: false, locked: true },
+      group: { locked: true },
+      sort: { locked: true },
+      filter: { locked: true },
     };
     columns.push(groupColumn);
   }
 
   columns.forEach((column, column_idx) => {
-    if (!column.tableData) {
-      column.tableData = {};
+    if (!column) {
+      column = {};
+    }
+
+    if (!column.id || column.id > 0) {
+      column.id = column_idx + 1;
     }
 
     column.type = column.type || 'text'; // 'text', 'number', 'date'
     column.align = column.align || 'left'; // 'left', 'center', 'right'
-    column.visible = column.visible !== undefined ? column.visible : true;
-    column.groupable = column.groupable !== undefined ? column.groupable : true;
-    column.sortable = column.sortable !== undefined ? column.sortable : true;
-    column.draggable = column.draggable !== undefined ? column.draggable : true;
+    column.service = column.service !== undefined ? column.service : false;
 
-    if (!column.tableData.id || column.tableData.id > 0) {
-      column.tableData.id = column_idx + 1;
-    }
-    column.tableData.droppableId = getUID();
-    column.tableData.draggableId = getUID();
+    column.dnd = column.dnd || {};
+    column.dnd.droppable = column.dnd.droppable !== undefined ? column.dnd.droppable : true;
+    column.dnd.droppableId = getUID();
+    column.dnd.draggable = column.dnd.draggable !== undefined ? column.dnd.draggable : true;
+    column.dnd.draggableId = getUID();
 
-    column.tableData.group = column.tableData.group || {};
-    column.tableData.group.id = column.tableData.group.id || undefined; // 1, 2, ...
-    column.tableData.group.order = column.tableData.group.order || undefined; // 'asc', 'desc'
+    column.visibility = column.visibility || {};
+    column.visibility.locked = column.visibility.locked !== undefined ? column.visibility.locked : false;
+    column.visibility.visible = column.visibility.visible !== undefined ? column.visibility.visible : true;
 
-    column.tableData.sort = column.tableData.sort || {};
-    column.tableData.sort.id = column.tableData.sort.id || undefined; // 1, 2, ...
-    column.tableData.sort.order = column.tableData.sort.order || undefined; // 'asc', 'desc'
-    column.tableData.sort.comparator = column.tableData.sort.comparator || compareValues; // data1, data2, column
+    column.group = column.group || {};
+    column.group.locked = column.group.locked !== undefined ? column.group.locked : false;
+    column.group.id = column.group.id || undefined; // 1, 2, ...
+    column.group.order = column.group.order || undefined; // 'asc', 'desc'
 
-    column.tableData.filter = column.tableData.filter || [{ value: undefined, type: undefined }];
+    column.sort = column.sort || {};
+    column.sort.locked = column.sort.locked !== undefined ? column.sort.locked : false;
+    column.sort.id = column.sort.id || undefined; // 1, 2, ...
+    column.sort.order = column.sort.order || undefined; // 'asc', 'desc'
+    column.sort.comparator = column.sort.comparator || compareValues; // data1, data2, column
+
+    column.filter = column.filter || {};
+    column.filter.locked = column.filter.locked !== undefined ? column.filter.locked : false;
+    column.filter.values = column.filter.values || [{ value: undefined, type: undefined }];
   });
-  return reorderColumns(columns, [['group', 'id'], ['id']]);
+  return sortColumns(columns, [['service'], ['group', 'id'], ['id']]);
 }
 
 export function fillRowsTableData(rows, columns) {
@@ -97,8 +110,8 @@ function compareColumns(column1, column2, key) {
   return 0;
 }
 
-export function reorderColumns(columns, keys) {
-  let _columns = columns.filter(col => col.tableData.id > 0).sort(function (column1, column2) {
+export function sortColumns(columns, keys) {
+  let _columns = columns.slice(0).sort(function (column1, column2) {
     let result = 0;
     let i = 0;
     let ii = keys.length;
@@ -126,18 +139,18 @@ export function getValue(value, column) {
 function compareValues(value1, value2, column) {
   let _value1 = getValue(value1, column);
   let _value2 = getValue(value2, column);
-  if (column.tableData.group.id) {
+  if (column.group.id) {
     if (_value1 > _value2) {
-      return column.tableData.group.order === "asc" ? 1 : -1;
+      return column.group.order === "asc" ? 1 : -1;
     } else if (_value1 < _value2) {
-      return column.tableData.group.order === "asc" ? -1 : 1;
+      return column.group.order === "asc" ? -1 : 1;
     }
   } else {
-    if (column.tableData.sort.id) {
+    if (column.sort.id) {
       if (_value1 > _value2) {
-        return column.tableData.sort.order === "asc" ? 1 : -1;
+        return column.sort.order === "asc" ? 1 : -1;
       } else if (_value1 < _value2) {
-        return column.tableData.sort.order === "asc" ? -1 : 1;
+        return column.sort.order === "asc" ? -1 : 1;
       }
     }
   }
@@ -151,7 +164,7 @@ function compareRows(row1, row2, columns) {
   while (i < ii && result === 0) {
     let column = columns[i];
     let field = column.field;
-    let comparator = column.tableData.sort.comparator;
+    let comparator = column.sort.comparator;
     result = comparator(row1[field], row2[field], column);
     i++;
   }
@@ -159,7 +172,7 @@ function compareRows(row1, row2, columns) {
 }
 
 export function sortRows(rows, columns) {
-  let _columns = reorderColumns(columns, [['group', 'id'], ['sort', 'id'], ['id']]);
+  let _columns = sortColumns(columns, [['service'], ['group', 'id'], ['sort', 'id'], ['id']]);
   rows.sort(function (row1, row2) {
     return compareRows(row1, row2, _columns);
   });
