@@ -115,7 +115,7 @@ export default class AtnHeadCell extends React.PureComponent {
             axis="horizontal"
             onDragEnd={(idFrom, idTo, x, y) => this.props.onDragEnd(idFrom, idTo)}
           >
-            {column.title}
+            {column.title} {column.tableData.id} {column.tableData.sort.id || 0} {column.tableData.group.id || 0}
           </Draggable>
 
           <Draggable

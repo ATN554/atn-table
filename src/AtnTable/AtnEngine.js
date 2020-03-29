@@ -88,9 +88,9 @@ function compareColumns(column1, column2, key) {
   key.forEach((k) => { value2 = value2[k]; });
 
   if (value1 && !value2) {
-    return 1;
-  } else if (!value1 && value2) {
     return -1;
+  } else if (!value1 && value2) {
+    return 1;
   } else if (value1 && value2) {
     return value1 - value2;
   }
@@ -98,7 +98,7 @@ function compareColumns(column1, column2, key) {
 }
 
 export function reorderColumns(columns, keys) {
-  columns.sort(function (column1, column2) {
+  let _columns = columns.filter(col => col.tableData.id > 0).sort(function (column1, column2) {
     let result = 0;
     let i = 0;
     let ii = keys.length;
@@ -108,10 +108,10 @@ export function reorderColumns(columns, keys) {
     }
     return result;
   });
-  return columns;
+  return _columns;
 }
 
-function getValue(value, column) {
+export function getValue(value, column) {
   let _type = column.type;
   let _value = value;
   if (_type === "number") {
@@ -159,8 +159,7 @@ function compareRows(row1, row2, columns) {
 }
 
 export function sortRows(rows, columns) {
-  let _columns = columns.slice(0);
-  _columns = reorderColumns(_columns, [['group', 'id'], ['sort', 'id'], ['id']]);
+  let _columns = reorderColumns(columns, [['group', 'id'], ['sort', 'id'], ['id']]);
   rows.sort(function (row1, row2) {
     return compareRows(row1, row2, _columns);
   });
