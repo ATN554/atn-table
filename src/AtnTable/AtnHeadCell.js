@@ -9,8 +9,8 @@ export default class AtnHeadCell extends React.PureComponent {
 
     this.state = {
       memProps: props,
-      droppableId: props.column.tableData.droppableId,
-      draggableId: props.column.tableData.draggableId,
+      droppableId: props.column.dnd.droppableId,
+      draggableId: props.column.dnd.draggableId,
       resizerId: getUID(),
       column: props.column,
       pageX: undefined,

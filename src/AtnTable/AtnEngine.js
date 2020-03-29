@@ -95,9 +95,9 @@ export function fillRowsTableData(rows, columns) {
 }
 
 function compareColumns(column1, column2, key) {
-  let value1 = column1.tableData;
+  let value1 = column1;
   key.forEach((k) => { value1 = value1[k]; });
-  let value2 = column2.tableData;
+  let value2 = column2;
   key.forEach((k) => { value2 = value2[k]; });
 
   if (value1 && !value2) {
