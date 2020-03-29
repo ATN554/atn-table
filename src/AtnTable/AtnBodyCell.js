@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AtnBodyRow(props) {
+export default function AtnBodyCell(props) {
   return (
     <div className="atn-tbody-td">
       <div

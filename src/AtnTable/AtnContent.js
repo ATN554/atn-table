@@ -2,6 +2,7 @@ import React from "react";
 import "./content.css";
 import AtnHeadRow from "./AtnHeadRow.js";
 import AtnBodyRow from "./AtnBodyRow.js";
+import AtnTotalsRow from './AtnTotalsRow.js';
 
 export default function AtnContent(props) {
   return (
@@ -27,18 +28,11 @@ export default function AtnContent(props) {
       </div>
       
       <div className="atn-tfoot">
-        <div className="atn-tfoot-tr">
-          {props.columns.map((column, col_index) => (
-            <div key={"tf" + col_index} className="atn-tfoot-td">
-              <div 
-                className={"atn-tfoot-td-container atn-" + (col_index === 0 ? "left" : column.align) + "-align"}
-                style={{ width: column.width + "px" }}
-              >
-                {props.renders.renderTotalsCell(props.totals, column, col_index)}
-              </div>
-            </div>
-          ))}
-        </div>
+        <AtnTotalsRow 
+          columns={props.columns}
+          totals={props.totals}
+          renderTotalsCell={props.renders.renderTotalsCell}
+        />
       </div>
     </div>
   )
