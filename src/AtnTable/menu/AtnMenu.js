@@ -1,5 +1,5 @@
 import React from "react";
-import getUID from "../UID/uid.js";
+import getUID from "../../UID/uid.js";
 
 export default class AtnMenu extends React.Component {
   constructor(props) {

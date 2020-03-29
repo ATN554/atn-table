@@ -1,7 +1,7 @@
 import React from "react";
-import getUID from "../UID/uid.js";
-import Draggable from "../DND/Draggable.js";
-import Droppable from "../DND/Droppable.js";
+import getUID from "../../UID/uid.js";
+import Draggable from "../../DND/Draggable.js";
+import Droppable from "../../DND/Droppable.js";
 
 export default class AtnHeadCell extends React.Component {
   constructor(props) {

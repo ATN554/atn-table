@@ -1,13 +1,13 @@
 import React from "react";
 import "./container.css";
 import "./scrollbar.css";
-import "./menutop.css";
-import "./menubot.css";
-import "./menuleft.css";
-import "./menuright.css";
+import "./menu/menutop.css";
+import "./menu/menubot.css";
+import "./menu/menuleft.css";
+import "./menu/menuright.css";
 import { fillColumnsTableData, fillRowsTableData, sortColumns, sortData } from "./AtnEngine.js";
-import AtnContent from "./AtnContent.js";
-import AtnMenu from "./AtnMenu.js";
+import AtnContent from "./content/AtnContent.js";
+import AtnMenu from "./menu/AtnMenu.js";
 
 const renderHeaderCell = (column, column_index) => {
   return column.title;
