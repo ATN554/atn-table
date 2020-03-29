@@ -62,7 +62,7 @@ export const data = [
     "SM": "1.29",
     "ID": 2
   },
-  {
+/*  {
     "DT_CREATE": "24.04.2019",
     "URC": 259,
     "FULL_NAME": "Namibia",
@@ -747,5 +747,5 @@ export const data = [
     "FULL_NAME": "Somalia",
     "SM": "5.01",
     "ID": 100
-  }
+  }*/
 ];

@@ -5,28 +5,15 @@ export default class Draggable extends React.Component {
   constructor(props) {
     super(props);
 
-    let droppable = this.props.droppable === undefined ? "droppable" : this.props.droppable;
-    let axis = this.props.axis === undefined ? "both" : this.props.axis;
-    let enabled = this.props.enabled === undefined ? true : this.props.enabled;
-    let showClone = this.props.showClone !== undefined ? this.props.showClone : true;
-    let cloneOpacity = this.props.cloneOpacity !== undefined ? this.props.cloneOpacity : 0.8;
-
     this.state = {
       dndcloneId: getUID(),
-      droppable: droppable,
-      elements: this.props.children,
       isReadyForDrag: false,
       isDraging: false,
-      showClone: showClone,
-      cloneOpacity: cloneOpacity,
       eventPos: [0, 0],
       position: [0, 0],
       deltaPos: [0, 0],
       size: [0, 0],
       innerShift: [0, 0],
-      xAxisMove: axis === "horizontal" || axis === "both",
-      yAxisMove: axis === "vertical" || axis === "both",
-      enabled: enabled
     };
 
     this.onMouseDown = this.onMouseDown.bind(this);
@@ -69,7 +56,8 @@ export default class Draggable extends React.Component {
   }
 
   start(x, y) {
-    if (this.state.enabled) {
+    let enabled = this.props.enabled === undefined ? true : this.props.enabled;
+    if (enabled) {
       if (!this.state.isReadyForDrag && !this.state.isDraging) {
         let box = this.refs.refdnd.getBoundingClientRect();
         let cs = getComputedStyle(this.refs.refdnd);
@@ -92,8 +80,11 @@ export default class Draggable extends React.Component {
           parseFloat(cs.borderTopWidth) -
           parseFloat(cs.borderBottomWidth)
         ];
-        let _x = this.state.xAxisMove ? x : selfPos[0];
-        let _y = this.state.yAxisMove ? y : selfPos[1];
+        let axis = this.props.axis || "both";
+        let xAxisMove = axis === "horizontal" || axis === "both";
+        let yAxisMove = axis === "vertical" || axis === "both";
+        let _x = xAxisMove ? x : selfPos[0];
+        let _y = yAxisMove ? y : selfPos[1];
         this.setState({
           isReadyForDrag: true,
           isDraging: false,
@@ -102,8 +93,8 @@ export default class Draggable extends React.Component {
           deltaPos: deltaPos,
           size: size,
           innerShift: [
-            this.state.xAxisMove ? _x - selfPos[0] : 0,
-            this.state.yAxisMove ? _y - selfPos[1] : 0
+            xAxisMove ? _x - selfPos[0] : 0,
+            yAxisMove ? _y - selfPos[1] : 0
           ]
         });
       }
@@ -113,7 +104,8 @@ export default class Draggable extends React.Component {
   findDroppable(x, y) {
     let target = document.elementFromPoint(x, y);
     if (target) {
-      return target.closest("." + this.state.droppable);
+      let droppable = this.props.droppable || "droppable";
+      return target.closest("." + droppable);
     }
     return undefined;
   }
@@ -161,8 +153,11 @@ export default class Draggable extends React.Component {
   }
 
   move(x, y) {
-    let _x = this.state.xAxisMove ? x : this.state.position[0];
-    let _y = this.state.yAxisMove ? y : this.state.position[1];
+    let axis = this.props.axis || "both";
+    let xAxisMove = axis === "horizontal" || axis === "both";
+    let yAxisMove = axis === "vertical" || axis === "both";
+    let _x = xAxisMove ? x : this.state.position[0];
+    let _y = yAxisMove ? y : this.state.position[1];
     if (this.state.isReadyForDrag) {
       this.setState(
         {
@@ -250,6 +245,8 @@ export default class Draggable extends React.Component {
   }
 
   render() {
+    let showClone = this.props.showClone !== undefined ? this.props.showClone : true;
+    let cloneOpacity = this.props.cloneOpacity || 0.8;
     return React.createElement(
       this.props.type,
       {
@@ -273,7 +270,7 @@ export default class Draggable extends React.Component {
               ...this.props.style,
               position: "absolute",
               visibility:
-                this.state.showClone && this.state.isDraging
+                showClone && this.state.isDraging
                   ? "visible"
                   : "hidden",
               margin: "0px",
@@ -290,10 +287,10 @@ export default class Draggable extends React.Component {
                 "px",
               width: this.state.size[0] + "px",
               height: this.state.size[1] + "px",
-              opacity: this.state.cloneOpacity
+              opacity: cloneOpacity
             }
           },
-          this.state.elements
+          this.props.children
         )
       ]
     );
