@@ -74,6 +74,10 @@
   padding: 3px;
   margin: 0px;
   transition: background-color 0.3s ease-in;
+  
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVR42mN4/f/1fwZ0UDWzC1MQp0oAzgMM4YLm6HcAAAAASUVORK5CYII= ");
+  background-repeat: repeat-y;
+  background-position-x: center;
 }
 
 .atn-thead-td-resizer:hover,

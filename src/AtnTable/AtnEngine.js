@@ -179,3 +179,30 @@ export function sortData(data, columns) {
   });
   return data;
 }
+
+function clearValue(value) {
+  return value.replace(new RegExp(";","g"), ",");
+}
+
+/* 
+Разделитель строки \n
+Разделитель колонок ;
+*/
+function saveToFile(filename, text) {
+  var universalBOM = "\uFEFF";
+  var blob = new Blob([universalBOM+text], { type: "text/plain;charset=utf-8" });
+  if (navigator.msSaveBlob) {
+    navigator.msSaveBlob(blob, filename);
+  } else {
+    var link = document.createElement("a");
+    if (link.download !== undefined) {
+      var url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", filename);
+      link.style.visibility = "hidden";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
+}
