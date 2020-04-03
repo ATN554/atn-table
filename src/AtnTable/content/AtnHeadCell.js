@@ -95,6 +95,14 @@ export default class AtnHeadCell extends React.Component {
           onDragEnd={(idFrom, idTo, x, y) => this.props.onDragEnd(idFrom, idTo)}
           enabled={column.dnd.draggable}
         >
+          <div
+            style={{ position: "absolute", left: "0", top: "0" }}
+          >
+            <input
+              type="button"
+              className="atn-round-button"
+            />
+          </div>
           {this.props.renderHeaderCell(column, this.props.columnIndex)}
         </Draggable>
 
