@@ -148,6 +148,7 @@ export default class AtnTable extends React.Component {
               >
                 <AtnSortPanel 
                   tableRef={this}
+                  title="Настройка колонок"
                   columns={_sortColumns}
                   renders={this.state.renders}
                 />

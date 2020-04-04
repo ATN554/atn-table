@@ -25,10 +25,10 @@ export default class AtnSortPanel extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="atn-sort-tr">
-          <div className="atn-sort-td">
-           Сортировка
+      <div className="atn-sort-container">
+        <div className="atn-sort-title-tr">
+          <div className="atn-sort-title-td">
+            {this.props.title}
           </div>
         </div>
         {this.props.columns.map((col, col_index) => (

@@ -1,13 +1,22 @@
-.atn-sort-tr {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  background: inherit;
+.atn-sort-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  overflow: auto;
 }
 
-.atn-sort-td {
-  display: inline-block;
+.atn-sort-title-tr {
+  position: sticky;
+  top: 0;
+  font-weight: bold;
+  background: var(--th-bg-color);
+}
+
+.atn-sort-title-td {
   min-height: 18px;
   max-height: 38px;
   line-height: 18px;
@@ -23,9 +32,33 @@
   transition: background-color 0.3s ease-in;
 }
 
-.atn-atn-sort-td:hover,
-.atn-atn-sort-td:focus,
-.atn-atn-sort-td:active {
+.atn-sort-tr:nth-child(odd) {
+	background: inherit;
+}
+
+.atn-sort-tr:nth-child(even) {
+  background: var(--menu-bg-color-darken);
+}
+
+.atn-sort-td {
+  min-height: 18px;
+  max-height: 38px;
+  line-height: 18px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: left;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color-darken);
+  background: inherit;
+  user-select: none;
+  padding: 3px;
+  margin: 0px;
+  transition: background-color 0.3s ease-in;
+}
+
+.atn-sort-td:hover,
+.atn-sort-td:focus,
+.atn-sort-td:active {
   background: var(--th-bg-color-hover);
   transition: background-color 0.3s ease-in;
 }
