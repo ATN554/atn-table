@@ -8,6 +8,7 @@ import "./menu/menuright.css";
 import { fillColumnsTableData, fillRowsTableData, sortColumns, sortData } from "./AtnEngine.js";
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
+import AtnSortPanel from "./sort-panel/AtnSortPanel.js";
 
 const renderHeaderCell = (column, column_index) => {
   return column.title;
@@ -105,7 +106,8 @@ export default class AtnTable extends React.Component {
   }
 
   render() {
-    let visibleColumns = this.state.columns.filter((col) => col.visibility.visible);
+    let columns = this.state.columns;
+    let visibleColumns = columns.filter((col) => col.visibility.visible);
     return (
       <table className="atn-container">
         <thead className="atn-container-th">
@@ -142,7 +144,10 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mleft-content"
                 buttonClass="atn-mleft-button"
               >
-                Меню слева
+                <AtnSortPanel 
+                  tableRef={this}
+                  columns={columns}
+                />
               </AtnMenu>
               <AtnContent
                 tableRef={this}
