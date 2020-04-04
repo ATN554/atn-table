@@ -19,7 +19,7 @@ export default class AtnSortPanel extends React.Component {
       colFrom.sort.id = colTo.sort.id;
       colTo.sort.id = tmpId;
 
-      this.props.tableRef.updateColumns(columns, true, false);
+      this.props.tableRef.updateColumns(columns, true, true);
     }
   }
 

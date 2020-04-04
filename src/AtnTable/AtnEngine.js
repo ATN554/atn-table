@@ -165,14 +165,14 @@ export function getValue(value, column) {
 function compareValues(value1, value2, column) {
   let _value1 = getValue(value1, column);
   let _value2 = getValue(value2, column);
-  if (column.group.id) {
+  if (column.group.id > 0) {
     if (_value1 > _value2) {
       return column.group.order === "asc" ? 1 : -1;
     } else if (_value1 < _value2) {
       return column.group.order === "asc" ? -1 : 1;
     }
   } else {
-    if (column.sort.id) {
+    if (column.sort.order === 'asc' || column.sort.order === 'desc') {
       if (_value1 > _value2) {
         return column.sort.order === "asc" ? 1 : -1;
       } else if (_value1 < _value2) {

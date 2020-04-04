@@ -18,15 +18,19 @@ export default function AtnHeadSortCell(props) {
         onDragEnd={(idFrom, idTo, x, y) => props.onDragEnd(idFrom, idTo)}
         enabled={props.column.dnd.draggable}
       >
-        <div
-          style={{ display: "none", position: "absolute", left: "0", top: "0" }}
-        >
-          <input
-            type="button"
-            className="atn-round-button"
-          />
+        <div className="atn-sort-td-container">
+          {props.renderHeaderCell(props.column, props.columnIndex)}
+          <div>
+            <input
+              type="button"
+              className="atn-round-button"
+            />
+            <input
+              type="button"
+              className="atn-round-button"
+            />
+          </div>
         </div>
-        {props.renderHeaderCell(props.column, props.columnIndex)}
       </Draggable>
 
       <div>

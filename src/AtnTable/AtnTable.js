@@ -88,7 +88,7 @@ export default class AtnTable extends React.Component {
   updateColumns(_columns, _sortColumns = true, _sortData = true) {
     if (_sortData) {
       _columns = _sortColumns ? sortColumns(_columns) : _columns;
-      let _data = sortData(this.props.data);
+      let _data = sortData(this.props.data, _columns);
       this.setState({ columns: _columns, data: _data });
     } else {
       _columns = _sortColumns ? sortColumns(_columns) : _columns;
@@ -97,7 +97,7 @@ export default class AtnTable extends React.Component {
   }
 
   updateData(_data, _sortData = true) {
-    _data = _sortData ? sortData(_data) : _data;
+    _data = _sortData ? sortData(_data, this.state.columns) : _data;
     this.setState({ data: _data });
   }
 
@@ -139,7 +139,7 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mtop-content"
                 buttonClass="atn-mtop-button"
               >
-                Меню сверху
+                <div>Меню сверху</div>
               </AtnMenu>
               <AtnMenu
                 mainClass="atn-mleft"
@@ -165,14 +165,14 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mright-content"
                 buttonClass="atn-mright-button"
               >
-                Группировка
+                <div>Группировка</div>
               </AtnMenu>
               <AtnMenu
                 mainClass="atn-mbot"
                 contentClass="atn-mbot-content"
                 buttonClass="atn-mbot-button"
               >
-                Меню снизу
+                <div>Меню снизу</div>
               </AtnMenu>
             </td>
           </tr>
