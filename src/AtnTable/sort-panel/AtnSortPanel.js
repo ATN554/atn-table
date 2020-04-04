@@ -7,6 +7,8 @@ export default class AtnSortPanel extends React.Component {
     super(props);
 
     this.handleDragEnd = this.handleDragEnd.bind(this);
+    this.handleChangeVisibility = this.handleChangeVisibility.bind(this);
+    this.handleChangeSortOrder = this.handleChangeSortOrder.bind(this);
   }
 
   handleDragEnd(idFrom, idTo) {
@@ -19,8 +21,18 @@ export default class AtnSortPanel extends React.Component {
       colFrom.sort.id = colTo.sort.id;
       colTo.sort.id = tmpId;
 
-      this.props.tableRef.updateColumns(columns, true, true);
+      this.props.tableRef.updateData();
     }
+  }
+
+  handleChangeVisibility(column) {
+    column.visibility.visible = !column.visibility.visible;
+    this.props.tableRef.updateData();
+  }
+
+  handleChangeSortOrder(column, order) {
+    column.sort.order = order;
+    this.props.tableRef.updateData();
   }
 
   render() {
@@ -37,9 +49,9 @@ export default class AtnSortPanel extends React.Component {
             column={col}
             columnIndex={col_index}
             renderHeaderCell={this.props.renders.renderHeaderCell}
-            onDragEnd={(idFrom, idTo) => {
-              this.handleDragEnd(idFrom, idTo);
-            }}
+            onDragEnd={this.handleDragEnd}
+            onChangeVisibility={this.handleChangeVisibility}
+            onChangeSortOrder={this.handleChangeSortOrder}
           />
         ))}
       </div>

@@ -11,12 +11,12 @@ export default class AtnHeadRow extends React.Component {
 
   handleHeaderResize(column, width) {
     column.width = width;
-    this.props.tableRef.updateColumns(this.props.columns, false, false);
+    this.props.tableRef.updateColumns(false, false);
   }
 
   handleDragEnd(idFrom, idTo) {
-    let columns = this.props.columns;
     if (idFrom !== idTo) {
+      let columns = this.props.columns;
       let colFrom = columns.find((el) => el.dnd.headDraggableId === idFrom);
       let colTo = columns.find((el) => el.dnd.headDroppableId === idTo);
       
@@ -24,7 +24,7 @@ export default class AtnHeadRow extends React.Component {
       colFrom.id = colTo.id;
       colTo.id = tmpId;
 
-      this.props.tableRef.updateColumns(columns, true, false);
+      this.props.tableRef.updateColumns(true, false);
     }
   }
 

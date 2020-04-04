@@ -27,18 +27,18 @@ export default function AtnHeadSortCell(props) {
         </div>
 
         {props.column.sort.order === 'asc' ? 
-          <SortAZ className="atn-column-sort-az active" onClick={() => { console.log("AZ ac") }} /> :
-          <SortAZ className="atn-column-sort-az" onClick={() => { console.log("AZ") }} />
+          <SortAZ className="atn-column-sort-az active" onClick={() => props.onChangeSortOrder(props.column, undefined)} /> :
+          <SortAZ className="atn-column-sort-az" onClick={() => props.onChangeSortOrder(props.column, "asc")} />
         }
 
         {props.column.sort.order === 'desc' ?
-          <SortZA className="atn-column-sort-za active" onClick={() => { console.log("ZA ac") }} /> :
-          <SortZA className="atn-column-sort-za" onClick={() => { console.log("ZA") }} />
+          <SortZA className="atn-column-sort-za active" onClick={() => props.onChangeSortOrder(props.column, undefined)} /> :
+          <SortZA className="atn-column-sort-za" onClick={() => props.onChangeSortOrder(props.column, "desc")} />
         }
 
         {props.column.visibility.visible ?
-          <VisibilityOn className="atn-column-show active" onClick={() => { console.log("ON") }} /> :
-          <VisibilityOff className="atn-column-show" onClick={() => { console.log("OFF") }} />
+          <VisibilityOn className="atn-column-show active" onClick={() => props.onChangeVisibility(props.column)} /> :
+          <VisibilityOff className="atn-column-show" onClick={() => props.onChangeVisibility(props.column)} />
         }
 
       </Draggable>

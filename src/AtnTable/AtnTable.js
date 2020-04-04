@@ -11,7 +11,7 @@ import AtnMenu from "./menu/AtnMenu.js";
 import AtnSortPanel from "./sort-panel/AtnSortPanel.js";
 
 const renderHeaderCell = (column, column_index) => {
-  return column.title + " : " + (column.id || 0) + " : " + (column.sort.id || 0) + " : " + (column.group.id || 0);
+  return column.title; // + " : " + (column.id || 0) + " : " + (column.sort.id || 0) + " : " + (column.group.id || 0);
 }
 
 const renderDataCell = (row, row_index, column, column_index) => {
@@ -85,10 +85,11 @@ export default class AtnTable extends React.Component {
     this.setState({ title: _title });
   }
 
-  updateColumns(_columns, _sortColumns = true, _sortData = true) {
+  updateColumns(_sortColumns = true, _sortData = true) {
+    let _columns = this.state.columns;
     if (_sortData) {
       _columns = _sortColumns ? sortColumns(_columns) : _columns;
-      let _data = sortData(this.props.data, _columns);
+      let _data = sortData(this.state.data, _columns);
       this.setState({ columns: _columns, data: _data });
     } else {
       _columns = _sortColumns ? sortColumns(_columns) : _columns;
@@ -96,7 +97,8 @@ export default class AtnTable extends React.Component {
     }
   }
 
-  updateData(_data, _sortData = true) {
+  updateData(_sortData = true) {
+    let _data = this.state.data;
     _data = _sortData ? sortData(_data, this.state.columns) : _data;
     this.setState({ data: _data });
   }
