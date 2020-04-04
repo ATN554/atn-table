@@ -23,6 +23,9 @@ export const columns = [
     type: "number", 
     align: "right", 
     width: 120, 
+    visibility: {
+      visible: false
+    }
   },
   { 
     title: "Дата создания", 

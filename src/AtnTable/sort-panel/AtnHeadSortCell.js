@@ -27,18 +27,18 @@ export default function AtnHeadSortCell(props) {
         </div>
 
         {props.column.sort.order === 'asc' ? 
-          <SortAZ className="atn-column-sort-az active" /> :
-          <SortAZ className="atn-column-sort-az" />
+          <SortAZ className="atn-column-sort-az active" onClick={() => { console.log("AZ ac") }} /> :
+          <SortAZ className="atn-column-sort-az" onClick={() => { console.log("AZ") }} />
         }
 
         {props.column.sort.order === 'desc' ?
-          <SortZA className="atn-column-sort-za active" /> :
-          <SortZA className="atn-column-sort-za" />
+          <SortZA className="atn-column-sort-za active" onClick={() => { console.log("ZA ac") }} /> :
+          <SortZA className="atn-column-sort-za" onClick={() => { console.log("ZA") }} />
         }
 
         {props.column.visibility.visible ?
-          <VisibilityOn className="atn-column-show active" /> :
-          <VisibilityOff className="atn-column-show" />
+          <VisibilityOn className="atn-column-show active" onClick={() => { console.log("ON") }} /> :
+          <VisibilityOff className="atn-column-show" onClick={() => { console.log("OFF") }} />
         }
 
       </Draggable>

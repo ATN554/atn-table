@@ -72,24 +72,40 @@
 
 .atn-column-sort-az {
   position: absolute;
-  top: -4px;
-  right: 26px;
+  top: 2px;
+  right: 35px;
   fill: gray;
+  cursor: pointer;
 }
 
 .atn-column-sort-az.active {
   fill: green;
 }
 
+.atn-column-sort-az:hover {
+  top: -1px;
+  right: 32px;
+  width: 16px;
+  height: 16px;
+}
+
 .atn-column-sort-za {
   position: absolute;
-  bottom: -4px;
-  right: 26px;
+  bottom: 2px;
+  right: 35px;
   fill: gray;
+  cursor: pointer;
 }
 
 .atn-column-sort-za.active {
   fill: green;
+}
+
+.atn-column-sort-za:hover {
+  bottom: -1px;
+  right: 32px;
+  width: 16px;
+  height: 16px;
 }
 
 .atn-column-show {
@@ -97,9 +113,17 @@
   top: 0;
   bottom: 0;
   right: 5px;
+  margin: auto;
   fill: gray;
+  cursor: pointer;
 }
 
 .atn-column-show.active {
   fill: green;
+}
+
+.atn-column-show:hover {
+  right: 2px;
+  width: 26px;
+  height: 16px;
 }
