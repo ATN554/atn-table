@@ -17,8 +17,8 @@ export default class AtnHeadRow extends React.Component {
   handleDragEnd(idFrom, idTo) {
     let columns = this.props.columns;
     if (idFrom !== idTo) {
-      let colFrom = columns.find((el) => el.dnd.draggableId === idFrom);
-      let colTo = columns.find((el) => el.dnd.droppableId === idTo);
+      let colFrom = columns.find((el) => el.dnd.headDraggableId === idFrom);
+      let colTo = columns.find((el) => el.dnd.headDroppableId === idTo);
       
       let tmpId = colFrom.id;
       colFrom.id = colTo.id;

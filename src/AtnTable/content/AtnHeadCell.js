@@ -22,7 +22,7 @@ export default class AtnHeadCell extends React.Component {
   }
 
   onDragStart(idFrom, x, y) {
-    let curCol = document.getElementById(this.props.column.dnd.draggableId);
+    let curCol = document.getElementById(this.props.column.dnd.headDraggableId);
     let cs = getComputedStyle(curCol);
     let width =
       curCol.offsetWidth -
@@ -81,12 +81,12 @@ export default class AtnHeadCell extends React.Component {
     let draggableClassName = column.dnd.draggable ? "atn-thead-td-container atn-cursor-move" : "atn-thead-td-container";
     return (
       <Droppable
-        id={column.dnd.droppableId}
+        id={column.dnd.headDroppableId}
         type="div"
         className={droppableClassName}
       >
         <Draggable
-          id={column.dnd.draggableId}
+          id={column.dnd.headDraggableId}
           type="div"
           droppable={"atn-thead-td-droppable"}
           className={draggableClassName}
@@ -95,14 +95,6 @@ export default class AtnHeadCell extends React.Component {
           onDragEnd={(idFrom, idTo, x, y) => this.props.onDragEnd(idFrom, idTo)}
           enabled={column.dnd.draggable}
         >
-          <div
-            style={{ position: "absolute", left: "0", top: "0" }}
-          >
-            <input
-              type="button"
-              className="atn-round-button"
-            />
-          </div>
           {this.props.renderHeaderCell(column, this.props.columnIndex)}
         </Draggable>
 

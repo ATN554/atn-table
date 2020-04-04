@@ -11,7 +11,7 @@ import AtnMenu from "./menu/AtnMenu.js";
 import AtnSortPanel from "./sort-panel/AtnSortPanel.js";
 
 const renderHeaderCell = (column, column_index) => {
-  return column.title;
+  return column.title + " : " + (column.id || 0) + " : " + (column.sort.id || 0) + " : " + (column.group.id || 0);
 }
 
 const renderDataCell = (row, row_index, column, column_index) => {
@@ -106,8 +106,10 @@ export default class AtnTable extends React.Component {
   }
 
   render() {
-    let columns = this.state.columns;
-    let visibleColumns = columns.filter((col) => col.visibility.visible);
+    let _columns = this.state.columns;
+    let _userColumns = _columns.filter((col) => !col.service);
+    let _visibleColumns = _columns.filter((col) => col.visibility.visible);
+    let _sortColumns = sortColumns(_userColumns, [['group', 'id'], ['sort', 'id'], ['id']]);
     return (
       <table className="atn-container">
         <thead className="atn-container-th">
@@ -146,12 +148,13 @@ export default class AtnTable extends React.Component {
               >
                 <AtnSortPanel 
                   tableRef={this}
-                  columns={columns}
+                  columns={_sortColumns}
+                  renders={this.state.renders}
                 />
               </AtnMenu>
               <AtnContent
                 tableRef={this}
-                columns={visibleColumns}
+                columns={_visibleColumns}
                 data={this.state.data}
                 totals={this.state.totals}
                 renders={this.state.renders}

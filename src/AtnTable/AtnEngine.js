@@ -41,7 +41,7 @@ export function fillColumnsTableData(columns) {
       column = {};
     }
 
-    if (!column.id || column.id > 0) {
+    if (!column.id || !column.service) {
       column.id = column_idx + 1;
     }
 
@@ -52,9 +52,13 @@ export function fillColumnsTableData(columns) {
 
     column.dnd = column.dnd || {};
     column.dnd.droppable = column.dnd.droppable !== undefined ? column.dnd.droppable : true;
-    column.dnd.droppableId = getUID();
+    column.dnd.headDroppableId = getUID();
+    column.dnd.sortDroppableId = getUID();
+    column.dnd.groupDroppableId = getUID();
     column.dnd.draggable = column.dnd.draggable !== undefined ? column.dnd.draggable : true;
-    column.dnd.draggableId = getUID();
+    column.dnd.headDraggableId = getUID();
+    column.dnd.sortDraggableId = getUID();
+    column.dnd.groupDraggableId = getUID();
 
     column.visibility = column.visibility || {};
     column.visibility.locked = column.visibility.locked !== undefined ? column.visibility.locked : false;
@@ -75,6 +79,26 @@ export function fillColumnsTableData(columns) {
     column.filter.locked = column.filter.locked !== undefined ? column.filter.locked : false;
     column.filter.values = column.filter.values || [{ value: undefined, type: undefined }];
   });
+
+  let fix_columns = columns.filter((col) => col.group.id);
+  fix_columns = sortColumns(fix_columns, [['group', 'id']]);
+  fix_columns.forEach((column, column_idx) => {
+    column.group.id = column_idx + 1;
+  });
+
+  fix_columns = columns.filter((col) => !col.service);
+  fix_columns = sortColumns(fix_columns, [['id']]);
+  fix_columns.forEach((column, column_idx) => {
+    if (column.id > 0) {
+      column.id = column_idx + 1;
+    }
+  });
+
+  fix_columns = sortColumns(fix_columns, [['group', 'id'], ['sort', 'id'], ['id']]);
+  fix_columns.forEach((column, column_idx) => {
+    column.sort.id = column_idx + 1;
+  });
+
   return columns;
 }
 
@@ -112,7 +136,8 @@ function compareColumns(column1, column2, key) {
 }
 
 export function sortColumns(columns, keys = [['service'], ['group', 'id'], ['id']]) {
-  let _columns = columns.slice(0).sort(function (column1, column2) {
+  let _columns = columns.slice(0);
+  _columns = _columns.sort(function (column1, column2) {
     let result = 0;
     let i = 0;
     let ii = keys.length;
