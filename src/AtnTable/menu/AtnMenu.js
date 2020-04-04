@@ -22,7 +22,8 @@ export default class AtnMenu extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.show !== nextState.show;
+    return this.state.show !== nextState.show ||
+           this.props.children !== nextProps.children;
   }
 
   componentDidMount() {

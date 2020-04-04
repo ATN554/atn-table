@@ -56,6 +56,10 @@
   transition: background-color 0.3s ease-in;
 }
 
+.atn-sort-td:last-child {
+  border-top: 1px solid var(--border-color-darken);
+}
+
 .atn-sort-td:hover,
 .atn-sort-td:focus,
 .atn-sort-td:active {

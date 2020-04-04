@@ -28,6 +28,9 @@ export default function AtnHeadSortCell(props) {
         </div>
         {props.renderHeaderCell(props.column, props.columnIndex)}
       </Draggable>
+
+      <div>
+      </div>
     </Droppable>
   );
 }

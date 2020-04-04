@@ -165,7 +165,7 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mright-content"
                 buttonClass="atn-mright-button"
               >
-                Меню справа
+                Группировка
               </AtnMenu>
               <AtnMenu
                 mainClass="atn-mbot"
