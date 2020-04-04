@@ -1,6 +1,10 @@
 import React from "react";
 import Draggable from "../../DND/Draggable.js";
 import Droppable from "../../DND/Droppable.js";
+import { ReactComponent as SortAZ } from "../svg/sort-az.svg";
+import { ReactComponent as SortZA } from "../svg/sort-za.svg";
+import { ReactComponent as VisibilityOn } from "../svg/on.svg";
+import { ReactComponent as VisibilityOff } from "../svg/off.svg";
 
 export default function AtnHeadSortCell(props) {
   return (
@@ -18,19 +22,25 @@ export default function AtnHeadSortCell(props) {
         onDragEnd={(idFrom, idTo, x, y) => props.onDragEnd(idFrom, idTo)}
         enabled={props.column.dnd.draggable}
       >
-        <div className="atn-sort-td-container">
+        <div className="atn-sort-td-text">
           {props.renderHeaderCell(props.column, props.columnIndex)}
-          <div>
-            <input
-              type="button"
-              className="atn-round-button"
-            />
-            <input
-              type="button"
-              className="atn-round-button"
-            />
-          </div>
         </div>
+
+        {props.column.sort.order === 'asc' ? 
+          <SortAZ className="atn-column-sort-az active" /> :
+          <SortAZ className="atn-column-sort-az" />
+        }
+
+        {props.column.sort.order === 'desc' ?
+          <SortZA className="atn-column-sort-za active" /> :
+          <SortZA className="atn-column-sort-za" />
+        }
+
+        {props.column.visibility.visible ?
+          <VisibilityOn className="atn-column-show active" /> :
+          <VisibilityOff className="atn-column-show" />
+        }
+
       </Draggable>
 
       <div>

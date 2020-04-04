@@ -17,8 +17,7 @@
 }
 
 .atn-sort-title-td {
-  min-height: 18px;
-  max-height: 38px;
+  height: 18px;
   line-height: 18px;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -41,13 +40,7 @@
 }
 
 .atn-sort-td {
-  min-height: 18px;
-  max-height: 38px;
-  line-height: 18px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  text-align: left;
-  overflow: hidden;
+  position: relative;
   border-bottom: 1px solid var(--border-color-darken);
   background: inherit;
   user-select: none;
@@ -67,10 +60,46 @@
   transition: background-color 0.3s ease-in;
 }
 
-.atn-sort-td-container {
-  white-space: nowrap;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  background: inherit;  
+.atn-sort-td-text {
+  width: calc(100% - 50px);
+  height: 18px;
+  line-height: 18px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: left;
+  overflow: hidden;
+}
+
+.atn-column-sort-az {
+  position: absolute;
+  top: -4px;
+  right: 26px;
+  fill: gray;
+}
+
+.atn-column-sort-az.active {
+  fill: green;
+}
+
+.atn-column-sort-za {
+  position: absolute;
+  bottom: -4px;
+  right: 26px;
+  fill: gray;
+}
+
+.atn-column-sort-za.active {
+  fill: green;
+}
+
+.atn-column-show {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  fill: gray;
+}
+
+.atn-column-show.active {
+  fill: green;
 }
