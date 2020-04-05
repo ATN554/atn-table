@@ -66,7 +66,7 @@ export function fillColumnsTableData(columns) {
 
     column.group = column.group || {};
     column.group.locked = column.group.locked !== undefined ? column.group.locked : false;
-    column.group.id = column.group.id || undefined; // 1, 2, ...
+    column.group.id = column.group.id || 0; // 1, 2, ...
     column.group.order = column.group.order || 'asc'; // 'asc', 'desc'
 
     column.sort = column.sort || {};
@@ -80,7 +80,7 @@ export function fillColumnsTableData(columns) {
     column.filter.values = column.filter.values || [{ value: undefined, type: undefined }];
   });
 
-  let fix_columns = columns.filter((col) => col.group.id);
+  let fix_columns = columns.filter((col) => col.group.id > 0);
   fix_columns = sortColumns(fix_columns, [['group', 'id']]);
   fix_columns.forEach((column, column_idx) => {
     column.group.id = column_idx + 1;

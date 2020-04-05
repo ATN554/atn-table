@@ -40,13 +40,13 @@ const renderSortZA = (column, fnc) => {
 
 const renderActivity = (column, fnc) => {
   if (column.group.locked) {
-    if (column.group.id) {
+    if (column.group.id > 0) {
       return (<VisibilityOn className={"atn-group-use"} style={{ fill: "var(--svg-fill-disabled-active)" }} />);
     } else {
       return (<VisibilityOff className={"atn-group-use"} style={{ fill: "var(--svg-fill-disabled-inactive)" }} />);
     }
   } else {
-    if (column.group.id) {
+    if (column.group.id > 0) {
       return (<VisibilityOn className={"atn-group-use active"} style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={() => fnc(column)} />);
     } else {
       return (<VisibilityOff className={"atn-group-use active"} style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={() => fnc(column)} />);
@@ -59,16 +59,16 @@ export default function AtnGroupCell(props) {
     <Droppable
       id={props.column.dnd.groupDroppableId}
       type="div"
-      className={props.column.dnd.droppable && props.column.group.id ? "atn-group-tr atn-group-droppable" : "atn-group-tr"}
+      className={props.column.dnd.droppable && props.column.group.id > 0 ? "atn-group-tr atn-group-droppable" : "atn-group-tr"}
     >
       <Draggable
         id={props.column.dnd.groupDraggableId}
         type="div"
         droppable={"atn-group-droppable"}
-        className={props.column.dnd.draggable && props.column.group.id ? "atn-group-td atn-cursor-move" : "atn-group-td"}
+        className={props.column.dnd.draggable && props.column.group.id > 0 ? "atn-group-td atn-cursor-move" : "atn-group-td"}
         axis="vertical"
         onDragEnd={(idFrom, idTo, x, y) => props.onDragEnd(idFrom, idTo)}
-        enabled={props.column.dnd.draggable && props.column.group.id}
+        enabled={props.column.dnd.draggable && props.column.group.id > 0}
       >
         <div className="atn-group-td-text">
           {props.renderHeaderCell(props.column, props.columnIndex)}

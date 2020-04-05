@@ -111,15 +111,15 @@ export default class AtnTable extends React.Component {
   render() {
     let _columns = this.state.columns;
     
-    let _headColumns = _columns.filter((col) => !col.service && !col.group.id && col.visibility.visible);
+    let _headColumns = _columns.filter((col) => !col.service && col.group.id === 0 && col.visibility.visible);
     
-    let _sortColumns = _columns.filter((col) => !col.service && !col.group.id);
+    let _sortColumns = _columns.filter((col) => !col.service && col.group.id === 0);
     _sortColumns = sortColumns(_sortColumns, [['sort', 'id'], ['id']]);
     
     let _groupColumns = _columns.filter((col) => !col.service && col.visibility.visible);
     _groupColumns = sortColumns(_groupColumns, [['group', 'id'], ['id']]);
     
-    let _groupPanelColumns = _groupColumns.filter(col => col.group.id);
+    let _groupPanelColumns = _groupColumns.filter(col => col.group.id > 0);
     return (
       <table className="atn-container">
         <thead className="atn-container-th">
@@ -138,7 +138,7 @@ export default class AtnTable extends React.Component {
             <td className="atn-groupbar">
               <div style={{ height: "24px", lineHeight: "24px" }}>
                 {_groupPanelColumns.map((col) => {
-                  return col.title;
+                  return col.title + " ";
                 })}
               </div>
             </td>

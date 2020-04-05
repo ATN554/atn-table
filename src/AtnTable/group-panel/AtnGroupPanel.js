@@ -29,7 +29,7 @@ export default class AtnGroupPanel extends React.Component {
     let columns = this.props.columns;
     let nextId = columns.filter((col) => col.group.id).reduce((pv, col) => Math.max(pv, col.group.id), 0);
     if (column.group.id) {
-      column.group.id = undefined;
+      column.group.id = 0;
     } else {
       column.group.id = (nextId + 1);
     }
