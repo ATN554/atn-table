@@ -12,7 +12,7 @@ import AtnSortPanel from "./sort-panel/AtnSortPanel.js";
 import AtnGroupPanel from "./group-panel/AtnGroupPanel.js";
 
 const renderHeaderCell = (column, column_index) => {
-  return column.title + " : " + column.id + " : " + column.sort.id + " : " + column.group.id;
+  return column.title; // + " : " + column.id + " : " + column.sort.id + " : " + column.group.id;
 }
 
 const renderDataCell = (row, row_index, column, column_index) => {

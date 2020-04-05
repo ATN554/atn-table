@@ -1,6 +1,7 @@
 import React from "react";
 import "./group.css";
 import AtnGroupCell from "./AtnGroupCell.js";
+import { sortColumns } from "../AtnEngine.js";
 
 export default class AtnGroupPanel extends React.Component {
   constructor(props) {
@@ -33,6 +34,11 @@ export default class AtnGroupPanel extends React.Component {
     } else {
       column.group.id = (nextId + 1);
     }
+    let fix_columns = columns.filter(col => col.group.id > 0);
+    fix_columns = sortColumns(fix_columns, [['group', 'id'], ['id']]);
+    fix_columns.forEach((column, column_idx) => {
+      column.group.id = column_idx + 1;
+    });
     this.props.tableRef.updateData();
   }
 

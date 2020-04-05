@@ -7,18 +7,16 @@ export const columns = [
     width: 150, 
     mimWidth: 10, 
     maxWidth: 250, 
+    visibility: {
+      locked: true
+    }
   },
   { 
     title: "Наименование", 
     field: "FULL_NAME", 
     width: 250, 
     sort: {
-      id: 1,
-      order: 'asc',
-      locked: true
-    },
-    visibility: {
-      locked: true
+      order: 'desc'
     }
   },
   { 
