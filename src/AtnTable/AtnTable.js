@@ -112,6 +112,8 @@ export default class AtnTable extends React.Component {
     let _userColumns = _columns.filter((col) => !col.service);
     let _visibleColumns = _columns.filter((col) => col.visibility.visible);
     let _sortColumns = sortColumns(_userColumns, [['group', 'id'], ['sort', 'id'], ['id']]);
+    let _groupColumns = sortColumns(_userColumns, [['group', 'id'], ['id']]);
+    let _hasGroups = (_groupColumns.findIndex(col => col.group.id > 0) !== -1);
     return (
       <table className="atn-container">
         <thead className="atn-container-th">
@@ -125,13 +127,14 @@ export default class AtnTable extends React.Component {
               </div>
             </td>
           </tr>
+          {_hasGroups &&
           <tr className="atn-groupbar-tr">
             <td className="atn-groupbar">
               <div style={{ height: "24px", lineHeight: "24px" }}>
                 Панель группы
               </div>
             </td>
-          </tr>
+          </tr>}
         </thead>
         <tbody className="atn-container-tb">
           <tr className="atn-content-mid-tr">

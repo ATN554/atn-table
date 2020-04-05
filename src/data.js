@@ -14,7 +14,11 @@ export const columns = [
     width: 250, 
     sort: {
       id: 1,
-      order: 'asc'
+      order: 'asc',
+      locked: true
+    },
+    visibility: {
+      locked: true
     }
   },
   { 

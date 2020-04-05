@@ -6,6 +6,54 @@ import { ReactComponent as SortZA } from "../svg/sort-za.svg";
 import { ReactComponent as VisibilityOn } from "../svg/on.svg";
 import { ReactComponent as VisibilityOff } from "../svg/off.svg";
 
+const renderSortAZ = (column, fnc) => {
+  if (column.sort.locked) {
+    if (column.sort.order === "asc") {
+      return (<SortAZ className={"atn-column-sort-az"} style={{fill: "var(--svg-fill-disabled-active)"}} />);
+    } else {
+      return (<SortAZ className={"atn-column-sort-az"} style={{ fill: "var(--svg-fill-disabled-inactive)" }} />);
+    }
+  } else {
+    if (column.sort.order === "asc") {
+      return (<SortAZ className={"atn-column-sort-az active"} style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={() => fnc(column, undefined)} />);
+    } else {
+      return (<SortAZ className={"atn-column-sort-az active"} style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={() => fnc(column, "asc")} />);
+    }
+  }
+}
+
+const renderSortZA = (column, fnc) => {
+  if (column.sort.locked) {
+    if (column.sort.order === "desc") {
+      return (<SortZA className={"atn-column-sort-za"} style={{ fill: "var(--svg-fill-disabled-active)" }} />);
+    } else {
+      return (<SortZA className={"atn-column-sort-za"} style={{ fill: "var(--svg-fill-disabled-inactive)" }} />);
+    }
+  } else {
+    if (column.sort.order === "desc") {
+      return (<SortZA className={"atn-column-sort-za active"} style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={() => fnc(column, undefined)} />);
+    } else {
+      return (<SortZA className={"atn-column-sort-za active"} style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={() => fnc(column, "desc")} />);
+    }
+  }
+}
+
+const renderVisibility = (column, fnc) => {
+  if (column.visibility.locked) {
+    if (column.visibility.visible) {
+      return (<VisibilityOn className={"atn-column-show"} style={{ fill: "var(--svg-fill-disabled-active)" }} />);
+    } else {
+      return (<VisibilityOff className={"atn-column-show"} style={{ fill: "var(--svg-fill-disabled-inactive)" }} />);
+    }
+  } else {
+    if (column.visibility.visible) {
+      return (<VisibilityOn className={"atn-column-show active"} style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={() => fnc(column)} />);
+    } else {
+      return (<VisibilityOff className={"atn-column-show active"} style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={() => fnc(column)} />);
+    }
+  }
+}
+
 export default function AtnHeadSortCell(props) {
   return (
     <Droppable
@@ -26,21 +74,9 @@ export default function AtnHeadSortCell(props) {
           {props.renderHeaderCell(props.column, props.columnIndex)}
         </div>
 
-        {props.column.sort.order === 'asc' ? 
-          <SortAZ className="atn-column-sort-az active" onClick={() => props.onChangeSortOrder(props.column, undefined)} /> :
-          <SortAZ className="atn-column-sort-az" onClick={() => props.onChangeSortOrder(props.column, "asc")} />
-        }
-
-        {props.column.sort.order === 'desc' ?
-          <SortZA className="atn-column-sort-za active" onClick={() => props.onChangeSortOrder(props.column, undefined)} /> :
-          <SortZA className="atn-column-sort-za" onClick={() => props.onChangeSortOrder(props.column, "desc")} />
-        }
-
-        {props.column.visibility.visible ?
-          <VisibilityOn className="atn-column-show active" onClick={() => props.onChangeVisibility(props.column)} /> :
-          <VisibilityOff className="atn-column-show" onClick={() => props.onChangeVisibility(props.column)} />
-        }
-
+        {renderSortAZ(props.column, props.onChangeSortOrder)}
+        {renderSortZA(props.column, props.onChangeSortOrder)}
+        {renderVisibility(props.column, props.onChangeVisibility)}
       </Draggable>
 
       <div>

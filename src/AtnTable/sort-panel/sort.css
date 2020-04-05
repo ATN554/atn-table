@@ -74,15 +74,13 @@
   position: absolute;
   top: 2px;
   right: 35px;
-  fill: gray;
-  cursor: pointer;
 }
 
 .atn-column-sort-az.active {
-  fill: green;
+  cursor: pointer;
 }
 
-.atn-column-sort-az:hover {
+.atn-column-sort-az.active:hover {
   top: -1px;
   right: 32px;
   width: 16px;
@@ -93,15 +91,13 @@
   position: absolute;
   bottom: 2px;
   right: 35px;
-  fill: gray;
-  cursor: pointer;
 }
 
 .atn-column-sort-za.active {
-  fill: green;
+  cursor: pointer;
 }
 
-.atn-column-sort-za:hover {
+.atn-column-sort-za.active:hover {
   bottom: -1px;
   right: 32px;
   width: 16px;
@@ -114,15 +110,13 @@
   bottom: 0;
   right: 5px;
   margin: auto;
-  fill: gray;
-  cursor: pointer;
 }
 
 .atn-column-show.active {
-  fill: green;
+  cursor: pointer;
 }
 
-.atn-column-show:hover {
+.atn-column-show.active:hover {
   right: 2px;
   width: 26px;
   height: 16px;

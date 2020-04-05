@@ -19,6 +19,10 @@
   --button-bg-color-active: #9E9;
   --button-bg-color-inactive: #977;
   --shadow-bg-color: #000A;
+  --svg-fill-enabled-active: #000;
+  --svg-fill-enabled-inactive: #777;
+  --svg-fill-disabled-active: #0003;
+  --svg-fill-disabled-inactive: #AAA3;
 
   --th-bg-color: linear-gradient(180deg, #b8dabb 0%, #e0f1e1 15%, #b8dabb 80%);
   --th-bg-color-hover: linear-gradient(180deg, #9ef098 0%, #e0f1e1 15%, #9ef098 80%);
