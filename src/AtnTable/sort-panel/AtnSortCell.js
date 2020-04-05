@@ -54,7 +54,7 @@ const renderVisibility = (column, fnc) => {
   }
 }
 
-export default function AtnHeadSortCell(props) {
+export default function AtnSortCell(props) {
   return (
     <Droppable
       id={props.column.dnd.sortDroppableId}

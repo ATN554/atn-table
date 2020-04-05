@@ -9,9 +9,10 @@ import { fillColumnsTableData, fillRowsTableData, sortColumns, sortData } from "
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
 import AtnSortPanel from "./sort-panel/AtnSortPanel.js";
+import AtnGroupPanel from "./group-panel/AtnGroupPanel.js";
 
 const renderHeaderCell = (column, column_index) => {
-  return column.title; // + " : " + (column.id || 0) + " : " + (column.sort.id || 0) + " : " + (column.group.id || 0);
+  return column.title + " : " + column.id + " : " + column.sort.id + " : " + column.group.id;
 }
 
 const renderDataCell = (row, row_index, column, column_index) => {
@@ -109,11 +110,16 @@ export default class AtnTable extends React.Component {
 
   render() {
     let _columns = this.state.columns;
-    let _userColumns = _columns.filter((col) => !col.service);
-    let _visibleColumns = _columns.filter((col) => col.visibility.visible);
-    let _sortColumns = sortColumns(_userColumns, [['group', 'id'], ['sort', 'id'], ['id']]);
-    let _groupColumns = sortColumns(_userColumns, [['group', 'id'], ['id']]);
-    let _hasGroups = (_groupColumns.findIndex(col => col.group.id > 0) !== -1);
+    
+    let _headColumns = _columns.filter((col) => !col.service && !col.group.id && col.visibility.visible);
+    
+    let _sortColumns = _columns.filter((col) => !col.service && !col.group.id);
+    _sortColumns = sortColumns(_sortColumns, [['sort', 'id'], ['id']]);
+    
+    let _groupColumns = _columns.filter((col) => !col.service && col.visibility.visible);
+    _groupColumns = sortColumns(_groupColumns, [['group', 'id'], ['id']]);
+    
+    let _groupPanelColumns = _groupColumns.filter(col => col.group.id);
     return (
       <table className="atn-container">
         <thead className="atn-container-th">
@@ -127,11 +133,13 @@ export default class AtnTable extends React.Component {
               </div>
             </td>
           </tr>
-          {_hasGroups &&
+          {_groupPanelColumns.length > 0 &&
           <tr className="atn-groupbar-tr">
             <td className="atn-groupbar">
               <div style={{ height: "24px", lineHeight: "24px" }}>
-                Панель группы
+                {_groupPanelColumns.map((col) => {
+                  return col.title;
+                })}
               </div>
             </td>
           </tr>}
@@ -160,7 +168,7 @@ export default class AtnTable extends React.Component {
               </AtnMenu>
               <AtnContent
                 tableRef={this}
-                columns={_visibleColumns}
+                columns={_headColumns}
                 data={this.state.data}
                 totals={this.state.totals}
                 renders={this.state.renders}
@@ -170,7 +178,12 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mright-content"
                 buttonClass="atn-mright-button"
               >
-                <div>Группировка</div>
+                <AtnGroupPanel
+                  tableRef={this}
+                  title="Группировка"
+                  columns={_groupColumns}
+                  renders={this.state.renders}
+                />
               </AtnMenu>
               <AtnMenu
                 mainClass="atn-mbot"

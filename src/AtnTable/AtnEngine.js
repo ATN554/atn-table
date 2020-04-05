@@ -67,7 +67,7 @@ export function fillColumnsTableData(columns) {
     column.group = column.group || {};
     column.group.locked = column.group.locked !== undefined ? column.group.locked : false;
     column.group.id = column.group.id || undefined; // 1, 2, ...
-    column.group.order = column.group.order || undefined; // 'asc', 'desc'
+    column.group.order = column.group.order || 'asc'; // 'asc', 'desc'
 
     column.sort = column.sort || {};
     column.sort.locked = column.sort.locked !== undefined ? column.sort.locked : false;
@@ -206,7 +206,7 @@ export function sortData(data, columns) {
 }
 
 function clearValue(value) {
-  return value.replace(new RegExp(";","g"), ",");
+  return value.replace(new RegExp(";", "g"), ",");
 }
 
 /* 
@@ -215,7 +215,7 @@ function clearValue(value) {
 */
 function saveToFile(filename, text) {
   var universalBOM = "\uFEFF";
-  var blob = new Blob([universalBOM+text], { type: "text/plain;charset=utf-8" });
+  var blob = new Blob([universalBOM + text], { type: "text/plain;charset=utf-8" });
   if (navigator.msSaveBlob) {
     navigator.msSaveBlob(blob, filename);
   } else {

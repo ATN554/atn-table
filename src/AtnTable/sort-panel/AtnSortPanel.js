@@ -1,6 +1,6 @@
 import React from "react";
 import "./sort.css";
-import AtnHeadSortCell from "./AtnHeadSortCell.js";
+import AtnSortCell from "./AtnSortCell.js";
 
 export default class AtnSortPanel extends React.Component {
   constructor(props) {
@@ -44,7 +44,7 @@ export default class AtnSortPanel extends React.Component {
           </div>
         </div>
         {this.props.columns.map((col, col_index) => (
-          <AtnHeadSortCell
+          <AtnSortCell
             key={"th" + col.id}
             column={col}
             columnIndex={col_index}
