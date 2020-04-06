@@ -154,7 +154,7 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mtop-content"
                 buttonClass="atn-mtop-button"
               >
-                <div>Меню сверху</div>
+                <div>Фильтр</div>
               </AtnMenu>
               <AtnMenu
                 mainClass="atn-mleft"
