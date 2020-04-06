@@ -64,16 +64,22 @@
   background: var(--toolbar-bg-color);
   position: relative;
   border: 1px solid var(--border-color-darken);
+  padding: 0px;
+  margin: 0px;
 }
 
 .atn-groupbar {
   background: var(--groupbar-bg-color);
   position: relative;
   border: 1px solid var(--border-color-darken);
+  padding: 0px;
+  margin: 0px;
 }
 
 .atn-container-tb {
   border: 1px solid var(--border-color-darken);
+  padding: 0px;
+  margin: 0px;
 }
 
 .atn-content-mid-tr {
@@ -95,6 +101,8 @@
 .atn-footer {
   background: var(--footer-bg-color);
   position: relative;
+  padding: 0px;
+  margin: 0px;
 }
 
 .atn-cursor-move {

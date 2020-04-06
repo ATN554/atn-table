@@ -59,7 +59,7 @@ export default function AtnGroupCell(props) {
     <Droppable
       id={props.column.dnd.groupDroppableId}
       type="div"
-      className={props.column.dnd.droppable && props.column.group.id > 0 ? "atn-group-tr atn-group-droppable" : "atn-group-tr"}
+      className={props.column.dnd.droppable && props.column.group.id > 0 ? "atn-group-tc atn-group-droppable" : "atn-group-tc"}
     >
       <Draggable
         id={props.column.dnd.groupDraggableId}

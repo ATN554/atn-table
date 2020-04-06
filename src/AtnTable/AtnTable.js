@@ -8,6 +8,7 @@ import "./menu/menuright.css";
 import { fillColumnsTableData, fillRowsTableData, sortColumns, sortData } from "./AtnEngine.js";
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
+import AtnGroupBar from "./group-bar/AtnGroupBar.js";
 import AtnSortPanel from "./sort-panel/AtnSortPanel.js";
 import AtnGroupPanel from "./group-panel/AtnGroupPanel.js";
 
@@ -136,11 +137,12 @@ export default class AtnTable extends React.Component {
           {_groupPanelColumns.length > 0 &&
           <tr className="atn-groupbar-tr">
             <td className="atn-groupbar">
-              <div style={{ height: "24px", lineHeight: "24px" }}>
-                {_groupPanelColumns.map((col) => {
-                  return col.title + " ";
-                })}
-              </div>
+              <AtnGroupBar
+                tableRef={this}
+                title="Группировка"
+                columns={_groupPanelColumns}
+                renders={this.state.renders}
+              />
             </td>
           </tr>}
         </thead>

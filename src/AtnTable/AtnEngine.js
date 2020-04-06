@@ -55,10 +55,12 @@ export function fillColumnsTableData(columns) {
     column.dnd.headDroppableId = getUID();
     column.dnd.sortDroppableId = getUID();
     column.dnd.groupDroppableId = getUID();
+    column.dnd.groupBarDroppableId = getUID();
     column.dnd.draggable = column.dnd.draggable !== undefined ? column.dnd.draggable : true;
     column.dnd.headDraggableId = getUID();
     column.dnd.sortDraggableId = getUID();
     column.dnd.groupDraggableId = getUID();
+    column.dnd.groupBarDraggableId = getUID();
 
     column.visibility = column.visibility || {};
     column.visibility.locked = column.visibility.locked !== undefined ? column.visibility.locked : false;

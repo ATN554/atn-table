@@ -1,29 +1,28 @@
-.atn-group-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.atn-group-bar-container {
   border-collapse: collapse;
   border-spacing: 0;
-  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 2px;
+  padding-right: 2px;
 }
 
-.atn-group-title-tr {
-  position: sticky;
-  top: 0;
+.atn-group-bar-title-tc {
+  left: 0;
   font-weight: bold;
   background: var(--th-bg-color);
+  margin-top: 2px;
+  margin-left: 2px;
 }
 
-.atn-group-title-td {
+.atn-group-bar-title-td {
   height: 18px;
   line-height: 18px;
   white-space: pre-wrap;
   word-wrap: break-word;
   text-align: center;
   overflow: hidden;
-  border-bottom: 1px solid var(--border-color-darken);
+  border: 1px solid var(--border-color-darken);
   background: inherit;
   user-select: none;
   padding: 3px;
@@ -31,17 +30,14 @@
   transition: background-color 0.3s ease-in;
 }
 
-.atn-group-tr:nth-child(odd) {
-	background: inherit;
+.atn-group-bar-tc {
+  margin-top: 2px;
+  margin-left: 2px;
 }
 
-.atn-group-tr:nth-child(even) {
-  background: var(--menu-bg-color-darken);
-}
-
-.atn-group-td {
+.atn-group-bar-td {
   position: relative;
-  border-bottom: 1px solid var(--border-color-darken);
+  border: 1px solid var(--border-color-darken);
   background: inherit;
   user-select: none;
   padding: 3px;
@@ -49,18 +45,18 @@
   transition: background-color 0.3s ease-in;
 }
 
-.atn-group-td:last-child {
-  border-top: 1px solid var(--border-color-darken);
+.atn-group-bar-td:last-child {
+  border-left: 1px solid var(--border-color-darken);
 }
 
-.atn-group-td:hover,
-.atn-group-td:focus,
-.atn-group-td:active {
+.atn-group-bar-td:hover,
+.atn-group-bar-td:focus,
+.atn-group-bar-td:active {
   background: var(--th-bg-color-hover);
   transition: background-color 0.3s ease-in;
 }
 
-.atn-group-td-text {
+.atn-group-bar-td-text {
   margin-left: 30px;
   margin-right: 20px;
   height: 18px;
@@ -71,41 +67,41 @@
   overflow: hidden;
 }
 
-.atn-group-use-az {
+.atn-group-bar-use-az {
   position: absolute;
   top: 2px;
   right: 8px;
 }
 
-.atn-group-use-az.active {
+.atn-group-bar-use-az.active {
   cursor: pointer;
 }
 
-.atn-group-use-az.active:hover {
+.atn-group-bar-use-az.active:hover {
   top: -1px;
   right: 5px;
   width: 16px;
   height: 16px;
 }
 
-.atn-group-use-za {
+.atn-group-bar-use-za {
   position: absolute;
   bottom: 2px;
   right: 8px;
 }
 
-.atn-group-use-za.active {
+.atn-group-bar-use-za.active {
   cursor: pointer;
 }
 
-.atn-group-use-za.active:hover {
+.atn-group-bar-use-za.active:hover {
   bottom: -1px;
   right: 5px;
   width: 16px;
   height: 16px;
 }
 
-.atn-group-use {
+.atn-group-bar-use {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -113,11 +109,11 @@
   margin: auto;
 }
 
-.atn-group-use.active {
+.atn-group-bar-use.active {
   cursor: pointer;
 }
 
-.atn-group-use.active:hover {
+.atn-group-bar-use.active:hover {
   left: 2px;
   width: 26px;
   height: 16px;
