@@ -122,7 +122,7 @@ export default class AtnTable extends React.Component {
     
     let _headColumns = _columns.filter(col => col.group.id === 0 && col.visibility.visible);
     
-    let _totalColumnWidths = _headColumns.reduce((w, col) => w + col.width + (col.id > 0 ? 7 : 0), 0);
+    let _totalColumnWidths = _headColumns.reduce((w, col) => w + col.width, 0);
    
     return (
       <table className="atn-container">

@@ -48,6 +48,7 @@
   background: inherit;
   user-select: none;
   padding: 3px;
+  padding-right: 3px;
   margin: 0px;
   transition: background-color 0.3s ease-in;
 }
@@ -64,15 +65,15 @@
 }
 
 .atn-thead-td-resizer {
-  display: inline-block;
-  width: 4px;
-  max-height: 38px;
-  line-height: 18px;
+  position: absolute;
+  right: 0;
+  width: 10px;
+  top: 1px;
+  bottom: 1px;
+  border-left: 1px dashed var(--border-color-darken);
   border-right: 1px solid var(--border-color-darken);
-  border-bottom: 1px solid var(--border-color-darken);
   background: inherit;
   user-select: none;
-  padding: 3px;
   margin: 0px;
   transition: background-color 0.3s ease-in;
   

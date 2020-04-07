@@ -1,5 +1,4 @@
 import React from "react";
-import getUID from "../../UID/uid.js";
 import Draggable from "../../DND/Draggable.js";
 import Droppable from "../../DND/Droppable.js";
 
@@ -8,11 +7,9 @@ export default class AtnHeadCell extends React.Component {
     super(props);
 
     this.state = {
-      resizerId: getUID(),
       pageX: undefined,
       curCol: undefined,
       curColWidth: undefined,
-      resizerWidth: 0,
     }
 
     this.onDragStart = this.onDragStart.bind(this);
@@ -29,8 +26,7 @@ export default class AtnHeadCell extends React.Component {
       parseFloat(cs.paddingLeft) -
       parseFloat(cs.paddingRight) -
       parseFloat(cs.borderLeftWidth) -
-      parseFloat(cs.borderRightWidth) +
-      this.state.resizerWidth;
+      parseFloat(cs.borderRightWidth);
     this.setState({
       curCol: curCol,
       pageX: x,
@@ -62,17 +58,11 @@ export default class AtnHeadCell extends React.Component {
       let deltaX = xe - xs;
       let diffX = xe - this.state.pageX;
       let newWidth = this.state.curColWidth + diffX;
-      let minWidth = (column.minWidth !== undefined ? column.minWidth : 0) + this.state.resizerWidth;
+      let minWidth = (column.minWidth !== undefined ? column.minWidth : 0);
       let maxWidth = (column.maxWidth !== undefined ? column.maxWidth : 500);
       return ((deltaX < 0 && newWidth > minWidth) || (deltaX > 0 && newWidth < maxWidth));
     }
     return false;
-  }
-
-  componentDidMount() {
-    let resizer = document.getElementById(this.state.resizerId);
-    let resizerWidth = resizer.offsetWidth;
-    this.setState({ resizerWidth: resizerWidth});
   }
 
   render() {
@@ -90,7 +80,7 @@ export default class AtnHeadCell extends React.Component {
           type="div"
           droppable={"atn-thead-td-droppable"}
           className={draggableClassName}
-          style={{ width: (column.width - this.state.resizerWidth) + "px" }}
+          style={{ width: column.width + "px" }}
           axis="horizontal"
           onDragEnd={(idFrom, idTo, x, y) => this.props.onDragEnd(idFrom, idTo)}
           enabled={column.dnd.draggable}
@@ -99,7 +89,6 @@ export default class AtnHeadCell extends React.Component {
         </Draggable>
 
         <Draggable
-          id={this.state.resizerId}
           type="div"
           showClone={false}
           className="atn-thead-td-resizer atn-cursor-resize-horizontal"
