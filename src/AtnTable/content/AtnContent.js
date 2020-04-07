@@ -17,13 +17,33 @@ export default function AtnContent(props) {
 
       <div className="atn-tbody">
         {props.data.map((row, row_index) => (
-          <AtnBodyRow
-            key={"tr" + row_index}
-            columns={props.columns}
-            row={row}
-            rowIndex={row_index}
-            renderDataCell={props.renders.renderDataCell}
-          />
+          <React.Fragment key={"tr" + row_index}>
+            {
+              row.tableData.group.new
+                && 
+              props.groupColumns.slice(row.tableData.group.level).map((col, col_index) => (
+                <AtnBodyRow
+                  key={"tr-group-" + row_index + "-" + col_index}
+                  columns={[col]}
+                  row={row}
+                  rowIndex={row_index}
+                  renderDataCell={props.renders.renderDataCell}
+                />)
+              )
+            }
+
+            {
+              row.tableData.group.open
+                &&
+              <AtnBodyRow
+                key={"tr-data-" + row_index}
+                columns={props.columns}
+                row={row}
+                rowIndex={row_index}
+                renderDataCell={props.renders.renderDataCell}
+              />
+            }
+          </React.Fragment>
         ))}
       </div>
       

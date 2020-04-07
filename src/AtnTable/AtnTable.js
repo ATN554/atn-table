@@ -34,8 +34,7 @@ export default class AtnTable extends React.Component {
 
     let columns = fillColumnsTableData(props.columns);
     columns = sortColumns(columns);
-    let data = fillRowsTableData(props.data);
-    data = sortData(data, columns);
+    let data = sortData(props.data, columns);
 
     let renders = props.renders || {};
     renders.renderHeaderCell = renders.renderHeaderCell || renderHeaderCell;
@@ -171,6 +170,7 @@ export default class AtnTable extends React.Component {
               <AtnContent
                 tableRef={this}
                 columns={_headColumns}
+                groupColumns={_groupPanelColumns}
                 data={this.state.data}
                 totals={this.state.totals}
                 renders={this.state.renders}

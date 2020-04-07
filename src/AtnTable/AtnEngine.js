@@ -104,23 +104,6 @@ export function fillColumnsTableData(columns) {
   return columns;
 }
 
-export function fillRowsTableData(rows) {
-  rows.forEach((row, row_idx) => {
-    if (!row.tableData) {
-      row.tableData = {};
-    }
-
-    row.tableData.id = (row_idx + 1);
-
-    row.tableData.group = row.tableData.group || {};
-    row.tableData.group.id = row.tableData.group.id || undefined;
-    row.tableData.group.title = row.tableData.group.title || undefined;
-    row.tableData.group.level = row.tableData.group.level || undefined;
-    row.tableData.group.open = row.tableData.group.open || undefined;
-  });
-  return rows;
-}
-
 function compareColumns(column1, column2, key) {
   let value1 = column1;
   key.forEach((k) => { value1 = value1[k]; });
@@ -155,11 +138,13 @@ export function sortColumns(columns, keys = [['service'], ['group', 'id'], ['id'
 export function getValue(value, column) {
   let _type = column.type;
   let _value = value;
-  if (_type === "number") {
-    _value = Number(_value);
-  } else if (_type === "date") {
-    let _format = column.format || "DD.MM.YYYY";
-    _value = Moment(_value, _format).toDate();
+  if (_value !== undefined) {
+    if (_type === "number") {
+      _value = Number(_value);
+    } else if (_type === "date") {
+      let _format = column.format || "DD.MM.YYYY";
+      _value = Moment(_value, _format).toDate();
+    }
   }
   return _value;
 }
@@ -168,14 +153,26 @@ function compareValues(value1, value2, column) {
   let _value1 = getValue(value1, column);
   let _value2 = getValue(value2, column);
   if (column.group.id > 0) {
-    if (_value1 > _value2) {
+    if (_value1 === undefined && _value2 === undefined) {
+      return 0;
+    } else if (_value1 === undefined) {
+      return column.group.order === "asc" ? -1 : 1;
+    } else if (_value2 === undefined) {
+      return column.group.order === "asc" ? 1 : -1;
+    } else if (_value1 > _value2) {
       return column.group.order === "asc" ? 1 : -1;
     } else if (_value1 < _value2) {
       return column.group.order === "asc" ? -1 : 1;
     }
   } else {
     if (column.sort.order === 'asc' || column.sort.order === 'desc') {
-      if (_value1 > _value2) {
+      if (_value1 === undefined && _value2 === undefined) {
+        return 0;
+      } else if (_value1 === undefined) {
+        return column.sort.order === "asc" ? -1 : 1;
+      } else if (_value2 === undefined) {
+        return column.sort.order === "asc" ? 1 : -1;
+      } else if (_value1 > _value2) {
         return column.sort.order === "asc" ? 1 : -1;
       } else if (_value1 < _value2) {
         return column.sort.order === "asc" ? -1 : 1;
@@ -204,7 +201,62 @@ export function sortData(data, columns) {
   data.sort(function (row1, row2) {
     return compareRows(row1, row2, _columns);
   });
+  data = fillDataGroupsInfo(data, _columns);
   return data;
+}
+
+function fillDataGroupsInfo(rows, columns) {
+  let compare_keys = columns.filter(col => col.group.id > 0);
+  let ckcnt = compare_keys.length;
+  if (ckcnt === 0) {
+    rows.forEach((row, row_idx) => {
+      if (!row.tableData) {
+        row.tableData = {};
+      }
+      row.tableData.id = row_idx;
+      row.tableData.group = row.tableData.group || {};
+      row.tableData.group.new = false;
+      row.tableData.group.open = true;
+    });
+  } else {
+    let prevRow = { tableData: {group: {id: -1}} };
+    rows.forEach((row, row_idx) => {
+      if (!row.tableData) {
+        row.tableData = {};
+      }
+      row.tableData.id = row_idx;
+      let level;
+      let same = true;
+      let compare_key;
+      for (level = 0; level < ckcnt; level++) {
+        compare_key = compare_keys[level];
+        let field = compare_key.field;
+        let comparator = compare_key.sort.comparator;
+        let result = comparator(prevRow[field], row[field], compare_key);
+        if (result !== 0) {
+          same = false;
+          break;
+        }
+      }
+      if (same) {
+        row.tableData.group = row.tableData.group || {};
+        row.tableData.group.new = false;
+        row.tableData.group.open = prevRow.tableData.group.open;
+        row.tableData.group.id = prevRow.tableData.group.id;
+        row.tableData.group.level = prevRow.tableData.group.level;
+      } else {
+        row.tableData.group = row.tableData.group || {};
+        row.tableData.group.new = true;
+        row.tableData.group.open = row.tableData.group.open || true;
+        row.tableData.group.id = level === 0 ? prevRow.tableData.group.id + 1 : prevRow.tableData.group.id;
+        row.tableData.group.title = row[compare_key.field] + ". id: " + row.tableData.group.id + ". level: " + level;
+        row.tableData.group.level = level;
+      }
+
+      prevRow = row;
+    });
+  }
+  return rows;
 }
 
 function clearValue(value) {
