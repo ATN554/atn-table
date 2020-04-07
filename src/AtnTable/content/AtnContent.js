@@ -1,6 +1,7 @@
 import React from "react";
 import "./content.css";
 import AtnHeadRow from "./AtnHeadRow.js";
+import AtnBodyGroupRow from "./AtnBodyGroupRow.js";
 import AtnBodyRow from "./AtnBodyRow.js";
 import AtnTotalsRow from './AtnTotalsRow.js';
 
@@ -22,12 +23,14 @@ export default function AtnContent(props) {
               row.tableData.group.new
                 && 
               props.groupColumns.slice(row.tableData.group.level).map((col, col_index) => (
-                <AtnBodyRow
+                <AtnBodyGroupRow
                   key={"tr-group-" + row_index + "-" + col_index}
-                  columns={[col]}
+                  column={col}
+                  columnIndex={col_index}
                   row={row}
                   rowIndex={row_index}
                   renderDataCell={props.renders.renderDataCell}
+                  totalColumnWidths={props.totalColumnWidths}
                 />)
               )
             }
