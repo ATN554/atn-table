@@ -206,53 +206,45 @@ export function sortData(data, columns) {
 }
 
 function fillDataGroupsInfo(rows, columns) {
-  let compare_keys = columns.filter(col => col.group.id > 0);
-  let ckcnt = compare_keys.length;
+  let _columns = columns.filter(col => col.group.id > 0);
+  let ckcnt = _columns.length;
   if (ckcnt === 0) {
     rows.forEach((row, row_idx) => {
       if (!row.tableData) {
         row.tableData = {};
       }
       row.tableData.id = row_idx;
-      row.tableData.group = row.tableData.group || {};
-      row.tableData.group.new = false;
-      row.tableData.group.open = true;
+      row.tableData.plain = true;
     });
   } else {
-    let prevRow = { tableData: {group: {id: -1}} };
+    let prevRow = { tableData: {group: {id: -1, open: [false]}} };
     rows.forEach((row, row_idx) => {
       if (!row.tableData) {
         row.tableData = {};
       }
       row.tableData.id = row_idx;
+      row.tableData.plain = false;
+      row.tableData.group = {};
+
       let level;
       let same = true;
-      let compare_key;
+      let _column;
       for (level = 0; level < ckcnt; level++) {
-        compare_key = compare_keys[level];
-        let field = compare_key.field;
-        let comparator = compare_key.sort.comparator;
-        let result = comparator(prevRow[field], row[field], compare_key);
+        _column = _columns[level];
+        let field = _column.field;
+        let comparator = _column.sort.comparator;
+        let result = comparator(prevRow[field], row[field], _column);
         if (result !== 0) {
           same = false;
           break;
         }
       }
-      if (same) {
-        row.tableData.group = row.tableData.group || {};
-        row.tableData.group.new = false;
-        row.tableData.group.open = prevRow.tableData.group.open;
-        row.tableData.group.id = prevRow.tableData.group.id;
-        row.tableData.group.level = prevRow.tableData.group.level;
-      } else {
-        row.tableData.group = row.tableData.group || {};
-        row.tableData.group.new = true;
-        row.tableData.group.open = row.tableData.group.open || true;
-        row.tableData.group.id = level === 0 ? prevRow.tableData.group.id + 1 : prevRow.tableData.group.id;
-        row.tableData.group.title = row[compare_key.field] + ". id: " + row.tableData.group.id + ". level: " + level;
-        row.tableData.group.level = level;
-      }
 
+      row.tableData.group.new = !same;
+      row.tableData.group.level = level;
+
+console.log(same, level);
+      
       prevRow = row;
     });
   }

@@ -58,7 +58,7 @@ export default class AtnHeadCell extends React.Component {
       let deltaX = xe - xs;
       let diffX = xe - this.state.pageX;
       let newWidth = this.state.curColWidth + diffX;
-      let minWidth = (column.minWidth !== undefined ? column.minWidth : 0);
+      let minWidth = (column.minWidth !== undefined ? column.minWidth : 30);
       let maxWidth = (column.maxWidth !== undefined ? column.maxWidth : 500);
       return ((deltaX < 0 && newWidth > minWidth) || (deltaX > 0 && newWidth < maxWidth));
     }
@@ -85,7 +85,9 @@ export default class AtnHeadCell extends React.Component {
           onDragEnd={(idFrom, idTo, x, y) => this.props.onDragEnd(idFrom, idTo)}
           enabled={column.dnd.draggable}
         >
-          {this.props.renderHeaderCell(column, this.props.columnIndex)}
+          <div className="atn-thead-td-text">
+            {this.props.renderHeaderCell(column, this.props.columnIndex)}
+          </div>
         </Draggable>
 
         <Draggable

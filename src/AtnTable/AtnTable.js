@@ -121,9 +121,9 @@ export default class AtnTable extends React.Component {
     _sortColumns = sortColumns(_sortColumns, [['sort', 'id'], ['id']]);
     
     let _headColumns = _columns.filter(col => col.group.id === 0 && col.visibility.visible);
-    
-    let _totalColumnWidths = _headColumns.reduce((w, col) => w + col.width, 0);
-   
+
+    let _totalColumnsWidth = _headColumns.reduce((w, col) => 1 + w + col.width, -1);
+
     return (
       <table className="atn-container">
         <thead className="atn-container-th">
@@ -175,10 +175,10 @@ export default class AtnTable extends React.Component {
                 tableRef={this}
                 columns={_headColumns}
                 groupColumns={_groupPanelColumns}
+                totalColumnsWidth={_totalColumnsWidth}
                 data={this.state.data}
                 totals={this.state.totals}
                 renders={this.state.renders}
-                totalColumnWidths={_totalColumnWidths}
               />
               <AtnMenu
                 mainClass="atn-mright"
