@@ -87,6 +87,7 @@ export default class AtnMenu extends React.Component {
           type="button"
           value=""
           onClick={this.toggle}
+          onTouchEnd={this.toggle}
           className={this.state.buttonClass}
         />
       </div>

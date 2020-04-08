@@ -54,23 +54,9 @@ export const data = [
     "URC": 2336,
     "FULL_NAME": "Peru",
     "SM": "2.86",
-    "ID": 0
+    "ID": 1
   },
   {
-    "DT_CREATE": "09.05.2019",
-    "URC": 2336,
-    "FULL_NAME": "Peru",
-    "SM": "2.86",
-    "ID": 2
-  },
-  {
-    "DT_CREATE": "24.09.2019",
-    "URC": 7145,
-    "FULL_NAME": "Iceland",
-    "SM": "1.29",
-    "ID": 3
-  },
-/*  {
     "DT_CREATE": "24.09.2019",
     "URC": 7145,
     "FULL_NAME": "Iceland",
@@ -762,5 +748,5 @@ export const data = [
     "FULL_NAME": "Somalia",
     "SM": "5.01",
     "ID": 100
-  }*/
+  }
 ];

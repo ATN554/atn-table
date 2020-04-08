@@ -12,9 +12,23 @@ export default function AtnBodyGroupRow(props) {
 
   const renderToggle = () => {
     if (props.row.tableData.group.find(g => g.field === props.column.field).open) {
-      return (<VisibilityOn className="atn-tbody-group-td-button-img" style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={toggleGroup} />);
+      return (
+        <VisibilityOn
+          className="atn-tbody-group-td-button-img"
+          style={{ fill: "var(--svg-fill-enabled-active)" }}
+          onClick={toggleGroup}
+          onTouchEnd={toggleGroup}
+        />
+      );
     } else {
-      return (<VisibilityOff className="atn-tbody-group-td-button-img" style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={toggleGroup} />);
+      return (
+        <VisibilityOff
+          className="atn-tbody-group-td-button-img"
+          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
+          onClick={toggleGroup}
+          onTouchEnd={toggleGroup}
+        />
+      );
     }
   }
 

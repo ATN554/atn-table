@@ -9,15 +9,39 @@ import { ReactComponent as VisibilityOff } from "../svg/off.svg";
 const renderSortAZ = (column, fnc) => {
   if (column.sort.locked) {
     if (column.sort.order === "asc") {
-      return (<SortAZ className={"atn-column-sort-az"} style={{fill: "var(--svg-fill-disabled-active)"}} />);
+      return (
+        <SortAZ
+          className={"atn-column-sort-az"}
+          style={{fill: "var(--svg-fill-disabled-active)"}}
+        />
+      );
     } else {
-      return (<SortAZ className={"atn-column-sort-az"} style={{ fill: "var(--svg-fill-disabled-inactive)" }} />);
+      return (
+        <SortAZ
+          className={"atn-column-sort-az"}
+          style={{ fill: "var(--svg-fill-disabled-inactive)" }}
+        />
+      );
     }
   } else {
     if (column.sort.order === "asc") {
-      return (<SortAZ className={"atn-column-sort-az active"} style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={() => fnc(column, undefined)} />);
+      return (
+        <SortAZ
+          className={"atn-column-sort-az active"}
+          style={{ fill: "var(--svg-fill-enabled-active)" }}
+          onClick={() => fnc(column, undefined)}
+          onTouchEnd={() => fnc(column, undefined)}
+        />
+      );
     } else {
-      return (<SortAZ className={"atn-column-sort-az active"} style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={() => fnc(column, "asc")} />);
+      return (
+        <SortAZ
+          className={"atn-column-sort-az active"}
+          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
+          onClick={() => fnc(column, "asc")}
+          onTouchEnd={() => fnc(column, "asc")}
+        />
+      );
     }
   }
 }
@@ -25,15 +49,39 @@ const renderSortAZ = (column, fnc) => {
 const renderSortZA = (column, fnc) => {
   if (column.sort.locked) {
     if (column.sort.order === "desc") {
-      return (<SortZA className={"atn-column-sort-za"} style={{ fill: "var(--svg-fill-disabled-active)" }} />);
+      return (
+        <SortZA
+          className={"atn-column-sort-za"}
+          style={{ fill: "var(--svg-fill-disabled-active)" }}
+        />
+      );
     } else {
-      return (<SortZA className={"atn-column-sort-za"} style={{ fill: "var(--svg-fill-disabled-inactive)" }} />);
+      return (
+        <SortZA
+          className={"atn-column-sort-za"}
+          style={{ fill: "var(--svg-fill-disabled-inactive)" }}
+        />
+      );
     }
   } else {
     if (column.sort.order === "desc") {
-      return (<SortZA className={"atn-column-sort-za active"} style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={() => fnc(column, undefined)} />);
+      return (
+        <SortZA
+          className={"atn-column-sort-za active"}
+          style={{ fill: "var(--svg-fill-enabled-active)" }}
+          onClick={() => fnc(column, undefined)}
+          onTouchEnd={() => fnc(column, undefined)}
+        />
+      );
     } else {
-      return (<SortZA className={"atn-column-sort-za active"} style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={() => fnc(column, "desc")} />);
+      return (
+        <SortZA
+          className={"atn-column-sort-za active"}
+          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
+          onClick={() => fnc(column, "desc")}
+          onTouchEnd={() => fnc(column, "desc")}
+        />
+      );
     }
   }
 }
@@ -41,15 +89,39 @@ const renderSortZA = (column, fnc) => {
 const renderVisibility = (column, fnc) => {
   if (column.visibility.locked) {
     if (column.visibility.visible) {
-      return (<VisibilityOn className={"atn-column-show"} style={{ fill: "var(--svg-fill-disabled-active)" }} />);
+      return (
+        <VisibilityOn
+          className={"atn-column-show"}
+          style={{ fill: "var(--svg-fill-disabled-active)" }}
+        />
+      );
     } else {
-      return (<VisibilityOff className={"atn-column-show"} style={{ fill: "var(--svg-fill-disabled-inactive)" }} />);
+      return (
+        <VisibilityOff
+          className={"atn-column-show"}
+          style={{ fill: "var(--svg-fill-disabled-inactive)" }}
+        />
+      );
     }
   } else {
     if (column.visibility.visible) {
-      return (<VisibilityOn className={"atn-column-show active"} style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={() => fnc(column)} />);
+      return (
+        <VisibilityOn
+          className={"atn-column-show active"}
+          style={{ fill: "var(--svg-fill-enabled-active)" }}
+          onClick={() => fnc(column)}
+          onTouchEnd={() => fnc(column)}
+        />
+      );
     } else {
-      return (<VisibilityOff className={"atn-column-show active"} style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={() => fnc(column)} />);
+      return (
+        <VisibilityOff
+          className={"atn-column-show active"}
+          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
+          onClick={() => fnc(column)}
+          onTouchEnd={() => fnc(column)}
+        />
+      );
     }
   }
 }
