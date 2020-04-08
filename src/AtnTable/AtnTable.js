@@ -181,7 +181,7 @@ export default class AtnTable extends React.Component {
                 columns={_headColumns}
                 groupColumns={_groupPanelColumns}
                 totalColumnsWidth={_totalColumnsWidth}
-                data={this.state.data}
+                data={this.state.data.slice(0, 10)}
                 totals={this.state.totals}
                 renders={this.state.renders}
               />

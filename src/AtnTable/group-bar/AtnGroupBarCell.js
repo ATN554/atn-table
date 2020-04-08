@@ -9,15 +9,37 @@ import { ReactComponent as VisibilityOff } from "../svg/off.svg";
 const renderSortAZ = (column, fnc) => {
   if (column.group.locked) {
     if (column.group.order === "asc") {
-      return (<SortAZ className={"atn-group-bar-use-az"} style={{ fill: "var(--svg-fill-disabled-active)" }} />);
+      return (
+        <SortAZ
+          className={"atn-group-bar-use-az"}
+          style={{ fill: "var(--svg-fill-disabled-active)" }}
+        />
+      );
     } else {
-      return (<SortAZ className={"atn-group-bar-use-az"} style={{ fill: "var(--svg-fill-disabled-inactive)" }} />);
+      return (
+        <SortAZ
+          className={"atn-group-bar-use-az"}
+          style={{ fill: "var(--svg-fill-disabled-inactive)" }}
+        />
+      );
     }
   } else {
     if (column.group.order === "asc") {
-      return (<SortAZ className={"atn-group-bar-use-az active"} style={{ fill: "var(--svg-fill-enabled-active)" }} />);
+      return (
+        <SortAZ
+          className={"atn-group-bar-use-az active"}
+          style={{ fill: "var(--svg-fill-enabled-active)" }}
+        />
+      );
     } else {
-      return (<SortAZ className={"atn-group-bar-use-az active"} style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={() => fnc(column, "asc")} />);
+      return (
+        <SortAZ
+          className={"atn-group-bar-use-az active"}
+          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
+          onClick={() => fnc(column, "asc")}
+          onTouchEnd={() => fnc(column, "asc")}
+        />
+      );
     }
   }
 }
@@ -25,15 +47,37 @@ const renderSortAZ = (column, fnc) => {
 const renderSortZA = (column, fnc) => {
   if (column.group.locked) {
     if (column.group.order === "desc") {
-      return (<SortZA className={"atn-group-bar-use-za"} style={{ fill: "var(--svg-fill-disabled-active)" }} />);
+      return (
+        <SortZA
+          className={"atn-group-bar-use-za"}
+          style={{ fill: "var(--svg-fill-disabled-active)" }}
+        />
+      );
     } else {
-      return (<SortZA className={"atn-group-bar-use-za"} style={{ fill: "var(--svg-fill-disabled-inactive)" }} />);
+      return (
+        <SortZA
+          className={"atn-group-bar-use-za"}
+          style={{ fill: "var(--svg-fill-disabled-inactive)" }}
+        />
+      );
     }
   } else {
     if (column.group.order === "desc") {
-      return (<SortZA className={"atn-group-bar-use-za active"} style={{ fill: "var(--svg-fill-enabled-active)" }} />);
+      return (
+        <SortZA
+          className={"atn-group-bar-use-za active"}
+          style={{ fill: "var(--svg-fill-enabled-active)" }}
+        />
+      );
     } else {
-      return (<SortZA className={"atn-group-bar-use-za active"} style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={() => fnc(column, "desc")} />);
+      return (
+        <SortZA
+          className={"atn-group-bar-use-za active"}
+          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
+          onClick={() => fnc(column, "desc")}
+          onTouchEnd={() => fnc(column, "desc")}
+        />
+      );
     }
   }
 }
@@ -41,15 +85,39 @@ const renderSortZA = (column, fnc) => {
 const renderActivity = (column, fnc) => {
   if (column.group.locked) {
     if (column.group.id > 0) {
-      return (<VisibilityOn className={"atn-group-bar-use"} style={{ fill: "var(--svg-fill-disabled-active)" }} />);
+      return (
+        <VisibilityOn
+          className={"atn-group-bar-use"}
+          style={{ fill: "var(--svg-fill-disabled-active)" }}
+        />
+      );
     } else {
-      return (<VisibilityOff className={"atn-group-bar-use"} style={{ fill: "var(--svg-fill-disabled-inactive)" }} />);
+      return (
+        <VisibilityOff
+          className={"atn-group-bar-use"}
+          style={{ fill: "var(--svg-fill-disabled-inactive)" }}
+        />
+      );
     }
   } else {
     if (column.group.id > 0) {
-      return (<VisibilityOn className={"atn-group-bar-use active"} style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={() => fnc(column)} />);
+      return (
+        <VisibilityOn
+          className={"atn-group-bar-use active"}
+          style={{ fill: "var(--svg-fill-enabled-active)" }}
+          onClick={() => fnc(column)}
+          onTouchEnd={() => fnc(column)}
+        />
+      );
     } else {
-      return (<VisibilityOff className={"atn-group-bar-use active"} style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={() => fnc(column)} />);
+      return (
+        <VisibilityOff
+          className={"atn-group-bar-use active"}
+          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
+          onClick={() => fnc(column)}
+          onTouchEnd={() => fnc(column)}
+        />
+      );
     }
   }
 }
