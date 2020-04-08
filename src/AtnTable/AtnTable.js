@@ -5,7 +5,7 @@ import "./menu/menutop.css";
 import "./menu/menubot.css";
 import "./menu/menuleft.css";
 import "./menu/menuright.css";
-import { fillColumnsTableData, fillRowsTableData, sortColumns, sortData } from "./AtnEngine.js";
+import { nvl, fillColumnsTableData, fillRowsTableData, sortColumns, sortData } from "./AtnEngine.js";
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
 import AtnGroupBar from "./group-bar/AtnGroupBar.js";
@@ -13,17 +13,21 @@ import AtnSortPanel from "./sort-panel/AtnSortPanel.js";
 import AtnGroupPanel from "./group-panel/AtnGroupPanel.js";
 
 const renderHeaderCell = (column, column_index) => {
-  return column.title; // + " : " + column.id + " : " + column.sort.id + " : " + column.group.id;
+  return nvl(column.title, " ");
+}
+
+const renderDataGroupCell = (row, row_index, column, column_index) => {
+  return <span><b>{nvl(column.title, " ")}:</b> {nvl(row[column.field], " ")}</span>;
 }
 
 const renderDataCell = (row, row_index, column, column_index) => {
-  return row[column.field];
+  return nvl(row[column.field], " ");
 }
 
 const renderTotalsCell = (totals, column, column_index) => {
-  let text = totals[column.field] || "";
+  let text = nvl(totals[column.field], " ");
   if (column_index === 0) {
-    text = (totals["First-Column-Text"] || "") + text;
+    text = (nvl(totals["First-Column-Text"], "")) + text;
   }
   return text;
 }
@@ -36,10 +40,11 @@ export default class AtnTable extends React.Component {
     columns = sortColumns(columns);
     let data = sortData(props.data, columns);
 
-    let renders = props.renders || {};
-    renders.renderHeaderCell = renders.renderHeaderCell || renderHeaderCell;
-    renders.renderDataCell = renders.renderDataCell || renderDataCell;
-    renders.renderTotalsCell = renders.renderTotalsCell || renderTotalsCell;
+    let renders = nvl(props.renders, {});
+    renders.renderHeaderCell = nvl(renders.renderHeaderCell, renderHeaderCell);
+    renders.renderDataGroupCell = nvl(renders.renderDataGroupCell, renderDataGroupCell);
+    renders.renderDataCell = nvl(renders.renderDataCell, renderDataCell);
+    renders.renderTotalsCell = nvl(renders.renderTotalsCell, renderTotalsCell);
 
     this.state = {
       memProps: props,

@@ -1,6 +1,10 @@
 import getUID from "../UID/uid.js";
 import Moment from 'moment';
 
+export function nvl(value, placer) {
+  return value === undefined ? placer : value;
+}
+
 export function fillColumnsTableData(columns) {
   let hasActionColumn = columns.findIndex((col) => col.field === '#ACTION_COLUMN') !== -1;
   let hasGroupColumn = columns.findIndex((col) => col.field === '#GROUP_COLUMN') !== -1;
@@ -45,41 +49,41 @@ export function fillColumnsTableData(columns) {
       column.id = column_idx + 1;
     }
 
-    column.type = column.type || 'text'; // 'text', 'number', 'date'
-    column.align = column.align || 'left'; // 'left', 'center', 'right'
-    column.service = column.service !== undefined ? column.service : false;
-    column.width = column.width !== undefined ? column.width : 0;
+    column.type = nvl(column.type, 'text'); // 'text', 'number', 'date'
+    column.align = nvl(column.align, 'left'); // 'left', 'center', 'right'
+    column.service = nvl(column.service, false);
+    column.width = nvl(column.width, 0);
 
-    column.dnd = column.dnd || {};
-    column.dnd.droppable = column.dnd.droppable !== undefined ? column.dnd.droppable : true;
+    column.dnd = nvl(column.dnd, {});
+    column.dnd.droppable = nvl(column.dnd.droppable, true);
     column.dnd.headDroppableId = getUID();
     column.dnd.sortDroppableId = getUID();
     column.dnd.groupDroppableId = getUID();
     column.dnd.groupBarDroppableId = getUID();
-    column.dnd.draggable = column.dnd.draggable !== undefined ? column.dnd.draggable : true;
+    column.dnd.draggable = nvl(column.dnd.draggable, true);
     column.dnd.headDraggableId = getUID();
     column.dnd.sortDraggableId = getUID();
     column.dnd.groupDraggableId = getUID();
     column.dnd.groupBarDraggableId = getUID();
 
-    column.visibility = column.visibility || {};
-    column.visibility.locked = column.visibility.locked !== undefined ? column.visibility.locked : false;
-    column.visibility.visible = column.visibility.visible !== undefined ? column.visibility.visible : true;
+    column.visibility = nvl(column.visibility, {});
+    column.visibility.locked = nvl(column.visibility.locked, false);
+    column.visibility.visible = nvl(column.visibility.visible, true);
 
-    column.group = column.group || {};
-    column.group.locked = column.group.locked !== undefined ? column.group.locked : false;
-    column.group.id = column.group.id || 0; // 1, 2, ...
-    column.group.order = column.group.order || 'asc'; // 'asc', 'desc'
+    column.group = nvl(column.group, {});
+    column.group.locked = nvl(column.group.locked, false);
+    column.group.id = nvl(column.group.id, 0); // 1, 2, ...
+    column.group.order = nvl(column.group.order, 'asc'); // 'asc', 'desc'
 
-    column.sort = column.sort || {};
-    column.sort.locked = column.sort.locked !== undefined ? column.sort.locked : false;
-    column.sort.id = column.sort.id || undefined; // 1, 2, ...
-    column.sort.order = column.sort.order || undefined; // 'asc', 'desc'
-    column.sort.comparator = column.sort.comparator || compareValues; // data1, data2, column
+    column.sort = nvl(column.sort, {});
+    column.sort.locked = nvl(column.sort.locked, false);
+    column.sort.id = nvl(column.sort.id, 0); // 1, 2, ...
+    column.sort.order = nvl(column.sort.order, undefined); // 'asc', 'desc'
+    column.sort.comparator = nvl(column.sort.comparator, compareValues); // data1, data2, column
 
-    column.filter = column.filter || {};
-    column.filter.locked = column.filter.locked !== undefined ? column.filter.locked : false;
-    column.filter.values = column.filter.values || [{ value: undefined, type: undefined }];
+    column.filter = nvl(column.filter, {});
+    column.filter.locked = nvl(column.filter.locked, false);
+    column.filter.values = nvl(column.filter.values, [{ value: undefined, type: undefined }]);
   });
 
   let fix_columns = columns.filter((col) => col.group.id > 0);
@@ -260,7 +264,7 @@ function fillDataGroupsInfo(rows, columns) {
         if (col_index < level) {
           row.tableData.group[col_index] = prevRow.tableData.group[col_index];
         } else {
-          row.tableData.group[col_index] = row.tableData.group[col_index] || { field: field, open: false, uid: getUID() }
+          row.tableData.group[col_index] = row.tableData.group[col_index] || { field: field, open: false }
         }
       });
 

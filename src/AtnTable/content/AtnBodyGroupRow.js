@@ -12,23 +12,28 @@ export default function AtnBodyGroupRow(props) {
 
   const renderToggle = () => {
     if (props.row.tableData.group.find(g => g.field === props.column.field).open) {
-      return (<VisibilityOn style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={toggleGroup} />);
+      return (<VisibilityOn className="atn-tbody-group-td-button-img" style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={toggleGroup} />);
     } else {
-      return (<VisibilityOff style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={toggleGroup} />);
+      return (<VisibilityOff className="atn-tbody-group-td-button-img" style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={toggleGroup} />);
     }
   }
 
   return (
     <div className="atn-tbody-tr">
-      <div 
-        className="atn-tbody-group-td"
-        style={{ width: props.totalColumnsWidth + "px" }}
-      >
-        <div className="atn-tbody-group-td-button">
-          {renderToggle()}
-        </div>
-        <div className="atn-tbody-group-td-text">
-          {props.renderDataCell(props.row, props.rowIndex, props.column, props.columnIndex)}
+      <div className="atn-tbody-group-td">
+        <div 
+          className="atn-tbody-group-td-container"
+          style={{ width: props.totalColumnsWidth + "px" }}
+        >
+          {Array.from(Array(props.columnIndex)).map((el, el_idx) => (
+            <div key={"tdm-" + el_idx} className="atn-tbody-group-td-margin"></div>  
+          ))}
+          <div className="atn-tbody-group-td-button">
+            {renderToggle()}
+          </div>
+          <div className="atn-tbody-group-td-text">
+            {props.renderDataGroupCell(props.row, props.rowIndex, props.column, props.columnIndex)}
+          </div>
         </div>
       </div>
     </div>

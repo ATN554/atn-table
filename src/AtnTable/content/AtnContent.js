@@ -36,10 +36,10 @@ export default function AtnContent(props) {
                 totalColumnsWidth={props.totalColumnsWidth}
                 columns={props.groupColumns}
                 column={col}
-                columnIndex={col_index}
+                columnIndex={row.tableData.level + col_index}
                 row={row}
                 rowIndex={row_index}
-                renderDataCell={props.renders.renderDataCell}
+                renderDataGroupCell={props.renders.renderDataGroupCell}
               />
              ))
             }

@@ -6,10 +6,7 @@ export const columns = [
     align: "right", 
     width: 150, 
     mimWidth: 10, 
-    maxWidth: 250, 
-    visibility: {
-      locked: true
-    }
+    maxWidth: 250,
   },
   { 
     title: "Наименование", 
@@ -57,7 +54,7 @@ export const data = [
     "URC": 2336,
     "FULL_NAME": "Peru",
     "SM": "2.86",
-    "ID": 1
+    "ID": 0
   },
   {
     "DT_CREATE": "09.05.2019",
