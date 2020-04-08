@@ -215,9 +215,10 @@ function fillDataGroupsInfo(rows, columns) {
       }
       row.tableData.id = row_idx;
       row.tableData.plain = true;
+      row.tableData.group = [];
     });
   } else {
-    let prevRow = { tableData: { group: { open: false } } };
+    let prevRow = {};
     rows.forEach((row, row_idx) => {
       if (!row.tableData) {
         row.tableData = {};
@@ -225,7 +226,17 @@ function fillDataGroupsInfo(rows, columns) {
       row.tableData.id = row_idx;
       row.tableData.plain = false;
       if (!row.tableData.group) {
-        row.tableData.group = {};
+        row.tableData.group = [];
+      }
+
+      let groupf;
+      let gpcnt = row.tableData.group.length;
+      for (let i = gpcnt - 1; i >= 0; i--) {
+        groupf = row.tableData.group[i];
+        let _col = _columns[i];
+        if (!_col || groupf.field !== _col.field) {
+          row.tableData.group = row.tableData.group.slice(0, i);
+        }
       }
 
       let level;
@@ -244,41 +255,32 @@ function fillDataGroupsInfo(rows, columns) {
 
       row.tableData.new = !same;
       row.tableData.level = level;
+      _columns.forEach((col, col_index) => {
+        let field = col.field;
+        if (col_index < level) {
+          row.tableData.group[col_index] = prevRow.tableData.group[col_index];
+        } else {
+          row.tableData.group[col_index] = row.tableData.group[col_index] || { field: field, open: false, uid: getUID() }
+        }
+      });
 
-      if (same) {
-        _columns.forEach((col, col_index) => {
-          let field = col.field;
-          if (col_index < level) {
-            row.tableData.group[field] = prevRow.tableData.group[field];
-          } else {
-            row.tableData.group[field] = row.tableData.group[field] || { open: false }
-          }
-        });
-      } else {
-        _columns.forEach((col) => {
-          let field = col.field;
-          row.tableData.group[field] = row.tableData.group[field] || { open: false };
-        });
-      }
-      
-      let groupf = row.tableData.group[_columns[0].field];
+      groupf = row.tableData.group[0];
       groupf.show = true;
       let prevOpen = groupf.open;
       let prevShow = groupf.show;
       for (let i = 1; i < ckcnt; i++) {
-        let field = _columns[i].field;
-        groupf = row.tableData.group[field];
+        groupf = row.tableData.group[i];
         groupf.show = (prevOpen && prevShow);
         prevOpen = groupf.open;
         prevShow = groupf.show;
       }
-      
+
       row.tableData.show = true;
       for (let i = 0; i < ckcnt; i++) {
-        let field = _columns[i].field;
-        groupf = row.tableData.group[field];
+        groupf = row.tableData.group[i];
         if (!groupf.open || !groupf.show) {
           row.tableData.show = false;
+          break;
         }
       }
 

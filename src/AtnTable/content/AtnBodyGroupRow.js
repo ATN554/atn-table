@@ -5,13 +5,13 @@ import { ReactComponent as VisibilityOff } from "../svg/off.svg";
 export default function AtnBodyGroupRow(props) {
 
   const toggleGroup = () => {
-    let groupf = props.row.tableData.group[props.column.field];
+    let groupf = props.row.tableData.group.find(g => g.field === props.column.field);
     groupf.open = !groupf.open;
     props.tableRef.updateData();
   }
 
   const renderToggle = () => {
-    if (props.row.tableData.group[props.column.field].open) {
+    if (props.row.tableData.group.find(g => g.field === props.column.field).open) {
       return (<VisibilityOn style={{ fill: "var(--svg-fill-enabled-active)" }} onClick={toggleGroup} />);
     } else {
       return (<VisibilityOff style={{ fill: "var(--svg-fill-enabled-inactive)" }} onClick={toggleGroup} />);

@@ -29,7 +29,7 @@ export default function AtnContent(props) {
           <React.Fragment key={"tr-data-c-" + row_index}>
             {row.tableData.new &&
               props.groupColumns.slice(row.tableData.level).map((col, col_index) => (
-              row.tableData.group[col.field].show &&
+              row.tableData.group.find(g => g.field === col.field).show &&
               <AtnBodyGroupRow
                 tableRef={props.tableRef}
                 key={"tr-group-" + row_index + "-" + col_index}
