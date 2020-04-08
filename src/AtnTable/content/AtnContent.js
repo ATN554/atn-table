@@ -27,23 +27,31 @@ export default function AtnContent(props) {
             renderDataCell={props.renders.renderDataCell}
           /> :
           <React.Fragment key={"tr-data-c-" + row_index}>
-            {row.tableData.group.new &&
-            <AtnBodyGroupRow
-              tableRef={props.tableRef}
-              key={"tr-group-" + row_index}
-              totalColumnsWidth={props.totalColumnsWidth}
-              columns={props.groupColumns}
-              row={row}
-              rowIndex={row_index}
-              renderDataCell={props.renders.renderDataCell}
-            />}
-            <AtnBodyRow
-              key={"tr-data-" + row_index}
-              columns={props.columns}
-              row={row}
-              rowIndex={row_index}
-              renderDataCell={props.renders.renderDataCell}
-            />
+            {row.tableData.new &&
+              props.groupColumns.slice(row.tableData.level).map((col, col_index) => (
+              row.tableData.group[col.field].show &&
+              <AtnBodyGroupRow
+                tableRef={props.tableRef}
+                key={"tr-group-" + row_index + "-" + col_index}
+                totalColumnsWidth={props.totalColumnsWidth}
+                columns={props.groupColumns}
+                column={col}
+                columnIndex={col_index}
+                row={row}
+                rowIndex={row_index}
+                renderDataCell={props.renders.renderDataCell}
+              />
+             ))
+            }
+            {row.tableData.show &&
+              <AtnBodyRow
+                key={"tr-data-" + row_index}
+                columns={props.columns}
+                row={row}
+                rowIndex={row_index}
+                renderDataCell={props.renders.renderDataCell}
+              />
+            }
           </React.Fragment>
         ))}
       </div>

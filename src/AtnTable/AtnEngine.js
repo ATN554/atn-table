@@ -217,14 +217,16 @@ function fillDataGroupsInfo(rows, columns) {
       row.tableData.plain = true;
     });
   } else {
-    let prevRow = { tableData: {group: {id: -1, open: [false]}} };
+    let prevRow = { tableData: { group: { open: false } } };
     rows.forEach((row, row_idx) => {
       if (!row.tableData) {
         row.tableData = {};
       }
       row.tableData.id = row_idx;
       row.tableData.plain = false;
-      row.tableData.group = {};
+      if (!row.tableData.group) {
+        row.tableData.group = {};
+      }
 
       let level;
       let same = true;
@@ -240,11 +242,46 @@ function fillDataGroupsInfo(rows, columns) {
         }
       }
 
-      row.tableData.group.new = !same;
-      row.tableData.group.level = level;
+      row.tableData.new = !same;
+      row.tableData.level = level;
 
-console.log(same, level);
+      if (same) {
+        _columns.forEach((col, col_index) => {
+          let field = col.field;
+          if (col_index < level) {
+            row.tableData.group[field] = prevRow.tableData.group[field];
+          } else {
+            row.tableData.group[field] = row.tableData.group[field] || { open: false }
+          }
+        });
+      } else {
+        _columns.forEach((col) => {
+          let field = col.field;
+          row.tableData.group[field] = row.tableData.group[field] || { open: false };
+        });
+      }
       
+      let groupf = row.tableData.group[_columns[0].field];
+      groupf.show = true;
+      let prevOpen = groupf.open;
+      let prevShow = groupf.show;
+      for (let i = 1; i < ckcnt; i++) {
+        let field = _columns[i].field;
+        groupf = row.tableData.group[field];
+        groupf.show = (prevOpen && prevShow);
+        prevOpen = groupf.open;
+        prevShow = groupf.show;
+      }
+      
+      row.tableData.show = true;
+      for (let i = 0; i < ckcnt; i++) {
+        let field = _columns[i].field;
+        groupf = row.tableData.group[field];
+        if (!groupf.open || !groupf.show) {
+          row.tableData.show = false;
+        }
+      }
+
       prevRow = row;
     });
   }
