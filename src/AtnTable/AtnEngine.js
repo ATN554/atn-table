@@ -218,17 +218,16 @@ function fillDataGroupsInfo(rows, columns) {
         row.tableData = {};
       }
       row.tableData.id = row_idx;
-      row.tableData.plain = true;
       row.tableData.group = [];
     });
   } else {
-    let prevRow = {};
+    let prevRow = { tableData: {gid: -1} };
     rows.forEach((row, row_idx) => {
       if (!row.tableData) {
         row.tableData = {};
       }
       row.tableData.id = row_idx;
-      row.tableData.plain = false;
+      row.tableData.gid = prevRow.tableData.gid;
       if (!row.tableData.group) {
         row.tableData.group = [];
       }
@@ -252,6 +251,9 @@ function fillDataGroupsInfo(rows, columns) {
         let comparator = _column.sort.comparator;
         let result = comparator(prevRow[field], row[field], _column);
         if (result !== 0) {
+          if (level === 0) {
+            row.tableData.gid++;
+          }
           same = false;
           break;
         }
@@ -295,7 +297,14 @@ function fillDataGroupsInfo(rows, columns) {
 }
 
 export function getLastPage(data, columns, pageSize) {
-  return data.length === 0 ? 0 : Math.floor((data.length-1) / pageSize);
+  let hasGroups = columns.findIndex(col => col.group.id > 0) !== -1;
+  let len;
+  if (hasGroups) {
+    len = data[data.length-1].tableData.gid;
+  } else {
+    len = data.length; 
+  }
+  return len === 0 ? 0 : Math.floor((len-1) / pageSize);
 }
 
 function clearValue(value) {

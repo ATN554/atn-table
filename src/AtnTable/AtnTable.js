@@ -18,7 +18,7 @@ const renderHeaderCell = (column, column_index) => {
 }
 
 const renderDataGroupCell = (row, row_index, column, column_index) => {
-  return <span><b>{nvl(column.title, " ")}:</b> {nvl(row[column.field], " ")}</span>;
+  return <span><b>{nvl(column.title, " ")}:</b> {nvl(row[column.field], " ")} {row.tableData.gid}</span>;
 }
 
 const renderDataCell = (row, row_index, column, column_index) => {
