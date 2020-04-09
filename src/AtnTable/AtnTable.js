@@ -11,6 +11,7 @@ import AtnMenu from "./menu/AtnMenu.js";
 import AtnGroupBar from "./group-bar/AtnGroupBar.js";
 import AtnSortPanel from "./sort-panel/AtnSortPanel.js";
 import AtnGroupPanel from "./group-panel/AtnGroupPanel.js";
+import AtnPageBar from "./page-bar/AtnPageBar.js";
 
 const renderHeaderCell = (column, column_index) => {
   return nvl(column.title, " ");
@@ -36,9 +37,9 @@ export default class AtnTable extends React.Component {
   constructor(props) {
     super(props);
 
-    let columns = fillColumnsTableData(props.columns);
+    let columns = fillColumnsTableData(nvl(props.columns, []));
     columns = sortColumns(columns);
-    let data = sortData(props.data, columns);
+    let data = sortData(nvl(props.data, []), columns);
 
     let renders = nvl(props.renders, {});
     renders.renderHeaderCell = nvl(renders.renderHeaderCell, renderHeaderCell);
@@ -47,11 +48,14 @@ export default class AtnTable extends React.Component {
     renders.renderTotalsCell = nvl(renders.renderTotalsCell, renderTotalsCell);
 
     this.state = {
-      memProps: props,
-      title: props.title,
+      title: nvl(props.title, ""),
       columns: columns,
       data: data,
-      totals: props.totals,
+      totals: nvl(props.totals, {}),
+
+      currentPage: nvl(props.currentPage, 0),
+      pageSize: nvl(props.pageSize, 10),
+      pageSizeOptions: nvl(props.pageSize, [5, 10, 20, -1]),
 
       renders: renders
     };
@@ -210,9 +214,13 @@ export default class AtnTable extends React.Component {
         <tfoot className="atn-container-tf">
           <tr className="atn-container-tr">
             <td className="atn-footer">
-              <div style={{ height: "24px", lineHeight: "24px" }}>
-                Подвал таблицы
-              </div>
+              <AtnPageBar
+                tableRef={this}
+                data={this.state.data}
+                currentPage={this.state.currentPage}
+                pageSize={this.state.pageSize}
+                pageSizeOptions={this.state.pageSizeOptions}
+              />
             </td>
           </tr>
         </tfoot>

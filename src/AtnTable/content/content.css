@@ -43,7 +43,6 @@
   display: inline-block;
   min-height: 18px;
   max-height: 38px;
-  line-height: 18px;
   white-space: pre-wrap;
   word-wrap: break-word;
   text-align: center;
@@ -116,7 +115,6 @@
   flex-direction: row;
   min-height: 18px;
   max-height: 38px;
-  line-height: 18px;
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow: hidden;
@@ -195,7 +193,6 @@
 .atn-tbody-td-container {
   min-height: 16px;
   max-height: 38px;
-  line-height: 16px;
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow: hidden;
@@ -252,7 +249,6 @@
 .atn-tfoot-td-container {
   min-height: 16px;
   max-height: 38px;
-  line-height: 16px;
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow: hidden;

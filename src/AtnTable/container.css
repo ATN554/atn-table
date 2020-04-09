@@ -32,6 +32,12 @@
   --tf-bg-color: linear-gradient(180deg, #bfd6c1 0%, #e0f1e1 15%, #bfd6c1 80%);
 }
 
+* {
+  font-family: "Roboto";
+  font-size: 13px;
+  line-height: 18px;
+}
+
 .atn-container {
   width: calc(100% - 10px);
   height: calc(100% - 10px);
@@ -47,7 +53,6 @@
   position: absolute;
   top: -10px;
   left: 12px;
-  line-height: 18px;
   padding-left: 3px;
   padding-right: 3px;
   background: var(--title-bg-color);
