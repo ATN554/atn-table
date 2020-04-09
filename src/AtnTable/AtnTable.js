@@ -5,7 +5,7 @@ import "./menu/menutop.css";
 import "./menu/menubot.css";
 import "./menu/menuleft.css";
 import "./menu/menuright.css";
-import { nvl, fillColumnsTableData, fillRowsTableData, sortColumns, sortData } from "./AtnEngine.js";
+import { nvl, fillColumnsTableData, fillRowsTableData, sortColumns, sortData, getLastPage } from "./AtnEngine.js";
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
 import AtnGroupBar from "./group-bar/AtnGroupBar.js";
@@ -89,6 +89,20 @@ export default class AtnTable extends React.Component {
 
   setTotals(_totals) {
     this.setState({ totals: _totals });
+  }
+
+  setCurrentPage(_page) {
+    let currentPage = _page;
+    if (currentPage <= 0) {
+      this.setState({ currentPage: 0 });
+    } else {
+      let lastPage = getLastPage(this.state.data, this.state.columns, this.state.pageSize);
+      if (currentPage >= lastPage) {
+        this.setState({ currentPage: lastPage });
+      } else {
+        this.setState({ currentPage: currentPage });
+      }
+    }
   }
 
   updateTitle(_title) {
@@ -185,7 +199,9 @@ export default class AtnTable extends React.Component {
                 columns={_headColumns}
                 groupColumns={_groupPanelColumns}
                 totalColumnsWidth={_totalColumnsWidth}
-                data={this.state.data.slice(0, 10)}
+                data={this.state.data}
+                currentPage={this.state.currentPage}
+                pageSize={this.state.pageSize}
                 totals={this.state.totals}
                 renders={this.state.renders}
               />
@@ -216,6 +232,7 @@ export default class AtnTable extends React.Component {
             <td className="atn-footer">
               <AtnPageBar
                 tableRef={this}
+                columns={_groupPanelColumns}
                 data={this.state.data}
                 currentPage={this.state.currentPage}
                 pageSize={this.state.pageSize}

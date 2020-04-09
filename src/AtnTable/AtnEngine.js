@@ -294,6 +294,10 @@ function fillDataGroupsInfo(rows, columns) {
   return rows;
 }
 
+export function getLastPage(data, columns, pageSize) {
+  return data.length === 0 ? 0 : Math.floor((data.length-1) / pageSize);
+}
+
 function clearValue(value) {
   return value.replace(new RegExp(";", "g"), ",");
 }
