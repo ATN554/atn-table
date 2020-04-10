@@ -163,11 +163,10 @@
   background: inherit;
   padding: 0px;
   margin: 0px;
-  transition: background-color 0.3s ease-in;
 }
 
 .atn-tbody-tr:nth-child(odd) {
-	background: inherit;
+  background: inherit;
 }
 
 .atn-tbody-tr:nth-child(even) {
@@ -178,7 +177,6 @@
 .atn-tbody-tr:focus,
 .atn-tbody-tr:active {
   background: var(--tb-bg-color-hover);
-  transition: background-color 0.3s ease-in;
 }
 
 .atn-tbody-td {
