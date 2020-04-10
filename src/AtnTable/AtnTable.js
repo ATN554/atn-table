@@ -5,7 +5,7 @@ import "./menu/menutop.css";
 import "./menu/menubot.css";
 import "./menu/menuleft.css";
 import "./menu/menuright.css";
-import { nvl, fillColumnsTableData, fillRowsTableData, sortColumns, sortData, getLastPage } from "./AtnEngine.js";
+import { nvl, fillColumnsTableData, fillRowsTableData, sortColumns, sortData, getCorrectPage } from "./AtnEngine.js";
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
 import AtnGroupBar from "./group-bar/AtnGroupBar.js";
@@ -18,7 +18,7 @@ const renderHeaderCell = (column, column_index) => {
 }
 
 const renderDataGroupCell = (row, row_index, column, column_index) => {
-  return <span><b>{nvl(column.title, " ")}:</b> {nvl(row[column.field], " ")} {row.tableData.gid}</span>;
+  return <span><b>{nvl(column.title, " ")}:</b> {nvl(row[column.field], " ")}</span>;
 }
 
 const renderDataCell = (row, row_index, column, column_index) => {
@@ -84,7 +84,8 @@ export default class AtnTable extends React.Component {
   setData(_data) {
     _data = fillRowsTableData(_data);
     _data = sortData(_data);
-    this.setState({ data: _data });
+    let _currentPage = getCorrectPage(_data, this.state.columns, this.state.pageSize, this.state.currentPage);
+    this.setState({ data: _data, currentPage: _currentPage });
   }
 
   setTotals(_totals) {
@@ -92,17 +93,8 @@ export default class AtnTable extends React.Component {
   }
 
   setCurrentPage(_page) {
-    let currentPage = _page;
-    if (currentPage <= 0) {
-      this.setState({ currentPage: 0 });
-    } else {
-      let lastPage = getLastPage(this.state.data, this.state.columns, this.state.pageSize);
-      if (currentPage >= lastPage) {
-        this.setState({ currentPage: lastPage });
-      } else {
-        this.setState({ currentPage: currentPage });
-      }
-    }
+    let _currentPage = getCorrectPage(this.state.data, this.state.columns, this.state.pageSize, _page);
+    this.setState({ currentPage: _currentPage });
   }
 
   updateTitle(_title) {
@@ -114,17 +106,20 @@ export default class AtnTable extends React.Component {
     if (_sortData) {
       _columns = _sortColumns ? sortColumns(_columns) : _columns;
       let _data = sortData(this.state.data, _columns);
-      this.setState({ columns: _columns, data: _data });
+      let _currentPage = getCorrectPage(_data, _columns, this.state.pageSize, this.state.currentPage);
+      this.setState({ columns: _columns, data: _data, currentPage: _currentPage });
     } else {
       _columns = _sortColumns ? sortColumns(_columns) : _columns;
-      this.setState({ columns: _columns });
+      let _currentPage = getCorrectPage(this.state.data, _columns, this.state.pageSize, this.state.currentPage);
+      this.setState({ columns: _columns, currentPage: _currentPage });
     }
   }
 
   updateData(_sortData = true) {
     let _data = this.state.data;
     _data = _sortData ? sortData(_data, this.state.columns) : _data;
-    this.setState({ data: _data });
+    let _currentPage = getCorrectPage(_data, this.state.columns, this.state.pageSize, this.state.currentPage);
+    this.setState({ data: _data, currentPage: _currentPage });
   }
 
   updateTotals(totals) {

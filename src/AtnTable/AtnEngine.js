@@ -307,6 +307,19 @@ export function getLastPage(data, columns, pageSize) {
   return len === 0 ? 0 : Math.floor((len-1) / pageSize);
 }
 
+export function getCorrectPage(data, columns, pageSize, page) {
+  if (page <= 0) {
+    return 0;
+  } else {
+    let lastPage = getLastPage(data, columns, pageSize);
+    if (page >= lastPage) {
+      return lastPage;
+    } else {
+      return page;
+    }
+  }
+}
+
 function clearValue(value) {
   return value.replace(new RegExp(";", "g"), ",");
 }
