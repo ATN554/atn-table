@@ -6,7 +6,8 @@
   bottom: 0;
   border-collapse: collapse;
   border-spacing: 0;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .atn-sort-title-tr {
@@ -14,6 +15,7 @@
   top: 0;
   font-weight: bold;
   background: var(--th-bg-color);
+  z-index: 1;
 }
 
 .atn-sort-title-td {

@@ -7,6 +7,8 @@ export default class AtnMenu extends React.Component {
 
     this.state = {
       menuId: getUID(),
+      contentId: getUID(),
+      buttonId: getUID(),
       show: false,
       mainClass: props.mainClass,
       contentClass: props.contentClass,
@@ -65,11 +67,13 @@ export default class AtnMenu extends React.Component {
 
   setShow(show) {
     if (show) {
-      document.querySelector("." + this.state.mainClass).classList.add('active');
-      document.querySelector("." + this.state.contentClass).classList.add('active');
+      document.getElementById(this.state.menuId).classList.add('active');
+      document.getElementById(this.state.contentId).classList.add('active');
+      document.getElementById(this.state.buttonId).classList.add('active');
     } else {
-      document.querySelector("." + this.state.mainClass).classList.remove('active');
-      document.querySelector("." + this.state.contentClass).classList.remove('active');
+      document.getElementById(this.state.menuId).classList.remove('active');
+      document.getElementById(this.state.contentId).classList.remove('active');
+      document.getElementById(this.state.buttonId).classList.remove('active');
     }
     this.setState({show: show});
   }
@@ -80,10 +84,14 @@ export default class AtnMenu extends React.Component {
         id={this.state.menuId}
         className={this.state.mainClass}
       >
-        <div className={this.state.contentClass}>
+        <div
+          id={this.state.contentId}
+          className={this.state.contentClass}
+        >
           {this.props.children}
         </div>
         <input
+          id={this.state.buttonId}
           type="button"
           value=""
           onClick={this.toggle}
