@@ -1,6 +1,5 @@
 import React from "react";
-import { ReactComponent as VisibilityOn } from "../svg/on.svg";
-import { ReactComponent as VisibilityOff } from "../svg/off.svg";
+import AtnToggleButton from "../toggle-button/AtnToggleButton.js";
 
 export default function AtnBodyGroupRow(props) {
 
@@ -12,26 +11,15 @@ export default function AtnBodyGroupRow(props) {
   }
 
   const renderToggle = () => {
-    //if (props.row.tableData.group.find(g => g.field === props.column.field).open) {
-    if (props.row.tableData.group[props.columnIndex].open) {
-      return (
-        <VisibilityOn
-          className="atn-tbody-group-td-button-img"
-          style={{ fill: "var(--svg-fill-enabled-active)" }}
-          onClick={toggleGroup}
-          onTouchEnd={toggleGroup}
+    return (
+      <div className="atn-tbody-group-td-button-img">
+        <AtnToggleButton
+          checked={props.row.tableData.group[props.columnIndex].open} // props.row.tableData.group.find(g => g.field === props.column.field).open
+          disabled={false}
+          onChange={toggleGroup}
         />
-      );
-    } else {
-      return (
-        <VisibilityOff
-          className="atn-tbody-group-td-button-img"
-          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
-          onClick={toggleGroup}
-          onTouchEnd={toggleGroup}
-        />
-      );
-    }
+      </div>
+    );
   }
 
   return (

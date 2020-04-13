@@ -3,8 +3,7 @@ import Draggable from "../../DND/Draggable.js";
 import Droppable from "../../DND/Droppable.js";
 import { ReactComponent as SortAZ } from "../svg/sort-az.svg";
 import { ReactComponent as SortZA } from "../svg/sort-za.svg";
-import { ReactComponent as VisibilityOn } from "../svg/on.svg";
-import { ReactComponent as VisibilityOff } from "../svg/off.svg";
+import AtnToggleButton from "../toggle-button/AtnToggleButton.js";
 
 const renderSortAZ = (column, fnc) => {
   if (column.sort.locked) {
@@ -87,43 +86,15 @@ const renderSortZA = (column, fnc) => {
 }
 
 const renderVisibility = (column, fnc) => {
-  if (column.visibility.locked) {
-    if (column.visibility.visible) {
-      return (
-        <VisibilityOn
-          className={"atn-column-show"}
-          style={{ fill: "var(--svg-fill-disabled-active)" }}
-        />
-      );
-    } else {
-      return (
-        <VisibilityOff
-          className={"atn-column-show"}
-          style={{ fill: "var(--svg-fill-disabled-inactive)" }}
-        />
-      );
-    }
-  } else {
-    if (column.visibility.visible) {
-      return (
-        <VisibilityOn
-          className={"atn-column-show active"}
-          style={{ fill: "var(--svg-fill-enabled-active)" }}
-          onClick={() => fnc(column)}
-          onTouchEnd={() => fnc(column)}
-        />
-      );
-    } else {
-      return (
-        <VisibilityOff
-          className={"atn-column-show active"}
-          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
-          onClick={() => fnc(column)}
-          onTouchEnd={() => fnc(column)}
-        />
-      );
-    }
-  }
+  return (
+    <div className="atn-column-show">
+      <AtnToggleButton
+        checked={column.visibility.visible}
+        disabled={column.visibility.locked}
+        onChange={() => {fnc(column)}}
+      />
+    </div>
+  );
 }
 
 export default function AtnSortCell(props) {

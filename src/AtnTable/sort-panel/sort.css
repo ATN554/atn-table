@@ -109,16 +109,6 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 5px;
+  left: 0;
   margin: auto;
-}
-
-.atn-column-show.active {
-  cursor: pointer;
-}
-
-.atn-column-show.active:hover {
-  left: 2px;
-  width: 26px;
-  height: 16px;
 }

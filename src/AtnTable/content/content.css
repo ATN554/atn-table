@@ -140,14 +140,8 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 5px;
+  left: 0;
   margin: auto;
-}
-
-.atn-tbody-group-td-button-img:hover {
-  left: 2px;
-  width: 26px;
-  height: 16px;
 }
 
 .atn-tbody-group-td-text {
@@ -260,21 +254,4 @@
 
 .atn-tfoot-td-text {
   padding: 3px;
-}
-
-.atn-round-button {
-  width: 12px;
-  height: 12px;
-  margin: 6px 3px 6px 3px;
-  padding: 0px;
-  border-radius: 50%;
-  outline: none;
-  background: var(--button-bg-color-inactive);
-}
-
-.atn-round-button:hover,
-.atn-round-button:focus,
-.atn-round-button:active {
-  background: var(--button-bg-color-active);
-  transition: background-color 0.5s ease-in 0.0s;
 }

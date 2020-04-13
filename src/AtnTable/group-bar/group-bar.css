@@ -103,16 +103,6 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 5px;
+  left: 0;
   margin: auto;
-}
-
-.atn-group-bar-use.active {
-  cursor: pointer;
-}
-
-.atn-group-bar-use.active:hover {
-  left: 2px;
-  width: 26px;
-  height: 16px;
 }

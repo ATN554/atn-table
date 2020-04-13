@@ -1,0 +1,30 @@
+.atn-toggle-button {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5px;
+  margin: auto;
+  cursor: pointer;
+  fill: var(--toggle-enabled-unchecked);
+  transition: fill 0.2s linear;
+}
+
+.atn-toggle-button.active:hover {
+  left: 2px;
+  width: 26px;
+  height: 16px;
+}
+
+.atn-toggle-button.checked {
+  fill: var(--toggle-enabled-checked);
+  transform: rotateY(180deg);
+}
+
+.atn-toggle-button.disabled {
+  cursor: not-allowed;
+  fill: var(--toggle-disabled-unchecked);
+}
+
+.atn-toggle-button.disabled.checked {
+  fill: var(--toggle-disabled-checked);
+}

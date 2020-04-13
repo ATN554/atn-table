@@ -19,6 +19,10 @@
   --button-bg-color-active: #9e9;
   --button-bg-color-inactive: #977;
   --shadow-bg-color: #000a;
+  --toggle-enabled-checked: #24a812;
+  --toggle-enabled-unchecked: #807272;
+  --toggle-disabled-checked: #3c922d77;
+  --toggle-disabled-unchecked: #80727277;
   --svg-fill-enabled-active: #24a812;
   --svg-fill-enabled-inactive: #807272;
   --svg-fill-disabled-active: #3c922d77;

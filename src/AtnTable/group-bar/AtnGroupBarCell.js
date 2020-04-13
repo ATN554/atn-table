@@ -3,8 +3,7 @@ import Draggable from "../../DND/Draggable.js";
 import Droppable from "../../DND/Droppable.js";
 import { ReactComponent as SortAZ } from "../svg/sort-az.svg";
 import { ReactComponent as SortZA } from "../svg/sort-za.svg";
-import { ReactComponent as VisibilityOn } from "../svg/on.svg";
-import { ReactComponent as VisibilityOff } from "../svg/off.svg";
+import AtnToggleButton from "../toggle-button/AtnToggleButton.js";
 
 const renderSortAZ = (column, fnc) => {
   if (column.group.locked) {
@@ -83,43 +82,15 @@ const renderSortZA = (column, fnc) => {
 }
 
 const renderActivity = (column, fnc) => {
-  if (column.group.locked) {
-    if (column.group.id > 0) {
-      return (
-        <VisibilityOn
-          className={"atn-group-bar-use"}
-          style={{ fill: "var(--svg-fill-disabled-active)" }}
-        />
-      );
-    } else {
-      return (
-        <VisibilityOff
-          className={"atn-group-bar-use"}
-          style={{ fill: "var(--svg-fill-disabled-inactive)" }}
-        />
-      );
-    }
-  } else {
-    if (column.group.id > 0) {
-      return (
-        <VisibilityOn
-          className={"atn-group-bar-use active"}
-          style={{ fill: "var(--svg-fill-enabled-active)" }}
-          onClick={() => fnc(column)}
-          onTouchEnd={() => fnc(column)}
-        />
-      );
-    } else {
-      return (
-        <VisibilityOff
-          className={"atn-group-bar-use active"}
-          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
-          onClick={() => fnc(column)}
-          onTouchEnd={() => fnc(column)}
-        />
-      );
-    }
-  }
+  return (
+    <div className="atn-group-bar-use">
+      <AtnToggleButton
+        checked={column.group.id > 0}
+        disabled={column.group.locked}
+        onChange={() => { fnc(column) }}
+      />
+    </div>
+  );
 }
 
 export default function AtnGroupCell(props) {
