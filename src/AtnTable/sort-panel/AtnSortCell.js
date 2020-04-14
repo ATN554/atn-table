@@ -1,88 +1,20 @@
 import React from "react";
 import Draggable from "../../DND/Draggable.js";
 import Droppable from "../../DND/Droppable.js";
-import { ReactComponent as SortAZ } from "../svg/sort-az.svg";
-import { ReactComponent as SortZA } from "../svg/sort-za.svg";
+import AtnSortButton from "../sort-button/AtnSortButton.js";
 import AtnToggleButton from "../toggle-button/AtnToggleButton.js";
 
-const renderSortAZ = (column, fnc) => {
-  if (column.sort.locked) {
-    if (column.sort.order === "asc") {
-      return (
-        <SortAZ
-          className={"atn-column-sort-az"}
-          style={{fill: "var(--svg-fill-disabled-active)"}}
-        />
-      );
-    } else {
-      return (
-        <SortAZ
-          className={"atn-column-sort-az"}
-          style={{ fill: "var(--svg-fill-disabled-inactive)" }}
-        />
-      );
-    }
-  } else {
-    if (column.sort.order === "asc") {
-      return (
-        <SortAZ
-          className={"atn-column-sort-az active"}
-          style={{ fill: "var(--svg-fill-enabled-active)" }}
-          onClick={() => fnc(column, undefined)}
-          onTouchEnd={() => fnc(column, undefined)}
-        />
-      );
-    } else {
-      return (
-        <SortAZ
-          className={"atn-column-sort-az active"}
-          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
-          onClick={() => fnc(column, "asc")}
-          onTouchEnd={() => fnc(column, "asc")}
-        />
-      );
-    }
-  }
-}
-
-const renderSortZA = (column, fnc) => {
-  if (column.sort.locked) {
-    if (column.sort.order === "desc") {
-      return (
-        <SortZA
-          className={"atn-column-sort-za"}
-          style={{ fill: "var(--svg-fill-disabled-active)" }}
-        />
-      );
-    } else {
-      return (
-        <SortZA
-          className={"atn-column-sort-za"}
-          style={{ fill: "var(--svg-fill-disabled-inactive)" }}
-        />
-      );
-    }
-  } else {
-    if (column.sort.order === "desc") {
-      return (
-        <SortZA
-          className={"atn-column-sort-za active"}
-          style={{ fill: "var(--svg-fill-enabled-active)" }}
-          onClick={() => fnc(column, undefined)}
-          onTouchEnd={() => fnc(column, undefined)}
-        />
-      );
-    } else {
-      return (
-        <SortZA
-          className={"atn-column-sort-za active"}
-          style={{ fill: "var(--svg-fill-enabled-inactive)" }}
-          onClick={() => fnc(column, "desc")}
-          onTouchEnd={() => fnc(column, "desc")}
-        />
-      );
-    }
-  }
+const renderSort = (column, fnc) => {
+  return (
+    <div className="atn-column-sort">
+      <AtnSortButton
+        order={column.sort.order}
+        disabled={column.sort.locked}
+        onChange={(order) => { fnc(column, order) }}
+        radio={false}
+      />
+    </div>
+  );
 }
 
 const renderVisibility = (column, fnc) => {
@@ -117,8 +49,7 @@ export default function AtnSortCell(props) {
           {props.renderHeaderCell(props.column, props.columnIndex)}
         </div>
 
-        {renderSortAZ(props.column, props.onChangeSortOrder)}
-        {renderSortZA(props.column, props.onChangeSortOrder)}
+        {renderSort(props.column, props.onChangeSortOrder)}
         {renderVisibility(props.column, props.onChangeVisibility)}
       </Draggable>
 

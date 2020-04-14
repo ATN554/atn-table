@@ -71,38 +71,12 @@
   overflow: hidden;
 }
 
-.atn-column-sort-az {
+.atn-column-sort {
   position: absolute;
   top: 2px;
-  right: 8px;
-}
-
-.atn-column-sort-az.active {
-  cursor: pointer;
-}
-
-.atn-column-sort-az.active:hover {
-  top: -1px;
-  right: 5px;
-  width: 16px;
-  height: 16px;
-}
-
-.atn-column-sort-za {
-  position: absolute;
   bottom: 2px;
-  right: 8px;
-}
-
-.atn-column-sort-za.active {
-  cursor: pointer;
-}
-
-.atn-column-sort-za.active:hover {
-  bottom: -1px;
-  right: 5px;
-  width: 16px;
-  height: 16px;
+  right: 20px;
+  margin: auto;
 }
 
 .atn-column-show {

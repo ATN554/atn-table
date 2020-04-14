@@ -10,6 +10,10 @@ export const columns = [
     visibility: {
       locked: true,
       visible: true,
+    },
+    sort: {
+      locked: true,
+      order: "asc"
     }
   },
   { 

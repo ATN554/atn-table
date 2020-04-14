@@ -5,7 +5,7 @@
   left: 5px;
   margin: auto;
   cursor: pointer;
-  fill: var(--toggle-enabled-unchecked);
+  fill: var(--svg-fill-enabled-inactive);
   transition: fill 0.2s linear;
 }
 
@@ -16,15 +16,15 @@
 }
 
 .atn-toggle-button.checked {
-  fill: var(--toggle-enabled-checked);
+  fill: var(--svg-fill-enabled-active);
   transform: rotateY(180deg);
 }
 
 .atn-toggle-button.disabled {
-  cursor: not-allowed;
-  fill: var(--toggle-disabled-unchecked);
+  cursor: default;
+  fill: var(--svg-fill-disabled-inactive);
 }
 
 .atn-toggle-button.disabled.checked {
-  fill: var(--toggle-disabled-checked);
+  fill: var(--svg-fill-disabled-active);
 }

@@ -65,38 +65,12 @@
   overflow: hidden;
 }
 
-.atn-group-bar-use-az {
+.atn-group-bar-sort {
   position: absolute;
   top: 2px;
-  right: 8px;
-}
-
-.atn-group-bar-use-az.active {
-  cursor: pointer;
-}
-
-.atn-group-bar-use-az.active:hover {
-  top: -1px;
-  right: 5px;
-  width: 16px;
-  height: 16px;
-}
-
-.atn-group-bar-use-za {
-  position: absolute;
   bottom: 2px;
-  right: 8px;
-}
-
-.atn-group-bar-use-za.active {
-  cursor: pointer;
-}
-
-.atn-group-bar-use-za.active:hover {
-  bottom: -1px;
-  right: 5px;
-  width: 16px;
-  height: 16px;
+  right: 20px;
+  margin: auto;
 }
 
 .atn-group-bar-use {

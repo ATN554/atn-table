@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as VisibilityOff } from "../svg/off.svg";
+import { ReactComponent as Icon } from "./button.svg";
 import "./toggle-button.css";
 
 export default function AtnToggleButton(props) {
@@ -34,7 +34,7 @@ export default function AtnToggleButton(props) {
 
   return (
     React.createElement(
-      VisibilityOff,
+      Icon,
       {
         ...getProps()
       }

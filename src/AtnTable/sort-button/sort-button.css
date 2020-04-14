@@ -1,0 +1,58 @@
+.atn-sort-button-asc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  fill: var(--svg-fill-enabled-inactive);
+  transition: fill 0.1s linear;
+}
+
+.atn-sort-button-asc.active:hover {
+  top: -3px;
+  left: -3px;
+  width: 16px;
+  height: 16px;
+}
+
+.atn-sort-button-asc.checked {
+  fill: var(--svg-fill-enabled-active);
+}
+
+.atn-sort-button-asc.disabled {
+  cursor: default;
+  fill: var(--svg-fill-disabled-inactive);
+}
+
+.atn-sort-button-asc.disabled.checked {
+  fill: var(--svg-fill-disabled-active);
+}
+
+.atn-sort-button-desc {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+  fill: var(--svg-fill-enabled-inactive);
+  transform: rotateX(180deg);
+  transition: fill 0.1s linear;
+}
+
+.atn-sort-button-desc.active:hover {
+  bottom: -3px;
+  left: -3px;
+  width: 16px;
+  height: 16px;
+}
+
+.atn-sort-button-desc.checked {
+  fill: var(--svg-fill-enabled-active);
+}
+
+.atn-sort-button-desc.disabled {
+  cursor: default;
+  fill: var(--svg-fill-disabled-inactive);
+}
+
+.atn-sort-button-desc.disabled.checked {
+  fill: var(--svg-fill-disabled-active);
+}

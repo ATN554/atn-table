@@ -71,38 +71,12 @@
   overflow: hidden;
 }
 
-.atn-group-use-az {
+.atn-group-sort {
   position: absolute;
   top: 2px;
-  right: 8px;
-}
-
-.atn-group-use-az.active {
-  cursor: pointer;
-}
-
-.atn-group-use-az.active:hover {
-  top: -1px;
-  right: 5px;
-  width: 16px;
-  height: 16px;
-}
-
-.atn-group-use-za {
-  position: absolute;
   bottom: 2px;
-  right: 8px;
-}
-
-.atn-group-use-za.active {
-  cursor: pointer;
-}
-
-.atn-group-use-za.active:hover {
-  bottom: -1px;
-  right: 5px;
-  width: 16px;
-  height: 16px;
+  right: 20px;
+  margin: auto;
 }
 
 .atn-group-use {
