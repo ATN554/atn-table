@@ -40,7 +40,7 @@ export default function AtnPageBar(props) {
       {pageArray.map((el) => (
         <input
           key={"pb-btn-" + el}
-          className={props.currentPage === el ? "atn-page-bar-btn-current" : "atn-page-bar-btn"}
+          className={props.currentPage === el ? "atn-page-bar-btn checked" : "atn-page-bar-btn"}
           type="button"
           value={el+1}
           onClick={() => { props.tableRef.setCurrentPage(el) }}

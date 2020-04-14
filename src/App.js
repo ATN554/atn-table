@@ -22,7 +22,8 @@ export default class App extends React.Component {
           columns={this.state.columns}
           data={this.state.data}
           totals={this.state.totals}
-          pageSize={0}
+          pageSize={20}
+          pageSizeOptions={[10, 20, 50, 0]}
         />
       </div>
     );

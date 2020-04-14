@@ -12,66 +12,47 @@
   border: none;
   font-weight: bold;
   background: var(--footer-bg-color);
-  box-shadow: inset 2px 2px 4px 1px var(--shadow-bg-color);
   min-width: 30px;
   height: 20px;
-  margin-left: 3px;
-  margin-right: 3px;
-}
-
-.atn-page-bar-btn-current {
-  outline: none;
-  border: none;
-  font-weight: bold;
-  background: var(--footer-bg-color);
-  box-shadow: 2px 2px 4px 1px var(--shadow-bg-color);
-  min-width: 30px;
-  height: 20px;
+  padding-top: 2px;
   margin-left: 3px;
   margin-right: 3px;
 }
 
 .atn-page-bar-btn:hover {
+  box-shadow: inset 1px 1px 4px 0px var(--shadow-bg-color);
+}
+
+.atn-page-bar-btn.checked {
   box-shadow: inset 1px 1px 4px 1px var(--shadow-bg-color);
-}
-
-.atn-page-bar-btn:active {
-  box-shadow: 1px 1px 4px 1px var(--shadow-bg-color);
-}
-
-.atn-page-bar-btn:first-child {
-  border-radius: 10px 0 0 10px;
-}
-
-.atn-page-bar-btn:last-child {
-  border-radius: 0 10px 10px 0;
 }
 
 .atn-pso-container {
   overflow-x: hidden;
   overflow-y: auto;
-  height: 88px;
-  margin: 5px;
-  padding-left: 25px;
-  box-shadow: 1px 1px 4px 1px var(--shadow-bg-color);
+  height: 99px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }
 
 .atn-pso-option {
   position: relative;
   cursor: pointer;
-  list-style-type: none;
+  padding: 3px 2px 1px 25px;
+  margin: 2px;
 }
 
 .atn-pso-option:hover {
-  background: linear-gradient(to right, var(--menu-bg-color-darken), transparent);
-  list-style-type: disc;
+  box-shadow: inset 1px 1px 4px 0px var(--shadow-bg-color);
 }
 
 .atn-pso-option.checked {
-  background: linear-gradient(to right, var(--menu-bg-color-darken), transparent);
-  list-style-type: circle;
+  box-shadow: inset 1px 1px 4px 1px var(--shadow-bg-color);
 }
 
-.atn-pso-option.checked:hover {
-  list-style-type: circle;
+.atn-pso-option.checked::before {
+  content: "•";
+  position: absolute;
+  left: 15px;
 }
