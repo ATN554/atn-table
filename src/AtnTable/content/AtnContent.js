@@ -61,7 +61,7 @@ export default function AtnContent(props) {
         }
       </div>
       
-      <div className="atn-tfoot">
+      <div className={Object.keys(props.totals).length === 0 ? "atn-tfoot hidden" : "atn-tfoot"}>
         <AtnTotalsRow 
           columns={props.columns}
           totals={props.totals}

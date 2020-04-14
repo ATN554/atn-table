@@ -166,8 +166,7 @@ export default class AtnTable extends React.Component {
               </div>
             </td>
           </tr>
-          {_groupPanelColumns.length > 0 &&
-          <tr className="atn-groupbar-tr">
+          <tr className={_groupPanelColumns.length === 0 ? "atn-groupbar-tr hidden" : "atn-groupbar-tr"}>
             <td className="atn-groupbar">
               <AtnGroupBar
                 tableRef={this}
@@ -176,7 +175,7 @@ export default class AtnTable extends React.Component {
                 renders={this.state.renders}
               />
             </td>
-          </tr>}
+          </tr>
         </thead>
         <tbody className="atn-container-tb">
           <tr className="atn-content-mid-tr">

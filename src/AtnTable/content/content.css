@@ -219,6 +219,10 @@
   z-index: 1;
 }
 
+.atn-tfoot.hidden {
+  display: none;
+}
+
 .atn-tfoot-tr {
   white-space: nowrap;
   display: flex;

@@ -74,6 +74,10 @@
   margin: 0px;
 }
 
+.atn-groupbar-tr.hidden {
+  display: none;
+}
+
 .atn-groupbar {
   background: var(--groupbar-bg-color);
   position: relative;
