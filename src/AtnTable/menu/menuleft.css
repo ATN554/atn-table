@@ -1,16 +1,24 @@
 .atn-mleft {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 50%;
   left: 0;
   width: 0;
-  transition: width 0.5s ease-in-out 0.1s;
+  height: 0;
+  transition: 
+    width 0.2s ease-in-out 0.4s, 
+    height 0.3s ease-in-out 0.1s, 
+    top 0.3s ease-in-out 0.1s;
   z-index: 2;
 }
 
 .atn-mleft.active {
-  width: 25%;
-  transition: width 0.5s ease-in-out 0.1s;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  transition: 
+    width 0.2s ease-in-out 0.1s, 
+    height 0.3s ease-in-out 0.3s, 
+    top 0.3s ease-in-out 0.3s;
 }
 
 .atn-mleft-content {
@@ -21,23 +29,32 @@
   left: 0;
   right: 0;
   border-right: 1px solid var(--border-color-darken);
+  border-top: 1px solid var(--border-color-darken);
+  border-bottom: 1px solid var(--border-color-darken);
   background: var(--menu-bg-color);
   box-shadow: 15px 0px 15px -10px var(--shadow-bg-color);
   overflow: hidden;
-  transition: opacity 0.5s ease-in-out 0.1s;
+  transition:
+    opacity 0.6s ease-in-out 0.0s,
+    border-top-width 0.0s linear 0.1s,
+    border-bottom-width 0.0s linear 0.1s;
 }
 
 .atn-mleft-content.active {
+  border-top-width: 0px;
+  border-bottom-width: 0px;
   opacity: 1;
-  transition: opacity 0.5s ease-in-out 0.1s;
+  transition:
+    opacity 0.6s ease-in-out 0.0s,
+    border-top-width 0.0s linear 0.6s,
+    border-bottom-width 0.0s linear 0.6s;
 }
 
 .atn-mleft-button {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 50%;
   right: -4px;
-  margin: auto;
+  margin-top: -24px;
   padding: 0;
   width: 10px;
   height: 48px;
