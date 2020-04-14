@@ -55,7 +55,7 @@ export default class AtnTable extends React.Component {
 
       currentPage: nvl(props.currentPage, 0),
       pageSize: nvl(props.pageSize, 10),
-      pageSizeOptions: nvl(props.pageSize, [5, 10, 20, -1]),
+      pageSizeOptions: nvl(props.pageSize, [5, 10, 20, 0]),
 
       renders: renders
     };
@@ -217,25 +217,32 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mbot-content"
                 buttonClass="atn-mbot-button"
               >
-                <div>Меню снизу</div>
+                <div>5</div>
+                <div>10</div>
+                <div>20</div>
+                <div>Все</div>
               </AtnMenu>
             </td>
           </tr>
         </tbody>
-        <tfoot className="atn-container-tf">
-          <tr className="atn-container-tr">
-            <td className="atn-footer">
-              <AtnPageBar
-                tableRef={this}
-                columns={_groupPanelColumns}
-                data={this.state.data}
-                currentPage={this.state.currentPage}
-                pageSize={this.state.pageSize}
-                pageSizeOptions={this.state.pageSizeOptions}
-              />
-            </td>
-          </tr>
-        </tfoot>
+        {
+          this.state.pageSize !== 0 
+            &&
+          <tfoot className="atn-container-tf">
+            <tr className="atn-container-tr">
+              <td className="atn-footer">
+                <AtnPageBar
+                  tableRef={this}
+                  columns={_groupPanelColumns}
+                  data={this.state.data}
+                  currentPage={this.state.currentPage}
+                  pageSize={this.state.pageSize}
+                  pageSizeOptions={this.state.pageSizeOptions}
+                />
+              </td>
+            </tr>
+          </tfoot>
+        }
       </table>
     );
   }

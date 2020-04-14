@@ -7,23 +7,11 @@ export const columns = [
     width: 150, 
     mimWidth: 10, 
     maxWidth: 250,
-    visibility: {
-      locked: true,
-      visible: true,
-    },
-    sort: {
-      locked: true,
-      order: "asc"
-    }
   },
   { 
     title: "Наименование", 
     field: "FULL_NAME", 
-    width: 250, 
-    group: {
-      id: 1,
-      order: 'asc'
-    }
+    width: 250,
   },
   { 
     title: "Сумма", 

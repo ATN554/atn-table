@@ -4,6 +4,8 @@
   left: 0;
   right: 0;
   height: 0;
+  width: 100px;
+  margin: auto;
   transition: height 0.5s ease-in-out 0.1s;
   z-index: 2;
 }
@@ -20,7 +22,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  border-top: 1px solid var(--border-color-darken);
+  border: 1px solid var(--border-color-darken);
+  border-bottom: none;
   background: var(--menu-bg-color);
   box-shadow: 0px -15px 15px -10px var(--shadow-bg-color);
   overflow: hidden;

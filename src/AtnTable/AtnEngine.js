@@ -297,6 +297,9 @@ function fillDataGroupsInfo(rows, columns) {
 }
 
 export function getLastPage(data, columns, pageSize) {
+  if (pageSize === 0) {
+    return 0;
+  }
   let hasGroups = columns.findIndex(col => col.group.id > 0) !== -1;
   let len;
   if (hasGroups) {

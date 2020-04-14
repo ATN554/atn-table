@@ -6,8 +6,8 @@ import AtnBodyRow from "./AtnBodyRow.js";
 import AtnTotalsRow from './AtnTotalsRow.js';
 
 export default function AtnContent(props) {
-  var p1 = props.currentPage * props.pageSize;
-  var p2 = p1 + props.pageSize;
+  var p1 = props.pageSize === 0 ? 0 : props.currentPage * props.pageSize;
+  var p2 = props.pageSize === 0 ? props.data.length : p1 + props.pageSize;
   return (
     <div className="atn-table">
       <div className="atn-thead">
