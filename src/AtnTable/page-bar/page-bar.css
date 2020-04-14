@@ -46,3 +46,32 @@
 .atn-page-bar-btn:last-child {
   border-radius: 0 10px 10px 0;
 }
+
+.atn-pso-container {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 88px;
+  margin: 5px;
+  padding-left: 25px;
+  box-shadow: 1px 1px 4px 1px var(--shadow-bg-color);
+}
+
+.atn-pso-option {
+  position: relative;
+  cursor: pointer;
+  list-style-type: none;
+}
+
+.atn-pso-option:hover {
+  background: linear-gradient(to right, var(--menu-bg-color-darken), transparent);
+  list-style-type: disc;
+}
+
+.atn-pso-option.checked {
+  background: linear-gradient(to right, var(--menu-bg-color-darken), transparent);
+  list-style-type: circle;
+}
+
+.atn-pso-option.checked:hover {
+  list-style-type: circle;
+}

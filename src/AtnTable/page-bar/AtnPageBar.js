@@ -26,14 +26,14 @@ export default function AtnPageBar(props) {
       <input
         className="atn-page-bar-btn"
         type="button"
-        value="<<"
+        value="⇐"
         onClick={() => { props.tableRef.setCurrentPage(0) }}
         onTouchEnd={() => { props.tableRef.setCurrentPage(0) }}
       />
       <input
         className="atn-page-bar-btn"
         type="button"
-        value="<"
+        value="←"
         onClick={() => { props.tableRef.setCurrentPage(props.currentPage - 1) }}
         onTouchEnd={() => { props.tableRef.setCurrentPage(props.currentPage - 1) }}
       />
@@ -50,14 +50,14 @@ export default function AtnPageBar(props) {
       <input
         className="atn-page-bar-btn"
         type="button"
-        value=">"
+        value="→"
         onClick={() => { props.tableRef.setCurrentPage(props.currentPage + 1) }}
         onTouchEnd={() => { props.tableRef.setCurrentPage(props.currentPage + 1) }}
       />
       <input
         className="atn-page-bar-btn"
         type="button"
-        value=">>"
+        value="⇒"
         onClick={() => { props.tableRef.setCurrentPage(lastPage) }}
         onTouchEnd={() => { props.tableRef.setCurrentPage(lastPage) }}
       />

@@ -12,6 +12,7 @@ import AtnGroupBar from "./group-bar/AtnGroupBar.js";
 import AtnSortPanel from "./sort-panel/AtnSortPanel.js";
 import AtnGroupPanel from "./group-panel/AtnGroupPanel.js";
 import AtnPageBar from "./page-bar/AtnPageBar.js";
+import AtnPageSizeOptions from "./page-bar/AtnPageSizeOptions.js";
 
 const renderHeaderCell = (column, column_index) => {
   return nvl(column.title, " ");
@@ -55,7 +56,7 @@ export default class AtnTable extends React.Component {
 
       currentPage: nvl(props.currentPage, 0),
       pageSize: nvl(props.pageSize, 10),
-      pageSizeOptions: nvl(props.pageSize, [5, 10, 20, 0]),
+      pageSizeOptions: nvl(props.pageSizeOptions, [5, 10, 20, 0]),
 
       renders: renders
     };
@@ -64,6 +65,9 @@ export default class AtnTable extends React.Component {
     this.setColumns = this.setColumns.bind(this);
     this.setData = this.setData.bind(this);
     this.setTotals = this.setTotals.bind(this);
+
+    this.setCurrentPage = this.setCurrentPage.bind(this);
+    this.setPageSize = this.setPageSize.bind(this);
 
     this.updateTitle = this.updateTitle.bind(this);
     this.updateColumns = this.updateColumns.bind(this);
@@ -95,6 +99,13 @@ export default class AtnTable extends React.Component {
   setCurrentPage(_page) {
     let _currentPage = getCorrectPage(this.state.data, this.state.columns, this.state.pageSize, _page);
     this.setState({ currentPage: _currentPage });
+  }
+
+  setPageSize(_pageSize) {
+    if (this.state.pageSizeOptions.includes(_pageSize)) {
+      let _currentPage = getCorrectPage(this.state.data, this.state.columns, _pageSize, this.state.currentPage);
+      this.setState({ pageSize: _pageSize, currentPage: _currentPage });
+    }
   }
 
   updateTitle(_title) {
@@ -217,32 +228,29 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mbot-content"
                 buttonClass="atn-mbot-button"
               >
-                <div>5</div>
-                <div>10</div>
-                <div>20</div>
-                <div>Все</div>
+                <AtnPageSizeOptions
+                  pageSize={this.state.pageSize}
+                  pageSizeOptions={this.state.pageSizeOptions}
+                  onChange={this.setPageSize}
+                />
               </AtnMenu>
             </td>
           </tr>
         </tbody>
-        {
-          this.state.pageSize !== 0 
-            &&
-          <tfoot className="atn-container-tf">
-            <tr className="atn-container-tr">
-              <td className="atn-footer">
-                <AtnPageBar
-                  tableRef={this}
-                  columns={_groupPanelColumns}
-                  data={this.state.data}
-                  currentPage={this.state.currentPage}
-                  pageSize={this.state.pageSize}
-                  pageSizeOptions={this.state.pageSizeOptions}
-                />
-              </td>
-            </tr>
-          </tfoot>
-        }
+        <tfoot className="atn-container-tf">
+          <tr className="atn-container-tr">
+            <td className="atn-footer">
+              <AtnPageBar
+                tableRef={this}
+                columns={_groupPanelColumns}
+                data={this.state.data}
+                currentPage={this.state.currentPage}
+                pageSize={this.state.pageSize}
+                pageSizeOptions={this.state.pageSizeOptions}
+              />
+            </td>
+          </tr>
+        </tfoot>
       </table>
     );
   }
