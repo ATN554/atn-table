@@ -31,21 +31,24 @@ export default function AtnContent(props) {
           )) :
           props.data.filter(row => row.tableData.gid >= p1 && row.tableData.gid < p2).map((row, row_index) => (
             <React.Fragment key={"tr-data-c-" + row_index}>
-              {row.tableData.new &&
+              {
+                row.tableData.new 
+                  &&
                 props.groupColumns.slice(row.tableData.level).map((col, col_index) => (
-                row.tableData.group.find(g => g.field === col.field).show &&
-                <AtnBodyGroupRow
-                  tableRef={props.tableRef}
-                  key={"tr-group-" + row_index + "-" + col_index}
-                  totalColumnsWidth={props.totalColumnsWidth}
-                  columns={props.groupColumns}
-                  column={col}
-                  columnIndex={row.tableData.level + col_index}
-                  row={row}
-                  rowIndex={row_index}
-                  renderDataGroupCell={props.renders.renderDataGroupCell}
-                />
-              ))
+                  row.tableData.group[row.tableData.level + col_index].show 
+                    &&
+                  <AtnBodyGroupRow
+                    tableRef={props.tableRef}
+                    key={"tr-group-" + row_index + "-" + col_index}
+                    totalColumnsWidth={props.totalColumnsWidth}
+                    columns={props.groupColumns}
+                    column={col}
+                    columnIndex={row.tableData.level + col_index}
+                    row={row}
+                    rowIndex={row_index}
+                    renderDataGroupCell={props.renders.renderDataGroupCell}
+                  />
+                ))
               }
               {row.tableData.show &&
                 <AtnBodyRow
@@ -60,14 +63,17 @@ export default function AtnContent(props) {
           ))
         }
       </div>
-      
-      <div className={Object.keys(props.totals).length === 0 ? "atn-tfoot hidden" : "atn-tfoot"}>
-        <AtnTotalsRow 
-          columns={props.columns}
-          totals={props.totals}
-          renderTotalsCell={props.renders.renderTotalsCell}
-        />
-      </div>
+      {
+        Object.keys(props.totals).length !== 0
+         &&
+        <div className="atn-tfoot">
+          <AtnTotalsRow 
+            columns={props.columns}
+            totals={props.totals}
+            renderTotalsCell={props.renders.renderTotalsCell}
+          />
+        </div>
+      }
     </div>
   )
 }

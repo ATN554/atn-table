@@ -144,7 +144,8 @@ export default class AtnTable extends React.Component {
     _groupColumns = sortColumns(_groupColumns, [['group', 'id'], ['id']]);
 
     let _groupPanelColumns = _groupColumns.filter(col => col.group.id > 0);
-    _columns.find(col => col.id === -1).visibility.visible = (_groupPanelColumns.length > 0);
+    let _showGroupColumn = _groupPanelColumns.length !== 0;
+    _columns.find(col => col.id === -1).visibility.visible = _showGroupColumn;
     
     let _sortColumns = _columns.filter(col => !col.service && col.group.id === 0);
     _sortColumns = sortColumns(_sortColumns, [['sort', 'id'], ['id']]);
@@ -166,16 +167,20 @@ export default class AtnTable extends React.Component {
               </div>
             </td>
           </tr>
-          <tr className={_groupPanelColumns.length === 0 ? "atn-groupbar-tr hidden" : "atn-groupbar-tr"}>
-            <td className="atn-groupbar">
-              <AtnGroupBar
-                tableRef={this}
-                title="Группировка"
-                columns={_groupPanelColumns}
-                renders={this.state.renders}
-              />
-            </td>
-          </tr>
+          {
+            _showGroupColumn
+              &&
+            <tr className="atn-groupbar-tr">
+              <td className="atn-groupbar">
+                <AtnGroupBar
+                  tableRef={this}
+                  title="Группировка"
+                  columns={_groupPanelColumns}
+                  renders={this.state.renders}
+                />
+              </td>
+            </tr>
+          }
         </thead>
         <tbody className="atn-container-tb">
           <tr className="atn-content-mid-tr">

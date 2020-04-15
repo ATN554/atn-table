@@ -6,8 +6,8 @@ export function nvl(value, placer) {
 }
 
 export function fillColumnsTableData(columns) {
-  let hasActionColumn = columns.findIndex((col) => col.field === '#ACTION_COLUMN') !== -1;
-  let hasGroupColumn = columns.findIndex((col) => col.field === '#GROUP_COLUMN') !== -1;
+  let hasActionColumn = columns.some(col => col.field === '#ACTION_COLUMN');
+  let hasGroupColumn = columns.some(col => col.field === '#GROUP_COLUMN');
 
   if (!hasActionColumn) {
     let actionColumn = {
@@ -300,7 +300,7 @@ export function getLastPage(data, columns, pageSize) {
   if (pageSize === 0) {
     return 0;
   }
-  let hasGroups = columns.findIndex(col => col.group.id > 0) !== -1;
+  let hasGroups = columns.some(col => col.group.id > 0);
   let len;
   if (hasGroups) {
     len = data[data.length-1].tableData.gid;
