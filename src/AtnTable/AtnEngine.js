@@ -296,6 +296,18 @@ function fillDataGroupsInfo(rows, columns) {
   return rows;
 }
 
+// treeData = [], plainData must be sorted by [parentReq, childReq]
+function treeBuilder(treeData, plainData, parentReq, childReq, parentValue, level = 0) {
+  plainData.forEach((el, el_idx) => {
+    if (el[parentReq] === parentValue) {
+      el.level = level;
+      treeData.push(el);
+      delete plainData[el_idx]; // 1.5 times faster
+      treeBuilder(treeData, plainData, parentReq, childReq, el[childReq], level + 1);
+    }
+  });
+}
+
 export function getLastPage(data, columns, pageSize) {
   if (pageSize === 0) {
     return 0;
