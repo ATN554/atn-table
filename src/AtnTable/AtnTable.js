@@ -193,7 +193,7 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mtop-content"
                 buttonClass="atn-mtop-button"
               >
-                <div>Фильтр</div>
+                <div></div>
               </AtnMenu>
               <AtnMenu
                 mainClass="atn-mleft"
@@ -228,12 +228,7 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mright-content"
                 buttonClass="atn-mright-button"
               >
-                <AtnGroupPanel
-                  tableRef={this}
-                  title="Группировка"
-                  columns={_groupColumns}
-                  renders={this.state.renders}
-                />
+                <div></div>
               </AtnMenu>
               <AtnMenu
                 mainClass="atn-mbot"

@@ -48,7 +48,7 @@ export function fillColumnsTableData(columns) {
       parentColumn.service = true;
       parentColumn.tree = 1;
       parentColumn.dnd = { droppable: false, draggable: false };
-      parentColumn.visibility = { visible: false, locked: true };
+      parentColumn.visibility = { visible: true, locked: true };
       parentColumn.group = { locked: true, id: 0 };
       parentColumn.sort = { locked: true, order: "asc" };
 
@@ -224,10 +224,56 @@ function compareRows(row1, row2, columns) {
 
 export function sortData(data, columns) {
   let _columns = sortColumns(columns, [['service'], ['tree'], ['group', 'id'], ['sort', 'id'], ['id']]);
-  data.sort(function (row1, row2) {
-    return compareRows(row1, row2, _columns);
+  let _sortColumns = _columns.filter(col => !col.service);
+
+  data.forEach((row, row_idx) => {
+    if (!row.tableData) {
+      row.tableData = {};
+    }
   });
-  data = fillDataGroupsInfo(data, _columns);
+  let childColumn = _columns.find(col => col.parentField);
+  if (childColumn) {
+    let treeData = [];
+    let plainData = data;
+    let parentReq = childColumn.parentField;
+    let childReq = childColumn.field;
+    let parentRow = { tableData: { tree: {level: -1} } };
+    parentRow[childReq] = 0;
+    treeBuilder(treeData, plainData, parentReq, childReq, parentRow);
+    
+    let it = treeData[Symbol.iterator]();
+    let curIt = it.next();
+    data = [];
+    while (!curIt.done) {
+      let row = curIt.value;
+      if (row.tableData.tree.last) {
+        let lastLevel = [row];
+        curIt = it.next();
+        while (!curIt.done && curIt.value.tableData.tree.last) {
+          lastLevel.push(curIt.value);
+          curIt = it.next();
+        }
+        lastLevel.sort(function (row1, row2) {
+          return compareRows(row1, row2, _sortColumns);
+        });
+        lastLevel = fillDataGroupsInfo(lastLevel, _columns);
+        data = data.concat(lastLevel);
+      } else {
+        data.push(row);
+        curIt = it.next();
+      }
+    }
+  } else {
+    data.sort(function (row1, row2) {
+      return compareRows(row1, row2, _sortColumns);
+    });
+    data = fillDataGroupsInfo(data, _sortColumns);
+  }
+  data.forEach((row, row_idx) => {
+    row.tableData.id = row_idx;
+    row["#ID"] = row_idx;
+  });
+
   return data;
 }
 
@@ -236,19 +282,11 @@ function fillDataGroupsInfo(rows, columns) {
   let ckcnt = _columns.length;
   if (ckcnt === 0) {
     rows.forEach((row, row_idx) => {
-      if (!row.tableData) {
-        row.tableData = {};
-      }
-      row.tableData.id = row_idx;
       row.tableData.group = [];
     });
   } else {
     let prevRow = { tableData: {gid: -1} };
     rows.forEach((row, row_idx) => {
-      if (!row.tableData) {
-        row.tableData = {};
-      }
-      row.tableData.id = row_idx;
       row.tableData.gid = prevRow.tableData.gid;
       if (!row.tableData.group) {
         row.tableData.group = [];
@@ -319,15 +357,24 @@ function fillDataGroupsInfo(rows, columns) {
 }
 
 // treeData = [], plainData must be sorted by [parentReq, childReq]
-function treeBuilder(treeData, plainData, parentReq, childReq, parentValue, level = 0) {
-  plainData.forEach((el, el_idx) => {
-    if (el[parentReq] === parentValue) {
-      el.level = level;
-      treeData.push(el);
-      delete plainData[el_idx]; // 1.5 times faster
-      treeBuilder(treeData, plainData, parentReq, childReq, el[childReq], level + 1);
+function treeBuilder(treeData, plainData, parentReq, childReq, parentRow) {
+  let parentValue = parentRow[childReq];
+  let currentLevel = parentRow.tableData.tree.level + 1;
+  let parentChilds = false;
+  plainData.forEach((row, row_idx) => {
+    if (row[parentReq] === parentValue) {
+      parentChilds = true;
+      row.tableData.tree = { level: currentLevel, open: false, show: false };
+      treeData.push(row);
+      delete plainData[row_idx]; // 1.5 times faster
+      let hasSelfChilds = treeBuilder(treeData, plainData, parentReq, childReq, row);
+      row.tableData.tree.last = !hasSelfChilds;
+
+      row["#TREE_LEVEL"] = row.tableData.tree.level;
+      row["#TREE_LAST"] = row.tableData.tree.last ? "yes" : "";
     }
   });
+  return parentChilds;
 }
 
 export function getLastPage(data, columns, pageSize) {

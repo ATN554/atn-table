@@ -18,6 +18,21 @@ export const columns = [
     maxWidth: 250,
     parentField: "PARENT_ID",
   },
+  {
+    title: "#ID",
+    field: "#ID",
+    width: 50,
+  },
+  {
+    title: "#TREE_LEVEL",
+    field: "#TREE_LEVEL",
+    width: 50,
+  },
+  {
+    title: "#TREE_LAST",
+    field: "#TREE_LAST",
+    width: 50,
+  },
   { 
     title: "Наименование", 
     field: "FULL_NAME", 
