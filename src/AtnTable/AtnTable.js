@@ -215,6 +215,7 @@ export default class AtnTable extends React.Component {
               <AtnContent
                 tableRef={this}
                 columns={_headColumns}
+                treeColumns={_treeColumns}
                 groupColumns={_groupColumns}
                 totalColumnsWidth={_totalColumnsWidth}
                 data={this.state.data}

@@ -619,7 +619,7 @@ export const data = [
     "URC": 7953,
     "FULL_NAME": "Israel",
     "SM": "6.85",
-    "PARENT_ID": 53,
+    "PARENT_ID": 0,
     "DT_CREATE": "03.10.2019"
   },
   {
@@ -795,7 +795,7 @@ export const data = [
     "URC": 8791,
     "FULL_NAME": "Iraq",
     "SM": "4.10",
-    "PARENT_ID": 53,
+    "PARENT_ID": 0,
     "DT_CREATE": "15.07.2019"
   },
   {

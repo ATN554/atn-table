@@ -237,7 +237,7 @@ export function sortData(data, columns) {
     let plainData = data;
     let parentReq = childColumn.parentField;
     let childReq = childColumn.field;
-    let parentRow = { tableData: { tree: {level: -1} } };
+    let parentRow = { tableData: { tid: -1, tree: {level: -1} } };
     parentRow[childReq] = 0;
     treeBuilder(treeData, plainData, parentReq, childReq, parentRow);
     
@@ -271,7 +271,7 @@ export function sortData(data, columns) {
   }
   data.forEach((row, row_idx) => {
     row.tableData.id = row_idx;
-    row["#ID"] = row_idx;
+    row["#ID"] = row.tableData.tid;
   });
 
   return data;
@@ -361,9 +361,14 @@ function treeBuilder(treeData, plainData, parentReq, childReq, parentRow) {
   let parentValue = parentRow[childReq];
   let currentLevel = parentRow.tableData.tree.level + 1;
   let parentChilds = false;
+  let tid = parentRow.tableData.tid;
   plainData.forEach((row, row_idx) => {
     if (row[parentReq] === parentValue) {
       parentChilds = true;
+      if (currentLevel === 0) {
+        tid++;
+      }
+      row.tableData.tid = tid;
       row.tableData.tree = { level: currentLevel, open: false, show: false };
       treeData.push(row);
       delete plainData[row_idx]; // 1.5 times faster
