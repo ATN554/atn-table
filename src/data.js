@@ -7,6 +7,7 @@ export const columns = [
     width: 150, 
     mimWidth: 10, 
     maxWidth: 250,
+    parentField: "PARENT_ID",
   },
   { 
     title: "Наименование", 
@@ -46,703 +47,803 @@ export const totals = {
 
 export const data = [
   {
-    "DT_CREATE": "08.05.2019",
-    "URC": 2336,
-    "FULL_NAME": "Peru",
-    "SM": "2.86",
-    "ID": 1
+    "ID": 1,
+    "URC": 5040,
+    "FULL_NAME": "Jersey",
+    "SM": "0.18",
+    "PARENT_ID": 0,
+    "DT_CREATE": "04.08.2020"
   },
   {
-    "DT_CREATE": "24.09.2019",
-    "URC": 7145,
-    "FULL_NAME": "Iceland",
-    "SM": "1.29",
-    "ID": 2
+    "ID": 2,
+    "URC": 8872,
+    "FULL_NAME": "Saint Kitts and Nevis",
+    "SM": "9.45",
+    "PARENT_ID": 1,
+    "DT_CREATE": "21.08.2019"
   },
   {
-    "DT_CREATE": "24.04.2019",
-    "URC": 259,
-    "FULL_NAME": "Namibia",
-    "SM": "6.27",
-    "ID": 3
-  },
-  {
-    "DT_CREATE": "02.08.2019",
-    "URC": 2893,
-    "FULL_NAME": "Montserrat",
-    "SM": "2.76",
-    "ID": 4
-  },
-  {
-    "DT_CREATE": "24.10.2019",
-    "URC": 5030,
-    "FULL_NAME": "Togo",
-    "SM": "3.55",
-    "ID": 5
-  },
-  {
-    "DT_CREATE": "11.07.2019",
-    "URC": 3958,
-    "FULL_NAME": "Portugal",
-    "SM": "0.07",
-    "ID": 6
-  },
-  {
-    "DT_CREATE": "16.01.2020",
-    "URC": 7302,
-    "FULL_NAME": "Romania",
-    "SM": "2.78",
-    "ID": 7
-  },
-  {
-    "DT_CREATE": "04.12.2019",
-    "URC": 9507,
-    "FULL_NAME": "Ecuador",
-    "SM": "1.44",
-    "ID": 8
-  },
-  {
-    "DT_CREATE": "22.12.2019",
-    "URC": 6874,
-    "FULL_NAME": "Wallis and Futuna",
-    "SM": "7.46",
-    "ID": 9
-  },
-  {
-    "DT_CREATE": "18.09.2019",
-    "URC": 3082,
-    "FULL_NAME": "Micronesia",
-    "SM": "8.44",
-    "ID": 10
-  },
-  {
-    "DT_CREATE": "07.02.2020",
-    "URC": 4449,
-    "FULL_NAME": "Australia",
-    "SM": "0.89",
-    "ID": 11
-  },
-  {
-    "DT_CREATE": "23.05.2019",
-    "URC": 5372,
-    "FULL_NAME": "Zambia",
-    "SM": "6.38",
-    "ID": 12
-  },
-  {
-    "DT_CREATE": "21.01.2020",
-    "URC": 3330,
-    "FULL_NAME": "Syria",
-    "SM": "5.51",
-    "ID": 13
-  },
-  {
-    "DT_CREATE": "29.09.2019",
-    "URC": 2292,
-    "FULL_NAME": "Jordan",
-    "SM": "2.72",
-    "ID": 14
-  },
-  {
-    "DT_CREATE": "29.09.2019",
-    "URC": 6120,
+    "ID": 3,
+    "URC": 5560,
     "FULL_NAME": "Thailand",
-    "SM": "4.78",
-    "ID": 15
+    "SM": "8.03",
+    "PARENT_ID": 2,
+    "DT_CREATE": "28.11.2020"
   },
   {
-    "DT_CREATE": "22.01.2020",
-    "URC": 5419,
-    "FULL_NAME": "Bosnia and Herzegovina",
-    "SM": "3.03",
-    "ID": 16
-  },
-  {
-    "DT_CREATE": "26.11.2019",
-    "URC": 1674,
-    "FULL_NAME": "Samoa",
-    "SM": "2.84",
-    "ID": 17
-  },
-  {
-    "DT_CREATE": "15.10.2019",
-    "URC": 407,
-    "FULL_NAME": "Guyana",
-    "SM": "1.44",
-    "ID": 18
-  },
-  {
-    "DT_CREATE": "02.07.2019",
-    "URC": 7654,
-    "FULL_NAME": "Puerto Rico",
-    "SM": "4.19",
-    "ID": 19
-  },
-  {
-    "DT_CREATE": "17.04.2019",
-    "URC": 6148,
-    "FULL_NAME": "Norway",
-    "SM": "6.23",
-    "ID": 20
-  },
-  {
-    "DT_CREATE": "15.05.2019",
-    "URC": 738,
-    "FULL_NAME": "Wallis and Futuna",
-    "SM": "5.03",
-    "ID": 21
-  },
-  {
-    "DT_CREATE": "27.02.2020",
-    "URC": 7521,
-    "FULL_NAME": "Jamaica",
-    "SM": "9.54",
-    "ID": 22
-  },
-  {
-    "DT_CREATE": "19.03.2020",
-    "URC": 8375,
-    "FULL_NAME": "Iran",
-    "SM": "4.91",
-    "ID": 23
-  },
-  {
-    "DT_CREATE": "27.09.2019",
-    "URC": 8761,
-    "FULL_NAME": "Angola",
-    "SM": "5.36",
-    "ID": 24
-  },
-  {
-    "DT_CREATE": "15.03.2020",
-    "URC": 7733,
-    "FULL_NAME": "Belgium",
-    "SM": "5.25",
-    "ID": 25
-  },
-  {
-    "DT_CREATE": "23.12.2019",
-    "URC": 7573,
-    "FULL_NAME": "Côte D'Ivoire (Ivory Coast)",
-    "SM": "1.68",
-    "ID": 26
-  },
-  {
-    "DT_CREATE": "10.10.2019",
-    "URC": 5893,
-    "FULL_NAME": "Saint Helena, Ascension and Tristan da Cunha",
-    "SM": "4.44",
-    "ID": 27
-  },
-  {
-    "DT_CREATE": "08.03.2020",
-    "URC": 2263,
-    "FULL_NAME": "Mali",
-    "SM": "5.91",
-    "ID": 28
-  },
-  {
-    "DT_CREATE": "27.03.2019",
-    "URC": 4178,
-    "FULL_NAME": "Niue",
-    "SM": "2.64",
-    "ID": 29
-  },
-  {
-    "DT_CREATE": "14.02.2020",
-    "URC": 2413,
-    "FULL_NAME": "Guinea-Bissau",
-    "SM": "5.09",
-    "ID": 30
-  },
-  {
-    "DT_CREATE": "03.07.2019",
-    "URC": 1170,
-    "FULL_NAME": "Guinea",
-    "SM": "0.88",
-    "ID": 31
-  },
-  {
-    "DT_CREATE": "03.11.2019",
-    "URC": 174,
-    "FULL_NAME": "Greece",
-    "SM": "7.32",
-    "ID": 32
-  },
-  {
-    "DT_CREATE": "10.10.2019",
-    "URC": 1719,
-    "FULL_NAME": "Jordan",
-    "SM": "9.90",
-    "ID": 33
-  },
-  {
-    "DT_CREATE": "19.05.2019",
-    "URC": 9123,
-    "FULL_NAME": "Denmark",
-    "SM": "2.45",
-    "ID": 34
-  },
-  {
-    "DT_CREATE": "19.11.2019",
-    "URC": 4437,
-    "FULL_NAME": "Nicaragua",
-    "SM": "6.06",
-    "ID": 35
-  },
-  {
-    "DT_CREATE": "27.09.2019",
-    "URC": 2750,
-    "FULL_NAME": "Bolivia",
-    "SM": "4.30",
-    "ID": 36
-  },
-  {
-    "DT_CREATE": "29.06.2019",
-    "URC": 3544,
-    "FULL_NAME": "Monaco",
-    "SM": "6.71",
-    "ID": 37
-  },
-  {
-    "DT_CREATE": "11.01.2020",
-    "URC": 5356,
-    "FULL_NAME": "Brazil",
-    "SM": "4.65",
-    "ID": 38
-  },
-  {
-    "DT_CREATE": "23.03.2020",
-    "URC": 8984,
-    "FULL_NAME": "Central African Republic",
-    "SM": "9.91",
-    "ID": 39
-  },
-  {
-    "DT_CREATE": "05.10.2019",
-    "URC": 4977,
-    "FULL_NAME": "Netherlands",
-    "SM": "0.99",
-    "ID": 40
-  },
-  {
-    "DT_CREATE": "16.12.2019",
-    "URC": 6572,
-    "FULL_NAME": "Dominican Republic",
-    "SM": "3.76",
-    "ID": 41
-  },
-  {
-    "DT_CREATE": "07.10.2019",
-    "URC": 2899,
-    "FULL_NAME": "Suriname",
-    "SM": "8.32",
-    "ID": 42
-  },
-  {
-    "DT_CREATE": "03.09.2019",
-    "URC": 9045,
-    "FULL_NAME": "Saudi Arabia",
-    "SM": "0.61",
-    "ID": 43
-  },
-  {
-    "DT_CREATE": "16.07.2019",
-    "URC": 3478,
-    "FULL_NAME": "Saint Vincent and The Grenadines",
-    "SM": "0.65",
-    "ID": 44
-  },
-  {
-    "DT_CREATE": "19.09.2019",
-    "URC": 9634,
-    "FULL_NAME": "Niger",
-    "SM": "8.66",
-    "ID": 45
-  },
-  {
-    "DT_CREATE": "22.08.2019",
-    "URC": 1494,
-    "FULL_NAME": "Iran",
-    "SM": "4.76",
-    "ID": 46
-  },
-  {
-    "DT_CREATE": "13.01.2020",
-    "URC": 1964,
-    "FULL_NAME": "United Kingdom (Great Britain)",
-    "SM": "6.57",
-    "ID": 47
-  },
-  {
-    "DT_CREATE": "21.07.2019",
-    "URC": 9468,
-    "FULL_NAME": "Haiti",
-    "SM": "7.68",
-    "ID": 48
-  },
-  {
-    "DT_CREATE": "15.04.2019",
-    "URC": 8213,
-    "FULL_NAME": "Palau",
-    "SM": "8.97",
-    "ID": 49
-  },
-  {
-    "DT_CREATE": "02.10.2019",
-    "URC": 6050,
-    "FULL_NAME": "Greece",
-    "SM": "9.06",
-    "ID": 50
-  },
-  {
-    "DT_CREATE": "28.06.2019",
-    "URC": 2465,
-    "FULL_NAME": "Timor-Leste",
-    "SM": "5.41",
-    "ID": 51
-  },
-  {
-    "DT_CREATE": "02.07.2019",
-    "URC": 6482,
-    "FULL_NAME": "Australia",
-    "SM": "0.35",
-    "ID": 52
-  },
-  {
-    "DT_CREATE": "30.10.2019",
-    "URC": 6256,
-    "FULL_NAME": "Aruba",
-    "SM": "3.23",
-    "ID": 53
-  },
-  {
-    "DT_CREATE": "09.01.2020",
-    "URC": 6088,
-    "FULL_NAME": "American Samoa",
-    "SM": "4.87",
-    "ID": 54
-  },
-  {
-    "DT_CREATE": "02.01.2020",
-    "URC": 9227,
-    "FULL_NAME": "Malaysia",
-    "SM": "9.47",
-    "ID": 55
-  },
-  {
-    "DT_CREATE": "22.11.2019",
-    "URC": 9031,
-    "FULL_NAME": "Macedonia",
-    "SM": "8.34",
-    "ID": 56
-  },
-  {
-    "DT_CREATE": "20.02.2020",
-    "URC": 4698,
-    "FULL_NAME": "Anguilla",
-    "SM": "1.23",
-    "ID": 57
-  },
-  {
-    "DT_CREATE": "27.12.2019",
-    "URC": 2594,
-    "FULL_NAME": "Ecuador",
-    "SM": "1.38",
-    "ID": 58
-  },
-  {
-    "DT_CREATE": "07.03.2020",
-    "URC": 7851,
-    "FULL_NAME": "Afghanistan",
-    "SM": "2.35",
-    "ID": 59
-  },
-  {
-    "DT_CREATE": "22.03.2020",
-    "URC": 2375,
+    "ID": 4,
+    "URC": 9089,
     "FULL_NAME": "Congo (Brazzaville)",
-    "SM": "3.01",
-    "ID": 60
+    "SM": "4.13",
+    "PARENT_ID": 2,
+    "DT_CREATE": "29.07.2019"
   },
   {
-    "DT_CREATE": "03.04.2019",
-    "URC": 9002,
-    "FULL_NAME": "Vanuatu",
-    "SM": "3.49",
-    "ID": 61
+    "ID": 5,
+    "URC": 2399,
+    "FULL_NAME": "Montenegro",
+    "SM": "4.95",
+    "PARENT_ID": 1,
+    "DT_CREATE": "30.01.2020"
   },
   {
-    "DT_CREATE": "28.02.2020",
-    "URC": 8567,
-    "FULL_NAME": "Greenland",
-    "SM": "7.35",
-    "ID": 62
+    "ID": 6,
+    "URC": 3234,
+    "FULL_NAME": "Puerto Rico",
+    "SM": "5.91",
+    "PARENT_ID": 5,
+    "DT_CREATE": "04.01.2020"
   },
   {
-    "DT_CREATE": "21.07.2019",
-    "URC": 674,
-    "FULL_NAME": "Israel",
-    "SM": "0.15",
-    "ID": 63
+    "ID": 7,
+    "URC": 5486,
+    "FULL_NAME": "Papua New Guinea",
+    "SM": "5.95",
+    "PARENT_ID": 2,
+    "DT_CREATE": "12.01.2020"
   },
   {
-    "DT_CREATE": "19.09.2019",
-    "URC": 9178,
-    "FULL_NAME": "Faroe Islands",
-    "SM": "2.71",
-    "ID": 64
+    "ID": 8,
+    "URC": 2056,
+    "FULL_NAME": "Romania",
+    "SM": "2.58",
+    "PARENT_ID": 4,
+    "DT_CREATE": "20.11.2019"
   },
   {
-    "DT_CREATE": "09.11.2019",
-    "URC": 1102,
-    "FULL_NAME": "Thailand",
-    "SM": "4.58",
-    "ID": 65
-  },
-  {
-    "DT_CREATE": "04.05.2019",
-    "URC": 6144,
-    "FULL_NAME": "Korea, North",
-    "SM": "8.48",
-    "ID": 66
-  },
-  {
-    "DT_CREATE": "22.01.2020",
-    "URC": 1960,
-    "FULL_NAME": "Portugal",
-    "SM": "8.53",
-    "ID": 67
-  },
-  {
-    "DT_CREATE": "04.10.2019",
-    "URC": 8513,
-    "FULL_NAME": "Lebanon",
-    "SM": "0.08",
-    "ID": 68
-  },
-  {
-    "DT_CREATE": "15.08.2019",
-    "URC": 2758,
-    "FULL_NAME": "Christmas Island",
-    "SM": "4.36",
-    "ID": 69
-  },
-  {
-    "DT_CREATE": "20.09.2019",
-    "URC": 5704,
-    "FULL_NAME": "New Zealand",
-    "SM": "2.64",
-    "ID": 70
-  },
-  {
-    "DT_CREATE": "07.04.2019",
-    "URC": 6309,
-    "FULL_NAME": "Guinea-Bissau",
-    "SM": "3.56",
-    "ID": 71
-  },
-  {
-    "DT_CREATE": "16.12.2019",
-    "URC": 3376,
-    "FULL_NAME": "French Southern Territories",
-    "SM": "2.68",
-    "ID": 72
-  },
-  {
-    "DT_CREATE": "20.08.2019",
-    "URC": 2105,
-    "FULL_NAME": "Grenada",
-    "SM": "8.14",
-    "ID": 73
-  },
-  {
-    "DT_CREATE": "04.11.2019",
-    "URC": 8575,
-    "FULL_NAME": "Saint Lucia",
-    "SM": "6.92",
-    "ID": 74
-  },
-  {
-    "DT_CREATE": "09.03.2020",
-    "URC": 1588,
-    "FULL_NAME": "Algeria",
-    "SM": "3.64",
-    "ID": 75
-  },
-  {
-    "DT_CREATE": "25.01.2020",
-    "URC": 497,
-    "FULL_NAME": "Liechtenstein",
-    "SM": "4.55",
-    "ID": 76
-  },
-  {
-    "DT_CREATE": "22.10.2019",
-    "URC": 2944,
+    "ID": 9,
+    "URC": 6549,
     "FULL_NAME": "Bulgaria",
-    "SM": "8.76",
-    "ID": 77
+    "SM": "2.46",
+    "PARENT_ID": 1,
+    "DT_CREATE": "31.05.2020"
   },
   {
-    "DT_CREATE": "29.02.2020",
-    "URC": 8492,
-    "FULL_NAME": "Martinique",
-    "SM": "1.02",
-    "ID": 78
-  },
-  {
-    "DT_CREATE": "29.06.2019",
-    "URC": 2866,
-    "FULL_NAME": "Brazil",
-    "SM": "0.16",
-    "ID": 79
-  },
-  {
-    "DT_CREATE": "10.03.2020",
-    "URC": 2353,
-    "FULL_NAME": "Tokelau",
-    "SM": "9.10",
-    "ID": 80
-  },
-  {
-    "DT_CREATE": "06.09.2019",
-    "URC": 3198,
-    "FULL_NAME": "Iceland",
-    "SM": "7.88",
-    "ID": 81
-  },
-  {
-    "DT_CREATE": "15.10.2019",
-    "URC": 4409,
-    "FULL_NAME": "Monaco",
-    "SM": "0.80",
-    "ID": 82
-  },
-  {
-    "DT_CREATE": "12.09.2019",
-    "URC": 6125,
-    "FULL_NAME": "Paraguay",
-    "SM": "9.87",
-    "ID": 83
-  },
-  {
-    "DT_CREATE": "09.11.2019",
-    "URC": 9269,
-    "FULL_NAME": "Eritrea",
-    "SM": "2.05",
-    "ID": 84
-  },
-  {
-    "DT_CREATE": "11.06.2019",
-    "URC": 6893,
-    "FULL_NAME": "Saint Lucia",
-    "SM": "4.89",
-    "ID": 85
-  },
-  {
-    "DT_CREATE": "31.01.2020",
-    "URC": 884,
+    "ID": 10,
+    "URC": 7046,
     "FULL_NAME": "Mayotte",
-    "SM": "3.18",
-    "ID": 86
+    "SM": "7.61",
+    "PARENT_ID": 5,
+    "DT_CREATE": "07.10.2019"
   },
   {
-    "DT_CREATE": "01.07.2019",
-    "URC": 9194,
-    "FULL_NAME": "Vanuatu",
-    "SM": "2.44",
-    "ID": 87
+    "ID": 11,
+    "URC": 1306,
+    "FULL_NAME": "Uganda",
+    "SM": "0.03",
+    "PARENT_ID": 2,
+    "DT_CREATE": "07.05.2019"
   },
   {
-    "DT_CREATE": "14.08.2019",
-    "URC": 1491,
-    "FULL_NAME": "Samoa",
-    "SM": "2.49",
-    "ID": 88
+    "ID": 12,
+    "URC": 5035,
+    "FULL_NAME": "South Sudan",
+    "SM": "8.42",
+    "PARENT_ID": 11,
+    "DT_CREATE": "15.06.2019"
   },
   {
-    "DT_CREATE": "22.12.2019",
-    "URC": 5709,
-    "FULL_NAME": "Bermuda",
-    "SM": "2.00",
-    "ID": 89
+    "ID": 13,
+    "URC": 7245,
+    "FULL_NAME": "Guam",
+    "SM": "2.76",
+    "PARENT_ID": 7,
+    "DT_CREATE": "01.02.2020"
   },
   {
-    "DT_CREATE": "05.06.2019",
-    "URC": 7814,
-    "FULL_NAME": "Mali",
-    "SM": "1.45",
-    "ID": 90
+    "ID": 14,
+    "URC": 7799,
+    "FULL_NAME": "Turkey",
+    "SM": "3.04",
+    "PARENT_ID": 9,
+    "DT_CREATE": "15.10.2020"
   },
   {
-    "DT_CREATE": "01.05.2019",
-    "URC": 36,
-    "FULL_NAME": "Jordan",
-    "SM": "7.81",
-    "ID": 91
+    "ID": 15,
+    "URC": 9058,
+    "FULL_NAME": "Cameroon",
+    "SM": "9.82",
+    "PARENT_ID": 13,
+    "DT_CREATE": "13.02.2021"
   },
   {
-    "DT_CREATE": "25.03.2020",
-    "URC": 6201,
-    "FULL_NAME": "Sri Lanka",
-    "SM": "4.60",
-    "ID": 92
+    "ID": 16,
+    "URC": 1096,
+    "FULL_NAME": "Sierra Leone",
+    "SM": "5.35",
+    "PARENT_ID": 9,
+    "DT_CREATE": "16.07.2020"
   },
   {
-    "DT_CREATE": "02.04.2019",
-    "URC": 4243,
-    "FULL_NAME": "Dominica",
+    "ID": 17,
+    "URC": 1186,
+    "FULL_NAME": "Greece",
+    "SM": "3.51",
+    "PARENT_ID": 1,
+    "DT_CREATE": "10.06.2020"
+  },
+  {
+    "ID": 18,
+    "URC": 8419,
+    "FULL_NAME": "Ghana",
+    "SM": "4.14",
+    "PARENT_ID": 4,
+    "DT_CREATE": "18.09.2019"
+  },
+  {
+    "ID": 19,
+    "URC": 1863,
+    "FULL_NAME": "United Arab Emirates",
     "SM": "7.67",
-    "ID": 93
+    "PARENT_ID": 4,
+    "DT_CREATE": "03.11.2019"
   },
   {
-    "DT_CREATE": "24.01.2020",
-    "URC": 9122,
-    "FULL_NAME": "Sierra Leone",
-    "SM": "4.03",
-    "ID": 94
+    "ID": 20,
+    "URC": 2540,
+    "FULL_NAME": "China",
+    "SM": "9.52",
+    "PARENT_ID": 6,
+    "DT_CREATE": "21.02.2021"
   },
   {
-    "DT_CREATE": "03.10.2019",
-    "URC": 2886,
+    "ID": 21,
+    "URC": 6863,
+    "FULL_NAME": "Sint Maarten",
+    "SM": "6.44",
+    "PARENT_ID": 18,
+    "DT_CREATE": "17.10.2020"
+  },
+  {
+    "ID": 22,
+    "URC": 8363,
+    "FULL_NAME": "Singapore",
+    "SM": "6.27",
+    "PARENT_ID": 17,
+    "DT_CREATE": "24.11.2019"
+  },
+  {
+    "ID": 23,
+    "URC": 2355,
+    "FULL_NAME": "Poland",
+    "SM": "7.19",
+    "PARENT_ID": 3,
+    "DT_CREATE": "17.06.2020"
+  },
+  {
+    "ID": 24,
+    "URC": 6248,
+    "FULL_NAME": "Solomon Islands",
+    "SM": "7.86",
+    "PARENT_ID": 4,
+    "DT_CREATE": "27.11.2020"
+  },
+  {
+    "ID": 25,
+    "URC": 8317,
+    "FULL_NAME": "Eritrea",
+    "SM": "6.99",
+    "PARENT_ID": 4,
+    "DT_CREATE": "17.03.2021"
+  },
+  {
+    "ID": 26,
+    "URC": 5707,
+    "FULL_NAME": "French Polynesia",
+    "SM": "6.18",
+    "PARENT_ID": 23,
+    "DT_CREATE": "26.10.2020"
+  },
+  {
+    "ID": 27,
+    "URC": 1253,
+    "FULL_NAME": "Lesotho",
+    "SM": "9.99",
+    "PARENT_ID": 6,
+    "DT_CREATE": "11.01.2021"
+  },
+  {
+    "ID": 28,
+    "URC": 8604,
+    "FULL_NAME": "Switzerland",
+    "SM": "4.01",
+    "PARENT_ID": 23,
+    "DT_CREATE": "28.05.2020"
+  },
+  {
+    "ID": 29,
+    "URC": 6174,
+    "FULL_NAME": "Gibraltar",
+    "SM": "9.14",
+    "PARENT_ID": 9,
+    "DT_CREATE": "20.01.2021"
+  },
+  {
+    "ID": 30,
+    "URC": 8204,
+    "FULL_NAME": "Fiji",
+    "SM": "1.85",
+    "PARENT_ID": 27,
+    "DT_CREATE": "25.09.2019"
+  },
+  {
+    "ID": 31,
+    "URC": 2677,
+    "FULL_NAME": "Greece",
+    "SM": "6.12",
+    "PARENT_ID": 1,
+    "DT_CREATE": "23.09.2019"
+  },
+  {
+    "ID": 32,
+    "URC": 8286,
+    "FULL_NAME": "Christmas Island",
+    "SM": "5.56",
+    "PARENT_ID": 14,
+    "DT_CREATE": "20.10.2019"
+  },
+  {
+    "ID": 33,
+    "URC": 7088,
+    "FULL_NAME": "Kazakhstan",
+    "SM": "9.25",
+    "PARENT_ID": 22,
+    "DT_CREATE": "18.07.2020"
+  },
+  {
+    "ID": 34,
+    "URC": 5683,
+    "FULL_NAME": "Ethiopia",
+    "SM": "9.27",
+    "PARENT_ID": 8,
+    "DT_CREATE": "17.12.2019"
+  },
+  {
+    "ID": 35,
+    "URC": 9893,
+    "FULL_NAME": "Holy See (Vatican City State)",
+    "SM": "6.94",
+    "PARENT_ID": 8,
+    "DT_CREATE": "28.07.2019"
+  },
+  {
+    "ID": 36,
+    "URC": 4354,
+    "FULL_NAME": "Serbia",
+    "SM": "1.32",
+    "PARENT_ID": 27,
+    "DT_CREATE": "02.12.2020"
+  },
+  {
+    "ID": 37,
+    "URC": 5402,
+    "FULL_NAME": "Egypt",
+    "SM": "8.21",
+    "PARENT_ID": 21,
+    "DT_CREATE": "18.02.2020"
+  },
+  {
+    "ID": 38,
+    "URC": 9777,
+    "FULL_NAME": "Tajikistan",
+    "SM": "3.24",
+    "PARENT_ID": 33,
+    "DT_CREATE": "21.02.2021"
+  },
+  {
+    "ID": 39,
+    "URC": 7731,
+    "FULL_NAME": "Holy See (Vatican City State)",
+    "SM": "4.90",
+    "PARENT_ID": 33,
+    "DT_CREATE": "20.08.2020"
+  },
+  {
+    "ID": 40,
+    "URC": 9784,
+    "FULL_NAME": "Nicaragua",
+    "SM": "5.89",
+    "PARENT_ID": 34,
+    "DT_CREATE": "29.02.2020"
+  },
+  {
+    "ID": 41,
+    "URC": 2574,
+    "FULL_NAME": "United States Minor Outlying Islands",
+    "SM": "9.29",
+    "PARENT_ID": 20,
+    "DT_CREATE": "30.12.2019"
+  },
+  {
+    "ID": 42,
+    "URC": 6886,
+    "FULL_NAME": "Kiribati",
+    "SM": "6.98",
+    "PARENT_ID": 25,
+    "DT_CREATE": "31.05.2019"
+  },
+  {
+    "ID": 43,
+    "URC": 9427,
+    "FULL_NAME": "France",
+    "SM": "9.23",
+    "PARENT_ID": 14,
+    "DT_CREATE": "22.11.2019"
+  },
+  {
+    "ID": 44,
+    "URC": 2004,
+    "FULL_NAME": "Palau",
+    "SM": "0.75",
+    "PARENT_ID": 41,
+    "DT_CREATE": "14.06.2020"
+  },
+  {
+    "ID": 45,
+    "URC": 4285,
+    "FULL_NAME": "Cuba",
+    "SM": "9.12",
+    "PARENT_ID": 3,
+    "DT_CREATE": "20.03.2020"
+  },
+  {
+    "ID": 46,
+    "URC": 6753,
+    "FULL_NAME": "Comoros",
+    "SM": "8.37",
+    "PARENT_ID": 8,
+    "DT_CREATE": "09.08.2020"
+  },
+  {
+    "ID": 47,
+    "URC": 4872,
+    "FULL_NAME": "Kyrgyzstan",
+    "SM": "1.53",
+    "PARENT_ID": 45,
+    "DT_CREATE": "12.09.2019"
+  },
+  {
+    "ID": 48,
+    "URC": 8772,
+    "FULL_NAME": "Isle of Man",
+    "SM": "4.78",
+    "PARENT_ID": 30,
+    "DT_CREATE": "16.11.2020"
+  },
+  {
+    "ID": 49,
+    "URC": 8672,
+    "FULL_NAME": "Gabon",
+    "SM": "7.03",
+    "PARENT_ID": 18,
+    "DT_CREATE": "04.12.2019"
+  },
+  {
+    "ID": 50,
+    "URC": 9854,
+    "FULL_NAME": "Ireland",
+    "SM": "7.69",
+    "PARENT_ID": 15,
+    "DT_CREATE": "23.03.2021"
+  },
+  {
+    "ID": 51,
+    "URC": 3914,
+    "FULL_NAME": "Liechtenstein",
+    "SM": "3.71",
+    "PARENT_ID": 24,
+    "DT_CREATE": "07.04.2021"
+  },
+  {
+    "ID": 52,
+    "URC": 6513,
+    "FULL_NAME": "Wallis and Futuna",
+    "SM": "2.78",
+    "PARENT_ID": 49,
+    "DT_CREATE": "14.03.2020"
+  },
+  {
+    "ID": 53,
+    "URC": 6429,
+    "FULL_NAME": "Albania",
+    "SM": "6.43",
+    "PARENT_ID": 45,
+    "DT_CREATE": "29.02.2020"
+  },
+  {
+    "ID": 54,
+    "URC": 3270,
+    "FULL_NAME": "Syria",
+    "SM": "9.14",
+    "PARENT_ID": 36,
+    "DT_CREATE": "07.02.2020"
+  },
+  {
+    "ID": 55,
+    "URC": 3216,
+    "FULL_NAME": "Curaçao",
+    "SM": "9.21",
+    "PARENT_ID": 44,
+    "DT_CREATE": "07.02.2021"
+  },
+  {
+    "ID": 56,
+    "URC": 8439,
+    "FULL_NAME": "Turkey",
+    "SM": "7.63",
+    "PARENT_ID": 19,
+    "DT_CREATE": "10.01.2020"
+  },
+  {
+    "ID": 57,
+    "URC": 2300,
+    "FULL_NAME": "El Salvador",
+    "SM": "1.17",
+    "PARENT_ID": 23,
+    "DT_CREATE": "02.12.2019"
+  },
+  {
+    "ID": 58,
+    "URC": 5671,
+    "FULL_NAME": "Saint Barthélemy",
+    "SM": "5.78",
+    "PARENT_ID": 7,
+    "DT_CREATE": "29.08.2019"
+  },
+  {
+    "ID": 59,
+    "URC": 5219,
+    "FULL_NAME": "Germany",
+    "SM": "5.40",
+    "PARENT_ID": 6,
+    "DT_CREATE": "06.10.2020"
+  },
+  {
+    "ID": 60,
+    "URC": 2582,
+    "FULL_NAME": "Portugal",
+    "SM": "1.43",
+    "PARENT_ID": 55,
+    "DT_CREATE": "28.11.2019"
+  },
+  {
+    "ID": 61,
+    "URC": 2681,
+    "FULL_NAME": "Thailand",
+    "SM": "5.86",
+    "PARENT_ID": 47,
+    "DT_CREATE": "26.06.2019"
+  },
+  {
+    "ID": 62,
+    "URC": 5078,
+    "FULL_NAME": "Belgium",
+    "SM": "1.47",
+    "PARENT_ID": 47,
+    "DT_CREATE": "01.02.2021"
+  },
+  {
+    "ID": 63,
+    "URC": 3532,
+    "FULL_NAME": "Dominica",
+    "SM": "7.66",
+    "PARENT_ID": 59,
+    "DT_CREATE": "16.09.2020"
+  },
+  {
+    "ID": 64,
+    "URC": 2020,
+    "FULL_NAME": "Holy See (Vatican City State)",
+    "SM": "5.38",
+    "PARENT_ID": 58,
+    "DT_CREATE": "18.04.2019"
+  },
+  {
+    "ID": 65,
+    "URC": 7870,
+    "FULL_NAME": "Barbados",
+    "SM": "1.87",
+    "PARENT_ID": 56,
+    "DT_CREATE": "04.05.2019"
+  },
+  {
+    "ID": 66,
+    "URC": 5357,
+    "FULL_NAME": "Côte D'Ivoire (Ivory Coast)",
+    "SM": "0.59",
+    "PARENT_ID": 17,
+    "DT_CREATE": "27.08.2020"
+  },
+  {
+    "ID": 67,
+    "URC": 9624,
+    "FULL_NAME": "Marshall Islands",
+    "SM": "1.38",
+    "PARENT_ID": 55,
+    "DT_CREATE": "25.08.2020"
+  },
+  {
+    "ID": 68,
+    "URC": 9280,
+    "FULL_NAME": "Hungary",
+    "SM": "9.41",
+    "PARENT_ID": 16,
+    "DT_CREATE": "07.03.2020"
+  },
+  {
+    "ID": 69,
+    "URC": 7953,
+    "FULL_NAME": "Israel",
+    "SM": "6.85",
+    "PARENT_ID": 53,
+    "DT_CREATE": "03.10.2019"
+  },
+  {
+    "ID": 70,
+    "URC": 1553,
+    "FULL_NAME": "Curaçao",
+    "SM": "9.85",
+    "PARENT_ID": 39,
+    "DT_CREATE": "05.04.2020"
+  },
+  {
+    "ID": 71,
+    "URC": 4619,
+    "FULL_NAME": "United Kingdom (Great Britain)",
+    "SM": "2.77",
+    "PARENT_ID": 5,
+    "DT_CREATE": "22.01.2020"
+  },
+  {
+    "ID": 72,
+    "URC": 4694,
+    "FULL_NAME": "Swaziland",
+    "SM": "5.55",
+    "PARENT_ID": 18,
+    "DT_CREATE": "27.12.2020"
+  },
+  {
+    "ID": 73,
+    "URC": 2869,
+    "FULL_NAME": "Thailand",
+    "SM": "8.14",
+    "PARENT_ID": 63,
+    "DT_CREATE": "30.09.2019"
+  },
+  {
+    "ID": 74,
+    "URC": 8142,
+    "FULL_NAME": "Andorra",
+    "SM": "3.50",
+    "PARENT_ID": 2,
+    "DT_CREATE": "28.06.2019"
+  },
+  {
+    "ID": 75,
+    "URC": 2244,
+    "FULL_NAME": "Sint Maarten",
+    "SM": "7.78",
+    "PARENT_ID": 47,
+    "DT_CREATE": "10.10.2020"
+  },
+  {
+    "ID": 76,
+    "URC": 9372,
+    "FULL_NAME": "Honduras",
+    "SM": "6.84",
+    "PARENT_ID": 24,
+    "DT_CREATE": "11.12.2020"
+  },
+  {
+    "ID": 77,
+    "URC": 7722,
+    "FULL_NAME": "Congo (Brazzaville)",
+    "SM": "0.50",
+    "PARENT_ID": 33,
+    "DT_CREATE": "06.12.2020"
+  },
+  {
+    "ID": 78,
+    "URC": 1782,
+    "FULL_NAME": "Honduras",
+    "SM": "7.61",
+    "PARENT_ID": 69,
+    "DT_CREATE": "23.06.2019"
+  },
+  {
+    "ID": 79,
+    "URC": 7815,
+    "FULL_NAME": "Wallis and Futuna",
+    "SM": "4.15",
+    "PARENT_ID": 5,
+    "DT_CREATE": "15.06.2019"
+  },
+  {
+    "ID": 80,
+    "URC": 8631,
+    "FULL_NAME": "Slovenia",
+    "SM": "8.39",
+    "PARENT_ID": 44,
+    "DT_CREATE": "03.04.2021"
+  },
+  {
+    "ID": 81,
+    "URC": 4610,
+    "FULL_NAME": "Chad",
+    "SM": "2.39",
+    "PARENT_ID": 60,
+    "DT_CREATE": "06.05.2019"
+  },
+  {
+    "ID": 82,
+    "URC": 7298,
+    "FULL_NAME": "Malawi",
+    "SM": "3.77",
+    "PARENT_ID": 42,
+    "DT_CREATE": "02.12.2019"
+  },
+  {
+    "ID": 83,
+    "URC": 4888,
+    "FULL_NAME": "Martinique",
+    "SM": "4.54",
+    "PARENT_ID": 43,
+    "DT_CREATE": "05.01.2021"
+  },
+  {
+    "ID": 84,
+    "URC": 4095,
+    "FULL_NAME": "Isle of Man",
+    "SM": "0.22",
+    "PARENT_ID": 38,
+    "DT_CREATE": "15.12.2019"
+  },
+  {
+    "ID": 85,
+    "URC": 1311,
     "FULL_NAME": "Reunion",
-    "SM": "7.68",
-    "ID": 95
+    "SM": "8.23",
+    "PARENT_ID": 24,
+    "DT_CREATE": "11.02.2020"
   },
   {
-    "DT_CREATE": "03.11.2019",
-    "URC": 6094,
-    "FULL_NAME": "Mali",
-    "SM": "9.88",
-    "ID": 96
+    "ID": 86,
+    "URC": 7181,
+    "FULL_NAME": "Virgin Islands, United States",
+    "SM": "9.84",
+    "PARENT_ID": 54,
+    "DT_CREATE": "24.08.2019"
   },
   {
-    "DT_CREATE": "10.04.2019",
-    "URC": 1944,
-    "FULL_NAME": "Canada",
-    "SM": "0.82",
-    "ID": 97
+    "ID": 87,
+    "URC": 3353,
+    "FULL_NAME": "Greece",
+    "SM": "1.57",
+    "PARENT_ID": 66,
+    "DT_CREATE": "31.03.2021"
   },
   {
-    "DT_CREATE": "02.01.2020",
-    "URC": 2950,
-    "FULL_NAME": "Sierra Leone",
-    "SM": "6.15",
-    "ID": 98
+    "ID": 88,
+    "URC": 7904,
+    "FULL_NAME": "Faroe Islands",
+    "SM": "4.56",
+    "PARENT_ID": 62,
+    "DT_CREATE": "16.10.2019"
   },
   {
-    "DT_CREATE": "29.07.2019",
-    "URC": 1407,
-    "FULL_NAME": "Tuvalu",
-    "SM": "9.53",
-    "ID": 99
+    "ID": 89,
+    "URC": 7073,
+    "FULL_NAME": "Chile",
+    "SM": "3.76",
+    "PARENT_ID": 60,
+    "DT_CREATE": "15.02.2020"
   },
   {
-    "DT_CREATE": "22.03.2020",
-    "URC": 4960,
-    "FULL_NAME": "Somalia",
-    "SM": "5.01",
-    "ID": 100
+    "ID": 90,
+    "URC": 7344,
+    "FULL_NAME": "Denmark",
+    "SM": "2.03",
+    "PARENT_ID": 19,
+    "DT_CREATE": "30.12.2019"
+  },
+  {
+    "ID": 91,
+    "URC": 8791,
+    "FULL_NAME": "Iraq",
+    "SM": "4.10",
+    "PARENT_ID": 53,
+    "DT_CREATE": "15.07.2019"
+  },
+  {
+    "ID": 92,
+    "URC": 7668,
+    "FULL_NAME": "Botswana",
+    "SM": "2.94",
+    "PARENT_ID": 50,
+    "DT_CREATE": "18.11.2019"
+  },
+  {
+    "ID": 93,
+    "URC": 6949,
+    "FULL_NAME": "Chile",
+    "SM": "2.29",
+    "PARENT_ID": 84,
+    "DT_CREATE": "15.02.2020"
+  },
+  {
+    "ID": 94,
+    "URC": 6829,
+    "FULL_NAME": "Solomon Islands",
+    "SM": "7.56",
+    "PARENT_ID": 78,
+    "DT_CREATE": "08.06.2019"
+  },
+  {
+    "ID": 95,
+    "URC": 6560,
+    "FULL_NAME": "Slovenia",
+    "SM": "5.97",
+    "PARENT_ID": 74,
+    "DT_CREATE": "09.02.2021"
+  },
+  {
+    "ID": 96,
+    "URC": 3279,
+    "FULL_NAME": "Isle of Man",
+    "SM": "7.85",
+    "PARENT_ID": 33,
+    "DT_CREATE": "03.10.2019"
+  },
+  {
+    "ID": 97,
+    "URC": 6928,
+    "FULL_NAME": "Falkland Islands",
+    "SM": "3.17",
+    "PARENT_ID": 54,
+    "DT_CREATE": "09.12.2019"
+  },
+  {
+    "ID": 98,
+    "URC": 1178,
+    "FULL_NAME": "Kenya",
+    "SM": "8.39",
+    "PARENT_ID": 93,
+    "DT_CREATE": "29.07.2019"
+  },
+  {
+    "ID": 99,
+    "URC": 8723,
+    "FULL_NAME": "Madagascar",
+    "SM": "4.07",
+    "PARENT_ID": 48,
+    "DT_CREATE": "29.05.2020"
+  },
+  {
+    "ID": 100,
+    "URC": 9644,
+    "FULL_NAME": "Tonga",
+    "SM": "1.83",
+    "PARENT_ID": 17,
+    "DT_CREATE": "12.03.2020"
   }
 ];
