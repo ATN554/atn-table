@@ -11,7 +11,7 @@ export function fillColumnsTableData(columns) {
 
   if (!hasActionColumn) {
     let actionColumn = {
-      id: -2,
+      id: -4,
       title: "Действия",
       field: "#ACTION_COLUMN",
       width: 90,
@@ -44,12 +44,16 @@ export function fillColumnsTableData(columns) {
   if (childColumn) {
     let parentColumn = columns.find(col => col.field === childColumn.parentField);
     if (parentColumn) {
+      parentColumn.id = -3;
+      parentColumn.service = true;
       parentColumn.tree = 1;
       parentColumn.dnd = { droppable: false, draggable: false };
-      parentColumn.visibility = { visible: true, locked: true };
+      parentColumn.visibility = { visible: false, locked: true };
       parentColumn.group = { locked: true, id: 0 };
       parentColumn.sort = { locked: true, order: "asc" };
 
+      childColumn.id = -2;
+      childColumn.service = true;
       childColumn.tree = 2;
       childColumn.dnd = { droppable: false, draggable: false };
       childColumn.visibility = { visible: true, locked: true };

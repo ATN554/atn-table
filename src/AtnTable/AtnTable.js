@@ -8,6 +8,7 @@ import "./menu/menuright.css";
 import { nvl, fillColumnsTableData, fillRowsTableData, sortColumns, sortData, getCorrectPage } from "./AtnEngine.js";
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
+import AtnSettingsPanel from "./settings-panel/AtnSettingsPanel.js";
 import AtnGroupBar from "./group-bar/AtnGroupBar.js";
 import AtnSortPanel from "./sort-panel/AtnSortPanel.js";
 import AtnGroupPanel from "./group-panel/AtnGroupPanel.js";
@@ -140,11 +141,13 @@ export default class AtnTable extends React.Component {
   render() {
     let _columns = this.state.columns;
 
-    let _groupColumns = _columns.filter(col => !col.service && !col.tree && col.visibility.visible);
+    let _treeColumns = _columns.filter(col => col.tree);
+    _treeColumns = sortColumns(_treeColumns, [['tree'], ['id']]);
+
+    let _groupColumns = _columns.filter(col => !col.service && col.group.id > 0);
     _groupColumns = sortColumns(_groupColumns, [['group', 'id'], ['id']]);
 
-    let _groupPanelColumns = _groupColumns.filter(col => col.group.id > 0);
-    let _showGroupColumn = _groupPanelColumns.length !== 0;
+    let _showGroupColumn = _groupColumns.length !== 0;
     _columns.find(col => col.id === -1).visibility.visible = _showGroupColumn;
     
     let _sortColumns = _columns.filter(col => !col.service && col.group.id === 0);
@@ -175,7 +178,7 @@ export default class AtnTable extends React.Component {
                 <AtnGroupBar
                   tableRef={this}
                   title="Группировка"
-                  columns={_groupPanelColumns}
+                  columns={_groupColumns}
                   renders={this.state.renders}
                 />
               </td>
@@ -197,17 +200,22 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mleft-content"
                 buttonClass="atn-mleft-button"
               >
-                <AtnSortPanel 
+                <AtnSettingsPanel 
                   tableRef={this}
-                  title="Настройка колонок"
-                  columns={_sortColumns}
+                  title="Сортировка данных"
+                  treeTitle="Иерархия"
+                  treeColumns={_treeColumns}
+                  groupTitle="Группировка"
+                  groupColumns={_groupColumns}
+                  sortTitle="Сортировка"
+                  sortColumns={_sortColumns}
                   renders={this.state.renders}
                 />
               </AtnMenu>
               <AtnContent
                 tableRef={this}
                 columns={_headColumns}
-                groupColumns={_groupPanelColumns}
+                groupColumns={_groupColumns}
                 totalColumnsWidth={_totalColumnsWidth}
                 data={this.state.data}
                 currentPage={this.state.currentPage}
@@ -246,7 +254,7 @@ export default class AtnTable extends React.Component {
             <td className="atn-footer">
               <AtnPageBar
                 tableRef={this}
-                columns={_groupPanelColumns}
+                columns={_groupColumns}
                 data={this.state.data}
                 currentPage={this.state.currentPage}
                 pageSize={this.state.pageSize}
