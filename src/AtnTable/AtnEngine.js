@@ -40,6 +40,24 @@ export function fillColumnsTableData(columns) {
     columns.push(groupColumn);
   }
 
+  let childColumn = columns.find(col => col.parentField);
+  if (childColumn) {
+    let parentColumn = columns.find(col => col.field === childColumn.parentField);
+    if (parentColumn) {
+      parentColumn.tree = 1;
+      parentColumn.dnd = { droppable: false, draggable: false };
+      parentColumn.visibility = { visible: true, locked: true };
+      parentColumn.group = { locked: true, id: 0 };
+      parentColumn.sort = { locked: true, order: "asc" };
+
+      childColumn.tree = 2;
+      childColumn.dnd = { droppable: false, draggable: false };
+      childColumn.visibility = { visible: true, locked: true };
+      childColumn.group = { locked: true, id: 0 };
+      childColumn.sort = { locked: true, order: "asc" };
+    }
+  }
+
   columns.forEach((column, column_idx) => {
     if (!column) {
       column = {};
@@ -100,7 +118,7 @@ export function fillColumnsTableData(columns) {
     }
   });
 
-  fix_columns = sortColumns(fix_columns, [['group', 'id'], ['sort', 'id'], ['id']]);
+  fix_columns = sortColumns(fix_columns, [['tree'], ['group', 'id'], ['sort', 'id'], ['id']]);
   fix_columns.forEach((column, column_idx) => {
     column.sort.id = column_idx + 1;
   });
@@ -124,7 +142,7 @@ function compareColumns(column1, column2, key) {
   return 0;
 }
 
-export function sortColumns(columns, keys = [['service'], ['group', 'id'], ['id']]) {
+export function sortColumns(columns, keys = [['service'], ['tree'], ['group', 'id'], ['id']]) {
   let _columns = columns.slice(0);
   _columns = _columns.sort(function (column1, column2) {
     let result = 0;
@@ -201,7 +219,7 @@ function compareRows(row1, row2, columns) {
 }
 
 export function sortData(data, columns) {
-  let _columns = sortColumns(columns, [['service'], ['group', 'id'], ['sort', 'id'], ['id']]);
+  let _columns = sortColumns(columns, [['service'], ['tree'], ['group', 'id'], ['sort', 'id'], ['id']]);
   data.sort(function (row1, row2) {
     return compareRows(row1, row2, _columns);
   });

@@ -140,7 +140,7 @@ export default class AtnTable extends React.Component {
   render() {
     let _columns = this.state.columns;
 
-    let _groupColumns = _columns.filter(col => !col.service && col.visibility.visible);
+    let _groupColumns = _columns.filter(col => !col.service && !col.tree && col.visibility.visible);
     _groupColumns = sortColumns(_groupColumns, [['group', 'id'], ['id']]);
 
     let _groupPanelColumns = _groupColumns.filter(col => col.group.id > 0);

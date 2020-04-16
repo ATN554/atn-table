@@ -1,4 +1,13 @@
 export const columns = [
+  {
+    title: "Родит. Ид.",
+    field: "PARENT_ID",
+    type: "integer",
+    align: "right",
+    width: 150,
+    mimWidth: 10,
+    maxWidth: 250,
+  },
   { 
     title: "Ид.", 
     field: "ID", 
