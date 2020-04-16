@@ -147,15 +147,20 @@ export default class AtnTable extends React.Component {
     let _groupColumns = _userColumns.filter(col => !col.tree && col.group.id > 0);
     _groupColumns = sortColumns(_groupColumns, [['group', 'id'], ['id']]);
 
-    let _showGroupColumn = _groupColumns.length !== 0;
-    _columns.find(col => col.field === "#GROUP_COLUMN").visibility.visible = _showGroupColumn;
-    
     let _sortColumns = _userColumns.filter(col => !col.tree && col.group.id === 0);
     _sortColumns = sortColumns(_sortColumns, [['sort', 'id'], ['id']]);
     
     let _headColumns = _columns.filter(col => col.group.id === 0 && col.visibility.visible);
 
     let _totalColumnsWidth = _headColumns.reduce((w, col) => 1 + w + col.width, -1);
+
+    let dataInfo = {};
+    dataInfo.isTreeData = _treeColumns.length > 0;
+    dataInfo.hasGroups = _groupColumns.length > 0;
+    dataInfo.isGroupData = !dataInfo.isTreeData && dataInfo.hasGroups;
+    dataInfo.isPlainData = !dataInfo.isTreeData && !dataInfo.isGroupData;
+
+    _columns.find(col => col.field === "#GROUP_COLUMN").visibility.visible = dataInfo.isGroupData;
 
     return (
       <table className="atn-container">
@@ -171,7 +176,7 @@ export default class AtnTable extends React.Component {
             </td>
           </tr>
           {
-            _showGroupColumn
+            dataInfo.isGroupData
               &&
             <tr className="atn-groupbar-tr">
               <td className="atn-groupbar">
@@ -202,6 +207,7 @@ export default class AtnTable extends React.Component {
               >
                 <AtnSettingsPanel 
                   tableRef={this}
+                  dataInfo={dataInfo}
                   title="Порядок данных"
                   treeTitle="Иерархия"
                   treeColumns={_treeColumns}
@@ -214,6 +220,7 @@ export default class AtnTable extends React.Component {
               </AtnMenu>
               <AtnContent
                 tableRef={this}
+                dataInfo={dataInfo}
                 columns={_headColumns}
                 treeColumns={_treeColumns}
                 groupColumns={_groupColumns}

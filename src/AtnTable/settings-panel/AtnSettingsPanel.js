@@ -9,6 +9,7 @@ export default function AtnSettingsPanel(props) {
   
   const {
     tableRef,
+    dataInfo,
     title,
     treeTitle,
     treeColumns,
@@ -91,33 +92,45 @@ export default function AtnSettingsPanel(props) {
         {title}
       </div>
 
-      <div className="atn-settings-tree-title">
-        {treeTitle}
-      </div>
-      {treeColumns.filter(col => col.tree === 2).map((col, col_index) => (
-        <AtnTreeCell
-          key={"th" + col.id}
-          column={col}
-          columnIndex={col_index}
-          renderHeaderCell={renders.renderHeaderCell}
-          onChangeTreeOrder={handleChangeTreeOrder}
-        />
-      ))}
-
-      <div className="atn-settings-group-title">
-        {groupTitle}
-      </div>
-      {groupColumns.map((col, col_index) => (
-        <AtnGroupCell
-          key={"gth" + col.id}
-          column={col}
-          columnIndex={col_index}
-          renderHeaderCell={renders.renderHeaderCell}
-          onDragEnd={handleDragEndGroup}
-          onChangeActive={handleChangeActive}
-          onChangeGroupOrder={handleChangeGroupOrder}
-        />
-      ))}
+      {
+        dataInfo.isTreeData
+          &&
+        <React.Fragment>
+          <div className="atn-settings-tree-title">
+            {treeTitle}
+          </div>
+          {treeColumns.filter(col => col.tree === 2).map((col, col_index) => (
+            <AtnTreeCell
+              key={"th" + col.id}
+              column={col}
+              columnIndex={col_index}
+              renderHeaderCell={renders.renderHeaderCell}
+              onChangeTreeOrder={handleChangeTreeOrder}
+            />
+          ))}
+        </React.Fragment>
+      }
+      
+      {
+        dataInfo.hasGroups
+          &&
+        <React.Fragment>
+          <div className="atn-settings-group-title">
+            {groupTitle}
+          </div>
+          {groupColumns.map((col, col_index) => (
+            <AtnGroupCell
+              key={"gth" + col.id}
+              column={col}
+              columnIndex={col_index}
+              renderHeaderCell={renders.renderHeaderCell}
+              onDragEnd={handleDragEndGroup}
+              onChangeActive={handleChangeActive}
+              onChangeGroupOrder={handleChangeGroupOrder}
+            />
+          ))}
+        </React.Fragment>
+      }
 
       <div className="atn-settings-sort-title">
         {sortTitle}

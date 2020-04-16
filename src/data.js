@@ -22,13 +22,8 @@ export const columns = [
     maxWidth: 250,
     parentField: "PARENT_ID",
   },
-  {
-    title: "#ID",
-    field: "#ID",
-    width: 50,
-  },
   { 
-    title: "Наименование WWWWW", 
+    title: "Наименование", 
     field: "FULL_NAME", 
     width: 250,
   },
