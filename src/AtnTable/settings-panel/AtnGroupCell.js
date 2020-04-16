@@ -6,7 +6,7 @@ import AtnToggleButton from "../toggle-button/AtnToggleButton.js";
 
 const renderSort = (column, fnc) => {
   return (
-    <div className="atn-group-sort">
+    <div className="atn-settings-sort">
       <AtnSortButton
         order={column.group.order}
         disabled={column.group.locked}
@@ -19,7 +19,7 @@ const renderSort = (column, fnc) => {
 
 const renderActivity = (column, fnc) => {
   return (
-    <div className="atn-group-use">
+    <div className="atn-settings-use">
       <AtnToggleButton
         checked={column.group.id > 0}
         disabled={column.group.locked}
@@ -34,23 +34,24 @@ export default function AtnGroupCell(props) {
     <Droppable
       id={props.column.dnd.groupDroppableId}
       type="div"
-      className={props.column.dnd.droppable && props.column.group.id > 0 ? "atn-group-tc atn-group-droppable" : "atn-group-tc"}
+      className={props.column.dnd.droppable && props.column.group.id > 0 ? "atn-settings-tr atn-group-droppable" : "atn-settings-tr"}
     >
       <Draggable
         id={props.column.dnd.groupDraggableId}
         type="div"
         droppable={"atn-group-droppable"}
-        className={props.column.dnd.draggable && props.column.group.id > 0 ? "atn-group-td atn-cursor-move" : "atn-group-td"}
+        className={props.column.dnd.draggable && props.column.group.id > 0 ? "atn-settings-td atn-cursor-move" : "atn-settings-td"}
         axis="vertical"
         onDragEnd={(idFrom, idTo, x, y) => props.onDragEnd(idFrom, idTo)}
         enabled={props.column.dnd.draggable && props.column.group.id > 0}
       >
-        <div className="atn-group-td-text">
+        {renderActivity(props.column, props.onChangeActive)}
+
+        <div className="atn-settings-td-text">
           {props.renderHeaderCell(props.column, props.columnIndex)}
         </div>
 
         {renderSort(props.column, props.onChangeGroupOrder)}
-        {renderActivity(props.column, props.onChangeActive)}
       </Draggable>
 
       <div>

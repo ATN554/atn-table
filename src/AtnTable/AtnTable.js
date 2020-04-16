@@ -10,8 +10,6 @@ import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
 import AtnSettingsPanel from "./settings-panel/AtnSettingsPanel.js";
 import AtnGroupBar from "./group-bar/AtnGroupBar.js";
-import AtnSortPanel from "./sort-panel/AtnSortPanel.js";
-import AtnGroupPanel from "./group-panel/AtnGroupPanel.js";
 import AtnPageBar from "./page-bar/AtnPageBar.js";
 import AtnPageSizeOptions from "./page-bar/AtnPageSizeOptions.js";
 
@@ -204,7 +202,7 @@ export default class AtnTable extends React.Component {
               >
                 <AtnSettingsPanel 
                   tableRef={this}
-                  title="Сортировка данных"
+                  title="Порядок данных"
                   treeTitle="Иерархия"
                   treeColumns={_treeColumns}
                   groupTitle="Группировка"

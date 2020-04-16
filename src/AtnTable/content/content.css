@@ -43,9 +43,6 @@
   display: inline-block;
   min-height: 18px;
   max-height: 38px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-all;
   text-align: center;
   overflow: hidden;
   border-right: 1px solid var(--border-color-darken);
@@ -69,6 +66,9 @@
 }
 
 .atn-thead-td-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
   padding: 3px;
   padding-right: 14px;
 }
@@ -110,9 +110,6 @@
   flex-direction: row;
   min-height: 18px;
   max-height: 38px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-all;
   overflow: hidden;
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
@@ -136,18 +133,11 @@
   width: 20px;
 }
 
-.atn-tbody-tree-td-text {
-  padding: 3px;
-}
-
 .atn-tbody-group-td-container {
   display: flex;
   flex-direction: row;
   min-height: 18px;
   max-height: 38px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-all;
   overflow: hidden;
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
@@ -207,9 +197,6 @@
 .atn-tbody-td-container {
   min-height: 16px;
   max-height: 38px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-all;
   overflow: hidden;
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
@@ -219,6 +206,9 @@
 }
 
 .atn-tbody-td-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
   padding: 3px;
 }
 
@@ -264,9 +254,6 @@
 .atn-tfoot-td-container {
   min-height: 16px;
   max-height: 38px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-all;
   overflow: hidden;
   border-top: 1px solid var(--border-color-darken);
   border-right: 1px solid var(--border-color-darken);
@@ -277,5 +264,8 @@
 }
 
 .atn-tfoot-td-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
   padding: 3px;
 }

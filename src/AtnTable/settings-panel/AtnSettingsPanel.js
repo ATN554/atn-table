@@ -1,13 +1,15 @@
 import React from "react";
-import "./group.css";
-import "./sort.css";
+import "./settings-panel.css";
 import { sortColumns } from "../AtnEngine.js";
+import AtnTreeCell from "./AtnTreeCell.js";
 import AtnGroupCell from "./AtnGroupCell.js";
 import AtnSortCell from "./AtnSortCell.js";
 
 export default class AtnSettingsPanel extends React.Component {
   constructor(props) {
     super(props);
+
+    this.handleChangeTreeOrder = this.handleChangeTreeOrder.bind(this);
 
     this.handleDragEndGroup = this.handleDragEndGroup.bind(this);
     this.handleChangeGroupOrder = this.handleChangeGroupOrder.bind(this);
@@ -17,6 +19,13 @@ export default class AtnSettingsPanel extends React.Component {
 
     this.handleChangeActive = this.handleChangeActive.bind(this);
     this.handleChangeVisibility = this.handleChangeVisibility.bind(this);
+  }
+
+  handleChangeTreeOrder(column, order) {
+    column.sort.order = order;
+    let parentColumn = this.props.treeColumns.find(col => col.tree === 1);
+    parentColumn.sort.order = order;
+    this.props.tableRef.updateData();
   }
 
   handleDragEndGroup(idFrom, idTo) {
@@ -80,34 +89,28 @@ export default class AtnSettingsPanel extends React.Component {
 
   render() {
     return (
-      <div className="atn-sort-container">
-        <div className="atn-sort-title-tr">
-          <div className="atn-sort-title-td">
-            {this.props.title}
-          </div>
+      <div className="atn-settings-container">
+        <div className="atn-settings-title">
+          {this.props.title}
         </div>
 
-        <div className="atn-group-title-tr">
-          <div className="atn-group-title-td">
-            {this.props.treeTitle}
-          </div>
+        <div className="atn-settings-tree-title">
+          {this.props.treeTitle}
         </div>
-        {this.props.treeColumns.map((col, col_index) => (
-          <AtnSortCell
+        {this.props.treeColumns.filter(col => col.tree === 2).map((col, col_index) => (
+          <AtnTreeCell
             key={"th" + col.id}
             column={col}
             columnIndex={col_index}
             renderHeaderCell={this.props.renders.renderHeaderCell}
             onDragEnd={this.handleDragEndSort}
             onChangeActive={this.handleChangeActive}
-            onChangeSortOrder={this.handleChangeSortOrder}
+            onChangeTreeOrder={this.handleChangeTreeOrder}
           />
         ))}
 
-        <div className="atn-group-title-tr">
-          <div className="atn-group-title-td">
-            {this.props.groupTitle}
-          </div>
+        <div className="atn-settings-group-title">
+          {this.props.groupTitle}
         </div>
         {this.props.groupColumns.map((col, col_index) => (
           <AtnGroupCell
@@ -121,19 +124,15 @@ export default class AtnSettingsPanel extends React.Component {
           />
         ))}
 
-        <div className="atn-sort-title-tr">
-          <div className="atn-sort-title-td">
-            {this.props.sortTitle}
-          </div>
+        <div className="atn-settings-sort-title">
+          {this.props.sortTitle}
         </div>
         {this.props.sortColumns.map((col, col_index) => (
           <AtnSortCell
-            key={"th" + col.id}
+            key={"tth" + col.id}
             column={col}
             columnIndex={col_index}
             renderHeaderCell={this.props.renders.renderHeaderCell}
-            onDragEnd={this.handleDragEndSort}
-            onChangeActive={this.handleChangeActive}
             onChangeSortOrder={this.handleChangeSortOrder}
           />
         ))}

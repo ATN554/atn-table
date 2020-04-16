@@ -3,19 +3,21 @@ import AtnToggleButton from "../toggle-button/AtnToggleButton.js";
 
 export default function AtnBodyTreeRow(props) {
 
+  var tableData = props.row.tableData;
+  var tree = tableData.tree;
+  var column = props.column;
+
   const toggleTree = () => {
-    props.row.tableData.tree.open = !props.row.tableData.tree.open;
+    tree.open = !tree.open;
     props.tableRef.updateData();
   }
 
   const renderToggle = () => {
     return (
-      props.row.tableData.tree.last ?
-      <div key="tdm-last" className="atn-tbody-tree-td-margin"></div> :
       <div className="atn-tbody-tree-td-button-img">
         <AtnToggleButton
-          checked={props.row.tableData.tree.open}
-          disabled={false}
+          checked={tree.open}
+          disabled={tree.last}
           onChange={toggleTree}
         />
       </div>
@@ -28,16 +30,16 @@ export default function AtnBodyTreeRow(props) {
     >
       <div
         className={"atn-tbody-tree-td-container"}
-        style={{ width: props.column.width + "px" }}
+        style={{ width: column.width + "px" }}
       >
-        {Array.from(Array(props.row.tableData.tree.level)).map((el, el_idx) => (
+        {Array.from(Array(tree.level)).map((el, el_idx) => (
           <div key={"tdm-" + el_idx} className="atn-tbody-tree-td-margin"></div>
         ))}
         <div className="atn-tbody-tree-td-button">
           {renderToggle()}
         </div>
-        <div className={"atn-tbody-tree-td-text atn-" + props.column.align + "-align"}>
-          {props.renderDataCell(props.row, props.rowIndex, props.column, props.columnIndex)}
+        <div className={"atn-tbody-td-text atn-" + column.align + "-align"}>
+          {props.renderDataCell(props.row, props.rowIndex, column, props.column_index)}
         </div>
       </div>
     </div>

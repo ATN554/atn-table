@@ -240,6 +240,10 @@ export function sortData(data, columns) {
     let childReq = childColumn.field;
     let parentRow = { tableData: { tid: -1, tree: {level: -1} } };
     parentRow[childReq] = 0;
+    let _treeColumns = _columns.filter(col => col.tree);
+    plainData.sort(function (row1, row2) {
+      return compareRows(row1, row2, _treeColumns);
+    });
     treeBuilder(treeData, plainData, parentReq, childReq, parentRow);
     data = fillDataTreeInfo(treeData, _sortColumns);
   } else {
