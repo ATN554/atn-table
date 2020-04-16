@@ -17,8 +17,6 @@
 
 .atn-group-bar-title-td {
   height: 18px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
   text-align: center;
   overflow: hidden;
   border: 1px solid var(--border-color-darken);
@@ -35,7 +33,7 @@
 }
 
 .atn-group-bar-td {
-  position: relative;
+  display: flex;
   border: 1px solid var(--border-color-darken);
   background: inherit;
   user-select: none;
@@ -56,27 +54,21 @@
 }
 
 .atn-group-bar-td-text {
-  margin-left: 30px;
-  margin-right: 20px;
   height: 18px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
   text-align: left;
   overflow: hidden;
 }
 
 .atn-group-bar-sort {
-  position: absolute;
-  top: 2px;
-  bottom: 2px;
-  right: 20px;
-  margin: auto;
+  position: relative;
+  height: 18px;
+  width: 20px;
+  margin: auto 3px auto 3px;
 }
 
 .atn-group-bar-use {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
+  position: relative;
+  height: 10px;
+  width: 20px;
+  margin: auto 3px auto 3px;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import "./content.css";
 import AtnHeadRow from "./AtnHeadRow.js";
+import AtnBodyTreeRow from "./AtnBodyTreeRow.js";
 import AtnBodyGroupRow from "./AtnBodyGroupRow.js";
 import AtnBodyRow from "./AtnBodyRow.js";
 import AtnTotalsRow from './AtnTotalsRow.js';
@@ -12,54 +13,75 @@ export default function AtnContent(props) {
   var p2 = pageSize === 0 ? data.length : p1 + pageSize;
 
   var isTreeData = treeColumns.length > 0;
-  var isGroupData = !isTreeData && groupColumns.length > 0;
+  var hasGroups = groupColumns.length > 0;
+  var isGroupData = !isTreeData && hasGroups;
   var isPlainData = !isTreeData && !isGroupData;
 
-  const renderPlainData = (_data) => {
-    return _data.map((row, row_index) => (
+  const renderPlainRow = (_row, _row_index) => {
+    return (
       <AtnBodyRow
-        key={"tr-data-" + row_index}
+        key={"tr-data-" + _row_index}
         columns={columns}
-        row={row}
-        rowIndex={row_index}
+        row={_row}
+        rowIndex={_row_index}
         renderDataCell={renders.renderDataCell}
       />
-    ));
+    );
   }
 
-  const renderGroupData = (_data) => {
-    return _data.map((row, row_index) => (
-      <React.Fragment key={"tr-data-c-" + row_index}>
+  const renderGroupRow = (_row, _row_index) => {
+    return (
+      <React.Fragment key={"tr-data-g-" + _row_index}>
         {
-          row.tableData.new
-           &&
-          groupColumns.slice(row.tableData.level).map((col, col_index) => (
-            row.tableData.group[row.tableData.level + col_index].show
+          _row.tableData.new 
+            &&
+          groupColumns.slice(_row.tableData.level).map((col, col_index) => (
+            _row.tableData.group[_row.tableData.level + col_index].show
               &&
             <AtnBodyGroupRow
               tableRef={tableRef}
-              key={"tr-group-" + row_index + "-" + col_index}
+              key={"tr-group-" + _row_index + "-" + col_index}
               totalColumnsWidth={totalColumnsWidth}
               columns={groupColumns}
               column={col}
-              columnIndex={row.tableData.level + col_index}
-              row={row}
-              rowIndex={row_index}
+              columnIndex={_row.tableData.level + col_index}
+              row={_row}
+              rowIndex={_row_index}
               renderDataGroupCell={renders.renderDataGroupCell}
             />
           ))
         }
-        {row.tableData.show &&
-          <AtnBodyRow
-            key={"tr-data-" + row_index}
-            columns={columns}
-            row={row}
-            rowIndex={row_index}
-            renderDataCell={renders.renderDataCell}
-          />
+        {
+          _row.tableData.show && renderPlainRow(_row, _row_index)
         }
       </React.Fragment>
-    ))
+    );
+  }
+
+  const renderTreeRow = (_row, _row_index) => {
+    return (
+      _row.tableData.show && 
+      <AtnBodyTreeRow
+        tableRef={tableRef}
+        key={"tr-data-" + _row_index}
+        columns={columns}
+        row={_row}
+        rowIndex={_row_index}
+        renderDataCell={renders.renderDataCell}
+      />
+    );
+  }
+
+  const renderPlainData = (_data) => {
+    return _data.map(renderPlainRow);
+  }
+
+  const renderGroupData = (_data) => {
+    return _data.map(renderGroupRow);
+  }
+
+  const renderTreeData = (_data) => {
+    return _data.map(renderTreeRow);
   }
 
   return (
@@ -75,6 +97,7 @@ export default function AtnContent(props) {
       <div className="atn-tbody">
         {isPlainData && renderPlainData( data.slice(p1, p2) )}
         {isGroupData && renderGroupData( data.filter(row => row.tableData.gid >= p1 && row.tableData.gid < p2) )}
+        {isTreeData && renderTreeData( data.filter(row => row.tableData.tid >= p1 && row.tableData.tid < p2) )}
       </div>
       {
         Object.keys(totals).length !== 0

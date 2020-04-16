@@ -2,7 +2,8 @@ import React from "react";
 
 export default function AtnBodyCell(props) {
   return (
-    <div className="atn-tbody-td"
+    <div 
+      className="atn-tbody-td"
     >
       <div 
         className={"atn-tbody-td-container atn-" + props.column.align + "-align"} 

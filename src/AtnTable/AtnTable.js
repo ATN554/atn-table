@@ -141,16 +141,18 @@ export default class AtnTable extends React.Component {
   render() {
     let _columns = this.state.columns;
 
-    let _treeColumns = _columns.filter(col => col.tree);
+    let _userColumns = _columns.filter(col => !col.service);
+
+    let _treeColumns = _userColumns.filter(col => col.tree);
     _treeColumns = sortColumns(_treeColumns, [['tree'], ['id']]);
 
-    let _groupColumns = _columns.filter(col => !col.service && col.group.id > 0);
+    let _groupColumns = _userColumns.filter(col => !col.tree && col.group.id > 0);
     _groupColumns = sortColumns(_groupColumns, [['group', 'id'], ['id']]);
 
     let _showGroupColumn = _groupColumns.length !== 0;
-    _columns.find(col => col.id === -1).visibility.visible = _showGroupColumn;
+    _columns.find(col => col.field === "#GROUP_COLUMN").visibility.visible = _showGroupColumn;
     
-    let _sortColumns = _columns.filter(col => !col.service && col.group.id === 0);
+    let _sortColumns = _userColumns.filter(col => !col.tree && col.group.id === 0);
     _sortColumns = sortColumns(_sortColumns, [['sort', 'id'], ['id']]);
     
     let _headColumns = _columns.filter(col => col.group.id === 0 && col.visibility.visible);
@@ -250,7 +252,7 @@ export default class AtnTable extends React.Component {
             <td className="atn-footer">
               <AtnPageBar
                 tableRef={this}
-                columns={_groupColumns}
+                columns={_userColumns}
                 data={this.state.data}
                 currentPage={this.state.currentPage}
                 pageSize={this.state.pageSize}

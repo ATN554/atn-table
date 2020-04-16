@@ -4,7 +4,6 @@ import AtnToggleButton from "../toggle-button/AtnToggleButton.js";
 export default function AtnBodyGroupRow(props) {
 
   const toggleGroup = () => {
-    //let groupf = props.row.tableData.group.find(g => g.field === props.column.field);
     let groupf = props.row.tableData.group[props.columnIndex];
     groupf.open = !groupf.open;
     props.tableRef.updateData();
@@ -14,7 +13,7 @@ export default function AtnBodyGroupRow(props) {
     return (
       <div className="atn-tbody-group-td-button-img">
         <AtnToggleButton
-          checked={props.row.tableData.group[props.columnIndex].open} // props.row.tableData.group.find(g => g.field === props.column.field).open
+          checked={props.row.tableData.group[props.columnIndex].open}
           disabled={false}
           onChange={toggleGroup}
         />
@@ -24,7 +23,7 @@ export default function AtnBodyGroupRow(props) {
 
   return (
     <div className="atn-tbody-tr">
-      <div className="atn-tbody-group-td">
+      <div className="atn-tbody-td">
         <div 
           className="atn-tbody-group-td-container"
           style={{ width: props.totalColumnsWidth + "px" }}
@@ -35,7 +34,7 @@ export default function AtnBodyGroupRow(props) {
           <div className="atn-tbody-group-td-button">
             {renderToggle()}
           </div>
-          <div className="atn-tbody-group-td-text">
+          <div className="atn-tbody-td-text">
             {props.renderDataGroupCell(props.row, props.rowIndex, props.column, props.columnIndex)}
           </div>
         </div>

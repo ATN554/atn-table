@@ -45,12 +45,13 @@ export default function AtnGroupCell(props) {
         onDragEnd={(idFrom, idTo, x, y) => props.onDragEnd(idFrom, idTo)}
         enabled={props.column.dnd.draggable && props.column.group.id > 0}
       >
+        {renderActivity(props.column, props.onChangeActive)}
+
         <div className="atn-group-bar-td-text">
           {props.renderHeaderCell(props.column, props.columnIndex)}
         </div>
 
         {renderSort(props.column, props.onChangeGroupOrder)}
-        {renderActivity(props.column, props.onChangeActive)}
       </Draggable>
 
       <div>

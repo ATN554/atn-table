@@ -45,6 +45,7 @@
   max-height: 38px;
   white-space: pre-wrap;
   word-wrap: break-word;
+  word-break: break-all;
   text-align: center;
   overflow: hidden;
   border-right: 1px solid var(--border-color-darken);
@@ -104,10 +105,39 @@
   z-index: 0;
 }
 
-.atn-tbody-group-td {
+.atn-tbody-tree-td-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 18px;
+  max-height: 38px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   background: inherit;
   padding: 0px;
   margin: 0px;
+}
+
+.atn-tbody-tree-td-margin {
+  padding: 0px;
+  margin-left: 15px;
+}
+
+.atn-tbody-tree-td-button {
+  margin: 7px 5px auto 5px;
+}
+
+.atn-tbody-tree-td-button-img {
+  position: relative;
+  height: 10px;
+  width: 20px;
+}
+
+.atn-tbody-tree-td-text {
+  padding: 3px;
 }
 
 .atn-tbody-group-td-container {
@@ -117,6 +147,7 @@
   max-height: 38px;
   white-space: pre-wrap;
   word-wrap: break-word;
+  word-break: break-all;
   overflow: hidden;
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
@@ -131,22 +162,13 @@
 }
 
 .atn-tbody-group-td-button {
-  position: relative;
-  height: 18px;
-  padding: 3px;
+  margin: 7px 5px auto 5px;
 }
 
 .atn-tbody-group-td-button-img {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-}
-
-.atn-tbody-group-td-text {
-  padding: 3px;
-  margin-left: 24px;
+  position: relative;
+  height: 10px;
+  width: 20px;
 }
 
 .atn-tbody-tr {
@@ -187,6 +209,7 @@
   max-height: 38px;
   white-space: pre-wrap;
   word-wrap: break-word;
+  word-break: break-all;
   overflow: hidden;
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
@@ -243,6 +266,7 @@
   max-height: 38px;
   white-space: pre-wrap;
   word-wrap: break-word;
+  word-break: break-all;
   overflow: hidden;
   border-top: 1px solid var(--border-color-darken);
   border-right: 1px solid var(--border-color-darken);

@@ -12,25 +12,15 @@ export const columns = [
     title: "Ид.", 
     field: "ID", 
     type: "integer", 
-    align: "right", 
+    align: "left", 
     width: 150, 
     mimWidth: 10, 
     maxWidth: 250,
-    parentField: "PARENT_ID",
+    _parentField: "PARENT_ID",
   },
   {
     title: "#ID",
     field: "#ID",
-    width: 50,
-  },
-  {
-    title: "#TREE_LEVEL",
-    field: "#TREE_LEVEL",
-    width: 50,
-  },
-  {
-    title: "#TREE_LAST",
-    field: "#TREE_LAST",
     width: 50,
   },
   { 
