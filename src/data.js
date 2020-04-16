@@ -7,6 +7,10 @@ export const columns = [
     width: 150,
     mimWidth: 10,
     maxWidth: 250,
+    visibility: { 
+      visible: false,
+      locked: true
+    },
   },
   { 
     title: "Ид.", 

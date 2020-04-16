@@ -49,7 +49,7 @@ export function fillColumnsTableData(columns) {
 
       parentColumn.tree = 1;
       parentColumn.dnd = { droppable: false, draggable: false };
-      parentColumn.visibility = { visible: true, locked: true };
+      parentColumn.visibility = { visible: false, locked: true };
       parentColumn.sort = { locked: true, order: "asc" };
 
       childColumn.tree = 2;
