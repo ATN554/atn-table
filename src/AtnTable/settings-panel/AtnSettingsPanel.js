@@ -1,35 +1,33 @@
 import React from "react";
 import "./settings-panel.css";
-import { sortColumns } from "../AtnEngine.js";
+import { sortColumns as fncSortColumns } from "../AtnEngine.js";
 import AtnTreeCell from "./AtnTreeCell.js";
 import AtnGroupCell from "./AtnGroupCell.js";
 import AtnSortCell from "./AtnSortCell.js";
 
-export default class AtnSettingsPanel extends React.Component {
-  constructor(props) {
-    super(props);
+export default function AtnSettingsPanel(props) {
+  
+  const {
+    tableRef,
+    title,
+    treeTitle,
+    treeColumns,
+    groupTitle,
+    groupColumns,
+    sortTitle,
+    sortColumns,
+    renders
+  } = props;
 
-    this.handleChangeTreeOrder = this.handleChangeTreeOrder.bind(this);
-
-    this.handleDragEndGroup = this.handleDragEndGroup.bind(this);
-    this.handleChangeGroupOrder = this.handleChangeGroupOrder.bind(this);
-
-    this.handleDragEndSort = this.handleDragEndSort.bind(this);
-    this.handleChangeSortOrder = this.handleChangeSortOrder.bind(this);
-
-    this.handleChangeActive = this.handleChangeActive.bind(this);
-    this.handleChangeVisibility = this.handleChangeVisibility.bind(this);
-  }
-
-  handleChangeTreeOrder(column, order) {
+  const handleChangeTreeOrder = (column, order) => {
     column.sort.order = order;
-    let parentColumn = this.props.treeColumns.find(col => col.tree === 1);
+    let parentColumn = treeColumns.find(col => col.tree === 1);
     parentColumn.sort.order = order;
-    this.props.tableRef.updateData();
+    tableRef.updateData();
   }
 
-  handleDragEndGroup(idFrom, idTo) {
-    let columns = this.props.groupColumns;
+  const handleDragEndGroup = (idFrom, idTo) => {
+    let columns = groupColumns;
     if (idFrom !== idTo) {
       let colFrom = columns.find((el) => el.dnd.groupDraggableId === idFrom);
       let colTo = columns.find((el) => el.dnd.groupDroppableId === idTo);
@@ -38,17 +36,17 @@ export default class AtnSettingsPanel extends React.Component {
       colFrom.group.id = colTo.group.id;
       colTo.group.id = tmpId;
 
-      this.props.tableRef.updateData();
+      tableRef.updateData();
     }
   }
 
-  handleChangeGroupOrder(column, order) {
+  const handleChangeGroupOrder = (column, order) => {
     column.group.order = order;
-    this.props.tableRef.updateData();
+    tableRef.updateData();
   }
 
-  handleDragEndSort(idFrom, idTo) {
-    let columns = this.props.sortColumns;
+  const handleDragEndSort = (idFrom, idTo) => {
+    let columns = sortColumns;
     if (idFrom !== idTo) {
       let colFrom = columns.find((el) => el.dnd.sortDraggableId === idFrom);
       let colTo = columns.find((el) => el.dnd.sortDroppableId === idTo);
@@ -57,17 +55,17 @@ export default class AtnSettingsPanel extends React.Component {
       colFrom.sort.id = colTo.sort.id;
       colTo.sort.id = tmpId;
 
-      this.props.tableRef.updateData();
+      tableRef.updateData();
     }
   }
 
-  handleChangeSortOrder(column, order) {
+  const handleChangeSortOrder = (column, order) => {
     column.sort.order = order;
-    this.props.tableRef.updateData();
+    tableRef.updateData();
   }
 
-  handleChangeActive(column) {
-    let columns = this.props.groupColumns;
+  const handleChangeActive = (column) => {
+    let columns = groupColumns;
     let nextId = columns.filter((col) => col.group.id).reduce((pv, col) => Math.max(pv, col.group.id), 0);
     if (column.group.id) {
       column.group.id = 0;
@@ -75,68 +73,66 @@ export default class AtnSettingsPanel extends React.Component {
       column.group.id = (nextId + 1);
     }
     let fix_columns = columns.filter(col => col.group.id > 0);
-    fix_columns = sortColumns(fix_columns, [['group', 'id'], ['id']]);
+    fix_columns = fncSortColumns(fix_columns, [['group', 'id'], ['id']]);
     fix_columns.forEach((column, column_idx) => {
       column.group.id = column_idx + 1;
     });
-    this.props.tableRef.updateData();
+    tableRef.updateData();
   }
-
-  handleChangeVisibility(column) {
+/*
+  const handleChangeVisibility = (column) => {
     column.visibility.visible = !column.visibility.visible;
-    this.props.tableRef.updateData();
-  }
+    tableRef.updateData();
+  }*/
 
-  render() {
-    return (
-      <div className="atn-settings-container">
-        <div className="atn-settings-title">
-          {this.props.title}
-        </div>
-
-        <div className="atn-settings-tree-title">
-          {this.props.treeTitle}
-        </div>
-        {this.props.treeColumns.filter(col => col.tree === 2).map((col, col_index) => (
-          <AtnTreeCell
-            key={"th" + col.id}
-            column={col}
-            columnIndex={col_index}
-            renderHeaderCell={this.props.renders.renderHeaderCell}
-            onDragEnd={this.handleDragEndSort}
-            onChangeActive={this.handleChangeActive}
-            onChangeTreeOrder={this.handleChangeTreeOrder}
-          />
-        ))}
-
-        <div className="atn-settings-group-title">
-          {this.props.groupTitle}
-        </div>
-        {this.props.groupColumns.map((col, col_index) => (
-          <AtnGroupCell
-            key={"gth" + col.id}
-            column={col}
-            columnIndex={col_index}
-            renderHeaderCell={this.props.renders.renderHeaderCell}
-            onDragEnd={this.handleDragEndGroup}
-            onChangeActive={this.handleChangeActive}
-            onChangeGroupOrder={this.handleChangeGroupOrder}
-          />
-        ))}
-
-        <div className="atn-settings-sort-title">
-          {this.props.sortTitle}
-        </div>
-        {this.props.sortColumns.map((col, col_index) => (
-          <AtnSortCell
-            key={"tth" + col.id}
-            column={col}
-            columnIndex={col_index}
-            renderHeaderCell={this.props.renders.renderHeaderCell}
-            onChangeSortOrder={this.handleChangeSortOrder}
-          />
-        ))}
+  return (
+    <div className="atn-settings-container">
+      <div className="atn-settings-title">
+        {title}
       </div>
-    );
-  }
+
+      <div className="atn-settings-tree-title">
+        {treeTitle}
+      </div>
+      {treeColumns.filter(col => col.tree === 2).map((col, col_index) => (
+        <AtnTreeCell
+          key={"th" + col.id}
+          column={col}
+          columnIndex={col_index}
+          renderHeaderCell={renders.renderHeaderCell}
+          onChangeTreeOrder={handleChangeTreeOrder}
+        />
+      ))}
+
+      <div className="atn-settings-group-title">
+        {groupTitle}
+      </div>
+      {groupColumns.map((col, col_index) => (
+        <AtnGroupCell
+          key={"gth" + col.id}
+          column={col}
+          columnIndex={col_index}
+          renderHeaderCell={renders.renderHeaderCell}
+          onDragEnd={handleDragEndGroup}
+          onChangeActive={handleChangeActive}
+          onChangeGroupOrder={handleChangeGroupOrder}
+        />
+      ))}
+
+      <div className="atn-settings-sort-title">
+        {sortTitle}
+      </div>
+      {sortColumns.map((col, col_index) => (
+        <AtnSortCell
+          key={"tth" + col.id}
+          column={col}
+          columnIndex={col_index}
+          renderHeaderCell={renders.renderHeaderCell}
+          onDragEnd={handleDragEndSort}
+          onChangeActive={handleChangeActive}
+          onChangeSortOrder={handleChangeSortOrder}
+        />
+      ))}
+    </div>
+  );
 }

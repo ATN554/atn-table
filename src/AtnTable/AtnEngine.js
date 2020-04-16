@@ -347,9 +347,10 @@ function fillDataTreeInfo(rows, columns) {
   while (!curIt.done) {
     row = curIt.value;
     if (row.tableData.tree.last) {
+      let level = row.tableData.tree.level;
       let lastLevel = [row];
       curIt = it.next();
-      while (!curIt.done && curIt.value.tableData.tree.last) {
+      while (!curIt.done && curIt.value.tableData.tree.last && curIt.value.tableData.tree.level === level) {
         lastLevel.push(curIt.value);
         curIt = it.next();
       }
