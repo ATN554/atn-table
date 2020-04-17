@@ -108,7 +108,8 @@ export default function AtnSettingsPanel(props) {
           <input
             type="button"
             value=">"
-            style={{float: "right", height: "18px"}}
+            style={{float: "right"}}
+            className="atn-settings-title-btn"
             onClick={() => {
               document.getElementById(dataOrderContainerId).classList.add("left");
               document.getElementById(columnsOrderContainerId).classList.remove("right");
@@ -162,7 +163,8 @@ export default function AtnSettingsPanel(props) {
           <input
             type="button"
             value="<"
-            style={{ float: "left", height: "18px" }}
+            style={{float: "left"}}
+            className="atn-settings-title-btn"
             onClick={() => {
               document.getElementById(dataOrderContainerId).classList.remove("left");
               document.getElementById(columnsOrderContainerId).classList.add("right");
