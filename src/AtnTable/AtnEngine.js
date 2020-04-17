@@ -41,21 +41,15 @@ export function fillColumnsTableData(columns) {
   }
 
   let isTreeData = false;
-  let childColumn = columns.find(col => col.parentField);
-  if (childColumn) {
-    let parentColumn = columns.find(col => col.field === childColumn.parentField);
-    if (parentColumn) {
+  let treeColumn = columns.find(col => col.tree);
+  if (treeColumn) {
+    let parentField = treeColumn.tree.parentField;
+    let parentColumn = columns.find(col => col.field === parentField);
+    let childField = treeColumn.tree.childField;
+    let childColumn = columns.find(col => col.field === childField);
+    if (parentColumn && childColumn) {
       isTreeData = true;
-
-      parentColumn.tree = 1;
-      parentColumn.dnd = { droppable: false, draggable: false };
-      parentColumn.visibility = { visible: false, locked: true };
-      parentColumn.sort = { locked: true, order: "asc" };
-
-      childColumn.tree = 2;
-      childColumn.dnd = { droppable: false, draggable: false };
-      childColumn.visibility = { visible: true, locked: true };
-      childColumn.sort = { locked: true, order: "asc" };
+      treeColumn.visibility = { visible: true, locked: true };
     }
   }
 
@@ -76,11 +70,13 @@ export function fillColumnsTableData(columns) {
     column.dnd = nvl(column.dnd, {});
     column.dnd.droppable = nvl(column.dnd.droppable, true);
     column.dnd.headDroppableId = getUID();
+    column.dnd.orderDroppableId = getUID();
     column.dnd.sortDroppableId = getUID();
     column.dnd.groupDroppableId = getUID();
     column.dnd.groupBarDroppableId = getUID();
     column.dnd.draggable = nvl(column.dnd.draggable, true);
     column.dnd.headDraggableId = getUID();
+    column.dnd.orderDraggableId = getUID();
     column.dnd.sortDraggableId = getUID();
     column.dnd.groupDraggableId = getUID();
     column.dnd.groupBarDraggableId = getUID();
@@ -123,7 +119,7 @@ export function fillColumnsTableData(columns) {
     }
   });
 
-  fix_columns = sortColumns(fix_columns, [['tree'], ['group', 'id'], ['sort', 'id'], ['id']]);
+  fix_columns = sortColumns(fix_columns, [['group', 'id'], ['sort', 'id'], ['id']]);
   fix_columns.forEach((column, column_idx) => {
     column.sort.id = column_idx + 1;
   });
@@ -147,7 +143,7 @@ function compareColumns(column1, column2, key) {
   return 0;
 }
 
-export function sortColumns(columns, keys = [['service'], ['tree'], ['group', 'id'], ['id']]) {
+export function sortColumns(columns, keys = [['service'], ['group', 'id'], ['id']]) {
   let _columns = columns.slice(0);
   _columns = _columns.sort(function (column1, column2) {
     let result = 0;
@@ -224,25 +220,24 @@ function compareRows(row1, row2, columns) {
 }
 
 export function sortData(data, columns) {
-  let _columns = sortColumns(columns, [['service'], ['tree'], ['group', 'id'], ['sort', 'id'], ['id']]);
-  let _sortColumns = _columns.filter(col => !col.service && !col.tree);
+  let _columns = sortColumns(columns, [['service'], ['group', 'id'], ['sort', 'id'], ['id']]);
+  let _sortColumns = _columns.filter(col => !col.service);
 
   data.forEach((row, row_idx) => {
     if (!row.tableData) {
       row.tableData = {};
     }
   });
-  let childColumn = _columns.find(col => col.parentField);
-  if (childColumn) {
+  let treeColumn = _columns.find(col => col.tree);
+  if (treeColumn) {
     let treeData = [];
     let plainData = data;
-    let parentReq = childColumn.parentField;
-    let childReq = childColumn.field;
+    let parentReq = treeColumn.tree.parentField;
+    let childReq = treeColumn.tree.childField;
     let parentRow = { tableData: { tid: -1, tree: {level: -1} } };
     parentRow[childReq] = 0;
-    let _treeColumns = _columns.filter(col => col.tree);
     plainData.sort(function (row1, row2) {
-      return compareRows(row1, row2, _treeColumns);
+      return compareRows(row1, row2, _sortColumns);
     });
     treeBuilder(treeData, plainData, parentReq, childReq, parentRow);
     data = fillDataTreeInfo(treeData, _sortColumns);
@@ -367,7 +362,7 @@ function fillDataTreeInfo(rows, columns) {
   return data;
 }
 
-// treeData = [], plainData must be sorted by [parentReq, childReq]
+// treeData = []
 function treeBuilder(treeData, plainData, parentReq, childReq, parentRow, show) {
   let parentValue = parentRow[childReq];
   let currentLevel = parentRow.tableData.tree.level + 1;

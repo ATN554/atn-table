@@ -1,31 +1,28 @@
 import React from "react";
 import "./settings-panel.css";
 import { sortColumns as fncSortColumns } from "../AtnEngine.js";
-import AtnTreeCell from "./AtnTreeCell.js";
 import AtnGroupCell from "./AtnGroupCell.js";
 import AtnSortCell from "./AtnSortCell.js";
+import AtnOrderCell from "./AtnOrderCell.js";
+import getUID from "../../UID/uid";
 
 export default function AtnSettingsPanel(props) {
+
+  var dataOrderContainerId = getUID();
+  var columnsOrderContainerId = getUID();
   
   const {
     tableRef,
     dataInfo,
-    title,
-    treeTitle,
-    treeColumns,
+    dataSettingsTitle,
     groupTitle,
     groupColumns,
     sortTitle,
     sortColumns,
+    columnsSettingsTitle,
+    orderColumns,
     renders
   } = props;
-
-  const handleChangeTreeOrder = (column, order) => {
-    column.sort.order = order;
-    let parentColumn = treeColumns.find(col => col.tree === 1);
-    parentColumn.sort.order = order;
-    tableRef.updateData();
-  }
 
   const handleDragEndGroup = (idFrom, idTo) => {
     let columns = groupColumns;
@@ -60,6 +57,20 @@ export default function AtnSettingsPanel(props) {
     }
   }
 
+  const handleDragEndOrder = (idFrom, idTo) => {
+    let columns = orderColumns;
+    if (idFrom !== idTo) {
+      let colFrom = columns.find((el) => el.dnd.orderDraggableId === idFrom);
+      let colTo = columns.find((el) => el.dnd.orderDroppableId === idTo);
+
+      let tmpId = colFrom.id;
+      colFrom.id = colTo.id;
+      colTo.id = tmpId;
+
+      tableRef.updateColumns(true, false);
+    }
+  }
+
   const handleChangeSortOrder = (column, order) => {
     column.sort.order = order;
     tableRef.updateData();
@@ -80,72 +91,98 @@ export default function AtnSettingsPanel(props) {
     });
     tableRef.updateData();
   }
-/*
+
   const handleChangeVisibility = (column) => {
     column.visibility.visible = !column.visibility.visible;
-    tableRef.updateData();
-  }*/
+    tableRef.updateData(false);
+  }
 
   return (
-    <div className="atn-settings-container">
-      <div className="atn-settings-title">
-        {title}
+    <React.Fragment>
+      <div 
+        id={dataOrderContainerId}
+        className="atn-settings-container"
+      >
+        <div className="atn-settings-title">
+          {dataSettingsTitle}
+          <input
+            type="button"
+            value=">"
+            style={{float: "right", height: "18px"}}
+            onClick={() => {
+              document.getElementById(dataOrderContainerId).classList.add("left");
+              document.getElementById(columnsOrderContainerId).classList.remove("right");
+            }}
+          />
+        </div>
+
+        {
+          dataInfo.hasGroups
+            &&
+          <React.Fragment>
+            <div className="atn-settings-subtitle">
+              {groupTitle}
+            </div>
+            {groupColumns.map((col, col_index) => (
+              <AtnGroupCell
+                key={"gth" + col.id}
+                column={col}
+                columnIndex={col_index}
+                renderHeaderCell={renders.renderHeaderCell}
+                onDragEnd={handleDragEndGroup}
+                onChangeActive={handleChangeActive}
+                onChangeGroupOrder={handleChangeGroupOrder}
+              />
+            ))}
+          </React.Fragment>
+        }
+
+        <div className="atn-settings-subtitle">
+          {sortTitle}
+        </div>
+        {sortColumns.map((col, col_index) => (
+          <AtnSortCell
+            key={"sth" + col.id}
+            column={col}
+            columnIndex={col_index}
+            renderHeaderCell={renders.renderHeaderCell}
+            onDragEnd={handleDragEndSort}
+            onChangeActive={handleChangeActive}
+            onChangeSortOrder={handleChangeSortOrder}
+          />
+        ))}
+
       </div>
 
-      {
-        dataInfo.isTreeData
-          &&
-        <React.Fragment>
-          <div className="atn-settings-tree-title">
-            {treeTitle}
-          </div>
-          {treeColumns.filter(col => col.tree === 2).map((col, col_index) => (
-            <AtnTreeCell
-              key={"th" + col.id}
-              column={col}
-              columnIndex={col_index}
-              renderHeaderCell={renders.renderHeaderCell}
-              onChangeTreeOrder={handleChangeTreeOrder}
-            />
-          ))}
-        </React.Fragment>
-      }
-      
-      {
-        dataInfo.hasGroups
-          &&
-        <React.Fragment>
-          <div className="atn-settings-group-title">
-            {groupTitle}
-          </div>
-          {groupColumns.map((col, col_index) => (
-            <AtnGroupCell
-              key={"gth" + col.id}
-              column={col}
-              columnIndex={col_index}
-              renderHeaderCell={renders.renderHeaderCell}
-              onDragEnd={handleDragEndGroup}
-              onChangeActive={handleChangeActive}
-              onChangeGroupOrder={handleChangeGroupOrder}
-            />
-          ))}
-        </React.Fragment>
-      }
+      <div 
+        id={columnsOrderContainerId}
+        className="atn-settings-container right"
+      >
+        <div className="atn-settings-title">
+          <input
+            type="button"
+            value="<"
+            style={{ float: "left", height: "18px" }}
+            onClick={() => {
+              document.getElementById(dataOrderContainerId).classList.remove("left");
+              document.getElementById(columnsOrderContainerId).classList.add("right");
+            }}
+          />
+          {columnsSettingsTitle}
+        </div>
 
-      <div className="atn-settings-sort-title">
-        {sortTitle}
+        {orderColumns.map((col, col_index) => (
+          <AtnOrderCell
+            key={"oth" + col.id}
+            column={col}
+            columnIndex={col_index}
+            renderHeaderCell={renders.renderHeaderCell}
+            onDragEnd={handleDragEndOrder}
+            onChangeVisibility={handleChangeVisibility}
+          />
+        ))}
+
       </div>
-      {sortColumns.map((col, col_index) => (
-        <AtnSortCell
-          key={"tth" + col.id}
-          column={col}
-          columnIndex={col_index}
-          renderHeaderCell={renders.renderHeaderCell}
-          onDragEnd={handleDragEndSort}
-          onChangeActive={handleChangeActive}
-          onChangeSortOrder={handleChangeSortOrder}
-        />
-      ))}
-    </div>
+    </React.Fragment>      
   );
 }

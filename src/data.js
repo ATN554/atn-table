@@ -1,5 +1,17 @@
 export const columns = [
   {
+    title: "Наименование",
+    field: "FULL_NAME",
+    width: 250,
+    tree: {
+      parentField: "PARENT_ID",
+      childField: "ID",
+    },
+    sort: {
+      order: "asc",
+    },
+  },
+  {
     title: "Родит. Ид.",
     field: "PARENT_ID",
     type: "integer",
@@ -7,12 +19,11 @@ export const columns = [
     width: 150,
     mimWidth: 10,
     maxWidth: 250,
-    visibility: { 
+    visibility: {
       visible: false,
-      locked: true
     },
   },
-  { 
+  {
     title: "Ид.", 
     field: "ID", 
     type: "integer", 
@@ -20,14 +31,11 @@ export const columns = [
     width: 150, 
     mimWidth: 10, 
     maxWidth: 250,
-    parentField: "PARENT_ID",
+    visibility: {
+      visible: false,
+    },
   },
-  { 
-    title: "Наименование", 
-    field: "FULL_NAME", 
-    width: 250,
-  },
-  { 
+  {
     title: "Сумма", 
     field: "SM", 
     type: "number", 
@@ -37,7 +45,7 @@ export const columns = [
       visible: false
     }
   },
-  { 
+  {
     title: "Дата создания", 
     field: "DT_CREATE", 
     type: "date", 

@@ -7,15 +7,10 @@ import AtnBodyRow from "./AtnBodyRow.js";
 import AtnTotalsRow from './AtnTotalsRow.js';
 
 export default function AtnContent(props) {
-  const { tableRef, columns, treeColumns, groupColumns, totalColumnsWidth, data, currentPage, pageSize, totals, renders } = props;
+  const { tableRef, dataInfo, columns, groupColumns, totalColumnsWidth, data, currentPage, pageSize, totals, renders } = props;
 
   var p1 = pageSize === 0 ? 0 : currentPage * pageSize;
   var p2 = pageSize === 0 ? data.length : p1 + pageSize;
-
-  var isTreeData = treeColumns.length > 0;
-  var hasGroups = groupColumns.length > 0;
-  var isGroupData = !isTreeData && hasGroups;
-  var isPlainData = !isTreeData && !isGroupData;
 
   const renderPlainRow = (_row, _row_index) => {
     return (
@@ -95,9 +90,9 @@ export default function AtnContent(props) {
       </div>
 
       <div className="atn-tbody">
-        {isPlainData && renderPlainData( data.slice(p1, p2) )}
-        {isGroupData && renderGroupData( data.filter(row => row.tableData.gid >= p1 && row.tableData.gid < p2) )}
-        {isTreeData && renderTreeData( data.filter(row => row.tableData.tid >= p1 && row.tableData.tid < p2) )}
+        {dataInfo.isPlainData && renderPlainData( data.slice(p1, p2) )}
+        {dataInfo.isGroupData && renderGroupData( data.filter(row => row.tableData.gid >= p1 && row.tableData.gid < p2) )}
+        {dataInfo.isTreeData && renderTreeData( data.filter(row => row.tableData.tid >= p1 && row.tableData.tid < p2) )}
       </div>
       {
         Object.keys(totals).length !== 0
