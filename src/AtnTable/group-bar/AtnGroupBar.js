@@ -8,6 +8,7 @@ export default function AtnGroupBar(props) {
     title,
     columns,
     renders,
+    updateColumns,
     updateData
   } = props;
 
@@ -20,6 +21,7 @@ export default function AtnGroupBar(props) {
       colFrom.group.id = colTo.group.id;
       colTo.group.id = tmpId;
 
+      updateColumns(undefined, false, true);
       updateData();
     }
   }
@@ -36,6 +38,7 @@ export default function AtnGroupBar(props) {
     fix_columns.forEach((column, column_idx) => {
       column.group.id = column_idx + 1;
     });
+    updateColumns(undefined, false, true);
     updateData();
   }
 

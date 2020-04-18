@@ -5,7 +5,7 @@ import "./menu/menutop.css";
 import "./menu/menubot.css";
 import "./menu/menuleft.css";
 import "./menu/menuright.css";
-import { nvl, fillColumnsTableData, sortColumns, sortData, getCorrectPage } from "./AtnEngine.js";
+import { nvl, fillColumnsTableData, sortColumns, sortData, recalcData, getCorrectPage } from "./AtnEngine.js";
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
 import AtnSettingsPanel from "./settings-panel/AtnSettingsPanel.js";
@@ -33,12 +33,46 @@ const renderTotalsCell = (totals, column, column_index) => {
   return text;
 }
 
+const fillDataInfo = (_columns) => {
+  let dataInfo = {};
+
+  let _userColumns = _columns.filter(col => !col.service);
+
+  let _groupColumns = _userColumns.filter(col => !col.tree && col.group.id > 0);
+  _groupColumns = sortColumns(_groupColumns, [['group', 'id'], ['id']]);
+
+  dataInfo.isTreeData = _userColumns.some(col => col.tree);
+  dataInfo.hasGroups = _groupColumns.length > 0;
+  dataInfo.isGroupData = !dataInfo.isTreeData && dataInfo.hasGroups;
+  dataInfo.isPlainData = !dataInfo.isTreeData && !dataInfo.isGroupData;
+  _columns.find(col => col.field === "#GROUP_COLUMN").visibility.visible = dataInfo.isGroupData;
+
+  let _sortColumns = _userColumns.filter(col => col.group.id === 0);
+  _sortColumns = sortColumns(_sortColumns, [['sort', 'id'], ['id']]);
+
+  let _orderColumns = sortColumns(_sortColumns, [['id']]);
+
+  let _headColumns = _columns.filter(col => col.group.id === 0 && col.visibility.visible);
+
+  let _totalColumnsWidth = _headColumns.reduce((w, col) => 1 + w + col.width, -1);
+
+  dataInfo.userColumns = _userColumns;
+  dataInfo.groupColumns = _groupColumns;
+  dataInfo.sortColumns = _sortColumns;
+  dataInfo.orderColumns = _orderColumns;
+  dataInfo.headColumns = _headColumns;
+  dataInfo.totalColumnsWidth = _totalColumnsWidth;
+
+  return dataInfo;
+}
+
 export default class AtnTable extends React.Component {
   constructor(props) {
     super(props);
 
     let columns = fillColumnsTableData(nvl(props.columns, []));
     columns = sortColumns(columns);
+    let dataInfo = fillDataInfo(columns);
     let data = sortData(nvl(props.data, []), columns);
 
     let renders = nvl(props.renders, {});
@@ -52,6 +86,8 @@ export default class AtnTable extends React.Component {
       columns: columns,
       data: data,
       totals: nvl(props.totals, {}),
+
+      dataInfo: dataInfo,
 
       currentPage: nvl(props.currentPage, 0),
       pageSize: nvl(props.pageSize, 10),
@@ -73,24 +109,25 @@ export default class AtnTable extends React.Component {
     this.setState({ title: _title });
   }
 
-  setColumns(_columns = this.state.columns, _fillColumns = true, _sortColumns = true, _sortData = true) {
+  setColumns(_columns = this.state.columns, _fillColumns = true, _sortColumns = true) {
     if (_fillColumns) {
       _columns = fillColumnsTableData(_columns);
     }
-    if (_sortData) {
-      _columns = _sortColumns ? sortColumns(_columns) : _columns;
-      let _data = sortData(this.state.data, _columns);
-      let _currentPage = getCorrectPage(_data, _columns, this.state.pageSize, this.state.currentPage);
-      this.setState({ columns: _columns, data: _data, currentPage: _currentPage });
-    } else {
-      _columns = _sortColumns ? sortColumns(_columns) : _columns;
-      let _currentPage = getCorrectPage(this.state.data, _columns, this.state.pageSize, this.state.currentPage);
-      this.setState({ columns: _columns, currentPage: _currentPage });
+    if (_sortColumns) {
+      _columns = sortColumns(_columns);
     }
+    let _currentPage = getCorrectPage(this.state.data, _columns, this.state.pageSize, this.state.currentPage);
+    let _dataInfo = fillDataInfo(_columns);
+    this.setState({ columns: _columns, currentPage: _currentPage, dataInfo: _dataInfo });
   }
 
-  setData(_data = this.state.data, _sortData = true) {
-    _data = _sortData ? sortData(nvl(_data, []), this.state.columns) : _data;
+  setData(_data = this.state.data, _sortData = true, _recalcData = true) {
+    if (_sortData) {
+      _data = sortData(_data, this.state.columns);
+    }
+    /*if (_recalcData) {
+      _data = recalcData(_data, this.state.columns);
+    }*/
     let _currentPage = getCorrectPage(_data, this.state.columns, this.state.pageSize, this.state.currentPage);
     this.setState({ data: _data, currentPage: _currentPage });
   }
@@ -114,38 +151,14 @@ export default class AtnTable extends React.Component {
   render() {
     const { 
       title,
-      columns,
       data,
       totals,
+      dataInfo,
       currentPage,
       pageSize,
       pageSizeOptions,
       renders
     } = this.state;
-
-    let _columns = columns;
-
-    let _userColumns = _columns.filter(col => !col.service);
-
-    let _groupColumns = _userColumns.filter(col => !col.tree && col.group.id > 0);
-    _groupColumns = sortColumns(_groupColumns, [['group', 'id'], ['id']]);
-
-    let _sortColumns = _userColumns.filter(col => col.group.id === 0);
-    _sortColumns = sortColumns(_sortColumns, [['sort', 'id'], ['id']]);
-
-    let _orderColumns = sortColumns(_sortColumns, [['id']]);
-    
-    let _headColumns = _columns.filter(col => col.group.id === 0 && col.visibility.visible);
-
-    let _totalColumnsWidth = _headColumns.reduce((w, col) => 1 + w + col.width, -1);
-
-    let dataInfo = {};
-    dataInfo.isTreeData = _userColumns.some(col => col.tree);
-    dataInfo.hasGroups = _groupColumns.length > 0;
-    dataInfo.isGroupData = !dataInfo.isTreeData && dataInfo.hasGroups;
-    dataInfo.isPlainData = !dataInfo.isTreeData && !dataInfo.isGroupData;
-
-    _columns.find(col => col.field === "#GROUP_COLUMN").visibility.visible = dataInfo.isGroupData;
 
     return (
       <table className="atn-container">
@@ -167,8 +180,9 @@ export default class AtnTable extends React.Component {
               <td className="atn-groupbar">
                 <AtnGroupBar
                   title="Группировка"
-                  columns={_groupColumns}
+                  columns={dataInfo.groupColumns}
                   renders={this.state.renders}
+                  updateColumns={this.setColumns}
                   updateData={this.setData}
                 />
               </td>
@@ -194,11 +208,8 @@ export default class AtnTable extends React.Component {
                   dataInfo={dataInfo}
                   dataSettingsTitle="Настройка отображения данных"
                   groupTitle="Группировка"
-                  groupColumns={_groupColumns}
                   sortTitle="Сортировка"
-                  sortColumns={_sortColumns}
                   columnsSettingsTitle="Настройка порядка и отображения колонок"
-                  orderColumns={_orderColumns}
                   renders={renders}
                   updateColumns={this.setColumns}
                   updateData={this.setData}
@@ -206,9 +217,6 @@ export default class AtnTable extends React.Component {
               </AtnMenu>
               <AtnContent
                 dataInfo={dataInfo}
-                columns={_headColumns}
-                groupColumns={_groupColumns}
-                totalColumnsWidth={_totalColumnsWidth}
                 data={data}
                 currentPage={currentPage}
                 pageSize={pageSize}
@@ -242,7 +250,7 @@ export default class AtnTable extends React.Component {
           <tr className="atn-container-tr">
             <td className="atn-footer">
               <AtnPageBar
-                columns={_userColumns}
+                columns={dataInfo.userColumns}
                 data={data}
                 currentPage={currentPage}
                 pageSize={pageSize}

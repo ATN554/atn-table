@@ -9,9 +9,6 @@ import AtnTotalsRow from './AtnTotalsRow.js';
 export default function AtnContent(props) {
   const {
     dataInfo,
-    columns,
-    groupColumns,
-    totalColumnsWidth,
     data,
     currentPage,
     pageSize,
@@ -21,6 +18,15 @@ export default function AtnContent(props) {
     updateData,
   } = props;
 
+  const {
+    headColumns,
+    groupColumns,
+    totalColumnsWidth,
+    isPlainData,
+    isGroupData,
+    isTreeData
+  } = dataInfo;
+
   const p1 = pageSize === 0 ? 0 : currentPage * pageSize;
   const p2 = pageSize === 0 ? data.length : p1 + pageSize;
 
@@ -28,7 +34,7 @@ export default function AtnContent(props) {
     return (
       <AtnBodyRow
         key={"tr-data-" + _row_index}
-        columns={columns}
+        columns={headColumns}
         row={_row}
         rowIndex={_row_index}
         renderDataCell={renders.renderDataCell}
@@ -69,7 +75,7 @@ export default function AtnContent(props) {
       _row.tableData.show && 
       <AtnBodyTreeRow
         key={"tr-data-" + _row_index}
-        columns={columns}
+        columns={headColumns}
         row={_row}
         rowIndex={_row_index}
         renderDataCell={renders.renderDataCell}
@@ -94,23 +100,23 @@ export default function AtnContent(props) {
     <div className="atn-table">
       <div className="atn-thead">
         <AtnHeadRow
-          columns={columns}
+          columns={headColumns}
           renderHeaderCell={renders.renderHeaderCell}
           updateColumns={updateColumns}
         />
       </div>
 
       <div className="atn-tbody">
-        {dataInfo.isPlainData && renderPlainData( data.slice(p1, p2) )}
-        {dataInfo.isGroupData && renderGroupData( data.filter(row => row.tableData.gid >= p1 && row.tableData.gid < p2) )}
-        {dataInfo.isTreeData && renderTreeData( data.filter(row => row.tableData.tid >= p1 && row.tableData.tid < p2) )}
+        {isPlainData && renderPlainData( data.slice(p1, p2) )}
+        {isGroupData && renderGroupData( data.filter(row => row.tableData.gid >= p1 && row.tableData.gid < p2) )}
+        {isTreeData && renderTreeData( data.filter(row => row.tableData.tid >= p1 && row.tableData.tid < p2) )}
       </div>
       {
         Object.keys(totals).length !== 0
          &&
         <div className="atn-tfoot">
           <AtnTotalsRow 
-            columns={columns}
+            columns={headColumns}
             totals={totals}
             renderTotalsCell={renders.renderTotalsCell}
           />

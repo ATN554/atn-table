@@ -257,6 +257,10 @@ export function sortData(data, columns) {
   return data;
 }
 
+export function recalcData(data, columns) {
+
+}
+
 function fillDataGroupsInfo(rows, columns) {
   let _columns = columns.filter(col => col.group.id > 0);
   let ckcnt = _columns.length;

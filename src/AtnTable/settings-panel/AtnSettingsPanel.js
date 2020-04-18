@@ -9,22 +9,26 @@ import getUID from "../../UID/uid";
 
 export default function AtnSettingsPanel(props) {
 
-  var dataOrderContainerId = getUID();
-  var columnsOrderContainerId = getUID();
+  const dataOrderContainerId = getUID();
+  const columnsOrderContainerId = getUID();
   
   const {
     dataInfo,
     dataSettingsTitle,
     groupTitle,
-    groupColumns,
     sortTitle,
-    sortColumns,
     columnsSettingsTitle,
-    orderColumns,
     renders,
     updateColumns,
     updateData
   } = props;
+
+  const {
+    hasGroups,
+    groupColumns,
+    sortColumns,
+    orderColumns
+  } = dataInfo;
 
   const handleDragEndGroup = (idFrom, idTo) => {
     let columns = groupColumns;
@@ -36,6 +40,7 @@ export default function AtnSettingsPanel(props) {
       colFrom.group.id = colTo.group.id;
       colTo.group.id = tmpId;
 
+      updateColumns(undefined, false, true);
       updateData();
     }
   }
@@ -55,6 +60,7 @@ export default function AtnSettingsPanel(props) {
       colFrom.sort.id = colTo.sort.id;
       colTo.sort.id = tmpId;
 
+      updateColumns(undefined, false, false);
       updateData();
     }
   }
@@ -69,7 +75,7 @@ export default function AtnSettingsPanel(props) {
       colFrom.id = colTo.id;
       colTo.id = tmpId;
 
-      updateColumns(undefined, false, true, false);
+      updateColumns(undefined, false, true);
     }
   }
 
@@ -91,11 +97,13 @@ export default function AtnSettingsPanel(props) {
     fix_columns.forEach((column, column_idx) => {
       column.group.id = column_idx + 1;
     });
+    updateColumns(undefined, false, true);
     updateData();
   }
 
   const handleChangeVisibility = (column) => {
     column.visibility.visible = !column.visibility.visible;
+    updateColumns(undefined, false, false);
     updateData(undefined, false);
   }
 
@@ -123,7 +131,7 @@ export default function AtnSettingsPanel(props) {
        
         <div className="atn-settings-subcontainer">
           {
-            dataInfo.hasGroups
+            hasGroups
               &&
             <React.Fragment>
               <div className="atn-settings-subtitle">
