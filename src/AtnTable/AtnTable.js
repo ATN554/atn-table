@@ -207,12 +207,12 @@ export default class AtnTable extends React.Component {
                 <AtnSettingsPanel 
                   tableRef={this}
                   dataInfo={dataInfo}
-                  dataSettingsTitle="Порядок данных"
+                  dataSettingsTitle="Настройка отображения данных"
                   groupTitle="Группировка"
                   groupColumns={_groupColumns}
                   sortTitle="Сортировка"
                   sortColumns={_sortColumns}
-                  columnsSettingsTitle="Порядок и отображение колонок"
+                  columnsSettingsTitle="Настройка порядка и отображения колонок"
                   orderColumns={_orderColumns}
                   renders={this.state.renders}
                 />
