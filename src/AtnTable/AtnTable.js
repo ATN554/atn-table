@@ -212,7 +212,7 @@ export default class AtnTable extends React.Component {
                   groupColumns={_groupColumns}
                   sortTitle="Сортировка"
                   sortColumns={_sortColumns}
-                  columnsSettingsTitle="Порядок и отображение"
+                  columnsSettingsTitle="Порядок и отображение колонок"
                   orderColumns={_orderColumns}
                   renders={this.state.renders}
                 />

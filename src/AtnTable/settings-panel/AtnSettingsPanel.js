@@ -116,43 +116,44 @@ export default function AtnSettingsPanel(props) {
             }}
           />
         </div>
+       
+        <div className="atn-settings-subcontainer">
+          {
+            dataInfo.hasGroups
+              &&
+            <React.Fragment>
+              <div className="atn-settings-subtitle">
+                {groupTitle}
+              </div>
+              {groupColumns.map((col, col_index) => (
+                <AtnGroupCell
+                  key={"gth" + col.id}
+                  column={col}
+                  columnIndex={col_index}
+                  renderHeaderCell={renders.renderHeaderCell}
+                  onDragEnd={handleDragEndGroup}
+                  onChangeActive={handleChangeActive}
+                  onChangeGroupOrder={handleChangeGroupOrder}
+                />
+              ))}
+            </React.Fragment>
+          }
 
-        {
-          dataInfo.hasGroups
-            &&
-          <React.Fragment>
-            <div className="atn-settings-subtitle">
-              {groupTitle}
-            </div>
-            {groupColumns.map((col, col_index) => (
-              <AtnGroupCell
-                key={"gth" + col.id}
-                column={col}
-                columnIndex={col_index}
-                renderHeaderCell={renders.renderHeaderCell}
-                onDragEnd={handleDragEndGroup}
-                onChangeActive={handleChangeActive}
-                onChangeGroupOrder={handleChangeGroupOrder}
-              />
-            ))}
-          </React.Fragment>
-        }
-
-        <div className="atn-settings-subtitle">
-          {sortTitle}
+          <div className="atn-settings-subtitle">
+            {sortTitle}
+          </div>
+          {sortColumns.map((col, col_index) => (
+            <AtnSortCell
+              key={"sth" + col.id}
+              column={col}
+              columnIndex={col_index}
+              renderHeaderCell={renders.renderHeaderCell}
+              onDragEnd={handleDragEndSort}
+              onChangeActive={handleChangeActive}
+              onChangeSortOrder={handleChangeSortOrder}
+            />
+          ))}
         </div>
-        {sortColumns.map((col, col_index) => (
-          <AtnSortCell
-            key={"sth" + col.id}
-            column={col}
-            columnIndex={col_index}
-            renderHeaderCell={renders.renderHeaderCell}
-            onDragEnd={handleDragEndSort}
-            onChangeActive={handleChangeActive}
-            onChangeSortOrder={handleChangeSortOrder}
-          />
-        ))}
-
       </div>
 
       <div 
@@ -173,17 +174,18 @@ export default function AtnSettingsPanel(props) {
           {columnsSettingsTitle}
         </div>
 
-        {orderColumns.map((col, col_index) => (
-          <AtnOrderCell
-            key={"oth" + col.id}
-            column={col}
-            columnIndex={col_index}
-            renderHeaderCell={renders.renderHeaderCell}
-            onDragEnd={handleDragEndOrder}
-            onChangeVisibility={handleChangeVisibility}
-          />
-        ))}
-
+        <div className="atn-settings-subcontainer">
+          {orderColumns.map((col, col_index) => (
+            <AtnOrderCell
+              key={"oth" + col.id}
+              column={col}
+              columnIndex={col_index}
+              renderHeaderCell={renders.renderHeaderCell}
+              onDragEnd={handleDragEndOrder}
+              onChangeVisibility={handleChangeVisibility}
+            />
+          ))}
+        </div>
       </div>
     </React.Fragment>      
   );
