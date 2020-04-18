@@ -2,7 +2,7 @@ import React from "react";
 import { ReactComponent as Icon } from "./button.svg";
 import "./sort-button.css";
 
-export default function AtnToggleButton(props) {
+export default function AtnSortButton(props) {
   const {
     disabled,
     order,

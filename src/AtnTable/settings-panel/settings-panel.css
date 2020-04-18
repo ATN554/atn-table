@@ -1,5 +1,7 @@
 .atn-settings-container {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   top: 0;
   left: 0;
   right: 0;
@@ -22,14 +24,11 @@
   right: -100%;
 }
 
-.atn-settings-title-btn {
-  outline: none;
-  width: 18px;
-  height: 18px;
-}
-
 .atn-settings-title {
-  height: 36px;
+  display: flex;
+  flex-wrap: nowrap;
+  min-height: 18px;
+  max-height: 36px;
   font-weight: bold;
   text-align: center;
   background: var(--th-bg-color);
@@ -39,12 +38,16 @@
   overflow: hidden;
 }
 
+.atn-settings-title-btn {
+  position: relative;
+  width: 16px;
+}
+
+.atn-settings-title-text {
+  width: 100%;
+}
+
 .atn-settings-subcontainer {
-  position: absolute;
-  top: 43px;
-  left: 0;
-  right: 0;
-  bottom: -1px;
   overflow-x: hidden;
   overflow-y: auto;
 }

@@ -4,6 +4,7 @@ import { sortColumns as fncSortColumns } from "../AtnEngine.js";
 import AtnGroupCell from "./AtnGroupCell.js";
 import AtnSortCell from "./AtnSortCell.js";
 import AtnOrderCell from "./AtnOrderCell.js";
+import AtnArrowButton from "../arrow-button/AtnArrowButton.js";
 import getUID from "../../UID/uid";
 
 export default function AtnSettingsPanel(props) {
@@ -104,17 +105,19 @@ export default function AtnSettingsPanel(props) {
         className="atn-settings-container"
       >
         <div className="atn-settings-title">
-          {dataSettingsTitle}
-          <input
-            type="button"
-            value=">"
-            style={{float: "right"}}
-            className="atn-settings-title-btn"
-            onClick={() => {
-              document.getElementById(dataOrderContainerId).classList.add("left");
-              document.getElementById(columnsOrderContainerId).classList.remove("right");
-            }}
-          />
+          <div className="atn-settings-title-btn" />
+          <div className="atn-settings-title-text">
+            {dataSettingsTitle}
+          </div>
+          <div className="atn-settings-title-btn">
+            <AtnArrowButton
+              arrow="right"
+              onClick={() => {
+                document.getElementById(dataOrderContainerId).classList.add("left");
+                document.getElementById(columnsOrderContainerId).classList.remove("right");
+              }}
+            />
+          </div>
         </div>
        
         <div className="atn-settings-subcontainer">
@@ -161,17 +164,19 @@ export default function AtnSettingsPanel(props) {
         className="atn-settings-container right"
       >
         <div className="atn-settings-title">
-          <input
-            type="button"
-            value="<"
-            style={{float: "left"}}
-            className="atn-settings-title-btn"
-            onClick={() => {
-              document.getElementById(dataOrderContainerId).classList.remove("left");
-              document.getElementById(columnsOrderContainerId).classList.add("right");
-            }}
-          />
-          {columnsSettingsTitle}
+          <div className="atn-settings-title-btn">
+            <AtnArrowButton
+              arrow="left"
+              onClick={() => {
+                document.getElementById(dataOrderContainerId).classList.remove("left");
+                document.getElementById(columnsOrderContainerId).classList.add("right");
+              }}
+            />
+          </div>
+          <div className="atn-settings-title-text">
+            {columnsSettingsTitle}
+          </div>
+          <div className="atn-settings-title-btn" />
         </div>
 
         <div className="atn-settings-subcontainer">

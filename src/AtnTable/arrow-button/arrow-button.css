@@ -1,0 +1,37 @@
+.atn-arrow-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  cursor: pointer;
+  fill: var(--svg-fill-enabled);
+  transition: fill 0.1s linear;
+}
+
+.atn-arrow-button:hover {
+  width: 14px;
+  height: 12px;
+}
+
+.atn-arrow-button.disabled {
+  cursor: default;
+  fill: var(--svg-fill-disabled);
+}
+/*
+.atn-arrow-button.top {
+  transform: rotateZ(0deg);
+}
+*/
+.atn-arrow-button.left {
+  transform: rotateZ(-90deg);
+}
+
+.atn-arrow-button.right {
+  transform: rotateZ(90deg);
+}
+
+.atn-arrow-button.bottom {
+  transform: rotateZ(180deg);
+}
