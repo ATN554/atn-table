@@ -7,10 +7,22 @@ import AtnBodyRow from "./AtnBodyRow.js";
 import AtnTotalsRow from './AtnTotalsRow.js';
 
 export default function AtnContent(props) {
-  const { tableRef, dataInfo, columns, groupColumns, totalColumnsWidth, data, currentPage, pageSize, totals, renders } = props;
+  const {
+    dataInfo,
+    columns,
+    groupColumns,
+    totalColumnsWidth,
+    data,
+    currentPage,
+    pageSize,
+    totals,
+    renders,
+    updateColumns,
+    updateData,
+  } = props;
 
-  var p1 = pageSize === 0 ? 0 : currentPage * pageSize;
-  var p2 = pageSize === 0 ? data.length : p1 + pageSize;
+  const p1 = pageSize === 0 ? 0 : currentPage * pageSize;
+  const p2 = pageSize === 0 ? data.length : p1 + pageSize;
 
   const renderPlainRow = (_row, _row_index) => {
     return (
@@ -34,15 +46,14 @@ export default function AtnContent(props) {
             _row.tableData.group[_row.tableData.level + col_index].show
               &&
             <AtnBodyGroupRow
-              tableRef={tableRef}
               key={"tr-group-" + _row_index + "-" + col_index}
               totalColumnsWidth={totalColumnsWidth}
-              columns={groupColumns}
               column={col}
               columnIndex={_row.tableData.level + col_index}
               row={_row}
               rowIndex={_row_index}
               renderDataGroupCell={renders.renderDataGroupCell}
+              updateData={updateData}
             />
           ))
         }
@@ -57,12 +68,12 @@ export default function AtnContent(props) {
     return (
       _row.tableData.show && 
       <AtnBodyTreeRow
-        tableRef={tableRef}
         key={"tr-data-" + _row_index}
         columns={columns}
         row={_row}
         rowIndex={_row_index}
         renderDataCell={renders.renderDataCell}
+        updateData={updateData}
       />
     );
   }
@@ -83,9 +94,9 @@ export default function AtnContent(props) {
     <div className="atn-table">
       <div className="atn-thead">
         <AtnHeadRow
-          tableRef={tableRef}
           columns={columns}
           renderHeaderCell={renders.renderHeaderCell}
+          updateColumns={updateColumns}
         />
       </div>
 

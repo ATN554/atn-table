@@ -3,12 +3,12 @@ import AtnToggleButton from "../toggle-button/AtnToggleButton.js";
 
 export default function AtnBodyTreeRow(props) {
   const {
-    tableRef,
     column,
     columnIndex,
     row,
     rowIndex,
-    renderDataCell
+    renderDataCell,
+    updateData
   } = props;
 
   var tableData = row.tableData;
@@ -16,7 +16,7 @@ export default function AtnBodyTreeRow(props) {
 
   const toggleTree = () => {
     tree.open = !tree.open;
-    tableRef.updateData();
+    updateData();
   }
 
   const renderToggle = () => {

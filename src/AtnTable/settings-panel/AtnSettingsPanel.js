@@ -13,7 +13,6 @@ export default function AtnSettingsPanel(props) {
   var columnsOrderContainerId = getUID();
   
   const {
-    tableRef,
     dataInfo,
     dataSettingsTitle,
     groupTitle,
@@ -22,7 +21,9 @@ export default function AtnSettingsPanel(props) {
     sortColumns,
     columnsSettingsTitle,
     orderColumns,
-    renders
+    renders,
+    updateColumns,
+    updateData
   } = props;
 
   const handleDragEndGroup = (idFrom, idTo) => {
@@ -35,13 +36,13 @@ export default function AtnSettingsPanel(props) {
       colFrom.group.id = colTo.group.id;
       colTo.group.id = tmpId;
 
-      tableRef.updateData();
+      updateData();
     }
   }
 
   const handleChangeGroupOrder = (column, order) => {
     column.group.order = order;
-    tableRef.updateData();
+    updateData();
   }
 
   const handleDragEndSort = (idFrom, idTo) => {
@@ -54,7 +55,7 @@ export default function AtnSettingsPanel(props) {
       colFrom.sort.id = colTo.sort.id;
       colTo.sort.id = tmpId;
 
-      tableRef.updateData();
+      updateData();
     }
   }
 
@@ -68,13 +69,13 @@ export default function AtnSettingsPanel(props) {
       colFrom.id = colTo.id;
       colTo.id = tmpId;
 
-      tableRef.updateColumns(true, false);
+      updateColumns(undefined, false, true, false);
     }
   }
 
   const handleChangeSortOrder = (column, order) => {
     column.sort.order = order;
-    tableRef.updateData();
+    updateData();
   }
 
   const handleChangeActive = (column) => {
@@ -90,12 +91,12 @@ export default function AtnSettingsPanel(props) {
     fix_columns.forEach((column, column_idx) => {
       column.group.id = column_idx + 1;
     });
-    tableRef.updateData();
+    updateData();
   }
 
   const handleChangeVisibility = (column) => {
     column.visibility.visible = !column.visibility.visible;
-    tableRef.updateData(false);
+    updateData(undefined, false);
   }
 
   return (

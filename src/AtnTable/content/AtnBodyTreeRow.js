@@ -4,11 +4,11 @@ import AtnBodyCell from "./AtnBodyCell.js";
 
 export default function AtnBodyTreeRow(props) {
   const {
-    tableRef,
     columns,
     row,
     rowIndex,
-    renderDataCell
+    renderDataCell,
+    updateData
   } = props;
 
   return (
@@ -16,13 +16,13 @@ export default function AtnBodyTreeRow(props) {
       {columns.map((col, col_index) => (
         col.tree ?
         <AtnBodyTreeCell
-          tableRef={tableRef}
           key={"tb" + col_index}
           column={col}
           columnIndex={col_index}
           row={row}
           rowIndex={rowIndex}
           renderDataCell={renderDataCell}
+          updateData={updateData}
         /> :
         <AtnBodyCell
           key={"tb" + col_index}

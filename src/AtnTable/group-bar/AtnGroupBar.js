@@ -5,10 +5,10 @@ import { sortColumns } from "../AtnEngine.js";
 
 export default function AtnGroupBar(props) {
   const {
-    tableRef,
     title,
     columns,
-    renders
+    renders,
+    updateData
   } = props;
 
   const handleDragEnd = (idFrom, idTo) => {
@@ -20,7 +20,7 @@ export default function AtnGroupBar(props) {
       colFrom.group.id = colTo.group.id;
       colTo.group.id = tmpId;
 
-      tableRef.updateData();
+      updateData();
     }
   }
 
@@ -36,12 +36,12 @@ export default function AtnGroupBar(props) {
     fix_columns.forEach((column, column_idx) => {
       column.group.id = column_idx + 1;
     });
-    tableRef.updateData();
+    updateData();
   }
 
   const handleChangeGroupOrder = (column, order) => {
     column.group.order = order;
-    tableRef.updateData();
+    updateData();
   }
 
   return (

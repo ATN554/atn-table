@@ -3,14 +3,14 @@ import AtnHeadCell from "./AtnHeadCell.js";
 
 export default function AtnHeadRow(props) {
   const {
-    tableRef,
     columns,
-    renderHeaderCell
+    renderHeaderCell,
+    updateColumns
   } = props;
 
   const handleHeaderResize = (column, width) => {
     column.width = width;
-    tableRef.updateColumns(false, false);
+    updateColumns(undefined, false, false, false);
   }
 
   const handleDragEnd = (idFrom, idTo) => {
@@ -22,7 +22,7 @@ export default function AtnHeadRow(props) {
       colFrom.id = colTo.id;
       colTo.id = tmpId;
 
-      tableRef.updateColumns(true, false);
+      updateColumns(undefined, false, true, false);
     }
   }
 

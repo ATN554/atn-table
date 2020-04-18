@@ -4,11 +4,11 @@ import { getLastPage } from "../AtnEngine.js";
 
 export default function AtnPageBar(props) {
   const {
-    tableRef,
     columns,
     data,
     currentPage,
-    pageSize
+    pageSize,
+    setCurrentPage
   } = props;
   
   const lastPage = getLastPage(data, columns, pageSize);
@@ -24,7 +24,7 @@ export default function AtnPageBar(props) {
     return pages;
   }
 
-  var pageArray = getPageArray();
+  const pageArray = getPageArray();
 
   return (
     <div 
@@ -34,15 +34,15 @@ export default function AtnPageBar(props) {
         className="atn-page-bar-btn"
         type="button"
         value="⇐"
-        onClick={() => { tableRef.setCurrentPage(0) }}
-        onTouchEnd={() => { tableRef.setCurrentPage(0) }}
+        onClick={() => { setCurrentPage(0) }}
+        onTouchEnd={() => { setCurrentPage(0) }}
       />
       <input
         className="atn-page-bar-btn"
         type="button"
         value="←"
-        onClick={() => { tableRef.setCurrentPage(currentPage - 1) }}
-        onTouchEnd={() => { tableRef.setCurrentPage(currentPage - 1) }}
+        onClick={() => { setCurrentPage(currentPage - 1) }}
+        onTouchEnd={() => { setCurrentPage(currentPage - 1) }}
       />
       {pageArray.map((el) => (
         <input
@@ -50,23 +50,23 @@ export default function AtnPageBar(props) {
           className={currentPage === el ? "atn-page-bar-btn checked" : "atn-page-bar-btn"}
           type="button"
           value={el+1}
-          onClick={() => { tableRef.setCurrentPage(el) }}
-          onTouchEnd={() => { tableRef.setCurrentPage(el) }}
+          onClick={() => { setCurrentPage(el) }}
+          onTouchEnd={() => { setCurrentPage(el) }}
         />
       ))}
       <input
         className="atn-page-bar-btn"
         type="button"
         value="→"
-        onClick={() => { tableRef.setCurrentPage(currentPage + 1) }}
-        onTouchEnd={() => { tableRef.setCurrentPage(currentPage + 1) }}
+        onClick={() => { setCurrentPage(currentPage + 1) }}
+        onTouchEnd={() => { setCurrentPage(currentPage + 1) }}
       />
       <input
         className="atn-page-bar-btn"
         type="button"
         value="⇒"
-        onClick={() => { tableRef.setCurrentPage(lastPage) }}
-        onTouchEnd={() => { tableRef.setCurrentPage(lastPage) }}
+        onClick={() => { setCurrentPage(lastPage) }}
+        onTouchEnd={() => { setCurrentPage(lastPage) }}
       />
     </div>
   );

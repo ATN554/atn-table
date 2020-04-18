@@ -67,51 +67,16 @@ export default class AtnTable extends React.Component {
 
     this.setCurrentPage = this.setCurrentPage.bind(this);
     this.setPageSize = this.setPageSize.bind(this);
-
-    this.updateTitle = this.updateTitle.bind(this);
-    this.updateColumns = this.updateColumns.bind(this);
-    this.updateData = this.updateData.bind(this);
-    this.updateTotals = this.updateTotals.bind(this);
   }
 
   setTitle(_title) {
     this.setState({ title: _title });
   }
 
-  setColumns(_columns) {
-    _columns = fillColumnsTableData(_columns);
-    _columns = sortColumns(_columns);
-    this.setState({ columns: _columns });
-  }
-
-  setData(_data) {
-    _data = sortData(nvl(_data, []), this.state.columns);
-    let _currentPage = getCorrectPage(_data, this.state.columns, this.state.pageSize, this.state.currentPage);
-    this.setState({ data: _data, currentPage: _currentPage });
-  }
-
-  setTotals(_totals) {
-    this.setState({ totals: _totals });
-  }
-
-  setCurrentPage(_page) {
-    let _currentPage = getCorrectPage(this.state.data, this.state.columns, this.state.pageSize, _page);
-    this.setState({ currentPage: _currentPage });
-  }
-
-  setPageSize(_pageSize) {
-    if (this.state.pageSizeOptions.includes(_pageSize)) {
-      let _currentPage = getCorrectPage(this.state.data, this.state.columns, _pageSize, this.state.currentPage);
-      this.setState({ pageSize: _pageSize, currentPage: _currentPage });
+  setColumns(_columns = this.state.columns, _fillColumns = true, _sortColumns = true, _sortData = true) {
+    if (_fillColumns) {
+      _columns = fillColumnsTableData(_columns);
     }
-  }
-
-  updateTitle(_title) {
-    this.setState({ title: _title });
-  }
-
-  updateColumns(_sortColumns = true, _sortData = true) {
-    let _columns = this.state.columns;
     if (_sortData) {
       _columns = _sortColumns ? sortColumns(_columns) : _columns;
       let _data = sortData(this.state.data, _columns);
@@ -124,15 +89,26 @@ export default class AtnTable extends React.Component {
     }
   }
 
-  updateData(_sortData = true) {
-    let _data = this.state.data;
-    _data = _sortData ? sortData(_data, this.state.columns) : _data;
+  setData(_data = this.state.data, _sortData = true) {
+    _data = _sortData ? sortData(nvl(_data, []), this.state.columns) : _data;
     let _currentPage = getCorrectPage(_data, this.state.columns, this.state.pageSize, this.state.currentPage);
     this.setState({ data: _data, currentPage: _currentPage });
   }
 
-  updateTotals(totals) {
-    this.setState({ totals: totals });
+  setTotals(_totals = {}) {
+    this.setState({ totals: _totals });
+  }
+
+  setCurrentPage(_page = 0) {
+    let _currentPage = getCorrectPage(this.state.data, this.state.columns, this.state.pageSize, _page);
+    this.setState({ currentPage: _currentPage });
+  }
+
+  setPageSize(_pageSize = 10) {
+    if (this.state.pageSizeOptions.includes(_pageSize)) {
+      let _currentPage = getCorrectPage(this.state.data, this.state.columns, _pageSize, this.state.currentPage);
+      this.setState({ pageSize: _pageSize, currentPage: _currentPage });
+    }
   }
 
   render() {
@@ -190,10 +166,10 @@ export default class AtnTable extends React.Component {
             <tr className="atn-groupbar-tr">
               <td className="atn-groupbar">
                 <AtnGroupBar
-                  tableRef={this}
                   title="Группировка"
                   columns={_groupColumns}
                   renders={this.state.renders}
+                  updateData={this.setData}
                 />
               </td>
             </tr>
@@ -214,8 +190,7 @@ export default class AtnTable extends React.Component {
                 contentClass="atn-mleft-content"
                 buttonClass="atn-mleft-button"
               >
-                <AtnSettingsPanel 
-                  tableRef={this}
+                <AtnSettingsPanel
                   dataInfo={dataInfo}
                   dataSettingsTitle="Настройка отображения данных"
                   groupTitle="Группировка"
@@ -225,10 +200,11 @@ export default class AtnTable extends React.Component {
                   columnsSettingsTitle="Настройка порядка и отображения колонок"
                   orderColumns={_orderColumns}
                   renders={renders}
+                  updateColumns={this.setColumns}
+                  updateData={this.setData}
                 />
               </AtnMenu>
               <AtnContent
-                tableRef={this}
                 dataInfo={dataInfo}
                 columns={_headColumns}
                 groupColumns={_groupColumns}
@@ -238,6 +214,8 @@ export default class AtnTable extends React.Component {
                 pageSize={pageSize}
                 totals={totals}
                 renders={renders}
+                updateColumns={this.setColumns}
+                updateData={this.setData}
               />
               <AtnMenu
                 mainClass="atn-mright"
@@ -264,11 +242,11 @@ export default class AtnTable extends React.Component {
           <tr className="atn-container-tr">
             <td className="atn-footer">
               <AtnPageBar
-                tableRef={this}
                 columns={_userColumns}
                 data={data}
                 currentPage={currentPage}
                 pageSize={pageSize}
+                setCurrentPage={this.setCurrentPage}
               />
             </td>
           </tr>
