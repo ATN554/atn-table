@@ -5,7 +5,7 @@ import "./menu/menutop.css";
 import "./menu/menubot.css";
 import "./menu/menuleft.css";
 import "./menu/menuright.css";
-import { nvl, fillColumnsTableData, fillRowsTableData, sortColumns, sortData, getCorrectPage } from "./AtnEngine.js";
+import { nvl, fillColumnsTableData, sortColumns, sortData, getCorrectPage } from "./AtnEngine.js";
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
 import AtnSettingsPanel from "./settings-panel/AtnSettingsPanel.js";
@@ -85,8 +85,7 @@ export default class AtnTable extends React.Component {
   }
 
   setData(_data) {
-    _data = fillRowsTableData(_data);
-    _data = sortData(_data);
+    _data = sortData(nvl(_data, []), this.state.columns);
     let _currentPage = getCorrectPage(_data, this.state.columns, this.state.pageSize, this.state.currentPage);
     this.setState({ data: _data, currentPage: _currentPage });
   }
@@ -137,7 +136,18 @@ export default class AtnTable extends React.Component {
   }
 
   render() {
-    let _columns = this.state.columns;
+    const { 
+      title,
+      columns,
+      data,
+      totals,
+      currentPage,
+      pageSize,
+      pageSizeOptions,
+      renders
+    } = this.state;
+
+    let _columns = columns;
 
     let _userColumns = _columns.filter(col => !col.service);
 
@@ -167,7 +177,7 @@ export default class AtnTable extends React.Component {
           <tr className="atn-toolbar-tr">
             <td className="atn-toolbar">
               <div className="atn-title">
-                {this.state.title}
+                {title}
               </div>
               <div style={{ height: "32px", lineHeight: "32px" }}>
                 Панель кнопок
@@ -214,7 +224,7 @@ export default class AtnTable extends React.Component {
                   sortColumns={_sortColumns}
                   columnsSettingsTitle="Настройка порядка и отображения колонок"
                   orderColumns={_orderColumns}
-                  renders={this.state.renders}
+                  renders={renders}
                 />
               </AtnMenu>
               <AtnContent
@@ -223,11 +233,11 @@ export default class AtnTable extends React.Component {
                 columns={_headColumns}
                 groupColumns={_groupColumns}
                 totalColumnsWidth={_totalColumnsWidth}
-                data={this.state.data}
-                currentPage={this.state.currentPage}
-                pageSize={this.state.pageSize}
-                totals={this.state.totals}
-                renders={this.state.renders}
+                data={data}
+                currentPage={currentPage}
+                pageSize={pageSize}
+                totals={totals}
+                renders={renders}
               />
               <AtnMenu
                 mainClass="atn-mright"
@@ -242,8 +252,8 @@ export default class AtnTable extends React.Component {
                 buttonClass="atn-mbot-button"
               >
                 <AtnPageSizeOptions
-                  pageSize={this.state.pageSize}
-                  pageSizeOptions={this.state.pageSizeOptions}
+                  pageSize={pageSize}
+                  pageSizeOptions={pageSizeOptions}
                   onChange={this.setPageSize}
                 />
               </AtnMenu>
@@ -256,9 +266,9 @@ export default class AtnTable extends React.Component {
               <AtnPageBar
                 tableRef={this}
                 columns={_userColumns}
-                data={this.state.data}
-                currentPage={this.state.currentPage}
-                pageSize={this.state.pageSize}
+                data={data}
+                currentPage={currentPage}
+                pageSize={pageSize}
               />
             </td>
           </tr>

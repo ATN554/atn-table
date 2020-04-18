@@ -7,6 +7,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.tableRef = null;
+
     this.state = {
       columns: columns,
       data: data,
@@ -14,14 +16,18 @@ export default class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.tableRef.setData(this.state.data);
+    this.tableRef.setTotals(this.state.totals);
+  }
+
   render() {
     return (
       <div className="content">
         <AtnTable
+          ref={el =>  this.tableRef = el}
           title="Заголовок таблицы"
           columns={this.state.columns}
-          data={this.state.data}
-          totals={this.state.totals}
           pageSize={20}
           pageSizeOptions={[10, 20, 50, 0]}
         />
