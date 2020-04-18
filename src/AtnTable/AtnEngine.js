@@ -236,8 +236,10 @@ export function sortData(data, columns) {
     let childReq = treeColumn.tree.childField;
     let parentRow = { tableData: { tid: -1, tree: {level: -1} } };
     parentRow[childReq] = treeColumn.tree.startFrom;
+    let _idTB = _sortColumns.findIndex(col => col.tree);
+    let _sortColumnsBTB = _sortColumns.slice(0, _idTB+1);
     plainData.sort(function (row1, row2) {
-      return compareRows(row1, row2, _sortColumns);
+      return compareRows(row1, row2, _sortColumnsBTB);
     });
     treeBuilder(treeData, plainData, parentReq, childReq, parentRow);
     data = fillDataTreeInfo(treeData, _sortColumns);
