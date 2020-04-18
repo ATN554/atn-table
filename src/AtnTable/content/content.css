@@ -69,8 +69,7 @@
   white-space: pre-wrap;
   word-wrap: break-word;
   word-break: break-all;
-  padding: 3px;
-  padding-right: 14px;
+  padding: 3px 14px 3px 3px;
 }
 
 .atn-thead-td-resizer {

@@ -5,7 +5,7 @@ import "./menu/menutop.css";
 import "./menu/menubot.css";
 import "./menu/menuleft.css";
 import "./menu/menuright.css";
-import { nvl, fillColumnsTableData, fillRowsTableData, sortColumns, sortData, getCorrectPage, getLastPage } from "./AtnEngine.js";
+import { nvl, fillColumnsTableData, fillRowsTableData, sortColumns, sortData, getCorrectPage } from "./AtnEngine.js";
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
 import AtnSettingsPanel from "./settings-panel/AtnSettingsPanel.js";
