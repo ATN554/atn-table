@@ -3,37 +3,43 @@ import { ReactComponent as Icon } from "./button.svg";
 import "./sort-button.css";
 
 export default function AtnToggleButton(props) {
+  const {
+    disabled,
+    order,
+    radio,
+    onChange
+  } = props;
 
-  const getClassName = (order, sameState) => {
-    if (props.disabled) {
-      if (sameState) {
-        return "atn-sort-button-" + order + " disabled checked";
+  const getClassName = (_order, _sameState) => {
+    if (disabled) {
+      if (_sameState) {
+        return "atn-sort-button-" + _order + " disabled checked";
       } else {
-        return "atn-sort-button-" + order + " disabled";
+        return "atn-sort-button-" + _order + " disabled";
       }
     } else {
-      if (sameState) {
-        if (props.radio) {
-          return "atn-sort-button-" + order + " checked";
+      if (_sameState) {
+        if (radio) {
+          return "atn-sort-button-" + _order + " checked";
         } else {
-          return "atn-sort-button-" + order + " active checked";
+          return "atn-sort-button-" + _order + " active checked";
         }
       } else {
-        return "atn-sort-button-" + order + " active";
+        return "atn-sort-button-" + _order + " active";
       }
     }
   }
 
-  const getProps = (order) => {
-    let sameState = props.order === order;
-    return ((props.disabled) || (props.radio && sameState)) ?
+  const getProps = (_order) => {
+    let sameState = order === _order;
+    return ((disabled) || (radio && sameState)) ?
       {
-        className: getClassName(order, sameState)
+        className: getClassName(_order, sameState)
       } :
       {
-        className: getClassName(order, sameState),
-        onClick: () => props.onChange(sameState ? undefined : order),
-        onTouchEnd: () => props.onChange(sameState ? undefined : order)
+        className: getClassName(_order, sameState),
+        onClick: () => onChange(sameState ? undefined : _order),
+        onTouchEnd: () => onChange(sameState ? undefined : _order)
       };
   }
 

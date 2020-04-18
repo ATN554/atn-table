@@ -235,7 +235,7 @@ export function sortData(data, columns) {
     let parentReq = treeColumn.tree.parentField;
     let childReq = treeColumn.tree.childField;
     let parentRow = { tableData: { tid: -1, tree: {level: -1} } };
-    parentRow[childReq] = 0;
+    parentRow[childReq] = treeColumn.tree.startFrom;
     plainData.sort(function (row1, row2) {
       return compareRows(row1, row2, _sortColumns);
     });
@@ -398,11 +398,19 @@ export function getLastPage(data, columns, pageSize) {
   let len;
   let isTree = columns.some(col => col.tree);
   if (isTree) {
-    len = data[data.length - 1].tableData.tid;
+    if (data.length === 0) {
+      len = 0;
+    } else {
+      len = data[data.length - 1].tableData.tid;
+    }
   } else {
     let hasGroups = columns.some(col => col.group.id > 0);
     if (hasGroups) {
-      len = data[data.length-1].tableData.gid;
+      if (data.length === 0) {
+        len = 0;
+      } else {
+        len = data[data.length-1].tableData.gid;
+      }
     } else {
       len = data.length; 
     }

@@ -3,16 +3,21 @@ import { ReactComponent as Icon } from "./button.svg";
 import "./toggle-button.css";
 
 export default function AtnToggleButton(props) {
+  const {
+    disabled,
+    checked,
+    onChange
+  } = props;
 
   const getClassName = () => {
-    if (props.disabled) {
-      if (props.checked) {
+    if (disabled) {
+      if (checked) {
         return "atn-toggle-button disabled checked";
       } else {
         return "atn-toggle-button disabled";
       }
     } else {
-      if (props.checked) {
+      if (checked) {
         return "atn-toggle-button active checked";
       } else {
         return "atn-toggle-button active";
@@ -21,14 +26,14 @@ export default function AtnToggleButton(props) {
   }
 
   const getProps = () => {
-    return props.disabled ? 
+    return disabled ? 
       {
         className: getClassName()
       } : 
       {
         className: getClassName(),
-        onClick: props.onChange,
-        onTouchEnd: props.onChange
+        onClick: onChange,
+        onTouchEnd: onChange
       };
   }
 

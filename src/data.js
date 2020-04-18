@@ -6,6 +6,7 @@ export const columns = [
     tree: {
       parentField: "PARENT_ID",
       childField: "ID",
+      startFrom: 0,
     },
     sort: {
       order: "asc",

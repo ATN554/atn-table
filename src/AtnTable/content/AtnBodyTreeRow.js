@@ -3,26 +3,34 @@ import AtnBodyTreeCell from "./AtnBodyTreeCell.js";
 import AtnBodyCell from "./AtnBodyCell.js";
 
 export default function AtnBodyTreeRow(props) {
+  const {
+    tableRef,
+    columns,
+    row,
+    rowIndex,
+    renderDataCell
+  } = props;
+
   return (
     <div className="atn-tbody-tr">
-      {props.columns.map((col, col_index) => (
+      {columns.map((col, col_index) => (
         col.tree ?
         <AtnBodyTreeCell
-          tableRef={props.tableRef}
+          tableRef={tableRef}
           key={"tb" + col_index}
           column={col}
           columnIndex={col_index}
-          row={props.row}
-          rowIndex={props.rowIndex}
-          renderDataCell={props.renderDataCell}
+          row={row}
+          rowIndex={rowIndex}
+          renderDataCell={renderDataCell}
         /> :
         <AtnBodyCell
           key={"tb" + col_index}
           column={col}
           columnIndex={col_index}
-          row={props.row}
-          rowIndex={props.rowIndex}
-          renderDataCell={props.renderDataCell}
+          row={row}
+          rowIndex={rowIndex}
+          renderDataCell={renderDataCell}
         />
       ))}
     </div>

@@ -2,16 +2,23 @@ import React from "react";
 import AtnBodyCell from "./AtnBodyCell.js";
 
 export default function AtnBodyRow(props) {
+  const {
+    columns,
+    row,
+    rowIndex,
+    renderDataCell
+  } = props;
+
   return (
     <div className="atn-tbody-tr">
-      {props.columns.map((col, col_index) => (
+      {columns.map((col, col_index) => (
         <AtnBodyCell
           key={"tb" + col_index}
           column={col}
           columnIndex={col_index}
-          row={props.row}
-          rowIndex={props.rowIndex}
-          renderDataCell={props.renderDataCell}
+          row={row}
+          rowIndex={rowIndex}
+          renderDataCell={renderDataCell}
         />
       ))}
     </div>

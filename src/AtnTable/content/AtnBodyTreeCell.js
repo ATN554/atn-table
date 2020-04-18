@@ -2,14 +2,21 @@ import React from "react";
 import AtnToggleButton from "../toggle-button/AtnToggleButton.js";
 
 export default function AtnBodyTreeRow(props) {
+  const {
+    tableRef,
+    column,
+    columnIndex,
+    row,
+    rowIndex,
+    renderDataCell
+  } = props;
 
-  var tableData = props.row.tableData;
+  var tableData = row.tableData;
   var tree = tableData.tree;
-  var column = props.column;
 
   const toggleTree = () => {
     tree.open = !tree.open;
-    props.tableRef.updateData();
+    tableRef.updateData();
   }
 
   const renderToggle = () => {
@@ -39,7 +46,7 @@ export default function AtnBodyTreeRow(props) {
           {renderToggle()}
         </div>
         <div className={"atn-tbody-td-text atn-" + column.align + "-align"}>
-          {props.renderDataCell(props.row, props.rowIndex, column, props.column_index)}
+          {renderDataCell(row, rowIndex, column, columnIndex)}
         </div>
       </div>
     </div>
