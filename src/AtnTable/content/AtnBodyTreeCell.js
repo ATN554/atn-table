@@ -34,20 +34,16 @@ export default function AtnBodyTreeRow(props) {
   return (
     <div
       className="atn-tbody-td"
+      style={{ flexBasis: column.width + "px" }}
     >
-      <div
-        className={"atn-tbody-tree-td-container"}
-        style={{ width: column.width + "px" }}
-      >
-        {Array.from(Array(tree.level)).map((el, el_idx) => (
-          <div key={"tdm-" + el_idx} className="atn-tbody-tree-td-margin"></div>
-        ))}
-        <div className="atn-tbody-tree-td-button">
-          {renderToggle()}
-        </div>
-        <div className={"atn-tbody-td-text atn-" + column.align + "-align"}>
-          {renderDataCell(row, rowIndex, column, columnIndex)}
-        </div>
+      {Array.from(Array(tree.level)).map((el, el_idx) => (
+        <div key={"tdm-" + el_idx} className="atn-tbody-tree-td-margin"></div>
+      ))}
+      <div className="atn-tbody-tree-td-button">
+        {renderToggle()}
+      </div>
+      <div className={"atn-tbody-td-text atn-" + column.align + "-align"}>
+        {renderDataCell(row, rowIndex, column, columnIndex)}
       </div>
     </div>
   )

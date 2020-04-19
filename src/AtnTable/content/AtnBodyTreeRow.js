@@ -1,6 +1,7 @@
 import React from "react";
 import AtnBodyTreeCell from "./AtnBodyTreeCell.js";
 import AtnBodyCell from "./AtnBodyCell.js";
+import AtnDetailsPanel from "./AtnDetailsPanel.js";
 
 export default function AtnBodyTreeRow(props) {
   const {
@@ -8,6 +9,7 @@ export default function AtnBodyTreeRow(props) {
     row,
     rowIndex,
     renderDataCell,
+    renderDetailsPanel,
     updateData
   } = props;
 
@@ -33,6 +35,15 @@ export default function AtnBodyTreeRow(props) {
           renderDataCell={renderDataCell}
         />
       ))}
+      {
+        renderDetailsPanel
+          &&
+        <AtnDetailsPanel
+          row={row}
+          rowIndex={rowIndex}
+          renderDetailsPanel={renderDetailsPanel}
+        />
+      }
     </div>
   )
 }

@@ -1,12 +1,14 @@
 import React from "react";
 import AtnBodyCell from "./AtnBodyCell.js";
+import AtnDetailsPanel from "./AtnDetailsPanel.js";
 
 export default function AtnBodyRow(props) {
   const {
     columns,
     row,
     rowIndex,
-    renderDataCell
+    renderDataCell,
+    renderDetailsPanel
   } = props;
 
   return (
@@ -21,6 +23,15 @@ export default function AtnBodyRow(props) {
           renderDataCell={renderDataCell}
         />
       ))}
+      {
+        renderDetailsPanel 
+          &&
+        <AtnDetailsPanel
+          row={row}
+          rowIndex={rowIndex}
+          renderDetailsPanel={renderDetailsPanel}
+        />
+      }
     </div>
   )
 }

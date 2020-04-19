@@ -12,15 +12,11 @@ export default function AtnBodyCell(props) {
   return (
     <div 
       className="atn-tbody-td"
+      style={{ flexBasis: column.width + "px" }}
     >
-      <div 
-        className={"atn-tbody-td-container atn-" + column.align + "-align"} 
-        style={{ width: column.width + "px" }}
-      >
-        <div className="atn-tbody-td-text">
+        <div className={"atn-tbody-td-text atn-" + column.align + "-align"}>
           {renderDataCell(row, rowIndex, column, columnIndex)}
         </div>
-      </div>
     </div>
   )
 }

@@ -3,7 +3,6 @@ import AtnToggleButton from "../toggle-button/AtnToggleButton.js";
 
 export default function AtnBodyGroupRow(props) {
   const {
-    totalColumnsWidth,
     column,
     columnIndex,
     row,
@@ -32,20 +31,15 @@ export default function AtnBodyGroupRow(props) {
 
   return (
     <div className="atn-tbody-tr">
-      <div className="atn-tbody-td">
-        <div 
-          className="atn-tbody-group-td-container"
-          style={{ width: totalColumnsWidth + "px" }}
-        >
-          {Array.from(Array(columnIndex)).map((el, el_idx) => (
-            <div key={"tdm-" + el_idx} className="atn-tbody-group-td-margin"></div>  
-          ))}
-          <div className="atn-tbody-group-td-button">
-            {renderToggle()}
-          </div>
-          <div className="atn-tbody-td-text">
-            {renderDataGroupCell(row, rowIndex, column, columnIndex)}
-          </div>
+      <div className="atn-tbody-group-td">
+        {Array.from(Array(columnIndex)).map((el, el_idx) => (
+          <div key={"tdm-" + el_idx} className="atn-tbody-group-td-margin"></div>  
+        ))}
+        <div className="atn-tbody-group-td-button">
+          {renderToggle()}
+        </div>
+        <div className="atn-tbody-td-text">
+          {renderDataGroupCell(row, rowIndex, column, columnIndex)}
         </div>
       </div>
     </div>

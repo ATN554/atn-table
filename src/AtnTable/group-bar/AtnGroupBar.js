@@ -47,10 +47,8 @@ export default function AtnGroupBar(props) {
 
   return (
     <div className="atn-group-bar-container">
-      <div className="atn-group-bar-title-tc">
-        <div className="atn-group-bar-title-td">
-          {title}
-        </div>
+      <div className="atn-group-bar-title-td">
+        {title}
       </div>
       {columns.map((col, col_index) => (
         <AtnGroupBarCell

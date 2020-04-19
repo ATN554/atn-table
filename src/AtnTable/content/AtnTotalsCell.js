@@ -9,14 +9,12 @@ export default function AtnTotalsCell(props) {
   } = props;
 
   return (
-    <div className="atn-tfoot-td">
-      <div
-        className={"atn-tfoot-td-container atn-" + (columnIndex === 0 ? "left" : column.align) + "-align"}
-        style={{ width: column.width + "px" }}
-      >
-        <div className="atn-tfoot-td-text">
-          {renderTotalsCell(totals, column, columnIndex)}
-        </div>
+    <div
+      className="atn-tfoot-td"
+      style={{ flexBasis: column.width + "px" }}
+    >
+      <div className={"atn-tfoot-td-text atn-" + (columnIndex === 0 ? "left" : column.align) + "-align"}>
+        {renderTotalsCell(totals, column, columnIndex)}
       </div>
     </div>
   )

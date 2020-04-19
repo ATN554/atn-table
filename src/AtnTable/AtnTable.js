@@ -83,10 +83,11 @@ export default class AtnTable extends React.Component {
     let data = sortData(nvl(props.data, []), dataInfo);
 
     let renders = nvl(props.renders, {});
-    renders.renderHeaderCell = nvl(renders.renderHeaderCell, renderHeaderCell);
-    renders.renderDataGroupCell = nvl(renders.renderDataGroupCell, renderDataGroupCell);
-    renders.renderDataCell = nvl(renders.renderDataCell, renderDataCell);
-    renders.renderTotalsCell = nvl(renders.renderTotalsCell, renderTotalsCell);
+    renders.renderHeaderCell = nvl(props.renderHeaderCell, renderHeaderCell);
+    renders.renderDataGroupCell = nvl(props.renderDataGroupCell, renderDataGroupCell);
+    renders.renderDataCell = nvl(props.renderDataCell, renderDataCell);
+    renders.renderTotalsCell = nvl(props.renderTotalsCell, renderTotalsCell);
+    renders.renderDetailsPanel = props.renderDetailsPanel;
 
     this.state = {
       title: nvl(props.title, ""),
@@ -238,10 +239,10 @@ export default class AtnTable extends React.Component {
               >
                 <AtnSettingsPanel
                   dataInfo={dataInfo}
-                  dataSettingsTitle="Настройка отображения данных"
+                  dataSettingsTitle="Порядок отображения данных"
                   groupTitle="Группировка"
                   sortTitle="Сортировка"
-                  columnsSettingsTitle="Настройка порядка и отображения колонок"
+                  columnsSettingsTitle="Порядок отображения колонок"
                   renders={renders}
                   updateColumnsAndData={this.setColumnsAndData}
                   updateColumns={this.setColumns}

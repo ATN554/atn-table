@@ -22,7 +22,6 @@ export default function AtnContent(props) {
     headColumns,
     groupColumns,
     totalColumnsWidth,
-    isPlainData,
     isGroupData,
     isTreeData
   } = dataInfo;
@@ -38,6 +37,7 @@ export default function AtnContent(props) {
         row={_row}
         rowIndex={_row_index}
         renderDataCell={renders.renderDataCell}
+        renderDetailsPanel={renders.renderDetailsPanel}
       />
     );
   }
@@ -53,7 +53,6 @@ export default function AtnContent(props) {
               &&
             <AtnBodyGroupRow
               key={"tr-group-" + _row_index + "-" + col_index}
-              totalColumnsWidth={totalColumnsWidth}
               column={col}
               columnIndex={_row.tableData.level + col_index}
               row={_row}
@@ -79,6 +78,7 @@ export default function AtnContent(props) {
         row={_row}
         rowIndex={_row_index}
         renderDataCell={renders.renderDataCell}
+        renderDetailsPanel={renders.renderDetailsPanel}
         updateData={updateData}
       />
     );
@@ -96,9 +96,23 @@ export default function AtnContent(props) {
     return _data.map(renderTreeRow);
   }
 
+  const renderData = isTreeData ? 
+                     data.filter(row => row.tableData.tid >= p1 && row.tableData.tid < p2) :
+                     isGroupData ?
+                     data.filter(row => row.tableData.gid >= p1 && row.tableData.gid < p2) :
+                     data.slice(p1, p2);
+  const renderFunction = isTreeData ?
+                         renderTreeData :
+                         isGroupData ?
+                         renderGroupData :
+                         renderPlainData;
+
   return (
     <div className="atn-table">
-      <div className="atn-thead">
+      <div
+        className="atn-thead"
+        style={{ width: (totalColumnsWidth + 1) + "px" }}
+      >
         <AtnHeadRow
           columns={headColumns}
           renderHeaderCell={renders.renderHeaderCell}
@@ -106,15 +120,19 @@ export default function AtnContent(props) {
         />
       </div>
 
-      <div className="atn-tbody">
-        {isPlainData && renderPlainData( data.slice(p1, p2) )}
-        {isGroupData && renderGroupData( data.filter(row => row.tableData.gid >= p1 && row.tableData.gid < p2) )}
-        {isTreeData && renderTreeData( data.filter(row => row.tableData.tid >= p1 && row.tableData.tid < p2) )}
+      <div 
+        className="atn-tbody"
+        style={{ width: (totalColumnsWidth + 1) + "px" }}
+      >
+        {renderFunction(renderData)}
       </div>
       {
         Object.keys(totals).length !== 0
          &&
-        <div className="atn-tfoot">
+        <div
+          className="atn-tfoot"
+          style={{ width: (totalColumnsWidth + 1) + "px" }}
+        >
           <AtnTotalsRow 
             columns={headColumns}
             totals={totals}
