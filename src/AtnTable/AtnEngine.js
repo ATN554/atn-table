@@ -219,46 +219,42 @@ function compareRows(row1, row2, columns) {
   return result;
 }
 
-export function sortData(data, columns) {
-  let _columns = sortColumns(columns, [['service'], ['group', 'id'], ['sort', 'id'], ['id']]);
-  let _sortColumns = _columns.filter(col => !col.service);
+export function sortData(data, dataInfo) {
+  let _sortColumns = sortColumns(dataInfo.userColumns, [['group', 'id'], ['sort', 'id'], ['id']]);
 
   data.forEach((row, row_idx) => {
     if (!row.tableData) {
       row.tableData = {};
     }
   });
-  let treeColumn = _columns.find(col => col.tree);
-  if (treeColumn) {
+
+  if (dataInfo.isTreeData) {
     let treeData = [];
     let plainData = data;
-    let parentReq = treeColumn.tree.parentField;
-    let childReq = treeColumn.tree.childField;
+    let parentReq = dataInfo.treeColumn.tree.parentField;
+    let childReq = dataInfo.treeColumn.tree.childField;
     let parentRow = { tableData: { tid: -1, tree: {level: -1} } };
-    parentRow[childReq] = treeColumn.tree.startFrom;
+    parentRow[childReq] = dataInfo.treeColumn.tree.startFrom;
     let _idTB = _sortColumns.findIndex(col => col.tree);
     let _sortColumnsBTB = _sortColumns.slice(0, _idTB+1);
     plainData.sort(function (row1, row2) {
       return compareRows(row1, row2, _sortColumnsBTB);
     });
     treeBuilder(treeData, plainData, parentReq, childReq, parentRow);
-    data = fillDataTreeInfo(treeData, _sortColumns);
+    data = fillDataTreeInfo(treeData, dataInfo.userColumns);
   } else {
     data.sort(function (row1, row2) {
       return compareRows(row1, row2, _sortColumns);
     });
-    data = fillDataGroupsInfo(data, _sortColumns);
+    data = fillDataGroupsInfo(data, dataInfo.userColumns);
   }
+
   data.forEach((row, row_idx) => {
     row.tableData.id = row_idx;
     row["#ID"] = row.tableData.id;
   });
 
   return data;
-}
-
-export function recalcData(data, columns) {
-
 }
 
 function fillDataGroupsInfo(rows, columns) {
@@ -397,21 +393,19 @@ function treeBuilder(treeData, plainData, parentReq, childReq, parentRow, show) 
   return parentChilds;
 }
 
-export function getLastPage(data, columns, pageSize) {
+export function getLastPage(data, dataInfo, pageSize) {
   if (pageSize === 0) {
     return 0;
   }
   let len;
-  let isTree = columns.some(col => col.tree);
-  if (isTree) {
+  if (dataInfo.isTreeData) {
     if (data.length === 0) {
       len = 0;
     } else {
       len = data[data.length - 1].tableData.tid;
     }
   } else {
-    let hasGroups = columns.some(col => col.group.id > 0);
-    if (hasGroups) {
+    if (dataInfo.hasGroups) {
       if (data.length === 0) {
         len = 0;
       } else {
@@ -424,11 +418,11 @@ export function getLastPage(data, columns, pageSize) {
   return len === 0 ? 0 : Math.floor((len-1) / pageSize);
 }
 
-export function getCorrectPage(data, columns, pageSize, page) {
+export function getCorrectPage(data, dataInfo, pageSize, page) {
   if (page <= 0) {
     return 0;
   } else {
-    let lastPage = getLastPage(data, columns, pageSize);
+    let lastPage = getLastPage(data, dataInfo, pageSize);
     if (page >= lastPage) {
       return lastPage;
     } else {

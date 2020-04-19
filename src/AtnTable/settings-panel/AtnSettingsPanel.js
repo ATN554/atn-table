@@ -19,6 +19,7 @@ export default function AtnSettingsPanel(props) {
     sortTitle,
     columnsSettingsTitle,
     renders,
+    updateColumnsAndData,
     updateColumns,
     updateData
   } = props;
@@ -40,8 +41,7 @@ export default function AtnSettingsPanel(props) {
       colFrom.group.id = colTo.group.id;
       colTo.group.id = tmpId;
 
-      updateColumns(undefined, false, true);
-      updateData();
+      updateColumnsAndData(undefined, false, true, undefined, true);
     }
   }
 
@@ -60,8 +60,7 @@ export default function AtnSettingsPanel(props) {
       colFrom.sort.id = colTo.sort.id;
       colTo.sort.id = tmpId;
 
-      updateColumns(undefined, false, false);
-      updateData();
+      updateColumnsAndData(undefined, false, false, undefined, true);
     }
   }
 
@@ -97,14 +96,12 @@ export default function AtnSettingsPanel(props) {
     fix_columns.forEach((column, column_idx) => {
       column.group.id = column_idx + 1;
     });
-    updateColumns(undefined, false, true);
-    updateData();
+    updateColumnsAndData(undefined, false, true, undefined, true);
   }
 
   const handleChangeVisibility = (column) => {
     column.visibility.visible = !column.visibility.visible;
-    updateColumns(undefined, false, false);
-    updateData(undefined, false);
+    updateColumnsAndData(undefined, false, false, undefined, false);
   }
 
   return (
