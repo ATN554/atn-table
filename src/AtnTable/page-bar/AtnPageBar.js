@@ -4,14 +4,14 @@ import { getLastPage } from "../AtnEngine.js";
 
 export default function AtnPageBar(props) {
   const {
-    columns,
+    dataInfo,
     data,
     currentPage,
     pageSize,
     setCurrentPage
   } = props;
   
-  const lastPage = getLastPage(data, columns, pageSize);
+  const lastPage = getLastPage(data, dataInfo, pageSize);
 
   const getPageArray = () => {
     let p1 = Math.max(currentPage - 2, 0);

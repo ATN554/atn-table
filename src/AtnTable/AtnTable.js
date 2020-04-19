@@ -279,7 +279,7 @@ export default class AtnTable extends React.Component {
           <tr className="atn-container-tr">
             <td className="atn-footer">
               <AtnPageBar
-                columns={dataInfo.userColumns}
+                dataInfo={dataInfo}
                 data={data}
                 currentPage={currentPage}
                 pageSize={pageSize}
