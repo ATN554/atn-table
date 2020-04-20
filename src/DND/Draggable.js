@@ -62,11 +62,12 @@ export default class Draggable extends React.Component {
         let box = this.refs.refdnd.getBoundingClientRect();
         let cs = getComputedStyle(this.refs.refdnd);
         let selfPos = this.findPos(this.refs.refdnd);
+        let oldPos = [this.refs.refdndclone.style.left, this.refs.refdndclone.style.top];
         this.refs.refdndclone.style.left = selfPos[0] + "px";
         this.refs.refdndclone.style.top = selfPos[1] + "px";
         let clonePos = this.findPos(this.refs.refdndclone);
-        this.refs.refdndclone.style.left = "0px";
-        this.refs.refdndclone.style.top = "0px";
+        this.refs.refdndclone.style.left = oldPos[0];
+        this.refs.refdndclone.style.top = oldPos[1];
         let deltaPos = [selfPos[0] - clonePos[0], selfPos[1] - clonePos[1]];
         let size = [
           box.width -
@@ -186,9 +187,18 @@ export default class Draggable extends React.Component {
         );
       }
       if (allowMove) {
+        let selfPos = this.findPos(this.refs.refdnd);
+        let oldPos = [this.refs.refdndclone.style.left, this.refs.refdndclone.style.top];
+        this.refs.refdndclone.style.left = selfPos[0] + "px";
+        this.refs.refdndclone.style.top = selfPos[1] + "px";
+        let clonePos = this.findPos(this.refs.refdndclone);
+        this.refs.refdndclone.style.left = oldPos[0];
+        this.refs.refdndclone.style.top = oldPos[1];
+        let deltaPos = [selfPos[0] - clonePos[0], selfPos[1] - clonePos[1]];
         this.setState(
           {
-            eventPos: [_x, _y]
+            eventPos: [_x, _y],
+            deltaPos: deltaPos
           },
           function () {
             if (this.props.onDragMove !== undefined) {
