@@ -226,6 +226,12 @@ export function sortData(data, dataInfo) {
     if (!row.tableData) {
       row.tableData = {};
     }
+    if (!row.tableData.id) {
+      row.tableData.id = row_idx;
+    }
+    if (!row.tableData.domId) {
+      row.tableData.domId = getUID();
+    }
   });
 
   if (dataInfo.isTreeData) {
@@ -250,8 +256,7 @@ export function sortData(data, dataInfo) {
   }
 
   data.forEach((row, row_idx) => {
-    row.tableData.id = row_idx;
-    row["#ID"] = row.tableData.id;
+    row["#NPP"] = row_idx;
   });
 
   return data;

@@ -16,6 +16,7 @@ export default function AtnContent(props) {
     renders,
     updateColumns,
     updateData,
+    setSelectedRow
   } = props;
 
   const {
@@ -38,6 +39,7 @@ export default function AtnContent(props) {
         rowIndex={_row_index}
         renderDataCell={renders.renderDataCell}
         renderDetailsPanel={renders.renderDetailsPanel}
+        setSelectedRow={setSelectedRow}
       />
     );
   }
@@ -80,6 +82,7 @@ export default function AtnContent(props) {
         renderDataCell={renders.renderDataCell}
         renderDetailsPanel={renders.renderDetailsPanel}
         updateData={updateData}
+        setSelectedRow={setSelectedRow}
       />
     );
   }

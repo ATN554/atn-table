@@ -10,11 +10,19 @@ export default function AtnBodyTreeRow(props) {
     rowIndex,
     renderDataCell,
     renderDetailsPanel,
-    updateData
+    updateData,
+    setSelectedRow
   } = props;
 
+  const domId = row.tableData.domId;
+
   return (
-    <div className="atn-tbody-tr">
+    <div
+      id={domId}
+      className={row.tableData.selected ? "atn-tbody-tr selected" : "atn-tbody-tr"}
+      onClick={() => setSelectedRow(row)}
+      onTouchEnd={() => setSelectedRow(row)}
+    >
       {columns.map((col, col_index) => (
         col.tree ?
         <AtnBodyTreeCell

@@ -101,7 +101,9 @@ export default class AtnTable extends React.Component {
       pageSize: nvl(props.pageSize, 10),
       pageSizeOptions: nvl(props.pageSizeOptions, [5, 10, 20, 0]),
 
-      renders: renders
+      renders: renders,
+
+      selectedRow: undefined,
     };
 
     this.setTitle = this.setTitle.bind(this);
@@ -112,6 +114,9 @@ export default class AtnTable extends React.Component {
 
     this.setCurrentPage = this.setCurrentPage.bind(this);
     this.setPageSize = this.setPageSize.bind(this);
+    
+    this.setSelectedRow = this.setSelectedRow.bind(this);
+    this.scrollToSelectedRow = this.scrollToSelectedRow.bind(this);
   }
 
   setTitle(_title) {
@@ -179,6 +184,39 @@ export default class AtnTable extends React.Component {
       let _currentPage = getCorrectPage(this.state.data, this.state.dataInfo, _pageSize, this.state.currentPage);
       this.setState({ pageSize: _pageSize, currentPage: _currentPage });
     }
+  }
+
+  setSelectedRow(row) {
+    let oldSelectedRow = this.state.selectedRow;
+    if (oldSelectedRow) {
+      oldSelectedRow.tableData.selected = false;
+    }
+    row.tableData.selected = true;
+    this.setState({selectedRow: row});
+  }
+
+  scrollToSelectedRow() {
+    let selectedRow = this.state.selectedRow;
+    if (selectedRow) {
+      let rowId = selectedRow.tableData.domId;
+      if (rowId) {
+        let rowEl = document.getElementById(rowId);
+        if (rowEl) {
+          rowEl.scrollIntoView({
+            block: "center",
+            behavior: "smooth",
+          });
+        }
+      }
+    }
+  }
+
+  componentDidMount() {
+    this.scrollToSelectedRow();
+  }
+
+  componentDidUpdate() {
+    this.scrollToSelectedRow();
   }
 
   render() {
@@ -258,6 +296,7 @@ export default class AtnTable extends React.Component {
                 renders={renders}
                 updateColumns={this.setColumns}
                 updateData={this.setData}
+                setSelectedRow={this.setSelectedRow}
               />
               <AtnMenu
                 mainClass="atn-mright"

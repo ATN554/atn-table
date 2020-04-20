@@ -166,9 +166,12 @@
 }
 
 .atn-tbody-tr:hover,
-.atn-tbody-tr:focus,
-.atn-tbody-tr:active {
+.atn-tbody-tr:focus {
   background: var(--tb-bg-color-hover);
+}
+
+.atn-tbody-tr.selected {
+  background: var(--tb-bg-color-selected);
 }
 
 .atn-tbody-td {
