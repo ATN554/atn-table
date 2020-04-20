@@ -8,11 +8,19 @@ export default function AtnBodyRow(props) {
     row,
     rowIndex,
     renderDataCell,
-    renderDetailsPanel
+    renderDetailsPanel,
+    setSelectedRow
   } = props;
 
+  const domId = row.tableData.domId;
+
   return (
-    <div className="atn-tbody-tr">
+    <div
+      id={domId}
+      className={row.tableData.selected ? "atn-tbody-tr selected" : "atn-tbody-tr"}
+      onClick={() => setSelectedRow(row)}
+      onTouchEnd={() => setSelectedRow(row)}
+    >
       {columns.map((col, col_index) => (
         <AtnBodyCell
           key={"tb" + col_index}
