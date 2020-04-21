@@ -1,18 +1,13 @@
 import React from "react";
 import "./page-bar.css";
-import { getLastPage } from "../AtnEngine.js";
 
 export default function AtnPageBar(props) {
   const {
-    dataInfo,
-    data,
     currentPage,
-    pageSize,
+    lastPage,
     setCurrentPage
   } = props;
   
-  const lastPage = getLastPage(data, dataInfo, pageSize);
-
   const getPageArray = () => {
     let p1 = Math.max(currentPage - 2, 0);
     let p2 = Math.min(p1 + 4, lastPage);

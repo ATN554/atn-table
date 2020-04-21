@@ -7,7 +7,7 @@ export const columns = [
       parentField: "PARENT_ID",
       childField: "ID",
       startFrom: 0,
-      load: false,
+      load: true,
     },
     sort: {
       order: "asc",
@@ -141,7 +141,7 @@ export const data = [
     "PARENT_ID": 1,
     "DT_CREATE": "31.05.2020"
   },
-/*  {
+  {
     "ID": 10,
     "URC": 7046,
     "FULL_NAME": "Mayotte",
@@ -868,5 +868,5 @@ export const data = [
     "SM": "1.83",
     "PARENT_ID": 17,
     "DT_CREATE": "12.03.2020"
-  }*/
+  }
 ];

@@ -5,7 +5,7 @@ import "./menu/menutop.css";
 import "./menu/menubot.css";
 import "./menu/menuleft.css";
 import "./menu/menuright.css";
-import { nvl, fillColumnsTableData, sortColumns, sortData, getCorrectPage, treeBuilderLoad } from "./AtnEngine.js";
+import { nvl, fillColumnsTableData, sortColumns, sortData, getLastPage, getCorrectPage, treeBuilderLoad } from "./AtnEngine.js";
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
 import AtnSettingsPanel from "./settings-panel/AtnSettingsPanel.js";
@@ -100,6 +100,7 @@ export default class AtnTable extends React.Component {
       currentPage: nvl(props.currentPage, 0),
       pageSize: nvl(props.pageSize, 10),
       pageSizeOptions: nvl(props.pageSizeOptions, [5, 10, 20, 0]),
+      lastPage: getLastPage(data, dataInfo, nvl(props.pageSize, 10)),
 
       renders: renders,
 
@@ -133,16 +134,18 @@ export default class AtnTable extends React.Component {
       _columns = sortColumns(_columns);
     }
     let _dataInfo = fillDataInfo(_columns);
-    let _currentPage = getCorrectPage(this.state.data, _dataInfo, this.state.pageSize, this.state.currentPage);
-    this.setState({ columns: _columns, currentPage: _currentPage, dataInfo: _dataInfo });
+    let _lastPage = getLastPage(this.state.data, this.state.dataInfo, this.state.pageSize);
+    let _currentPage = getCorrectPage(_lastPage, this.state.currentPage);
+    this.setState({ columns: _columns, currentPage: _currentPage, dataInfo: _dataInfo, lastPage: _lastPage });
   }
 
   setData(_data = this.state.data, _sortData = true) {
     if (_sortData) {
       _data = sortData(_data, this.state.dataInfo);
     }
-    let _currentPage = getCorrectPage(_data, this.state.dataInfo, this.state.pageSize, this.state.currentPage);
-    this.setState({ data: _data, currentPage: _currentPage });
+    let _lastPage = getLastPage(_data, this.state.dataInfo, this.state.pageSize);
+    let _currentPage = getCorrectPage(_lastPage, this.state.currentPage);
+    this.setState({ data: _data, currentPage: _currentPage, lastPage: _lastPage });
   }
 
   openTreeLevel(_row) {
@@ -152,7 +155,8 @@ export default class AtnTable extends React.Component {
     let tree = dataInfo.treeColumn.tree;
     let parentReq = tree.parentField;
     let childReq = tree.childField;
-    let _insertIdx = _data.findIndex(r => r === _row) + 1;
+    let id = _row.tableData.id;
+    let _insertIdx = _data.findIndex(r => r.tableData.id === id) + 1;
     treeBuilderLoad(_data, _insertIdx, parentReq, childReq, _row, dataInfo.userColumns);
     this.setData(_data, false);
   }
@@ -160,14 +164,14 @@ export default class AtnTable extends React.Component {
   closeTreeLevel(_row) {
     _row.tableData.tree.open = false;
     let _data = this.state.data;
-    let closeIdx = _data.findIndex(r => r === _row) + 1;
+    let id = _row.tableData.id;
+    let closeIdx = _data.findIndex(r => r.tableData.id === id) + 1;
     let len = _data.length;
     let level = _row.tableData.tree.level;
     for (let i = closeIdx; i < len; i++) {
       let r = _data[i];
       if (r.tableData.tree.level > level) {
         r.tableData.show = false;
-        r.tableData.tree = {};
       } else {
         break;
       }
@@ -192,13 +196,15 @@ export default class AtnTable extends React.Component {
       _data = sortData(_data, _dataInfo);
     }
 
-    let _currentPage = getCorrectPage(_data, _dataInfo, this.state.pageSize, this.state.currentPage);
+    let _lastPage = getLastPage(_data, this.state.dataInfo, this.state.pageSize);
+    let _currentPage = getCorrectPage(_lastPage, this.state.currentPage);
 
     this.setState({ 
       dataInfo: _dataInfo,
       columns: _columns,
       data: _data,
-      currentPage: _currentPage
+      currentPage: _currentPage,
+      lastPage: _lastPage
     });
   }
 
@@ -207,14 +213,15 @@ export default class AtnTable extends React.Component {
   }
 
   setCurrentPage(_page = 0) {
-    let _currentPage = getCorrectPage(this.state.data, this.state.dataInfo, this.state.pageSize, _page);
+    let _currentPage = getCorrectPage(this.state.lastPage, _page);
     this.setState({ currentPage: _currentPage });
   }
 
   setPageSize(_pageSize = 10) {
     if (this.state.pageSizeOptions.includes(_pageSize)) {
-      let _currentPage = getCorrectPage(this.state.data, this.state.dataInfo, _pageSize, this.state.currentPage);
-      this.setState({ pageSize: _pageSize, currentPage: _currentPage });
+      let _lastPage = getLastPage(this.state.data, this.state.dataInfo, this.state.pageSize);
+      let _currentPage = getCorrectPage(_pageSize, this.state.currentPage);
+      this.setState({ pageSize: _pageSize, currentPage: _currentPage, lastPage: _lastPage });
     }
   }
 
@@ -258,6 +265,7 @@ export default class AtnTable extends React.Component {
       totals,
       dataInfo,
       currentPage,
+      lastPage,
       pageSize,
       pageSizeOptions,
       renders
@@ -357,10 +365,8 @@ export default class AtnTable extends React.Component {
           <tr className="atn-container-tr">
             <td className="atn-footer">
               <AtnPageBar
-                dataInfo={dataInfo}
-                data={data}
                 currentPage={currentPage}
-                pageSize={pageSize}
+                lastPage={lastPage}
                 setCurrentPage={this.setCurrentPage}
               />
             </td>

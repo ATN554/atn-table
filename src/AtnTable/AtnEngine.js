@@ -226,10 +226,10 @@ export function sortData(data, dataInfo) {
     if (!row.tableData) {
       row.tableData = {};
     }
-    if (!row.tableData.id) {
+    if (row.tableData.id === undefined) {
       row.tableData.id = row_idx;
     }
-    if (!row.tableData.domId) {
+    if (row.tableData.domId === undefined) {
       row.tableData.domId = getUID();
     }
   });
@@ -452,7 +452,11 @@ export function getLastPage(data, dataInfo, pageSize) {
     if (data.length === 0) {
       len = 0;
     } else {
-      len = data[data.length - 1].tableData.tid;
+      if (dataInfo.treeColumn.tree.load) {
+        len = data.filter(row => row.tableData.tree.level === 0).length;
+      } else {
+        len = data[data.length - 1].tableData.tid;
+      }
     }
   } else {
     if (dataInfo.hasGroups) {
@@ -468,11 +472,10 @@ export function getLastPage(data, dataInfo, pageSize) {
   return len === 0 ? 0 : Math.floor((len-1) / pageSize);
 }
 
-export function getCorrectPage(data, dataInfo, pageSize, page) {
+export function getCorrectPage(lastPage, page) {
   if (page <= 0) {
     return 0;
   } else {
-    let lastPage = getLastPage(data, dataInfo, pageSize);
     if (page >= lastPage) {
       return lastPage;
     } else {
