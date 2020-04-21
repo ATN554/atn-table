@@ -5,7 +5,7 @@ import "./menu/menutop.css";
 import "./menu/menubot.css";
 import "./menu/menuleft.css";
 import "./menu/menuright.css";
-import { nvl, fillColumnsTableData, sortColumns, sortData, getCorrectPage } from "./AtnEngine.js";
+import { nvl, fillColumnsTableData, sortColumns, sortData, getCorrectPage, treeBuilderLoad } from "./AtnEngine.js";
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
 import AtnSettingsPanel from "./settings-panel/AtnSettingsPanel.js";
@@ -109,6 +109,8 @@ export default class AtnTable extends React.Component {
     this.setTitle = this.setTitle.bind(this);
     this.setColumns = this.setColumns.bind(this);
     this.setData = this.setData.bind(this);
+    this.openTreeLevel = this.openTreeLevel.bind(this);
+    this.closeTreeLevel = this.closeTreeLevel.bind(this);
     this.setColumnsAndData = this.setColumnsAndData.bind(this);
     this.setTotals = this.setTotals.bind(this);
 
@@ -141,6 +143,36 @@ export default class AtnTable extends React.Component {
     }
     let _currentPage = getCorrectPage(_data, this.state.dataInfo, this.state.pageSize, this.state.currentPage);
     this.setState({ data: _data, currentPage: _currentPage });
+  }
+
+  openTreeLevel(_row) {
+    _row.tableData.tree.open = true;
+    let _data = this.state.data;
+    let dataInfo = this.state.dataInfo;
+    let tree = dataInfo.treeColumn.tree;
+    let parentReq = tree.parentField;
+    let childReq = tree.childField;
+    let _insertIdx = _data.findIndex(r => r === _row) + 1;
+    treeBuilderLoad(_data, _insertIdx, parentReq, childReq, _row, dataInfo.userColumns);
+    this.setData(_data, false);
+  }
+
+  closeTreeLevel(_row) {
+    _row.tableData.tree.open = false;
+    let _data = this.state.data;
+    let closeIdx = _data.findIndex(r => r === _row) + 1;
+    let len = _data.length;
+    let level = _row.tableData.tree.level;
+    for (let i = closeIdx; i < len; i++) {
+      let r = _data[i];
+      if (r.tableData.tree.level > level) {
+        r.tableData.show = false;
+        r.tableData.tree = {};
+      } else {
+        break;
+      }
+    }
+    this.setData(_data, false);
   }
 
   setColumnsAndData(
@@ -296,6 +328,8 @@ export default class AtnTable extends React.Component {
                 renders={renders}
                 updateColumns={this.setColumns}
                 updateData={this.setData}
+                openTreeLevel={this.openTreeLevel}
+                closeTreeLevel={this.closeTreeLevel}
                 setSelectedRow={this.setSelectedRow}
               />
               <AtnMenu

@@ -235,10 +235,10 @@ export function sortData(data, dataInfo) {
   });
 
   if (dataInfo.isTreeData) {
-    let treeData = [];
+    let tree = dataInfo.treeColumn.tree;
     let plainData = data;
-    let parentReq = dataInfo.treeColumn.tree.parentField;
-    let childReq = dataInfo.treeColumn.tree.childField;
+    let parentReq = tree.parentField;
+    let childReq = tree.childField;
     let parentRow = { tableData: { tid: -1, tree: {level: -1} } };
     parentRow[childReq] = dataInfo.treeColumn.tree.startFrom;
     let _idTB = _sortColumns.findIndex(col => col.tree);
@@ -246,8 +246,17 @@ export function sortData(data, dataInfo) {
     plainData.sort(function (row1, row2) {
       return compareRows(row1, row2, _sortColumnsBTB);
     });
-    treeBuilder(treeData, plainData, parentReq, childReq, parentRow);
-    data = fillDataTreeInfo(treeData, dataInfo.userColumns);
+    if (tree.load) {
+      data.forEach((row) => {
+        row.tableData.tree = {};
+        row.tableData.show = false;
+      });
+      treeBuilderLoad(data, 0, parentReq, childReq, parentRow, _sortColumns);
+    } else {
+      let treeData = [];
+      treeBuilder(treeData, plainData, parentReq, childReq, parentRow);
+      data = fillDataTreeInfo(treeData, _sortColumns);
+    }
   } else {
     data.sort(function (row1, row2) {
       return compareRows(row1, row2, _sortColumns);
@@ -396,6 +405,42 @@ function treeBuilder(treeData, plainData, parentReq, childReq, parentRow, show) 
     }
   });
   return parentChilds;
+}
+
+export function treeBuilderLoad(data, insertIdx, parentReq, childReq, parentRow, sortColumns) {
+  let parentValue = parentRow[childReq];
+  let currentLevel = parentRow.tableData.tree.level + 1;
+  let tid = parentRow.tableData.tid;
+  let childRows = [];
+  let len = data.length - 1;
+  for (let i = len; i >= 0; i--) {
+    let row = data[i];
+    if (row[parentReq] === parentValue) {
+      row = data.splice(i, 1)[0];
+      if (currentLevel === 0) {
+        tid++;
+      }
+      row.tableData.tid = tid;
+      row.tableData.show = true;
+      if (!row.tableData.tree) {
+        row.tableData.tree = {};
+      }
+      row.tableData.tree.level = currentLevel;
+      row.tableData.tree.open = false;
+      childRows.push( row );
+    }
+  }
+  if (childRows.length > 0) {
+    childRows.forEach((row, row_idx) => {
+      parentValue = row[childReq];
+      let hasChilds = data.some(r => r[parentReq] === parentValue);
+      row.tableData.tree.last = !hasChilds;
+    });
+    childRows.sort(function (row1, row2) {
+      return compareRows(row1, row2, sortColumns);
+    });
+    data.splice(insertIdx, 0, ...childRows);
+  }
 }
 
 export function getLastPage(data, dataInfo, pageSize) {

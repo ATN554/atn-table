@@ -16,6 +16,8 @@ export default function AtnContent(props) {
     renders,
     updateColumns,
     updateData,
+    openTreeLevel,
+    closeTreeLevel,
     setSelectedRow
   } = props;
 
@@ -81,6 +83,8 @@ export default function AtnContent(props) {
         renderDataCell={renders.renderDataCell}
         renderDetailsPanel={renders.renderDetailsPanel}
         updateData={updateData}
+        openTreeLevel={openTreeLevel}
+        closeTreeLevel={closeTreeLevel}
         setSelectedRow={setSelectedRow}
       />
     );

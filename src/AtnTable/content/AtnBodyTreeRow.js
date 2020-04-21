@@ -11,6 +11,8 @@ export default function AtnBodyTreeRow(props) {
     renderDataCell,
     renderDetailsPanel,
     updateData,
+    openTreeLevel,
+    closeTreeLevel,
     setSelectedRow
   } = props;
 
@@ -27,12 +29,15 @@ export default function AtnBodyTreeRow(props) {
         col.tree ?
         <AtnBodyTreeCell
           key={"tb" + col_index}
+          load={col.tree.load}
           column={col}
           columnIndex={col_index}
           row={row}
           rowIndex={rowIndex}
           renderDataCell={renderDataCell}
           updateData={updateData}
+          openTreeLevel={openTreeLevel}
+          closeTreeLevel={closeTreeLevel}
         /> :
         <AtnBodyCell
           key={"tb" + col_index}
