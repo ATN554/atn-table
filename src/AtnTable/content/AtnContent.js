@@ -73,7 +73,6 @@ export default function AtnContent(props) {
 
   const renderTreeRow = (_row, _row_index) => {
     return (
-      _row.tableData.show && 
       <AtnBodyTreeRow
         key={"tr-data-" + _row_index}
         columns={headColumns}
@@ -100,7 +99,7 @@ export default function AtnContent(props) {
   }
 
   const renderData = isTreeData ? 
-                     data.filter(row => row.tableData.tid >= p1 && row.tableData.tid < p2) :
+                     data.filter(row => row.tableData.show && row.tableData.tid >= p1 && row.tableData.tid < p2) :
                      isGroupData ?
                      data.filter(row => row.tableData.gid >= p1 && row.tableData.gid < p2) :
                      data.slice(p1, p2);

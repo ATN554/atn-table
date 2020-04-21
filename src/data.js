@@ -3,7 +3,7 @@ export const columns = [
     title: "Наименование",
     field: "FULL_NAME",
     width: 250,
-    _tree: {
+    tree: {
       parentField: "PARENT_ID",
       childField: "ID",
       startFrom: 0,
