@@ -215,7 +215,7 @@ export default class AtnTable extends React.Component {
 
   setPageSize(_pageSize = 10) {
     if (this.state.pageSizeOptions.includes(_pageSize)) {
-      let _lastPage = getLastPage(this.state.data, this.state.dataInfo, this.state.pageSize);
+      let _lastPage = getLastPage(this.state.data, this.state.dataInfo, _pageSize);
       let _currentPage = getCorrectPage(_pageSize, this.state.currentPage);
       this.setState({ pageSize: _pageSize, currentPage: _currentPage, lastPage: _lastPage });
     }
