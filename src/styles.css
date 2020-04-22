@@ -14,3 +14,9 @@ body {
   background-color: #d1e9d3;
   border-radius: 5px;
 }
+
+.toolbar-button {
+  outline: none;
+  background: #d1e9d3;
+  margin: 3px 1px 3px 1px;
+}

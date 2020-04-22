@@ -48,25 +48,21 @@
   margin-top: 5px;
   margin-left: 5px;
   background: var(--table-bg-color);
-  border: 1px solid var(--border-color-darken);
   border-collapse: collapse;
   border-spacing: 0;
 }
 
 .atn-title {
+  line-height: 16px;
   position: absolute;
-  top: -10px;
+  top: -14px;
   left: 12px;
   padding-left: 3px;
   padding-right: 3px;
   background: var(--title-bg-color);
   border: 1px solid var(--border-color-darken);
   border-radius: 5px;
-  z-index: 1;
-}
-
-.atn-container-th {
-  border: 1px solid var(--border-color-darken);
+  z-index: 2;
 }
 
 .atn-toolbar {
@@ -75,6 +71,7 @@
   border: 1px solid var(--border-color-darken);
   padding: 0px;
   margin: 0px;
+  overflow: hidden;
 }
 
 .atn-groupbar {

@@ -1,24 +1,24 @@
 import React from "react";
 import "./styles.css";
 import AtnTable from "./AtnTable/AtnTable.js";
-import { columns, data, totals } from "./data.js";
+import {
+  groupColumns,
+  treeColumnsStatic,
+  treeColumnsLoad,
+  data,
+  totals
+} from "./data.js";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.tableRef = null;
-
-    this.state = {
-      columns: columns,
-      data: data,
-      totals: totals
-    };
   }
 
   componentDidMount() {
-    this.tableRef.setData(this.state.data);
-    this.tableRef.setTotals(this.state.totals);
+    this.tableRef.setData(data.slice(0));
+    this.tableRef.setTotals(totals);
   }
 
   render() {
@@ -27,9 +27,38 @@ export default class App extends React.Component {
         <AtnTable
           ref={el =>  this.tableRef = el}
           title="Заголовок таблицы"
-          columns={this.state.columns}
+          columns={groupColumns}
           pageSize={20}
           pageSizeOptions={[10, 20, 50, 0]}
+          toolbarElements={[
+            <input
+              className="toolbar-button"
+              type="button"
+              value="Режим группировки"
+              onClick={() => {
+                data.forEach((el) => el.tableData = undefined);
+                this.tableRef.setColumnsAndData(groupColumns, true, true, data.slice(0), true);
+              }}
+            />,
+            <input
+              className="toolbar-button"
+              type="button"
+              value="Режим постоянного дерева"
+              onClick={() => {
+                data.forEach((el) => el.tableData = undefined);
+                this.tableRef.setColumnsAndData(treeColumnsStatic, true, true, data.slice(0), true);
+              }}
+            />,
+            <input
+              className="toolbar-button"
+              type="button"
+              value="Режим динамического дерева"
+              onClick={() => {
+                data.forEach((el) => el.tableData = undefined);
+                this.tableRef.setColumnsAndData(treeColumnsLoad, true, true, data.slice(0), true);
+              }}
+            />
+          ]}
         />
       </div>
     );

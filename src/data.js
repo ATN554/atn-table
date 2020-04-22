@@ -1,4 +1,89 @@
-export const columns = [
+const columns = [
+  {
+    title: "Родит. Ид.",
+    field: "PARENT_ID",
+    type: "integer",
+    align: "right",
+    width: 150,
+    mimWidth: 10,
+    maxWidth: 250,
+    visibility: {
+      visible: false,
+    },
+  },
+  {
+    title: "Ид.",
+    field: "ID",
+    type: "integer",
+    align: "left",
+    width: 150,
+    mimWidth: 10,
+    maxWidth: 250,
+    visibility: {
+      visible: false,
+    },
+  },
+  {
+    title: "Сумма",
+    field: "SM",
+    type: "number",
+    align: "right",
+    width: 120,
+    visibility: {
+      visible: false
+    },
+    group: {
+      id: 0,
+      locked: true,
+    }
+  },
+  {
+    title: "Дата создания",
+    field: "DT_CREATE",
+    type: "date",
+    align: "center",
+    format: "DD.MM.YYYY",
+    width: 140,
+  },
+  {
+    title: "Исполнитель",
+    field: "URC",
+    type: "number",
+    width: 140,
+  }
+];
+
+export const groupColumns = [
+  {
+    title: "Наименование",
+    field: "FULL_NAME",
+    width: 250,
+    sort: {
+      order: "asc",
+    },
+  },
+  ...columns
+];
+
+export const treeColumnsStatic = [
+  {
+    title: "Наименование",
+    field: "FULL_NAME",
+    width: 250,
+    tree: {
+      parentField: "PARENT_ID",
+      childField: "ID",
+      startFrom: 0,
+      load: false,
+    },
+    sort: {
+      order: "asc",
+    },
+  },
+  ...columns
+];
+
+export const treeColumnsLoad = [
   {
     title: "Наименование",
     field: "FULL_NAME",
@@ -13,54 +98,7 @@ export const columns = [
       order: "asc",
     },
   },
-  {
-    title: "Родит. Ид.",
-    field: "PARENT_ID",
-    type: "integer",
-    align: "right",
-    width: 150,
-    mimWidth: 10,
-    maxWidth: 250,
-    visibility: {
-      visible: false,
-    },
-  },
-  {
-    title: "Ид.", 
-    field: "ID", 
-    type: "integer", 
-    align: "left", 
-    width: 150, 
-    mimWidth: 10, 
-    maxWidth: 250,
-    visibility: {
-      visible: false,
-    },
-  },
-  {
-    title: "Сумма", 
-    field: "SM", 
-    type: "number", 
-    align: "right", 
-    width: 120, 
-    visibility: {
-      visible: false
-    }
-  },
-  {
-    title: "Дата создания", 
-    field: "DT_CREATE", 
-    type: "date", 
-    align: "center", 
-    format: "DD.MM.YYYY", 
-    width: 140, 
-  },
-  {
-    title: "Исполнитель", 
-    field: "URC", 
-    type: "number", 
-    width: 140, 
-  }
+  ...columns
 ];
 
 export const totals = {

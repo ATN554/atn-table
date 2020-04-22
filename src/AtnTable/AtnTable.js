@@ -9,6 +9,7 @@ import { nvl, fillColumnsTableData, sortColumns, sortData, getLastPage, getCorre
 import AtnContent from "./content/AtnContent.js";
 import AtnMenu from "./menu/AtnMenu.js";
 import AtnSettingsPanel from "./settings-panel/AtnSettingsPanel.js";
+import AtnToolBar from "./tool-bar/AtnToolBar.js";
 import AtnGroupBar from "./group-bar/AtnGroupBar.js";
 import AtnPageBar from "./page-bar/AtnPageBar.js";
 import AtnPageSizeOptions from "./page-bar/AtnPageSizeOptions.js";
@@ -90,7 +91,6 @@ export default class AtnTable extends React.Component {
     renders.renderDetailsPanel = props.renderDetailsPanel;
 
     this.state = {
-      title: nvl(props.title, ""),
       columns: columns,
       data: data,
       totals: nvl(props.totals, {}),
@@ -107,7 +107,6 @@ export default class AtnTable extends React.Component {
       selectedRow: undefined,
     };
 
-    this.setTitle = this.setTitle.bind(this);
     this.setColumns = this.setColumns.bind(this);
     this.setData = this.setData.bind(this);
     this.openTreeLevel = this.openTreeLevel.bind(this);
@@ -122,10 +121,6 @@ export default class AtnTable extends React.Component {
     this.scrollToSelectedRow = this.scrollToSelectedRow.bind(this);
   }
 
-  setTitle(_title) {
-    this.setState({ title: _title });
-  }
-
   setColumns(_columns = this.state.columns, _fillColumns = true, _sortColumns = true) {
     if (_fillColumns) {
       _columns = fillColumnsTableData(_columns);
@@ -134,7 +129,7 @@ export default class AtnTable extends React.Component {
       _columns = sortColumns(_columns);
     }
     let _dataInfo = fillDataInfo(_columns);
-    let _lastPage = getLastPage(this.state.data, this.state.dataInfo, this.state.pageSize);
+    let _lastPage = getLastPage(this.state.data, _dataInfo, this.state.pageSize);
     let _currentPage = getCorrectPage(_lastPage, this.state.currentPage);
     this.setState({ columns: _columns, currentPage: _currentPage, dataInfo: _dataInfo, lastPage: _lastPage });
   }
@@ -196,7 +191,7 @@ export default class AtnTable extends React.Component {
       _data = sortData(_data, _dataInfo);
     }
 
-    let _lastPage = getLastPage(_data, this.state.dataInfo, this.state.pageSize);
+    let _lastPage = getLastPage(_data, _dataInfo, this.state.pageSize);
     let _currentPage = getCorrectPage(_lastPage, this.state.currentPage);
 
     this.setState({ 
@@ -260,7 +255,6 @@ export default class AtnTable extends React.Component {
 
   render() {
     const { 
-      title,
       data,
       totals,
       dataInfo,
@@ -271,19 +265,34 @@ export default class AtnTable extends React.Component {
       renders
     } = this.state;
 
+    const {
+      title,
+      toolbarElements
+    } = this.props;
+
     return (
       <table className="atn-container">
         <thead className="atn-container-th">
-          <tr className="atn-toolbar-tr">
-            <td className="atn-toolbar">
-              <div className="atn-title">
+          <tr className="atn-title-tr">
+            {
+              title
+                &&
+              <td className="atn-title">
                 {title}
-              </div>
-              <div style={{ height: "32px", lineHeight: "32px" }}>
-                Панель кнопок
-              </div>
-            </td>
+              </td>
+            }
           </tr>
+          {
+            toolbarElements
+              &&
+            <tr className="atn-toolbar-tr">
+              <td className="atn-toolbar">
+                <AtnToolBar
+                  toolbarElements={toolbarElements}
+                />
+              </td>
+            </tr>
+          }
           {
             dataInfo.isGroupData
               &&
