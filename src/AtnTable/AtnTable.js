@@ -38,7 +38,7 @@ const renderTotalsCell = (totals, column, column_index) => {
   return text;
 }
 
-const fillDataInfo = (_columns) => {
+const fillDataInfo = (_columns, _renders) => {
   let dataInfo = {};
 
   let _userColumns = _columns.filter(col => !col.service);
@@ -54,6 +54,7 @@ const fillDataInfo = (_columns) => {
   dataInfo.isGroupData = !dataInfo.isTreeData && dataInfo.hasGroups;
   dataInfo.isPlainData = !dataInfo.isTreeData && !dataInfo.isGroupData;
   _columns.find(col => col.field === "#GROUP_COLUMN").visibility.visible = dataInfo.isGroupData;
+  _columns.find(col => col.field === "#ACTION_COLUMN").visibility.visible = _renders.renderDetailsPanel !== undefined;
 
   let _sortColumns = _userColumns.filter(col => col.group.id === 0);
   _sortColumns = sortColumns(_sortColumns, [['sort', 'id'], ['id']]);
@@ -78,17 +79,17 @@ export default class AtnTable extends React.Component {
   constructor(props) {
     super(props);
 
-    let columns = fillColumnsTableData(nvl(props.columns, []));
-    columns = sortColumns(columns);
-    let dataInfo = fillDataInfo(columns);
-    let data = sortData(nvl(props.data, []), dataInfo);
-
     let renders = nvl(props.renders, {});
     renders.renderHeaderCell = nvl(props.renderHeaderCell, renderHeaderCell);
     renders.renderDataGroupCell = nvl(props.renderDataGroupCell, renderDataGroupCell);
     renders.renderDataCell = nvl(props.renderDataCell, renderDataCell);
     renders.renderTotalsCell = nvl(props.renderTotalsCell, renderTotalsCell);
     renders.renderDetailsPanel = props.renderDetailsPanel;
+
+    let columns = fillColumnsTableData(nvl(props.columns, []));
+    columns = sortColumns(columns);
+    let dataInfo = fillDataInfo(columns, renders);
+    let data = sortData(nvl(props.data, []), dataInfo);
 
     this.state = {
       columns: columns,
@@ -128,7 +129,7 @@ export default class AtnTable extends React.Component {
     if (_sortColumns) {
       _columns = sortColumns(_columns);
     }
-    let _dataInfo = fillDataInfo(_columns);
+    let _dataInfo = fillDataInfo(_columns, this.state.renders);
     let _lastPage = getLastPage(this.state.data, _dataInfo, this.state.pageSize);
     let _currentPage = getCorrectPage(_lastPage, this.state.currentPage);
     this.setState({ columns: _columns, currentPage: _currentPage, dataInfo: _dataInfo, lastPage: _lastPage });
@@ -185,7 +186,7 @@ export default class AtnTable extends React.Component {
       _columns = sortColumns(_columns);
     }
     
-    let _dataInfo = fillDataInfo(_columns);
+    let _dataInfo = fillDataInfo(_columns, this.state.renders);
     
     if (_sortData) {
       _data = sortData(_data, _dataInfo);

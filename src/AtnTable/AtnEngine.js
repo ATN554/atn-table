@@ -12,7 +12,7 @@ export function fillColumnsTableData(columns) {
   if (!hasActionColumn) {
     let actionColumn = {
       id: -2,
-      title: "Действия",
+      title: "",
       field: "#ACTION_COLUMN",
       width: 90,
       service: -2,

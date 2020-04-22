@@ -59,6 +59,9 @@ export default class App extends React.Component {
               }}
             />
           ]}
+          _renderDetailsPanel={(row, rowIndex) => {
+            return <div style={{margin: "3px", padding: "3px", border: "1px solid black", borderRadius: "5px"}}>NPP: {row["#NPP"]}</div>
+          }}
         />
       </div>
     );
