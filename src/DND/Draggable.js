@@ -10,10 +10,10 @@ export default class Draggable extends React.Component {
       isReadyForDrag: false,
       isDraging: false,
       eventPos: [0, 0],
-      position: [0, 0],
+      selfPos: [0, 0],
       deltaPos: [0, 0],
       size: [0, 0],
-      innerShift: [0, 0],
+      innerShift: [0, 0]
     };
 
     this.onMouseDown = this.onMouseDown.bind(this);
@@ -62,13 +62,16 @@ export default class Draggable extends React.Component {
         let box = this.refs.refdnd.getBoundingClientRect();
         let cs = getComputedStyle(this.refs.refdnd);
         let selfPos = this.findPos(this.refs.refdnd);
-        let oldPos = [this.refs.refdndclone.style.left, this.refs.refdndclone.style.top];
-        this.refs.refdndclone.style.left = selfPos[0] + "px";
-        this.refs.refdndclone.style.top = selfPos[1] + "px";
+        let oldPos = [
+          this.refs.refdndclone.style.left,
+          this.refs.refdndclone.style.top
+        ];
+        this.refs.refdndclone.style.left = "0px";
+        this.refs.refdndclone.style.top = "0px";
         let clonePos = this.findPos(this.refs.refdndclone);
         this.refs.refdndclone.style.left = oldPos[0];
         this.refs.refdndclone.style.top = oldPos[1];
-        let deltaPos = [selfPos[0] - clonePos[0], selfPos[1] - clonePos[1]];
+        let deltaPos = [-clonePos[0], -clonePos[1]];
         let size = [
           box.width -
           parseFloat(cs.paddingLeft) -
@@ -90,7 +93,7 @@ export default class Draggable extends React.Component {
           isReadyForDrag: true,
           isDraging: false,
           eventPos: [_x, _y],
-          position: selfPos,
+          selfPos: selfPos,
           deltaPos: deltaPos,
           size: size,
           innerShift: [
@@ -118,12 +121,15 @@ export default class Draggable extends React.Component {
       });
     } else if (this.state.isDraging) {
       let endPos = [this.state.eventPos[0], this.state.eventPos[1]];
-      let centerPos = [this.state.eventPos[0] + this.state.size[0] / 2, this.state.eventPos[1] + this.state.size[1] / 2];
+      let centerPos = [
+        this.state.eventPos[0] + this.state.size[0] / 2,
+        this.state.eventPos[1] + this.state.size[1] / 2
+      ];
       this.setState(
         {
           isDraging: false,
           eventPos: [0, 0],
-          position: [0, 0],
+          selfPos: [0, 0],
           deltaPos: [0, 0],
           size: [0, 0],
           innerShift: [0, 0]
@@ -157,8 +163,8 @@ export default class Draggable extends React.Component {
     let axis = this.props.axis || "both";
     let xAxisMove = axis === "horizontal" || axis === "both";
     let yAxisMove = axis === "vertical" || axis === "both";
-    let _x = xAxisMove ? x : this.state.position[0];
-    let _y = yAxisMove ? y : this.state.position[1];
+    let _x = xAxisMove ? x : this.state.selfPos[0];
+    let _y = yAxisMove ? y : this.state.selfPos[1];
     if (this.state.isReadyForDrag) {
       this.setState(
         {
@@ -187,14 +193,16 @@ export default class Draggable extends React.Component {
         );
       }
       if (allowMove) {
-        let selfPos = this.findPos(this.refs.refdnd);
-        let oldPos = [this.refs.refdndclone.style.left, this.refs.refdndclone.style.top];
-        this.refs.refdndclone.style.left = selfPos[0] + "px";
-        this.refs.refdndclone.style.top = selfPos[1] + "px";
+        let oldPos = [
+          this.refs.refdndclone.style.left,
+          this.refs.refdndclone.style.top
+        ];
+        this.refs.refdndclone.style.left = "0px";
+        this.refs.refdndclone.style.top = "0px";
         let clonePos = this.findPos(this.refs.refdndclone);
         this.refs.refdndclone.style.left = oldPos[0];
         this.refs.refdndclone.style.top = oldPos[1];
-        let deltaPos = [selfPos[0] - clonePos[0], selfPos[1] - clonePos[1]];
+        let deltaPos = [-clonePos[0], -clonePos[1]];
         this.setState(
           {
             eventPos: [_x, _y],
@@ -255,7 +263,8 @@ export default class Draggable extends React.Component {
   }
 
   render() {
-    let showClone = this.props.showClone !== undefined ? this.props.showClone : true;
+    let showClone =
+      this.props.showClone !== undefined ? this.props.showClone : true;
     let cloneOpacity = this.props.cloneOpacity || 0.8;
     return React.createElement(
       this.props.type,
@@ -280,9 +289,7 @@ export default class Draggable extends React.Component {
               ...this.props.style,
               position: "absolute",
               visibility:
-                showClone && this.state.isDraging
-                  ? "visible"
-                  : "hidden",
+                showClone && this.state.isDraging ? "visible" : "hidden",
               margin: "0px",
               zIndex: 1000,
               left:
